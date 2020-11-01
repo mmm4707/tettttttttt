@@ -17,6 +17,7 @@ LIGHTYELLOW = (175, 175,  20)
 
 class Tetris:
 
+    #생성자
     def __init__(self):
         self.screen = pygame.display.set_mode((350, 450))
         self.clock = pygame.time.Clock()
@@ -24,6 +25,7 @@ class Tetris:
         self.music_on_off = True
         self.check_reset = True
 
+    #각 키를 누를떄 실행되는 method
     def handle_key(self, event_key):
         if event_key == K_DOWN or event_key == K_s:
             self.board.drop_piece()
@@ -35,15 +37,16 @@ class Tetris:
             self.board.rotate_piece()
         elif event_key == K_SPACE:
             self.board.full_drop_piece()
-        elif event_key == K_q:
+        elif event_key == K_q: #스킬 부분
             self.board.ultimate()
-        elif event_key == K_m:
+        elif event_key == K_m: # 소리 설정
             self.music_on_off = not self.music_on_off
             if self.music_on_off:
                 pygame.mixer.music.play(-1, 0.0)
             else:
                 pygame.mixer.music.stop()
 
+    #가장 높은 점수 불러 오는 부분
     def HighScore(self):
         try:
             f = open('assets/save.txt', 'r')
@@ -63,7 +66,7 @@ class Tetris:
             f.close()
             self.board.HS(str(self.board.score))
 
-
+    #실행하기
     def run(self):
         pygame.init()
         icon = pygame.image.load('assets/images/icon.png')
