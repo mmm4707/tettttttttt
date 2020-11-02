@@ -69,39 +69,40 @@ class Tetris:
     #실행하기
     def run(self):
         pygame.init()
-        icon = pygame.image.load('assets/images/icon.png')
+        icon = pygame.image.load('assets/images/icon.PNG')  # png -> PNG로 수정
         pygame.display.set_icon(icon)
         pygame.display.set_caption('Tetris')
-        pygame.time.set_timer(pygame.USEREVENT, 500)
+        pygame.time.set_timer(pygame.USEREVENT, 200) # 블럭 내려오는 속도 조절(높을 수록 느려짐)
         start_sound = pygame.mixer.Sound('assets/sounds/Start.wav')
         start_sound.play()
-        bgm = pygame.mixer.music.load('assets/sounds/bgm.mp3')
+        bgm = pygame.mixer.music.load('assets/sounds/bensound-ukulele.mp3')  # (기존 파일은 소리가 안남) 다른 mp3 파일은 소리 난다. 게임진행 bgm변경
         while True:
             if self.check_reset:
                 self.board.newGame()
                 self.check_reset = False
                 pygame.mixer.music.play(-1, 0.0)
+
             if self.board.game_over():
-                self.screen.fill(BLACK)
-                pygame.mixer.music.stop()
-                self.board.GameOver()
-                self.HighScore()
+                self.screen.fill(BLACK) #게임 오버 배경 색
+                pygame.mixer.music.stop() #음악 멈추기
+                self.board.GameOver()  #게임 오버 보드 불러오기
+                self.HighScore()          #하이스코어 표기
                 self.check_reset = True
                 self.board.init_board()
             for event in pygame.event.get():
                 if event.type == QUIT:
                     pygame.quit()
                     sys.exit()
-                elif event.type == KEYUP and event.key == K_p:
-                    self.screen.fill(BLACK)
-                    pygame.mixer.music.stop()
+                elif event.type == KEYUP and event.key == K_p: # 일시 정지 버튼 누르면
+                    self.screen.fill(BLACK)         #일시 정지 화면
+                    pygame.mixer.music.stop()       #일시 정지 노래 중지
                     self.board.pause()
                     pygame.mixer.music.play(-1, 0.0)
                 elif event.type == KEYDOWN:
                     self.handle_key(event.key)
                 elif event.type == pygame.USEREVENT:
                     self.board.drop_piece()
-            # self.screen.fill(BLACK)
+          # self.screen.fill(BLACK)
             self.board.draw()
             pygame.display.update()
             self.clock.tick(30)
