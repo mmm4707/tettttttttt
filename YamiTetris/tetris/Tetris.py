@@ -25,7 +25,6 @@ class Tetris:
         self.music_on_off = True
         self.check_reset = True
 
-
     #각 키를 누를떄 실행되는 method
     def handle_key(self, event_key):
         if event_key == K_DOWN or event_key == K_s:
@@ -74,17 +73,13 @@ class Tetris:
         pygame.display.set_icon(icon)
         pygame.display.set_caption('Tetris')
 
-        #수정 할 부분 ?? version 1
-        pygame.time.set_timer(pygame.USEREVENT, 250) # 블럭 내려오는 속도 조절(높을 수록 느려짐)
-
+        self.board.level_speed() #추가 - level1에서 속도
 
         start_sound = pygame.mixer.Sound('assets/sounds/Start.wav')
         start_sound.play()
-        bgm = pygame.mixer.music.load('assets/sounds/bensound-ukulele.mp3')
-        #리눅스 배포판에 따라 pm3 파일은 저작권 문제 때무내에 실행 안되는 경우 있음
-        # (기존 파일은 소리가 안남) 다른 mp3 파일은 소리 난다. 게임진행 bgm변경
+        bgm = pygame.mixer.music.load('assets/sounds/bensound-ukulele.mp3')  # (기존 파일은 소리가 안남) 다른 mp3 파일은 소리 난다. 게임진행 bgm변경
+        while True:
 
-        while True: #게임 루
             if self.check_reset:
                 self.board.newGame()
                 self.check_reset = False
@@ -97,7 +92,7 @@ class Tetris:
                 self.HighScore()          #하이스코어 표기
                 self.check_reset = True
                 self.board.init_board()
-            for event in pygame.event.get(): #event는 키보드 누를떄 특정 동작 수할떄 발생
+            for event in pygame.event.get(): #게임진행중 - event는 키보드 누를떄 특정 동작 수할떄 발생
                 if event.type == QUIT: #종류 이벤트가 발생한 경우
                     pygame.quit() #모든 호출 종
                     sys.exit() #게임을 종료한다ㅏ.
@@ -109,8 +104,9 @@ class Tetris:
                 elif event.type == KEYDOWN: #키보드를 누르면
                     self.handle_key(event.key) #handle 메소드 실행
                 elif event.type == pygame.USEREVENT:
-                    self.board.drop_piece() #  떨어지는 속도 바꿔보기?!!!!!!!!!!!!!11
-          # self.screen.fill(BLACK)
+                    self.board.drop_piece()
+
+            # self.screen.fill(BLACK)
             self.board.draw()
             pygame.display.update() #이게 나오면 구현 시
             self.clock.tick(30) # 초당 프레임 관련

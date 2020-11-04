@@ -132,10 +132,7 @@ class Board:
 #블럭 내리기
     def drop_piece(self):
         if self.can_drop_piece():
-            if self.level == 1:
-                self.move_piece(dx=0, dy=1)
-            else:
-                pass
+            self.move_piece(dx=0, dy=1)
         else:
             self.absorb_piece()
             self.delete_lines()
@@ -180,15 +177,22 @@ class Board:
 
             if self.goal == 0:  # 만약 골이 0이된다면
                 if self.level < 10:  #레벨이 10보다 작다면
-                    self.level += 1  #레벨 올려주고
+                    self.level += 1  #레햣 벨 올려주고
                     self.goal = 5 * self.level  #레벨 * 5 만큼 골 수 변경
                 else:  #레벨 10부터느 골수는 없음 ( - ) 로 표시
                     self.goal = '-'
+            self.level_speed()  #추가 - level증가에 따른 속도 증가
 
-            if self.level <= 9:
-                pygame.time.set_timer(pygame.USEREVENT, (500 - 100 * (self.level-1)))
-            else:
-                pygame.time.set_time(pygame.USEREVENT, 100)
+    #추가 - 레벨별 스피드 조절
+    def level_speed(self):
+        if self.level <= 9:
+            pygame.time.set_timer(pygame.USEREVENT, (750 - 60 * self.level))
+        else :
+            pygame.time.set_time(pygame.USEREVENT, 150)
+
+
+
+
 
     def game_over(self):
         return sum(self.board[0]) > 0 or sum(self.board[1]) > 0
