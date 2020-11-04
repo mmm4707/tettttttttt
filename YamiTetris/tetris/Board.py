@@ -57,7 +57,6 @@ class Board:
         self.nextpiece()
         self.score += self.level
 
-
         #스킬 점수 설정 , 제거해야할 부분
         if self.skill < 100:
             self.skill += 2
@@ -178,15 +177,22 @@ class Board:
 
             if self.goal == 0:  # 만약 골이 0이된다면
                 if self.level < 10:  #레벨이 10보다 작다면
-                    self.level += 1  #레벨 올려주고
+                    self.level += 1  #레햣 벨 올려주고
                     self.goal = 5 * self.level  #레벨 * 5 만큼 골 수 변경
                 else:  #레벨 10부터느 골수는 없음 ( - ) 로 표시
                     self.goal = '-'
+            self.level_speed()  #추가 - level증가에 따른 속도 증가
 
-            if self.level <= 9:
-                pygame.time.set_timer(pygame.USEREVENT, (500 - 50 * (self.level-1)))
-            else:
-                pygame.time.set_time(pygame.USEREVENT, 100)
+    #추가 - 레벨별 스피드 조절
+    def level_speed(self):
+        if self.level <= 9:
+            pygame.time.set_timer(pygame.USEREVENT, (750 - 60 * self.level))
+        else :
+            pygame.time.set_time(pygame.USEREVENT, 150)
+
+
+
+
 
     def game_over(self):
         return sum(self.board[0]) > 0 or sum(self.board[1]) > 0
@@ -237,7 +243,9 @@ class Board:
                  (x_pix, y_pix, self.block_size, self.block_size))
                 pygame.draw.rect(self.screen, BLACK,
                  (x_pix, y_pix, self.block_size, self.block_size),1)
+
         self.draw_blocks(self.piece, dx=self.piece_x, dy=self.piece_y)
+
         self.draw_blocks(self.board)
         pygame.draw.rect(self.screen, WHITE, Rect(250, 0, 350, 450))
         self.draw_next_piece(self.next_piece)
