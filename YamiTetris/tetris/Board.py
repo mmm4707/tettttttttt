@@ -57,7 +57,6 @@ class Board:
         self.nextpiece()
         self.score += self.level
 
-
         #스킬 점수 설정 , 제거해야할 부분
         if self.skill < 100:
             self.skill += 2
@@ -133,7 +132,10 @@ class Board:
 #블럭 내리기
     def drop_piece(self):
         if self.can_drop_piece():
-            self.move_piece(dx=0, dy=1)
+            if self.level == 1:
+                self.move_piece(dx=0, dy=1)
+            else:
+                pass
         else:
             self.absorb_piece()
             self.delete_lines()
@@ -184,7 +186,7 @@ class Board:
                     self.goal = '-'
 
             if self.level <= 9:
-                pygame.time.set_timer(pygame.USEREVENT, (500 - 50 * (self.level-1)))
+                pygame.time.set_timer(pygame.USEREVENT, (500 - 100 * (self.level-1)))
             else:
                 pygame.time.set_time(pygame.USEREVENT, 100)
 
@@ -237,7 +239,9 @@ class Board:
                  (x_pix, y_pix, self.block_size, self.block_size))
                 pygame.draw.rect(self.screen, BLACK,
                  (x_pix, y_pix, self.block_size, self.block_size),1)
+
         self.draw_blocks(self.piece, dx=self.piece_x, dy=self.piece_y)
+
         self.draw_blocks(self.board)
         pygame.draw.rect(self.screen, WHITE, Rect(250, 0, 350, 450))
         self.draw_next_piece(self.next_piece)
