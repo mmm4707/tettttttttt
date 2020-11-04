@@ -101,7 +101,7 @@ class Tetris:
                 elif event.type == KEYDOWN:
                     self.handle_key(event.key)
                 elif event.type == pygame.USEREVENT:
-                    self.board.drop_piece()
+                    self.board.drop_piece() #
           # self.screen.fill(BLACK)
             self.board.draw()
             pygame.display.update()
