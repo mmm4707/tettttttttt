@@ -72,11 +72,14 @@ class Tetris:
         icon = pygame.image.load('assets/images/icon.PNG')  # png -> PNG로 수정
         pygame.display.set_icon(icon)
         pygame.display.set_caption('Tetris')
-        pygame.time.set_timer(pygame.USEREVENT, 200) # 블럭 내려오는 속도 조절(높을 수록 느려짐)
+
+        self.board.level_speed() #추가 - level1에서 속도
+
         start_sound = pygame.mixer.Sound('assets/sounds/Start.wav')
         start_sound.play()
         bgm = pygame.mixer.music.load('assets/sounds/bensound-ukulele.mp3')  # (기존 파일은 소리가 안남) 다른 mp3 파일은 소리 난다. 게임진행 bgm변경
         while True:
+
             if self.check_reset:
                 self.board.newGame()
                 self.check_reset = False
@@ -89,7 +92,8 @@ class Tetris:
                 self.HighScore()          #하이스코어 표기
                 self.check_reset = True
                 self.board.init_board()
-            for event in pygame.event.get():
+
+            for event in pygame.event.get(): #게임 진행 중
                 if event.type == QUIT:
                     pygame.quit()
                     sys.exit()
@@ -101,8 +105,9 @@ class Tetris:
                 elif event.type == KEYDOWN:
                     self.handle_key(event.key)
                 elif event.type == pygame.USEREVENT:
-                    self.board.drop_piece() #
-          # self.screen.fill(BLACK)
+                    self.board.drop_piece()
+
+            # self.screen.fill(BLACK)
             self.board.draw()
             pygame.display.update()
             self.clock.tick(30)
