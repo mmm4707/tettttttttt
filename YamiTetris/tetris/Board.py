@@ -277,7 +277,7 @@ class Board:
         textRectObj = textSurfaceObj.get_rect()
         textRectObj.center = (175, 185)
         fontObj2 = pygame.font.Font('assets/Roboto-Bold.ttf', 16)
-        textSurfaceObj2 = fontObj2.render('Press p to continue', True, GREEN)
+        textSurfaceObj2 = fontObj2.render('Press p to continue', True, GREEN) .
         textRectObj2 = textSurfaceObj2.get_rect()
         textRectObj2.center = (175, 235)
 
