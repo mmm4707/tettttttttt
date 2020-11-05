@@ -44,7 +44,7 @@ class Board:
         self.next_piece = Piece()
         self.piece_x, self.piece_y = 3, 0
 
-    def nextpiece(self):
+    def nextpiece(self):  #다음에 나올 블럭 그려주
         self.piece = self.next_piece
         self.next_piece = Piece()
         self.piece_x, self.piece_y = 3, 0
@@ -210,16 +210,35 @@ class Board:
                         while self.can_move_piece(0, tmp):
                             tmp += 1
                         x_s, y_s = self.pos_to_pixel(x, y+tmp-1)
-                        pygame.draw.rect(self.screen, self.piece.T_COLOR[7],
-                                        (x_pix, y_s, self.block_size, self.block_size))
-                        pygame.draw.rect(self.screen, BLACK,
-                                        (x_pix, y_s, self.block_size, self.block_size),1)
+                        #그림자 오류 발
+                     #   pygame.draw.rect(self.screen, self.piece.T_COLOR[7],
+                      #                  (x_pix, y_s, self.block_size, self.block_size))
+                       # pygame.draw.rect(self.screen, BLACK,
+                        #                (x_pix, y_s, self.block_size, self.block_size),1)견
+
                         pygame.draw.rect(self.screen, self.piece.T_COLOR[block-1],
                                         (x_pix, y_pix, self.block_size, self.block_size))
                         pygame.draw.rect(self.screen, BLACK,
                                         (x_pix, y_pix, self.block_size, self.block_size), 1)
 
-#다음 블럭 모양 만들어 주기 ?
+  #  def draw_shadow(self, array2d, dx, dy):  # 그림자 오류 디버깅     #########
+   #     for y, row in enumerate(array2d):
+    #        y += dy
+     #       if y >= 2 and y < self.height:
+      #          for x, block in enumerate(row):
+       #             x += dx
+        #            if block:
+         #               tmp = 1
+          #              while self.can_move_piece(0, tmp):
+           #                 tmp += 1
+            #            x_s, y_s = self.pos_to_pixel(x, y + tmp - 1)
+#
+ #                       pygame.draw.rect(self.screen, self.piece.T_COLOR[7],
+  #                                       (x_s, y_s, self.block_size, self.block_size))
+   #                     pygame.draw.rect(self.screen, BLACK,
+    #                                     (x_s, y_s, self.block_size, self.block_size), 1)
+
+    #다음 블럭 모양 만들어 주기 ?
     def draw_next_piece(self, array2d, color=WHITE):
         for y, row in enumerate(array2d):
             for x, block in enumerate(row):
@@ -243,6 +262,8 @@ class Board:
                  (x_pix, y_pix, self.block_size, self.block_size))
                 pygame.draw.rect(self.screen, BLACK,
                  (x_pix, y_pix, self.block_size, self.block_size),1)
+
+     #    self.draw_shadow(self.piece, dx = self.piece_x, dy=self.piece_y) #그림자 기능 추가
 
         self.draw_blocks(self.piece, dx=self.piece_x, dy=self.piece_y)
 
@@ -277,7 +298,7 @@ class Board:
         textRectObj = textSurfaceObj.get_rect()
         textRectObj.center = (175, 185)
         fontObj2 = pygame.font.Font('assets/Roboto-Bold.ttf', 16)
-        textSurfaceObj2 = fontObj2.render('Press p to continue', True, GREEN) .
+        textSurfaceObj2 = fontObj2.render('Press p to continue', True, GREEN)
         textRectObj2 = textSurfaceObj2.get_rect()
         textRectObj2.center = (175, 235)
 
