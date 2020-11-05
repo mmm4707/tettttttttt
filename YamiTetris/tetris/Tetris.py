@@ -2,7 +2,8 @@ import pygame, sys, time
 from pygame.locals import *
 from Board import *
 
-#               R    G    B
+
+#            R    G    B
 WHITE       = (255, 255, 255)
 GRAY        = (185, 185, 185)
 BLACK       = (  0,   0,   0)
@@ -77,17 +78,17 @@ class Tetris:
 
         start_sound = pygame.mixer.Sound('assets/sounds/Start.wav')
         start_sound.play()
-        bgm = pygame.mixer.music.load('assets/sounds/bensound-ukulele.mp3')  # (기존 파일은 소리가 안남) 다른 mp3 파일은 소리 난다. 게임진행 bgm변경
+        #bgm = pygame.mixer.music.load('assets/sounds/bensound-ukulele.mp3')  # (기존 파일은 소리가 안남) 다른 mp3 파일은 소리 난다. 게임진행 bgm변경
         while True:
 
             if self.check_reset:
                 self.board.newGame()
                 self.check_reset = False
-                pygame.mixer.music.play(-1, 0.0)
+                #pygame.mixer.music.play(-1, 0.0)  ## 수정 필요 오류 나서 일단 빼둠
 
             if self.board.game_over():
                 self.screen.fill(BLACK) #게임 오버 배경 색
-                pygame.mixer.music.stop() #음악 멈추기
+                #pygame.mixer.music.stop() #음악 멈추기     오류나서 일단 뺴
                 self.board.GameOver()  #게임 오버 보드 불러오기
                 self.HighScore()          #하이스코어 표기
                 self.check_reset = True
@@ -98,7 +99,7 @@ class Tetris:
                     sys.exit() #게임을 종료한다ㅏ.
                 elif event.type == KEYUP and event.key == K_p: # 일시 정지 버튼 누르면
                     self.screen.fill(BLACK)         #일시 정지 화면
-                    pygame.mixer.music.stop()       #일시 정지 노래 중지
+                    pygame.mixer.music.stop()       #일시 정지 노래 중둠    오류나서 일단 뺴
                     self.board.pause()
                     pygame.mixer.music.play(-1, 0.0)
                 elif event.type == KEYDOWN: #키보드를 누르면
@@ -110,6 +111,82 @@ class Tetris:
             self.board.draw()
             pygame.display.update() #이게 나오면 구현 시
             self.clock.tick(30) # 초당 프레임 관련
+import pygame
+import pygame_menu
 
-if __name__ == "__main__":
-    Tetris().run()
+pygame.init()
+surface=pygame.display.set_mode((800,600))
+
+def reset(): ## 뒤로 갈때 보여줄 목록들
+    menu.clear()
+    menu.add_button('Select mode',show_game)
+    menu.add_button('Show Rank',show_rank)
+    menu.add_button('Quit',pygame_menu.events.EXIT)
+
+def show_game(): ## 게임 목록 들어가면 나오는 목록들
+    menu.clear()
+    menu.add_button('Single mode', start_the_game)
+    menu.add_button('MiNi mode',start_the_Mini)
+    menu.add_button('Twohands mode',start_the_Twohands)
+    menu.add_button('Ai mode',start_the_Ai)
+    menu.add_button('back',reset)
+
+def show_rank():  ## 랭크 들어가면 나오는 목록들기
+    menu.clear()
+    menu.add_button('Single mode', show_the_rank)
+    menu.add_button('MiNi mode',show_the_rank)
+    menu.add_button('Twohands mode',show_the_rank)
+    menu.add_button('Ai mode',show_the_rank)
+    menu.add_button('back',reset)
+
+def show_the_rank():
+    #랭크 제도 만들면 여기다 넣으면 됩니다.
+    pass
+
+
+def start_the_game():
+    if __name__ == "__main__":
+        Tetris().run()
+
+
+def start_the_Mini():
+    ## 미니 게임 모드 만들면 여기다 실행 코드만 넣으세요
+    pass
+
+
+def start_the_Twohands():
+    ## 투핸드 모드 만들면 여기다 실행 코드만 넣으세요
+    pass
+
+
+def start_the_Ai():
+    ## ai 모드 만들면 여기다 실행 코드 넣으세요
+    pass
+
+def show_the_rank():
+    ## 일반게임 랭크 보여주기
+    pass
+
+def show_the_Mini():
+    ## 미니 게임 랭크 보여주기
+    pass
+
+
+def show_the_Twohands():
+    ## 투핸드 모드 랭크 보여주기
+    pass
+
+
+def show_the_Ai():
+    ## ai 모드 랭크 보여주
+    pass
+
+
+
+
+menu = pygame_menu.Menu(600,400,'Yami Tetris',theme=pygame_menu.themes.THEME_BLUE)
+
+menu.add_button('Select mode' , show_game)
+menu.add_button('Show Rank', show_rank)
+menu.add_button('Quit',pygame_menu.events.EXIT)
+menu.mainloop(surface)
