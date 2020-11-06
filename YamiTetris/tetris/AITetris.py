@@ -239,6 +239,7 @@ class Tetris:
                 self.HighScore()          #하이스코어 표기
                 self.check_reset = True
                 self.board.init_board()
+
             for event in pygame.event.get(): #게임진행중 - event는 키보드 누를떄 특정 동작 수할떄 발생
                 if event.type == QUIT: #종류 이벤트가 발생한 경우
                     pygame.quit() #모든 호출 종
@@ -253,35 +254,24 @@ class Tetris:
                 elif event.type == pygame.USEREVENT:
                     self.board.drop_piece()
 
-            for event1, event2 in  zip(pygame.event.get(), list(pygame.event.get()) + tetris_ai.run_ai(game.field, game.figure, game.width, game.height)):
-                if event1.type == QUIT: #종류 이벤트가 발생한 경우
-                    pygame.quit() #모든 호출 종
-                    sys.exit() #게임을 종료한다ㅏ.
-                    done = True
-                elif event1.type == KEYUP and event1.key == K_p: # 일시 정지 버튼 누르면
-                    self.screen.fill(BLACK)         #일시 정지 화면
-                    pygame.mixer.music.stop()       #일시 정지 노래 중지
-                    self.board.pause()
-                    pygame.mixer.music.play(-1, 0.0)
-                elif event1.type == KEYDOWN: #키보드를 누르면
-                    self.handle_key(event1.key) #handle 메소드 실행
-                elif event1.type == pygame.USEREVENT:
-                    self.board.drop_piece()
-
-
-                if not done:
-                    if event2.key == pygame.K_UP:
+            for event in list(pygame.event.get()) + tetris_ai.run_ai(game.field, game.figure, game.width, game.height):
+                if event.type == pygame.QUIT:
+                   done = True
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_UP:
                         game.rotate()
-                    if event2.key == pygame.K_DOWN:
+                    if event.key == pygame.K_DOWN:
                         pressing_down = True
-                    if event2.key == pygame.K_LEFT:
+                    if event.key == pygame.K_LEFT:
                         game.go_side(-1)
-                    if event2.key == pygame.K_RIGHT:
+                    if event.key == pygame.K_RIGHT:
                         game.go_side(1)
-                    if event2.key == pygame.K_SPACE:
+                    if event.key == pygame.K_SPACE:
                         game.go_space()
-                    if event2.key == pygame.K_ESCAPE:
-                        game.__init__(18 , 10)
+                    if event.key == pygame.K_ESCAPE:
+                        game.__init__(20, 10)
+
+
 
 
 
