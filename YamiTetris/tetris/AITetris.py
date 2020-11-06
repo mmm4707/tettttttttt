@@ -85,7 +85,7 @@ class Tetris:
 
         self.screen = pygame.display.set_mode((700, 450))  # 고정 크기의 창을 만들어준다.  350 450
         self.clock = pygame.time.Clock()
-        self.board = Board(self.screen)
+        self.aiboard = AIBoard(self.screen)
         self.music_on_off = True
         self.check_reset = True
 
@@ -158,17 +158,17 @@ class Tetris:
     #각 키를 누를떄 실행되는 method
     def handle_key(self, event_key):
         if event_key == K_DOWN or event_key == K_s:
-            self.board.drop_piece()
+            self.aiboard.drop_piece()
         elif event_key == K_LEFT or event_key == K_a:
-            self.board.move_piece(dx=-1, dy=0)
+            self.aiboard.move_piece(dx=-1, dy=0)
         elif event_key == K_RIGHT or event_key == K_d:
-            self.board.move_piece(dx=1, dy=0)
+            self.aiboard.move_piece(dx=1, dy=0)
         elif event_key == K_UP or event_key == K_w:
-            self.board.rotate_piece()
+            self.aiboard.rotate_piece()
         elif event_key == K_SPACE:
-            self.board.full_drop_piece()
+            self.aiboard.full_drop_piece()
         elif event_key == K_q: #스킬 부분
-            self.board.ultimate()
+            self.aiboard.ultimate()
         elif event_key == K_m: # 소리 설정
             self.music_on_off = not self.music_on_off
             if self.music_on_off:
@@ -182,19 +182,19 @@ class Tetris:
             f = open('assets/save.txt', 'r')
             l = f.read()
             f.close()
-            if int(l) < self.board.score:
-                h_s = self.board.score
+            if int(l) < self.aiboard.score:
+                h_s = self.aiboard.score
                 f = open('assets/save.txt', 'w')
-                f.write(str(self.board.score))
+                f.write(str(self.aiboard.score))
                 f.close()
             else:
                 h_s = l
-            self.board.HS(str(h_s))
+            self.aiboard.HS(str(h_s))
         except:
             f = open('assets/save.txt', 'w')
-            f.write(str(self.board.score))
+            f.write(str(self.aiboard.score))
             f.close()
-            self.board.HS(str(self.board.score))
+            self.aiboard.HS(str(self.aiboard.score))
 
     #실행하기
     def run(self):
@@ -203,7 +203,7 @@ class Tetris:
         pygame.display.set_icon(icon)
         pygame.display.set_caption('Tetris')
 
-        self.board.level_speed() #추가 - level1에서 속도
+        self.aiboard.level_speed() #추가 - level1에서 속도
 
         start_sound = pygame.mixer.Sound('assets/sounds/Start.wav')
         start_sound.play()
@@ -228,17 +228,18 @@ class Tetris:
                     game.go_down()
 
             if self.check_reset:
-                self.board.newGame()
+                self.aiboard.newGame()
                 self.check_reset = False
                 pygame.mixer.music.play(-1, 0.0)
 
-            if self.board.game_over():
+            if self.aiboard.game_over() or game.score > (self.score + 10): #ai와 점수차이이 종
                 self.screen.fill(BLACK) #게임 오버 배경 색
                 pygame.mixer.music.stop() #음악 멈추기
-                self.board.GameOver()  #게임 오버 보드 불러오기
+                self.aiboard.GameOver()  #게임 오버 보드 불러오기
                 self.HighScore()          #하이스코어 표기
                 self.check_reset = True
-                self.board.init_board()
+                self.aiboard.init_aiboard()
+                game.score =0
 
             for event in pygame.event.get(): #게임진행중 - event는 키보드 누를떄 특정 동작 수할떄 발생
                 if event.type == QUIT: #종류 이벤트가 발생한 경우
@@ -247,12 +248,12 @@ class Tetris:
                 elif event.type == KEYUP and event.key == K_p: # 일시 정지 버튼 누르면
                     self.screen.fill(BLACK)         #일시 정지 화면
                     pygame.mixer.music.stop()       #일시 정지 노래 중지
-                    self.board.pause()
+                    self.aiboard.pause()
                     pygame.mixer.music.play(-1, 0.0)
                 elif event.type == KEYDOWN: #키보드를 누르면
                     self.handle_key(event.key) #handle 메소드 실행
                 elif event.type == pygame.USEREVENT:
-                    self.board.drop_piece()
+                    self.aiboard.drop_piece()
 
             for event in list(pygame.event.get()) + tetris_ai.run_ai(game.field, game.figure, game.width, game.height):
                 if event.type == pygame.QUIT:
@@ -277,7 +278,7 @@ class Tetris:
 
             for i in range(game.height):
                 for j in range(game.width):
-                    pygame.draw.rect(self.screen, WHITE,
+                    pygame.draw.rect(self.screen, BLACK,
                                      [game.x + game.zoom * j, game.y + game.zoom * i, game.zoom, game.zoom], 1)
                     if game.field[i][j] > 0:
                         pygame.draw.rect(self.screen, colors[game.field[i][j]],
@@ -294,15 +295,19 @@ class Tetris:
                                               game.y + game.zoom * (i + game.figure.y) + 1,
                                               game.zoom - 2, game.zoom - 2])
 
-            font = pygame.font.SysFont('Calibri', 25, True, False)
-            font1 = pygame.font.SysFont('Calibri', 65, True, False)
-            text = font.render("Score: " + str(game.score), True, WHITE)
 
-            self.screen.blit(text, [600, 0])
+
+            text = pygame.font.Font('assets/Roboto-Bold.ttf', 18).render("SCORE",True, BLACK)
+            scoretext = pygame.font.Font('assets/Roboto-Bold.ttf', 16).render(""+ str(game.score), True, BLACK)
+
+            self.screen.blit(text, [605, 200])
+            self.screen.blit(scoretext, [605, 225])
+
+
             pygame.display.flip()
 
             # self.screen.fill(BLACK)
-            self.board.draw()
+            self.aiboard.draw()
 
             self.clock.tick(fps) # 초당 프레임 관련
 

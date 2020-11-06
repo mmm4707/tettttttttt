@@ -261,7 +261,10 @@ class Board:
         self.draw_blocks(self.piece, dx=self.piece_x, dy=self.piece_y)
 
         self.draw_blocks(self.board)
+
         pygame.draw.rect(self.screen, WHITE, Rect(250, 0, 100, 450))
+
+
         self.draw_next_piece(self.next_piece)
         next_text = pygame.font.Font('assets/Roboto-Bold.ttf', 18).render('NEXT', True, BLACK)
         skill_text = pygame.font.Font('assets/Roboto-Bold.ttf', 18).render('SKILL', True, BLACK)
