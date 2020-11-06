@@ -19,7 +19,7 @@ class Tetris:
 
     #생성자
     def __init__(self):
-        self.screen = pygame.display.set_mode((350, 450)) # 고정 크기의 창을 만들어준다.
+        self.screen = pygame.display.set_mode((350, 450)) # 고정 크기의 창을 만들어준다.  350 450
         self.clock = pygame.time.Clock()
         self.board = Board(self.screen)
         self.music_on_off = True
