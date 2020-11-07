@@ -356,6 +356,9 @@ class AIBoard:
                 elif event.type == KEYDOWN:
                     running = False
 
+
+
+
 #가장 높은 점수 보여주기 배경
     def HS(self, txt="no"):
         if txt != "no":
