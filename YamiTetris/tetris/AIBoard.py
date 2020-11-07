@@ -1,6 +1,8 @@
 import pygame, sys, datetime, time
 from pygame.locals import *
 from Piece import *
+import tetris_ai
+import AITetris
 
 #색상 정보
 #               R    G    B
@@ -29,6 +31,7 @@ class AIBoard:
         self.block_size = 25  #바꾸면 맵 블럭크기 변경
         self.init_aiboard() # 보드 생성 메소드 실행
         self.generate_piece() # 블럭 생성 메소드 실행
+
 
     def init_aiboard(self):
         self.aiboard = []
@@ -324,6 +327,7 @@ class AIBoard:
         self.screen.blit(textSurfaceObj, textRectObj)
         self.screen.blit(textSurfaceObj2, textRectObj2)
         pygame.display.update()
+
         running = True
         while running:
             for event in pygame.event.get():
@@ -347,6 +351,7 @@ class AIBoard:
         self.screen.blit(textSurfaceObj, textRectObj)
         self.screen.blit(textSurfaceObj2, textRectObj2)
         pygame.display.update()
+
         running = True
         while running:
             for event in pygame.event.get():

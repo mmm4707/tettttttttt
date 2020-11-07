@@ -77,7 +77,7 @@ class Tetris:
         self.board.level_speed() #추가 - level1에서 속도
 
         start_sound = pygame.mixer.Sound('assets/sounds/Start.wav')
-        start_sound.play()
+        #start_sound.play()
         #bgm = pygame.mixer.music.load('assets/sounds/bensound-ukulele.mp3')  # (기존 파일은 소리가 안남) 다른 mp3 파일은 소리 난다. 게임진행 bgm변경
         while True:
 
@@ -93,6 +93,7 @@ class Tetris:
                 self.HighScore()          #하이스코어 표기
                 self.check_reset = True
                 self.board.init_board()
+
             for event in pygame.event.get(): #게임진행중 - event는 키보드 누를떄 특정 동작 수할떄 발생
                 if event.type == QUIT: #종류 이벤트가 발생한 경우
                     pygame.quit() #모든 호출 종

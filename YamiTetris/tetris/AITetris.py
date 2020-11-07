@@ -59,7 +59,7 @@ class Figure:
         self.rotation = (self.rotation + 1) % len(self.figures[self.type])
 
 
-class Tetris:
+class AITetris:
     level = 2
     score = 0
     state = "start"
@@ -201,18 +201,18 @@ class Tetris:
         pygame.init()
         icon = pygame.image.load('assets/images/icon.PNG')  # png -> PNG로 수정
         pygame.display.set_icon(icon)
-        pygame.display.set_caption('Tetris')
+        pygame.display.set_caption('AITetris')
 
         self.aiboard.level_speed() #추가 - level1에서 속도
 
         start_sound = pygame.mixer.Sound('assets/sounds/Start.wav')
-        start_sound.play()
-        bgm = pygame.mixer.music.load('assets/sounds/bensound-ukulele.mp3')  # (기존 파일은 소리가 안남) 다른 mp3 파일은 소리 난다. 게임진행 bgm변경
+        #start_sound.play()
+        # bgm = pygame.mixer.music.load('assets/sounds/bensound-ukulele.mp3')  # (기존 파일은 소리가 안남) 다른 mp3 파일은 소리 난다. 게임진행 bgm변경
 
         done = False
         clock = pygame.time.Clock()
-        fps = 25
-        game = Tetris(18, 10)
+        fps = 50
+        game = AITetris(18, 10)
         counter = 0
         pressing_down = False
 
@@ -230,15 +230,17 @@ class Tetris:
             if self.check_reset:
                 self.aiboard.newGame()
                 self.check_reset = False
-                pygame.mixer.music.play(-1, 0.0)
+                #pygame.mixer.music.play(-1, 0.0)
 
             if self.aiboard.game_over() or game.score > (self.score + 10): #ai와 점수차이이 종
                 self.screen.fill(BLACK) #게임 오버 배경 색
-                pygame.mixer.music.stop() #음악 멈추기
+              #  pygame.mixer.music.stop() #음악 멈추기
                 self.aiboard.GameOver()  #게임 오버 보드 불러오기
                 self.HighScore()          #하이스코어 표기
                 self.check_reset = True
                 self.aiboard.init_aiboard()
+
+                #ai모드 reset 기능이 필요함
                 game.score =0
 
             for event in pygame.event.get(): #게임진행중 - event는 키보드 누를떄 특정 동작 수할떄 발생
@@ -312,5 +314,5 @@ class Tetris:
             self.clock.tick(fps) # 초당 프레임 관련
 
 if __name__ == "__main__":
-    Tetris(18,20).run()
+     AITetris(18,20).run()
 
