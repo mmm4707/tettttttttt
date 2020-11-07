@@ -182,8 +182,67 @@ def show_the_Ai():
     pass
 
 
+"""
+## 나중에 이미지 바꿀떄
+## 여기부터는 배경 이미지 및 꾸미기 등
 
 
+## 바꿀 이미지 파일 관리
+
+menu_image = pygame_menu.baseimage.BaseImage(
+
+    image_path='images/고양이.png',
+
+    drawing_mode=pygame_menu.baseimage.IMAGE_MODE_FILL
+
+)
+
+## 새로운 태마 만들기
+
+mytheme = pygame_menu.themes.THEME_ORANGE.copy()
+
+## 배경 이미지 교체
+
+mytheme.background_color = menu_image
+
+## 위젯 이미지 교체 .
+
+mytheme.widget_background_color = menu_image
+
+## 상단 바 바꾸기
+
+mytheme.title_bar_style = pygame_menu.widgets.MENUBAR_STYLE_UNDERLINE_TITLE
+
+## 글꼴 바꾸기
+
+mytheme.widget_font = pygame_menu.font.FONT_OPEN_SANS_BOLD
+
+mytheme.font = pygame_menu.font.FONT_OPEN_SANS_BOLD
+
+##  상단 바 글꼴 크기
+
+mytheme.title_font_size = 30
+
+# 위젯 글골 크기
+
+mytheme.widget_font_size = 30
+
+# 위젯 끼리 떨어져 있는 길이
+
+mytheme.widget_margin = (0, 20)
+
+menu = pygame_menu.Menu(600, 400, 'Yami Tetris',
+
+                        theme=mytheme)
+
+# 상단 메뉴바 모양 바꾸기
+
+
+title_bar_style = pygame_menu.widgets.MENUBAR_STYLE_NONE
+
+"""
+
+# 이미지 삽입할떄는 이거 삭제하고 위에꺼 쓰면 됩니다. !
 menu = pygame_menu.Menu(600,400,'Yami Tetris',theme=pygame_menu.themes.THEME_BLUE)
 
 menu.add_button('Select mode' , show_game)
