@@ -95,7 +95,8 @@ class Tetris:
             if self.board.game_over():
                 self.screen.fill(BLACK) #게임 오버 배경 색
                 #pygame.mixer.music.stop() #음악 멈추기     오류나서 일단 뺴
-                self.board.GameOgver()  #게임 오버 보드 불러오기
+                #pygame.mixer.music.stop() #음악 멈추기     오류나서 일단 뺴
+                self.board.GameOver()  #게임 오버 보드 불러오기
                 self.HighScore()          #하이스코어 표기
                 self.check_reset = True
                 self.board.init_board()
