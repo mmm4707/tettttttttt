@@ -398,17 +398,5 @@ class Board:
                     elif event.type == KEYDOWN:
                         running = False
 
-#스킬 사용
-    def ultimate(self):
-        if self.skill == 100:
-            bomb = pygame.image.load("assets/images/bomb.jpg")
-            bomb = pygame.transform.scale(bomb, (350, 450))
-            bomb_sound = pygame.mixer.Sound('assets/sounds/bomb.wav')
-            self.screen.blit(bomb, (0, 0))
-            pygame.display.update()
-            bomb_sound.play()
-            time.sleep(1)
-            self.board = []
-            self.skill = 0
-            for _ in range(self.height):
-                self.board.append([0]*self.width)
+#스킬 사용 remove
+
