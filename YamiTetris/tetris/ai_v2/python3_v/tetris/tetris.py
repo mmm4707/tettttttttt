@@ -1,4 +1,5 @@
 #!/usr/bin/env python2
+#파이썬 버전 3로 변형 하기
 import copy
 import time
 import threading
@@ -7,6 +8,7 @@ from field import Field
 from ai import Ai
 import pygame, sys
 from gui import Gui
+
 
 # The configuration
 cell_size =    18
