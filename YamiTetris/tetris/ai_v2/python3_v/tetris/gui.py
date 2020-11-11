@@ -56,7 +56,7 @@ class Gui(object):
         self.width = cell_size*(cols+6)
         self.height = cell_size*rows
         self.rlim = cell_size*cols
-        self.bground_grid = [[ 8 if x%2==y%2 else 0 for x in xrange(cols)] for y in xrange(rows)]
+        self.bground_grid = [[ 8 if x%2==y%2 else 0 for x in range(cols)] for y in range(rows)]
 
         self.default_font =  pygame.font.Font(
             pygame.font.get_default_font(), 12)

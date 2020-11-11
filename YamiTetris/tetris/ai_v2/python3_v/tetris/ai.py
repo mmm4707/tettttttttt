@@ -3,17 +3,17 @@ import copy
 
 def rotate_clockwise(shape):
     return [ [ shape[y][x]
-            for y in xrange(len(shape)) ]
-        for x in xrange(len(shape[0]) - 1, -1, -1) ]
+            for y in range(len(shape)) ]
+        for x in range(len(shape[0]) - 1, -1, -1) ]
 
 
 class Ai:
 
     @staticmethod
     def best(field, workingPieces, workingPieceIndex, weights, level):
-        bestRotation = None
-        bestOffset = None
-        bestScore = None
+        bestRotation = 0
+        bestOffset = 0
+        bestScore = 0
         workingPieceIndex = copy.deepcopy(workingPieceIndex)
         workingPiece = workingPieces[workingPieceIndex]
         shapes_rotation = { 4 : 4, 8 : 2, 12 : 2, 16 : 4, 20 : 4, 24 : 2, 28 : 1 }
