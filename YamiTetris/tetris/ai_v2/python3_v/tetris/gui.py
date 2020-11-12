@@ -7,23 +7,23 @@ from ai import Ai
 import pygame, sys
 
 # The configuration
-cell_size =    18
+cell_size =    25
 cols =        10
-rows =        22
+rows =        18
 maxfps =     30
-time =     25
+time =     25 # ai속도 조절
 maxPiece = 500
 
 colors = [
-(0,   0,   0  ),
-(255, 85,  85),
-(100, 200, 115),
-(120, 108, 245),
-(255, 140, 50 ),
-(50,  120, 52 ),
-(146, 202, 73 ),
-(150, 161, 218 ),
-(35,  35,  35) # Helper color for background grid
+(0, 0, 0),
+    (225, 13, 27), #레드
+    (98, 190, 68), #그린
+    (64, 111, 249), #블루
+    (253, 189, 53), # 오렌지
+    (246, 227, 90), #엘로우
+    (242, 64, 235), #핑크
+    (70, 230, 210), #사이온
+    (23,23,23 )  # Helper color for background grid
 ]
 
 # Define the shapes of the single parts
@@ -77,37 +77,20 @@ class Gui(object):
                 (x,y))
             y+=14
 
-    def center_msg(self, msg):
-        for i, line in enumerate(msg.splitlines()):
-            msg_image =  self.default_font.render(line, False,
-                (255,255,255), (0,0,0))
 
-            msgim_center_x, msgim_center_y = msg_image.get_size()
-            msgim_center_x //= 2
-            msgim_center_y //= 2
-
-            self.screen.blit(msg_image, (
-              self.width // 2-msgim_center_x,
-              self.height // 2-msgim_center_y+i*22))
 
     def draw_matrix(self, matrix, offset):
         off_x, off_y  = offset
         for y, row in enumerate(matrix):
             for x, val in enumerate(row):
                 if val:
-                    pygame.draw.rect(self.screen,colors[val],
-                        pygame.Rect(
-                            (off_x+x) *
-                              cell_size,
-                            (off_y+y) *
-                              cell_size,
-                            cell_size,
-                            cell_size),0)
+                    pygame.draw.rect(self.screen,colors[val], pygame.Rect((off_x+x) *cell_size,(off_y+y) *cell_size,cell_size,cell_size),0)
 
     def update(self, tetris):
-        self.screen.fill((0,0,0))
+        self.screen.fill((23,23,23))
         if tetris.gameover:# or self.nbPiece >= maxPiece:
-            self.center_msg("""Game Over!\nYour score: %dPress space to continue""" % tetris.score)
+            pass
+           # self.center_msg("""Game Over!\nYour score: %dPress space to continue""" % tetris.score)
         else:
             if tetris.paused:
                 self.center_msg("Paused")
@@ -125,4 +108,14 @@ class Gui(object):
                 self.draw_matrix(tetris.board, (0,0))
                 self.draw_matrix(tetris.stone, (tetris.stone_x, tetris.stone_y))
                 self.draw_matrix(tetris.next_stone, (cols+1,2))
+
+                # 배경에 라인 추가 하기
+                for i in range(cols + 1):
+                    pygame.draw.line(self.screen, (0, 0, 0), ((cell_size) * i, 0), ((cell_size) * i, self.height - 1),
+                                     2)
+
+                for j in range(rows + 1):
+                    pygame.draw.line(self.screen, (0, 0, 0), (0, (cell_size) * j),
+                                     (cell_size * cols - 1, (cell_size) * j), 2)
+
         pygame.display.update()

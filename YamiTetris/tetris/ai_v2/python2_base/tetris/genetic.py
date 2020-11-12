@@ -91,7 +91,6 @@ survivors =[[-7.079322515535496, 0.4084491347254038, -7.402904430910445, -2.7844
 
 generation = survivors
 
-start_time = time.time()
 average = computeAverage(survivors)
 extra_var_multiplier = max((1.0-10/float(batch/2)),0)
 std = list(map(lambda std: std + 0.001 * extra_var_multiplier, computeStandardDeviation(survivors)))

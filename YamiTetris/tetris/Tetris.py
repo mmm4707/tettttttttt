@@ -76,7 +76,7 @@ class Tetris:
 
         self.board.level_speed() #추가 - level1에서 속도
 
-        start_sound = pygame.mixer.Sound('assets/sounds/Start.wav')
+        #start_sound = pygame.mixer.Sound('assets/sounds/Start.wav')
         #start_sound.play()
         #bgm = pygame.mixer.music.load('assets/sounds/bensound-ukulele.mp3')  # (기존 파일은 소리가 안남) 다른 mp3 파일은 소리 난다. 게임진행 bgm변경
         while True:
