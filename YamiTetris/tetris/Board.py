@@ -293,8 +293,6 @@ class Board:
         combo_value = pygame.font.Font('assets/Roboto-Bold.ttf', 16).render(str(self.combo), True, BLACK)
 
 
-
-
         self.screen.blit(next_text, (255, 20))
         self.screen.blit(skill_text, (255, 120))
         self.screen.blit(skill_value, (255, 140))
