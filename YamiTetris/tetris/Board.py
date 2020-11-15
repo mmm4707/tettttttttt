@@ -39,7 +39,17 @@ class Board:
         self.goal = 5  #level up 도달 목표
         self.skill = 0 #skill 퍼센트
         self.combo=0 # combo 수
-
+        self.timer0 = threading.Timer(10, self.combo_null)
+        self.timer1 = threading.Timer(10, self.combo_null)
+        self.timer2 = threading.Timer(10, self.combo_null)
+        self.timer3 = threading.Timer(10, self.combo_null)
+        self.timer4 = threading.Timer(10, self.combo_null)
+        self.timer5 = threading.Timer(10, self.combo_null)
+        self.timer6 = threading.Timer(10, self.combo_null)
+        self.timer7 = threading.Timer(10, self.combo_null)
+        self.timer8 = threading.Timer(10, self.combo_null)
+        self.timer9 = threading.Timer(10, self.combo_null)
+        self.timer_list=[self.timer0,self.timer1,self.timer2,self.timer3,self.timer4,self.timer5,self.timer6,self.timer7,self.timer8,self.timer9]
         for _ in range(self.height):
             self.board.append([0]*self.width)
 
@@ -163,7 +173,18 @@ class Board:
         for y in reversed(range(1, y+1)):
             self.board[y] = list(self.board[y-1])
 
-# 라인 삭제하기
+    def combo_null(self):
+        self.combo=0
+
+    def combo_null_start(self):
+        for i in range(9):
+            if self.combo==i:
+                self.timer_list[i]=threading.Timer(10, self.combo_null)
+                self.timer_list[i].start()
+                for j in range(9):
+                    if i != j :
+                        self.timer_list[j].cancel()
+    # 라인 삭제하기
     def delete_lines(self):
         remove = [y for y, row in enumerate(self.board) if all(row)]
         for y in remove:
@@ -173,8 +194,12 @@ class Board:
             #라인 삭제 실행
             self.delete_line(y)
 
+            self.combo_null_start()
             #라인 삭제시 콤보 점수 1 증가
+
             self.combo+=1
+
+
 
             #콤보 *level * 10 만큼 점수 올려주기
             self.score=self.level*self.combo*10
@@ -399,17 +424,5 @@ class Board:
                     elif event.type == KEYDOWN:
                         running = False
 
-#스킬 사용
-    def ultimate(self):
-        if self.skill == 100:
-            bomb = pygame.image.load("assets/images/bomb.jpg")
-            bomb = pygame.transform.scale(bomb, (350, 450))
-            bomb_sound = pygame.mixer.Sound('assets/sounds/bomb.wav')
-            self.screen.blit(bomb, (0, 0))
-            pygame.display.update()
-            bomb_sound.play()
-            time.sleep(1)
-            self.board = []
-            self.skill = 0
-            for _ in range(self.height):
-                self.board.append([0]*self.width)
+#스킬 사용 remove
+

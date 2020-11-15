@@ -49,9 +49,7 @@ tetris_shapes = [
 ]
 
 def rotate_clockwise(shape):
-    return [ [ shape[y][x]
-            for y in range(len(shape)) ]
-        for x in range(len(shape[0]) - 1, -1, -1) ]
+    return [ [ shape[y][x] for y in range(len(shape)) ] for x in range(len(shape[0]) - 1, -1, -1) ]
 
 def check_collision(board, shape, offset):
     off_x, off_y = offset
@@ -72,13 +70,13 @@ def join_matrixes(mat1, mat2, mat2_off):
     off_x, off_y = mat2_off
     for cy, row in enumerate(mat2):
         for cx, val in enumerate(row):
-            mat1[cy+off_y-1    ][cx+off_x] += val
+            mat1[cy+off_y-1][cx+off_x] += val
     return mat1
 
 def new_board():
     board = [ [ 0 for x in range(cols) ]
             for y in range(rows) ]
-    #board += [[ 1 for x in xrange(cols)]]
+    #board += [[ 1 for x in range(cols)]]
     return board
 
 
@@ -92,7 +90,7 @@ class Tetris(object):
     def new_stone(self):
         self.stone = self.next_stone[:]
         self.next_stone = tetris_shapes[random.randint(0, len(tetris_shapes)-1)]
-        self.stone_x = int(cols / 2 - len(self.stone[0])/2)
+        self.stone_x = int((cols / 2 - len(self.stone[0])/2))
         self.stone_y = 0
         if check_collision(self.board,self.stone,(self.stone_x, self.stone_y)):
             self.gameover = True
@@ -131,17 +129,13 @@ class Tetris(object):
             if check_collision(self.board,
                                self.stone,
                                (self.stone_x, self.stone_y)):
-                self.board = join_matrixes(
-                  self.board,
-                  self.stone,
-                  (self.stone_x, self.stone_y))
+                self.board = join_matrixes(self.board,self.stone,(self.stone_x, self.stone_y))
                 self.new_stone()
                 cleared_rows = 0
 
                 for i, row in enumerate(self.board):
                     if 0 not in row:
-                        self.board = remove_row(
-                          self.board, i)
+                        self.board = remove_row(self.board, i)
                         cleared_rows += 1
                 self.add_cl_lines(cleared_rows)
                 return True
@@ -154,8 +148,6 @@ class Tetris(object):
                                    new_stone,
                                    (self.stone_x, self.stone_y)):
                 self.stone = new_stone
-
-
 
 
 
@@ -187,8 +179,6 @@ class Tetris(object):
         while 1:
             self.gui.update(self)
             Ai.choose(self.board, self.stone, self.next_stone, self.stone_x, weights, self)
-
-
 
             for event in pygame.event.get():
                 if event.type == pygame.USEREVENT+1:

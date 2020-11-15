@@ -67,14 +67,12 @@ class ai_Gui(object):
         pygame.time.set_timer(pygame.USEREVENT+1, time)
 
 
-
-
     def draw_matrix(self, matrix, offset):
         off_x, off_y  = offset
         for y, row in enumerate(matrix):
             for x, val in enumerate(row):
                 if val:
-                    pygame.draw.rect(self.screen,colors[val], pygame.Rect((off_x+x) *cell_size,(off_y+y) *cell_size,cell_size,cell_size),0)
+                    pygame.draw.rect(self.screen,colors[val], pygame.Rect((off_x+x*cell_size +350 , (off_y+y) *cell_size,cell_size,cell_size)) ,0)
 
     def update(self, tetris):
         self.screen.fill((23,23,23))
@@ -82,11 +80,11 @@ class ai_Gui(object):
             pass
            # self.center_msg("""Game Over!\nYour score: %dPress space to continue""" % tetris.score)
         else:
-             pygame.draw.rect(self.screen, (255,255,255), pygame.Rect(250, 0, 100, 450))
+             pygame.draw.rect(self.screen, (255,255,255), pygame.Rect(600, 0, 450, 450))
              ai_score_text = pygame.font.Font('assets/Roboto-Bold.ttf', 18).render('SCORE', True, (0,0,0))
              ai_score_value = pygame.font.Font('assets/Roboto-Bold.ttf', 16).render(str(tetris.ai_score), True, (0,0,0))
-             self.screen.blit(ai_score_text, (255, 180))
-             self.screen.blit(ai_score_value, (255, 200))
+             self.screen.blit(ai_score_text, (605, 180))
+             self.screen.blit(ai_score_value, (605, 200))
 
              self.draw_matrix(self.bground_grid, (0,0))
              self.draw_matrix(tetris.board, (0,0))
@@ -95,16 +93,16 @@ class ai_Gui(object):
              computer_said1 = pygame.font.Font('assets/Roboto-Bold.ttf', 16).render("YOU CAN'T", True, (0, 0, 0))
              computer_said2 = pygame.font.Font('assets/Roboto-Bold.ttf', 16).render("DEFEAT ME", True, (0, 0, 0))
 
-             self.screen.blit(computer_said1, (255, 20))
-             self.screen.blit(computer_said2, (255, 40))
+             self.screen.blit(computer_said1, (605, 20))
+             self.screen.blit(computer_said2, (605, 40))
 
              # 배경에 라인 추가 하기
              for i in range(cols + 1):
-                 pygame.draw.line(self.screen, (0, 0, 0), ((cell_size) * i, 0), ((cell_size) * i, self.height - 1),2)
+                 pygame.draw.line(self.screen, (0, 0, 0), ((cell_size) * i+350, 0), ((cell_size) * i+350, self.height - 1),2)
 
              for j in range(rows + 1):
-                 pygame.draw.line(self.screen, (0, 0, 0), (0, (cell_size) * j),
-                                     (cell_size * cols - 1, (cell_size) * j), 2)
+                 pygame.draw.line(self.screen, (0, 0, 0), (0+350, (cell_size) * j),
+                                     (cell_size * cols - 1+350, (cell_size) * j), 2)
 
         pygame.display.update()
 

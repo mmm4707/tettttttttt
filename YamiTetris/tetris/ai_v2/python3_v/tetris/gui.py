@@ -11,7 +11,7 @@ cell_size =    25
 cols =        10
 rows =        18
 maxfps =     30
-time =     10 # ai속도 조절
+time =     50 # ai속도 조절
 maxPiece = 500
 
 colors = [
