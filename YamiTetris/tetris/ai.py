@@ -1,7 +1,7 @@
 from ai_field import ai_Field
 import copy
 
-def rotate_clockwise(shape):
+def ai_rotate_clockwise(shape):
     return [ [ shape[y][x]
             for y in range(len(shape)) ]
         for x in range(len(shape[0]) - 1, -1, -1) ]
@@ -10,7 +10,7 @@ def rotate_clockwise(shape):
 class Ai:
 
     @staticmethod
-    def best(field, workingPieces, workingPieceIndex, weights, ai_level):
+    def best(ai_field, workingPieces, workingPieceIndex, weights, ai_level):
         bestRotation = None
         bestOffset = None
         bestScore = -10000
@@ -21,31 +21,31 @@ class Ai:
         hashedPiece = sum(flat_piece)
 
         for rotation in range(0, shapes_rotation[hashedPiece]):
-            for offset in range(0, field.width):
-                result = field.projectPieceDown(workingPiece, offset, ai_level)
+            for offset in range(0, ai_field.ai_width):
+                result = ai_field.projectPieceDown(workingPiece, offset, ai_level)
                 if not result is None:
                     score = None
                     if workingPieceIndex == len(workingPieces)-1 :
-                        heuristics = field.heuristics()
+                        heuristics = ai_field.heuristics()
                         score = sum([a*b for a,b in zip(heuristics, weights)])
                     else:
-                        _, _, score = Ai.best(field, workingPieces, workingPieceIndex + 1, weights, 2)
+                        _, _, score = Ai.best(ai_field, workingPieces, workingPieceIndex + 1, weights, 2)
 
                     if score > bestScore :
                         bestScore = score
                         bestOffset = offset
                         bestRotation = rotation
-                field.undo(ai_level)
-            workingPiece = rotate_clockwise(workingPiece)
+                ai_field.undo(ai_level)
+            workingPiece = ai_rotate_clockwise(workingPiece)
 
         return bestOffset, bestRotation, bestScore
 
     @staticmethod
     def choose(initialField, piece, next_piece, offsetX, weights, parent):
-        field = ai_Field(len(initialField[0]), len(initialField))
-        field.updateField(copy.deepcopy(initialField))
+        ai_field = ai_Field(len(initialField[0]), len(initialField))
+        ai_field.updateField(copy.deepcopy(initialField))
 
-        offset, rotation, _ = Ai.best(field, [piece, next_piece], 0, weights, 1)
+        offset, rotation, _ = Ai.best(ai_field, [piece, next_piece], 0, weights, 1)
         moves = []
 
         offset = offset - offsetX
@@ -57,5 +57,5 @@ class Ai:
             else:
                 moves.append("LEFT")
         #moves.append('RETURN')
-        parent.executes_moves(moves)
+        parent.ai_executes_moves(moves)
         #return moves

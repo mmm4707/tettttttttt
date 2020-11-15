@@ -2,16 +2,6 @@ import pygame, sys, time
 from pygame.locals import *
 from Board import *
 
-import copy
-import time
-import threading
-import random
-from ai_field import ai_Field
-from ai import Ai
-import pygame, sys
-from ai_gui import ai_Gui
-
-
 
 #            R    G    B
 WHITE       = (255, 255, 255)
@@ -25,8 +15,6 @@ BLUE        = (  0,   0, 155)
 LIGHTBLUE   = ( 20,  20, 175)
 YELLOW      = (155, 155,   0)
 LIGHTYELLOW = (175, 175,  20)
-
-
 
 class Tetris:
 
@@ -91,6 +79,12 @@ class Tetris:
         #start_sound = pygame.mixer.Sound('assets/sounds/Start.wav')
         #start_sound.play()
         #bgm = pygame.mixer.music.load('assets/sounds/bensound-ukulele.mp3')  # (기존 파일은 소리가 안남) 다른 mp3 파일은 소리 난다. 게임진행 bgm변경
+
+        delay = 150
+        interval = 100
+        pygame.key.set_repeat(delay, interval)
+
+
         while True:
 
             if self.check_reset:
@@ -100,6 +94,7 @@ class Tetris:
 
             if self.board.game_over():
                 self.screen.fill(BLACK) #게임 오버 배경 색
+                #pygame.mixer.music.stop() #음악 멈추기     오류나서 일단 뺴
                 #pygame.mixer.music.stop() #음악 멈추기     오류나서 일단 뺴
                 self.board.GameOver()  #게임 오버 보드 불러오기
                 self.HighScore()          #하이스코어 표기
@@ -125,5 +120,5 @@ class Tetris:
             pygame.display.update() #이게 나오면 구현 시
             self.clock.tick(30) # 초당 프레임 관련
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     Tetris().run()
