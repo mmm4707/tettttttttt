@@ -92,8 +92,8 @@ class ai_Gui(object):
            # self.center_msg("""Game Over!\nYour score: %dPress space to continue""" % tetris.score)
         else: #게임이 진행중 이라면
              pygame.draw.rect(self.ai_screen, WHITE, pygame.Rect(600, 0, 450, 450))  #게임 화면에 하얀색으로 네모 그려주기
-             ai_score_text = pygame.font.Font('assets/Roboto-Bold.ttf', 18).render('SCORE', True, BLACK)  #점수 글씨
-             ai_score_value = pygame.font.Font('assets/Roboto-Bold.ttf', 16).render(str(tetris.ai_score), True, BLACK) # ai의 점수 표시해주기
+             ai_score_text = pygame.font.Font('../../../assets/Roboto-Bold.ttf', 18).render('SCORE', True, BLACK)  #점수 글씨
+             ai_score_value = pygame.font.Font('../../../assets/Roboto-Bold.ttf', 16).render(str(tetris.ai_score), True, BLACK) # ai의 점수 표시해주기
              self.ai_screen.blit(ai_score_text, (605, 180))   # 정해둔 값을 화면에 올리기
              self.ai_screen.blit(ai_score_value, (605, 200))
 
@@ -101,8 +101,8 @@ class ai_Gui(object):
              self.ai_draw_matrix(tetris.ai_board, (0,0)) # (0.0) 부터  보드 업데이트 해주기 ####################################### 블럭이 쌓이는 위치 알려줌
              self.ai_draw_matrix(tetris.stone, (tetris.stone_x, tetris.stone_y)) #테트리스 블럭을 그려준다. 블럭의 왼쪽 끝 좌표부터 - 시작 블럭
 
-             computer_said1 = pygame.font.Font('assets/Roboto-Bold.ttf', 16).render("YOU CAN'T", True, BLACK)
-             computer_said2 = pygame.font.Font('assets/Roboto-Bold.ttf', 16).render("DEFEAT ME", True, BLACK)
+             computer_said1 = pygame.font.Font('../../../assets/Roboto-Bold.ttf', 16).render("YOU CAN'T", True, BLACK)
+             computer_said2 = pygame.font.Font('../../../assets/Roboto-Bold.ttf', 16).render("DEFEAT ME", True, BLACK)
 
              self.ai_screen.blit(computer_said1, (605, 20))
              self.ai_screen.blit(computer_said2, (605, 40))

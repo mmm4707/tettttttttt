@@ -4,17 +4,46 @@ from Board import *
 
 
 #            R    G    B
-WHITE       = (255, 255, 255)
-GRAY        = (185, 185, 185)
-BLACK       = (  0,   0,   0)
-RED         = (155,   0,   0)
-LIGHTRED    = (175,  20,  20)
-GREEN       = (  0, 155,   0)
-LIGHTGREEN  = ( 20, 175,  20)
-BLUE        = (  0,   0, 155)
-LIGHTBLUE   = ( 20,  20, 175)
-YELLOW      = (155, 155,   0)
-LIGHTYELLOW = (175, 175,  20)
+BLACK = (0, 0, 0)
+RED = (225, 13, 27)
+GREEN = (98, 190, 68)
+BLUE = (64, 111, 249)
+ORANGE = (253, 189, 53)
+YELLOW = (246, 227, 90)
+PINK = (242, 64, 235)
+CYON = (70, 230, 210)
+GRAY = (23, 23, 23)
+WHITE = (255, 255, 255)
+colors = [BLACK, RED, GREEN, BLUE, ORANGE, YELLOW, PINK, CYON, GRAY]
+
+cell_size = 25
+cols = 10
+rows = 18
+
+ai_tetris_shapes = [
+    [[1, 1, 1],
+     [0, 1, 0]],
+
+    [[0, 2, 2],
+     [2, 2, 0]],
+
+    [[3, 3, 0],
+     [0, 3, 3]],
+
+    [[4, 0, 0],
+     [4, 4, 4]],
+
+    [[0, 0, 5],
+     [5, 5, 5]],
+
+    [[6, 6, 6, 6]],
+
+    [[7, 7],
+     [7, 7]]
+]
+
+
+
 
 class Tetris:
 

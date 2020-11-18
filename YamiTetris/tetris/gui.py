@@ -97,19 +97,19 @@ class Gui(object):
             else:
                 menu_size = 100
                 pygame.draw.rect(self.screen, WHITE, pygame.Rect(self.width-menu_size, 0, base_height, base_height))  # 게임 화면에 하얀색으로 네모 그려주기
-                ai_score_text = pygame.font.Font('assets/Roboto-Bold.ttf', 18).render('SCORE', True, BLACK)  # 점수 글씨
-                ai_score_value = pygame.font.Font('assets/Roboto-Bold.ttf', 16).render(str(tetris.score), True,BLACK)  # 점수 표시해주기
+                ai_score_text = pygame.font.Font('ai_v2/python3_v/tetris/assets/Roboto-Bold.ttf', 18).render('SCORE', True, BLACK)  # 점수 글씨
+                ai_score_value = pygame.font.Font('ai_v2/python3_v/tetris/assets/Roboto-Bold.ttf', 16).render(str(tetris.ai_score), True, BLACK)  # 점수 표시해주기
 
 
                 self.screen.blit(ai_score_text, (605, 180))  # 정해둔 값을 화면에 올리기
                 self.screen.blit(ai_score_value, (605, 200))
 
                 #   self.ai_draw_matrix(self.bground_grid, (0,0))   #(0,0) 부터 내가 설정한 격자 그려주기
-                self.draw_matrix(tetris.board, (cols+(menu_size/cell_size), 0))  # (0.0) 부터  보드 업데이트 해주기 ####################################### 블럭이 쌓이는 위치 알려줌
+                self.draw_matrix(tetris.ai_board, (cols+(menu_size/cell_size), 0))  # (0.0) 부터  보드 업데이트 해주기 ####################################### 블럭이 쌓이는 위치 알려줌
                 self.draw_matrix(tetris.stone, (tetris.stone_x+cols+(menu_size/cell_size), tetris.stone_y))  # 테트리스 블럭을 그려준다. 블럭의 왼쪽 끝 좌표부터 - 시작 블럭
 
-                computer_said1 = pygame.font.Font('assets/Roboto-Bold.ttf', 16).render("YOU CAN'T", True, BLACK)
-                computer_said2 = pygame.font.Font('assets/Roboto-Bold.ttf', 16).render("DEFEAT ME", True, BLACK)
+                computer_said1 = pygame.font.Font('ai_v2/python3_v/tetris/assets/Roboto-Bold.ttf', 16).render("YOU CAN'T", True, BLACK)
+                computer_said2 = pygame.font.Font('ai_v2/python3_v/tetris/assets/Roboto-Bold.ttf', 16).render("DEFEAT ME", True, BLACK)
 
                 self.screen.blit(computer_said1, (605, 20))
                 self.screen.blit(computer_said2, (605, 40))
