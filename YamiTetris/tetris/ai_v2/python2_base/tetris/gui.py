@@ -96,13 +96,7 @@ class Gui(object):
             for x, val in enumerate(row):
                 if val:
                     pygame.draw.rect(self.screen,colors[val],
-                        pygame.Rect(
-                            (off_x+x) *
-                              cell_size,
-                            (off_y+y) *
-                              cell_size,
-                            cell_size,
-                            cell_size),0)
+                        pygame.Rect((off_x+x) *cell_size,(off_y+y) *cell_size,cell_size,cell_size),0)
 
     def update(self, tetris):
         self.screen.fill((0,0,0))

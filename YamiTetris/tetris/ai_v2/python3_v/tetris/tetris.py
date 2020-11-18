@@ -1,9 +1,4 @@
-#!/usr/bin/env python2
-import copy
-import time
-import threading
 import random
-from field import Field
 from ai import Ai
 import pygame, sys
 from gui import Gui
@@ -15,17 +10,18 @@ rows =        18
 maxfps =     30
 maxPiece = 500
 
-colors = [
-    (0, 0, 0),
-    (225, 13, 27), #레드
-    (98, 190, 68), #그린
-    (64, 111, 249), #블루
-    (253, 189, 53), # 오렌지
-    (246, 227, 90), #엘로우
-    (242, 64, 235), #핑크
-    (70, 230, 210), #사이온
-    (23,23,23 )  # Helper color for background grid
-]
+BLACK =  (0, 0, 0)
+RED =  (225, 13, 27)
+GREEN = (98, 190, 68)
+BLUE = (64, 111, 249)
+ORANGE = (253, 189, 53)
+YELLOW = (246, 227, 90)
+PINK  = (242, 64, 235)
+CYON =  (70, 230, 210)
+GRAY =  (23,23,23 )
+WHITE = (255,255,255)
+
+colors = [ BLACK, RED, GREEN, BLUE, ORANGE, YELLOW, PINK, CYON, GRAY]
 
 # Define the shapes of the single parts
 tetris_shapes = [
@@ -74,13 +70,12 @@ def join_matrixes(mat1, mat2, mat2_off):
     off_x, off_y = mat2_off
     for cy, row in enumerate(mat2):
         for cx, val in enumerate(row):
-            mat1[cy+off_y-1    ][cx+off_x] += val
+            mat1[cy+off_y-1][cx+off_x] += val
     return mat1
 
 def new_board():
-    board = [ [ 0 for x in range(cols) ]
-            for y in range(rows) ]
-    #board += [[ 1 for x in xrange(cols)]]
+    board = [ [ 0 for x in range(cols) ] for y in range(rows) ]
+    #board += [[ 1 for x in range(cols)]]
     return board
 
 class TetrisApp(object):
@@ -144,10 +139,7 @@ class TetrisApp(object):
             if check_collision(self.board,
                                self.stone,
                                (self.stone_x, self.stone_y)):
-                self.board = join_matrixes(
-                  self.board,
-                  self.stone,
-                  (self.stone_x, self.stone_y))
+                self.board = join_matrixes(self.board,self.stone,(self.stone_x, self.stone_y))
                 self.new_stone()
                 cleared_rows = 0
 

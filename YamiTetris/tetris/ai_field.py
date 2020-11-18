@@ -1,18 +1,23 @@
 import copy
 
-class ai_Field:
-    def __init__(self, ai_width, ai_height):
-        self.ai_width = ai_width
-        self.ai_height = ai_height
-        self.ai_field = [[0]*self.ai_width]*self.ai_height
 
+
+class ai_Field:
+    def __init__(self, ai_width, ai_height):    # 열개수(10), 행개수(18) 받아오기
+        self.ai_width = ai_width        #내부 변수에 할당  - 열개수
+        self.ai_height = ai_height      # 행개수
+        self.ai_field = [[0]*self.ai_width]*self.ai_height    #ai_field는   모두 0으로 초반에 채워 넣기  (ai_board와 비슷한 것)  (18 * 10)의 매트릭스 만들기
+
+    #열개수, 행개수 반환
     def size(self):
         return self.ai_width, self.ai_height
 
+    #받아온 ai_field를 반환
     def updateField(self, ai_field):
         self.ai_field = ai_field
 
     @staticmethod
+    #충돌 체크
     def check_collision(ai_field, shape, ai_offset):
         off_x, off_y = ai_offset
         for cy, row in enumerate(shape):
@@ -24,8 +29,11 @@ class ai_Field:
                     return True
         return False
 
+    # 블럭이 내려가는 모습 보여주기 (현재 움직이는 블럭, 열 번째, ai+level...?
     def projectPieceDown(self, piece, offsetX, workingPieceIndex):
+        #  열번째 + 현재움직이는 블럭의 가로 셀 수   >  10    또는 열번재가 0보다 작으면
         if offsetX+len(piece[0]) > self.ai_width or offsetX < 0:
+            #false반환
             return None
         #result = copy.deepcopy(self)
         offsetY = self.ai_height
@@ -81,6 +89,8 @@ class ai_Field:
         ai_heights = self.ai_heights()
         maxColumn = self.maxHeightColumns(ai_heights)
         return ai_heights + [self.aggregateHeight(ai_heights)] + self.numberOfHoles(ai_heights) + self.bumpinesses(ai_heights) + [self.completLine(), self.maxPitDepth(ai_heights), self.maxHeightColumns(ai_heights), self.minHeightColumns(ai_heights)]
+
+
 
     def aggregateHeight(self, ai_heights):
         ai_result = sum(ai_heights)

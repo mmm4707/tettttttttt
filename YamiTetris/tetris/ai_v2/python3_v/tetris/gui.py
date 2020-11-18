@@ -1,9 +1,4 @@
-#!/usr/bin/env python2
-import copy
 import time
-from random import randrange as rand
-from field import Field
-from ai import Ai
 import pygame, sys
 
 # The configuration
@@ -14,17 +9,19 @@ maxfps =     30
 time =     50 # ai속도 조절
 maxPiece = 500
 
-colors = [
-(0, 0, 0),
-    (225, 13, 27), #레드
-    (98, 190, 68), #그린
-    (64, 111, 249), #블루
-    (253, 189, 53), # 오렌지
-    (246, 227, 90), #엘로우
-    (242, 64, 235), #핑크
-    (70, 230, 210), #사이온
-    (23,23,23 )  # Helper color for background grid
-]
+BLACK =  (0, 0, 0)
+RED =  (225, 13, 27)
+GREEN = (98, 190, 68)
+BLUE = (64, 111, 249)
+ORANGE = (253, 189, 53)
+YELLOW = (246, 227, 90)
+PINK  = (242, 64, 235)
+CYON =  (70, 230, 210)
+GRAY =  (23,23,23 )
+WHITE = (255,255,255)
+
+colors = [ BLACK, RED, GREEN, BLUE, ORANGE, YELLOW, PINK, CYON, GRAY]
+
 
 # Define the shapes of the single parts
 tetris_shapes = [
@@ -49,12 +46,15 @@ tetris_shapes = [
      [7, 7]]
 ]
 
+base_width = 350
+base_height = 450
+
 class Gui(object):
     def __init__(self):
         pygame.init()
         pygame.key.set_repeat(250,25)
-        self.width = cell_size*(cols+6)
-        self.height = cell_size*rows
+        self.width = base_width*2
+        self.height = base_height
         self.rlim = cell_size*cols
         self.bground_grid = [[ 8 if x%2==y%2 else 0 for x in range(cols)] for y in range(rows)]
 
@@ -95,27 +95,32 @@ class Gui(object):
             if tetris.paused:
                 self.center_msg("Paused")
             else:
-                pygame.draw.line(self.screen,
-                    (255,255,255),
-                    (self.rlim+1, 0),
-                    (self.rlim+1, self.height-1))
-                self.disp_msg("Next:", (
-                    self.rlim+cell_size,
-                    2))
-                self.disp_msg("Score: %d\n\nLevel: %d\n\nLines: %d" % (tetris.score, tetris.level, tetris.lines),
-                    (self.rlim+cell_size, cell_size*5))
-                self.draw_matrix(self.bground_grid, (0,0))
-                self.draw_matrix(tetris.board, (0,0))
-                self.draw_matrix(tetris.stone, (tetris.stone_x, tetris.stone_y))
-                self.draw_matrix(tetris.next_stone, (cols+1,2))
+                menu_size = 100
+                pygame.draw.rect(self.screen, WHITE, pygame.Rect(self.width-menu_size, 0, base_height, base_height))  # 게임 화면에 하얀색으로 네모 그려주기
+                ai_score_text = pygame.font.Font('assets/Roboto-Bold.ttf', 18).render('SCORE', True, BLACK)  # 점수 글씨
+                ai_score_value = pygame.font.Font('assets/Roboto-Bold.ttf', 16).render(str(tetris.score), True,BLACK)  # 점수 표시해주기
 
-                # 배경에 라인 추가 하기
+
+                self.screen.blit(ai_score_text, (605, 180))  # 정해둔 값을 화면에 올리기
+                self.screen.blit(ai_score_value, (605, 200))
+
+                #   self.ai_draw_matrix(self.bground_grid, (0,0))   #(0,0) 부터 내가 설정한 격자 그려주기
+                self.draw_matrix(tetris.board, (cols+(menu_size/cell_size), 0))  # (0.0) 부터  보드 업데이트 해주기 ####################################### 블럭이 쌓이는 위치 알려줌
+                self.draw_matrix(tetris.stone, (tetris.stone_x+cols+(menu_size/cell_size), tetris.stone_y))  # 테트리스 블럭을 그려준다. 블럭의 왼쪽 끝 좌표부터 - 시작 블럭
+
+                computer_said1 = pygame.font.Font('assets/Roboto-Bold.ttf', 16).render("YOU CAN'T", True, BLACK)
+                computer_said2 = pygame.font.Font('assets/Roboto-Bold.ttf', 16).render("DEFEAT ME", True, BLACK)
+
+                self.screen.blit(computer_said1, (605, 20))
+                self.screen.blit(computer_said2, (605, 40))
+
+                # 배경에 라인 추가 하기 -> 테트리스 보드 칸을 나눠주는 선 만들기
                 for i in range(cols + 1):
-                    pygame.draw.line(self.screen, (0, 0, 0), ((cell_size) * i, 0), ((cell_size) * i, self.height - 1),
-                                     2)
+                    pygame.draw.line(self.screen, BLACK, ((cell_size) * i+base_width, 0),
+                                     ((cell_size) * i+base_width, self.height - 1), 2)
 
                 for j in range(rows + 1):
-                    pygame.draw.line(self.screen, (0, 0, 0), (0, (cell_size) * j),
-                                     (cell_size * cols - 1, (cell_size) * j), 2)
+                    pygame.draw.line(self.screen, BLACK, (base_width, (cell_size) * j),
+                                     (cell_size * cols - 1+base_width, (cell_size) * j), 2)
 
-        pygame.display.update()
+            pygame.display.update()
