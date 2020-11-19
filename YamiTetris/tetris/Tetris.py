@@ -3,6 +3,8 @@ from pygame.locals import *
 from Board import *
 
 
+
+
 #            R    G    B
 WHITE       = (255, 255, 255)
 GRAY        = (185, 185, 185)
@@ -116,6 +118,8 @@ class Tetris:
                     self.board.drop_piece()
 
             # self.screen.fill(BLACK)
-            self.board.draw()
+            self.board.draw(self,False)
             pygame.display.update() #이게 나오면 구현 시
             self.clock.tick(30) # 초당 프레임 관련
+if __name__ == "__main__":
+    Tetris().run()

@@ -2,22 +2,45 @@ import pygame, sys, datetime, time
 from pygame.locals import *
 from Piece import *
 import threading
-from AITetris import AITetris
+
+
+tetris_shapes = [
+    [[1, 1, 1],
+     [0, 1, 0]],
+
+    [[0, 2, 2],
+     [2, 2, 0]],
+
+    [[3, 3, 0],
+     [0, 3, 3]],
+
+    [[4, 0, 0],
+     [4, 4, 4]],
+
+    [[0, 0, 5],
+     [5, 5, 5]],
+
+    [[6, 6, 6, 6]],
+
+    [[7, 7],
+     [7, 7]]
+]
 
 
 #색상 정보
 #               R    G    B
-WHITE       = (255, 255, 255)
-GRAY        = (185, 185, 185)
-BLACK       = (  0,   0,   0)
-RED         = (155,   0,   0)
-LIGHTRED    = (175,  20,  20)
-GREEN       = (  0, 155,   0)
-LIGHTGREEN  = ( 20, 175,  20)
-BLUE        = (  0,   0, 155)
-LIGHTBLUE   = ( 20,  20, 175)
-YELLOW      = (155, 155,   0)
-LIGHTYELLOW = (175, 175,  20)
+BLACK =  (0, 0, 0)
+RED =  (225, 13, 27)
+GREEN = (98, 190, 68)
+BLUE = (64, 111, 249)
+ORANGE = (253, 189, 53)
+YELLOW = (246, 227, 90)
+PINK  = (242, 64, 235)
+CYON =  (70, 230, 210)
+GRAY =  (23,23,23 )
+WHITE = (255,255,255)
+
+colors = [ BLACK, RED, GREEN, BLUE, ORANGE, YELLOW, PINK, CYON, GRAY]
 
 
 base_width = 350
@@ -30,22 +53,23 @@ rows =        18
 max_speed = 750
 min_speed = 150
 
+time = 300
+
 class Board:
     #충돌에러
     COLLIDE_ERROR = {'no_error' : 0, 'right_wall':1, 'left_wall':2,'bottom':3, 'overlap':4}
 
     def __init__(self, screen):
+        pygame.init()
         self.screen = screen
         self.width = 10  #맵의 좌에서 우로 사이즈
         self.height = 20 #맵 위에서 아래로 사이즈
         self.block_size = 25  #바꾸면 맵 블럭크기 변경
         self.init_board() # 보드 생성 메소드 실행
         self.generate_piece() # 블럭 생성 메소드 실행
-        self.ai_width = base_width * 2
-        self.ai_height = base_height
-
-    def level(self):
-        return self.level
+        self.width_size = base_width * 2
+        self.height_size = base_height
+        pygame.event.set_blocked(pygame.MOUSEMOTION)
 
 
     def init_board(self):
@@ -215,8 +239,6 @@ class Board:
 
             self.combo+=1
 
-
-
             #콤보 *level * 10 만큼 점수 올려주기
             self.score=self.level*self.combo*10
 
@@ -240,10 +262,6 @@ class Board:
             pygame.time.set_timer(pygame.USEREVENT, (max_speed - 60 * self.level))
         else :
             pygame.time.set_time(pygame.USEREVENT, min_speed)
-
-
-
-
 
     def game_over(self):
         return sum(self.board[0]) > 0 or sum(self.board[1]) > 0
@@ -293,12 +311,18 @@ class Board:
                     pygame.draw.rect(self.screen, BLACK,
                                     (x_pix+240, y_pix+65, self.block_size * 0.5, self.block_size * 0.5),1)
 
+    def draw_matrix(self, matrix, offset):
+        off_x, off_y  = offset
+        for y, row in enumerate(matrix):
+            for x, val in enumerate(row):
+                if val:
+                    pygame.draw.rect(self.screen,colors[val], pygame.Rect((off_x+x) *cell_size,(off_y+y) *cell_size,cell_size,cell_size),0)
 
 #보드 내 필요한 내용 들 넣어주기
     def draw(self,tetris,ai_excute):
         now = datetime.datetime.now()
         nowTime = now.strftime('%H:%M:%S')
-        self.screen.fill(BLACK)
+        self.screen.fill(GRAY)
         for x in range(self.width):
             for y in range(self.height):
                 x_pix, y_pix = self.pos_to_pixel(x, y)
@@ -318,8 +342,6 @@ class Board:
 
         self.draw_next_piece(self.next_piece)
         next_text = pygame.font.Font('assets/Roboto-Bold.ttf', 18).render('NEXT', True, BLACK)
-        skill_text = pygame.font.Font('assets/Roboto-Bold.ttf', 18).render('SKILL', True, BLACK)
-        skill_value = pygame.font.Font('assets/Roboto-Bold.ttf', 16).render(str(self.skill)+'%', True, BLACK)
         score_text = pygame.font.Font('assets/Roboto-Bold.ttf', 18).render('SCORE', True, BLACK)
         score_value = pygame.font.Font('assets/Roboto-Bold.ttf', 16).render(str(self.score), True, BLACK)
         level_text = pygame.font.Font('assets/Roboto-Bold.ttf', 18).render('LEVEL', True, BLACK)
@@ -335,8 +357,6 @@ class Board:
 
 
         self.screen.blit(next_text, (255, 20))
-        self.screen.blit(skill_text, (255, 120))
-        self.screen.blit(skill_value, (255, 140))
         self.screen.blit(score_text, (255, 180))
         self.screen.blit(score_value, (255,200))
         self.screen.blit(level_text, (255, 240))
@@ -349,16 +369,41 @@ class Board:
         self.screen.blit(time_text, (255, 430))
 
 
+        menu_size = 100
+        pygame.draw.rect(self.screen, WHITE,pygame.Rect(self.width_size - menu_size, 0, base_height, base_height))  # 게임 화면에 하얀색으로 네모 그려주기
+        ai_score_text = pygame.font.Font('ai_v2/python3_v/tetris/assets/Roboto-Bold.ttf', 18).render('SCORE', True,BLACK)  # 점수 글씨
+        ai_score_value = pygame.font.Font('ai_v2/python3_v/tetris/assets/Roboto-Bold.ttf', 16).render(
+        str(tetris.ai_score), True, BLACK)  # 점수 표시해주기
+        self.screen.blit(ai_score_text, (605, 180))  # 정해둔 값을 화면에 올리기
+        self.screen.blit(ai_score_value, (605, 200))
+
+            #  self.ai_draw_matrix(self.bground_grid, (0,0))   #(0,0) 부터 내가 설정한 격자 그려주기
+        self.draw_matrix(tetris.ai_board, (cols + (menu_size / cell_size),0))  # (0.0) 부터  보드 업데이트 해주기 ####################################### 블럭이 쌓이는 위치 알려줌
+        self.draw_matrix(tetris.stone, (tetris.stone_x + cols + (menu_size / cell_size), tetris.stone_y))  # 테트리스 블럭을 그려준다. 블럭의 왼쪽 끝 좌표부터 - 시작 블럭
+
+        computer_said1 = pygame.font.Font('ai_v2/python3_v/tetris/assets/Roboto-Bold.ttf', 16).render("YOU CAN'T", True,BLACK)
+        computer_said2 = pygame.font.Font('ai_v2/python3_v/tetris/assets/Roboto-Bold.ttf', 16).render("DEFEAT ME", True, BLACK)
+
+        self.screen.blit(computer_said1, (605, 20))
+        self.screen.blit(computer_said2, (605, 40))
+
+            # 배경에 라인 추가 하기 -> 테트리스 보드 칸을 나눠주는 선 만들기
+        for i in range(cols + 1):
+            pygame.draw.line(self.screen, BLACK, ((cell_size) * i + base_width, 0),((cell_size) * i + base_width, self.height_size - 1), 2)
+        for j in range(rows + 1):
+            pygame.draw.line(self.screen, BLACK, (base_width, (cell_size) * j),(cell_size * cols - 1 + base_width, (cell_size) * j), 2)
+
+
     #게임 일시정지
     def pause(self):
         fontObj = pygame.font.Font('assets/Roboto-Bold.ttf', 32) #글씨 폰트 설정
         textSurfaceObj = fontObj.render('Paused', True, GREEN)  #위 폰트로 초록색 글씨
         textRectObj = textSurfaceObj.get_rect()
-        textRectObj.center = (175, 185)
+        textRectObj.center = (base_width,185)
         fontObj2 = pygame.font.Font('assets/Roboto-Bold.ttf', 16)
         textSurfaceObj2 = fontObj2.render('Press p to continue', True, GREEN)
         textRectObj2 = textSurfaceObj2.get_rect()
-        textRectObj2.center = (175, 235)
+        textRectObj2.center = (base_width, 235)
 
         #스크린에 표시
         self.screen.blit(textSurfaceObj, textRectObj)
@@ -377,11 +422,11 @@ class Board:
         fontObj = pygame.font.Font('assets/Roboto-Bold.ttf', 32)
         textSurfaceObj = fontObj.render('Game over', True, GREEN)
         textRectObj = textSurfaceObj.get_rect()
-        textRectObj.center = (175, 185)
+        textRectObj.center = (base_width, 185)
         fontObj2 = pygame.font.Font('assets/Roboto-Bold.ttf', 16)
         textSurfaceObj2 = fontObj2.render('Press a key to continue', True, GREEN)
         textRectObj2 = textSurfaceObj2.get_rect()
-        textRectObj2.center = (175, 235)
+        textRectObj2.center = (base_width, 235)
         self.screen.blit(textSurfaceObj, textRectObj)
         self.screen.blit(textSurfaceObj2, textRectObj2)
         pygame.display.update()
@@ -399,11 +444,11 @@ class Board:
         fontObj = pygame.font.Font('assets/Roboto-Bold.ttf', 32)
         textSurfaceObj = fontObj.render('Tetris', True, GREEN)
         textRectObj = textSurfaceObj.get_rect()
-        textRectObj.center = (175, 185)
+        textRectObj.center = (base_width, 185)
         fontObj2 = pygame.font.Font('assets/Roboto-Bold.ttf', 16)
         textSurfaceObj2 = fontObj2.render('Press a key to continue', True, GREEN)
         textRectObj2 = textSurfaceObj2.get_rect()
-        textRectObj2.center = (175, 235)
+        textRectObj2.center = (base_width, 235)
         self.screen.fill(BLACK)
         self.screen.blit(textSurfaceObj, textRectObj)
         self.screen.blit(textSurfaceObj2, textRectObj2)
@@ -423,11 +468,11 @@ class Board:
             fontObj = pygame.font.Font('assets/Roboto-Bold.ttf', 32)
             textSurfaceObj = fontObj.render('HighScore : '+txt, True, GREEN)
             textRectObj = textSurfaceObj.get_rect()
-            textRectObj.center = (175, 185)
+            textRectObj.center = (base_width, 185)
             fontObj2 = pygame.font.Font('assets/Roboto-Bold.ttf', 16)
             textSurfaceObj2 = fontObj2.render('Press a key to continue', True, GREEN)
             textRectObj2 = textSurfaceObj2.get_rect()
-            textRectObj2.center = (175, 235)
+            textRectObj2.center = (base_width, 235)
             self.screen.fill(BLACK)
             self.screen.blit(textSurfaceObj, textRectObj)
             self.screen.blit(textSurfaceObj2, textRectObj2)
