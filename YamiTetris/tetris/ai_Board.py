@@ -46,7 +46,7 @@ colors = [ BLACK, RED, GREEN, BLUE, ORANGE, YELLOW, PINK, CYON, GRAY]
 base_width = 350
 base_height = 450
 
-cell_size =    25
+cell_size =   40
 cols =        10
 rows =        18
 
