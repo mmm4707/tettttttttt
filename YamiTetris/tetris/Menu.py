@@ -2,7 +2,9 @@ import pygame
 import pygame_menu
 from Board import *
 from Tetris import *
+from Twohands import *
 from AITetris import AITetris
+
 
 pygame.init()
 surface=pygame.display.set_mode((800,600))
@@ -46,8 +48,8 @@ def start_the_Mini():
 
 def start_the_Twohands():
     ## 투핸드 모드 만들면 여기다 실행 코드만 넣으세요
-    pass
-
+    if __name__ == "__main__":
+        Twohands().run()
 
 def start_the_Ai():
     ## ai 모드 만들면 여기다 실행 코드 넣으세요
