@@ -26,32 +26,22 @@
         <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
         <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
         <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="BRANCH:origin/master" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="BRANCH:origin/aimode_v2" type="e8cecc67:BranchNodeDescriptor" />
       </path>
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6dabf8e4-bbae-447d-aecb-6aaca16560a8" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2020-11-26__6_36__Default_Changelist_.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2020-11-26__6_36__Default_Changelist_1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2020-11-26__6_53__Default_Changelist_.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2020-11-26__7_28__Default_Changelist_.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2020-11-26__7_30__Default_Changelist_.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2020-11-26__7_31__Default_Changelist_.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2020-11-26__8_35__Default_Changelist_.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2020-11-26__8_36__Default_Changelist_.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2020-11-26_오후_6_36_[Default_Changelist]/shelved.patch" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2020-11-26_오후_6_36_[Default_Changelist]1/shelved.patch" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2020-11-26_오후_6_53_[Default_Changelist]/shelved.patch" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2020-11-26_오후_6_53_[Default_Changelist]1/shelved.patch" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2020-11-26_오후_7_28_[Default_Changelist]/shelved.patch" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2020-11-26_오후_7_30_[Default_Changelist]/shelved.patch" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2020-11-26_오후_7_31_[Default_Changelist]/shelved.patch" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2020-11-26_오후_8_35_[Default_Changelist]/shelved.patch" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2020-11-26_오후_8_36_[Default_Changelist]/shelved.patch" afterDir="false" />
+    <list default="true" id="b3ee30dc-acd8-4962-8768-2b0bffac3f41" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2020-11-19__11_53__Default_Changelist_.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2020-11-19_오후_11_53_[Default_Changelist]/shelved.patch" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/YamiTetris/tetris/AITetris.py" beforeDir="false" afterPath="$PROJECT_DIR$/YamiTetris/tetris/AITetris.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/YamiTetris/tetris/Board.py" beforeDir="false" afterPath="$PROJECT_DIR$/YamiTetris/tetris/Board.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/YamiTetris/tetris/Menu.py" beforeDir="false" afterPath="$PROJECT_DIR$/YamiTetris/tetris/Menu.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/YamiTetris/tetris/Tetris.py" beforeDir="false" afterPath="$PROJECT_DIR$/YamiTetris/tetris/Tetris.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/YamiTetris/tetris/Two_Board.py" beforeDir="false" afterPath="$PROJECT_DIR$/YamiTetris/tetris/Two_Board.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/YamiTetris/tetris/ai_Board.py" beforeDir="false" afterPath="$PROJECT_DIR$/YamiTetris/tetris/ai_Board.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/YamiTetris/tetris/assets/ai_save.txt" beforeDir="false" afterPath="$PROJECT_DIR$/YamiTetris/tetris/assets/ai_save.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/YamiTetris/tetris/assets/save.txt" beforeDir="false" afterPath="$PROJECT_DIR$/YamiTetris/tetris/assets/save.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,44 +49,10 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_BRANCH_BY_REPOSITORY">
-      <map>
-        <entry key="$PROJECT_DIR$" value="error_and_ranking" />
-      </map>
-    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectId" id="1kdZJGwtOOwlqEyyC2bLPwvvf1O" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
-  <component name="ProjectViewState">
-    <option name="hideEmptyMiddlePackages" value="true" />
-    <option name="showLibraryContents" value="true" />
-  </component>
-  <component name="PropertiesComponent">
-    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-  </component>
   <component name="RunManager" selected="Python.Menu">
-    <configuration name="AITetris" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="2020-2-OSSP-CP--YamiYami_Z_Z-5" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/YamiTetris/tetris" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/YamiTetris/tetris/AITetris.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <configuration name="Menu" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="2020-2-OSSP-CP--YamiYami_Z_Z-5" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -118,7 +74,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="Piece" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="ai_Board" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="2020-2-OSSP-CP--YamiYami_Z_Z-5" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -130,49 +86,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/YamiTetris/tetris/Piece.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="Two_Board" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="2020-2-OSSP-CP--YamiYami_Z_Z-5" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/YamiTetris/tetris" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/YamiTetris/tetris/Two_Board.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="Twohands" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="2020-2-OSSP-CP--YamiYami_Z_Z-5" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/YamiTetris/tetris" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/YamiTetris/tetris/Twohands.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/YamiTetris/tetris/ai_Board.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -184,22 +98,11 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.Menu" />
-        <item itemvalue="Python.Twohands" />
-        <item itemvalue="Python.Two_Board" />
-        <item itemvalue="Python.Piece" />
-        <item itemvalue="Python.AITetris" />
+        <item itemvalue="Python.ai_Board" />
       </list>
     </recent_temporary>
   </component>
-  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
-    <task active="true" id="Default" summary="Default task">
-      <changelist id="6dabf8e4-bbae-447d-aecb-6aaca16560a8" name="Default Changelist" comment="" />
-      <created>1606032354911</created>
-      <option name="number" value="Default" />
-      <option name="presentableId" value="Default" />
-      <updated>1606032354911</updated>
-    </task>
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -213,7 +116,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="origin/master" />
+                        <option value="origin/aimode_v2" />
                       </list>
                     </value>
                   </entry>
@@ -226,42 +129,30 @@
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="middle" />
+    <option name="LAST_COMMIT_MESSAGE" value="middle" />
+  </component>
   <component name="WindowStateProjectService">
-    <state width="1515" height="555" key="GridCell.Tab.0.bottom" timestamp="1606390640880">
+    <state width="1515" height="67" key="GridCell.Tab.0.bottom" timestamp="1606391133641">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1515" height="555" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1606390640880" />
-    <state width="1515" height="555" key="GridCell.Tab.0.center" timestamp="1606390640880">
+    <state width="1515" height="67" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1606391133641" />
+    <state width="1515" height="67" key="GridCell.Tab.0.center" timestamp="1606391133640">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1515" height="555" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1606390640880" />
-    <state width="1515" height="555" key="GridCell.Tab.0.left" timestamp="1606390640880">
+    <state width="1515" height="67" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1606391133640" />
+    <state width="1515" height="67" key="GridCell.Tab.0.left" timestamp="1606391133640">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1515" height="555" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1606390640880" />
-    <state width="1515" height="555" key="GridCell.Tab.0.right" timestamp="1606390640880">
+    <state width="1515" height="67" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1606391133640" />
+    <state width="1515" height="67" key="GridCell.Tab.0.right" timestamp="1606391133640">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1515" height="555" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1606390640880" />
-    <state width="1515" height="2" key="GridCell.Tab.1.bottom" timestamp="1606046606855">
+    <state width="1515" height="67" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1606391133640" />
+    <state x="581" y="325" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1606390951040">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1515" height="2" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1606046606855" />
-    <state width="1515" height="2" key="GridCell.Tab.1.center" timestamp="1606046606854">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="1515" height="2" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1606046606854" />
-    <state width="1515" height="2" key="GridCell.Tab.1.left" timestamp="1606046606854">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="1515" height="2" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1606046606854" />
-    <state width="1515" height="2" key="GridCell.Tab.1.right" timestamp="1606046606854">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="1515" height="2" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1606046606854" />
-    <state x="308" y="23" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1606048902593">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="308" y="23" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1536.824@0.0.1536.824" timestamp="1606048902593" />
+    <state x="581" y="325" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.824@0.0.1536.824" timestamp="1606390951040" />
   </component>
 </project>

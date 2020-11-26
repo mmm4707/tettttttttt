@@ -22,7 +22,6 @@ class Tetris:
 
     #생성자
     def __init__(self):
-
         self.width = 10  # 가로 칸수
         self.height = 18  # 세로 칸 수
         self.block_size = 25*resize  # 블럭 하나당 크기
