@@ -55,7 +55,7 @@ class Board:
         self.board = []
         self.score = 0 #시작 점수
         self.level = 1 #시작 level
-        self.goal = 5  #level up 도달 목표
+        self.goal = 5  #level up 도달 목표 a
         self.skill = 0 #skill 퍼센트
         self.combo=0 # combo 수
         self.timer0 = threading.Timer(10, self.combo_null)

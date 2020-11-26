@@ -6,8 +6,18 @@ from Twohands import *
 from AITetris import AITetris
 
 
+resize = 2
+
+width = 10
+height = 18
+block_size = 25 * resize
+
+display_width = (width + 4) * block_size * 2
+display_height = height * block_size
+
+
 pygame.init()
-surface=pygame.display.set_mode((800,600))
+surface=pygame.display.set_mode((display_width,display_height))
 
 def reset(): ## 뒤로 갈때 보여줄 목록들
     menu.clear()
@@ -146,7 +156,9 @@ title_bar_style = pygame_menu.widgets.MENUBAR_STYLE_NONE
 """
 
 # 이미지 삽입할떄는 이거 삭제하고 위에꺼 쓰면 됩니다. !
-menu = pygame_menu.Menu(600,400,'Yami Tetris',theme=pygame_menu.themes.THEME_BLUE)
+menu = pygame_menu.Menu(display_height,display_width,'Yami Tetris',theme=pygame_menu.themes.THEME_BLUE)
+
+#폰트 사이즈 조정 변수 넣어주세욤
 
 menu.add_button('Select mode' , show_game)
 menu.add_button('Show Rank', show_rank)
