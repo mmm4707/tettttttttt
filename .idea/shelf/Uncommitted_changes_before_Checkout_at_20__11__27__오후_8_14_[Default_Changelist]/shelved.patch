@@ -1,0 +1,179 @@
+Index: YamiTetris/tetris/Database.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import pymysql\n\n\nclass Database:\n    def __init__(self):\n        self.score_db = pymysql.connect(\n        user = 'yutan0565',\n        passwd = 'GHKStkd1537!', # 데이터 서버 비밀번호는 나만 알음...  #요거 문제 해겨 하긴 해야함\n        host = 'db-tetris.cn66pqzgn9vt.ap-northeast-2.rds.amazonaws.com',\n        db = 'TetrisDB',\n        charset = 'utf8'\n        )\n\n\n    def load_data(self, game_mode):\n        #불러 오기\n        curs = self.score_db.cursor(pymysql.cursors.DictCursor)\n        if game_mode == 'original':\n            sql = \"select * from original_score order by score desc \"\n        elif game_mode == 'twohands':\n            sql = \"select * from twohands_score order by score desc\"\n        elif game_mode == 'mini':\n            sql = \"select * from mini_score order by score desc\"\n        curs.execute(sql)\n        data = curs.fetchall() #리스트 안에 딕셔너리가 있는 형태\n\n        return data\n\n    def add_data(self,game_mode,  ID, score):\n        #추가하기\n        curs = self.score_db.cursor()\n        if game_mode == 'original':\n            sql = \"INSERT INTO original_score (ID, score) VALUES (%s, %s)\"\n        elif game_mode == 'twohands':\n            sql = \"INSERT INTO twohands_score (ID, score) VALUES (%s, %s)\"\n        elif game_mode == 'mini':\n            sql = \"INSERT INTO mini_score (ID, score) VALUES (%s, %s)\"\n        curs.execute(sql, (ID, score))\n        self.score_db.commit()  #서버로 추가 사항 보내기\n        self.score_db.close()\n\n\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- YamiTetris/tetris/Database.py	(revision f0a95a118a21f49f7aaf20ddf081c1b3b23e3309)
++++ YamiTetris/tetris/Database.py	(date 1606474736768)
+@@ -5,7 +5,7 @@
+     def __init__(self):
+         self.score_db = pymysql.connect(
+         user = 'yutan0565',
+-        passwd = 'GHKStkd1537!', # 데이터 서버 비밀번호는 나만 알음...  #요거 문제 해겨 하긴 해야함
++        passwd = '12345678', # 데이터 서버 비밀번호는 나만 알음...  #요거 문제 해겨 하긴 해야함
+         host = 'db-tetris.cn66pqzgn9vt.ap-northeast-2.rds.amazonaws.com',
+         db = 'TetrisDB',
+         charset = 'utf8'
+Index: YamiTetris/tetris/xxx.py
+===================================================================
+--- YamiTetris/tetris/xxx.py	(revision f0a95a118a21f49f7aaf20ddf081c1b3b23e3309)
++++ YamiTetris/tetris/xxx.py	(revision f0a95a118a21f49f7aaf20ddf081c1b3b23e3309)
+@@ -1,6 +0,0 @@
+-from Database import Database
+-
+-database = Database()
+-
+-a= database.load_data("original")
+-print(a)
+\ No newline at end of file
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"BranchesTreeState\">\n    <expand>\n      <path>\n        <item name=\"ROOT\" type=\"e8cecc67:BranchNodeDescriptor\" />\n        <item name=\"LOCAL_ROOT\" type=\"e8cecc67:BranchNodeDescriptor\" />\n      </path>\n      <path>\n        <item name=\"ROOT\" type=\"e8cecc67:BranchNodeDescriptor\" />\n        <item name=\"REMOTE_ROOT\" type=\"e8cecc67:BranchNodeDescriptor\" />\n      </path>\n      <path>\n        <item name=\"ROOT\" type=\"e8cecc67:BranchNodeDescriptor\" />\n        <item name=\"REMOTE_ROOT\" type=\"e8cecc67:BranchNodeDescriptor\" />\n        <item name=\"GROUP_NODE:origin\" type=\"e8cecc67:BranchNodeDescriptor\" />\n      </path>\n    </expand>\n    <select>\n      <path>\n        <item name=\"ROOT\" type=\"e8cecc67:BranchNodeDescriptor\" />\n        <item name=\"REMOTE_ROOT\" type=\"e8cecc67:BranchNodeDescriptor\" />\n        <item name=\"GROUP_NODE:origin\" type=\"e8cecc67:BranchNodeDescriptor\" />\n        <item name=\"BRANCH:origin/aimode_v2\" type=\"e8cecc67:BranchNodeDescriptor\" />\n      </path>\n    </select>\n  </component>\n  <component name=\"ChangeListManager\">\n    <list default=\"true\" id=\"b3ee30dc-acd8-4962-8768-2b0bffac3f41\" name=\"Default Changelist\" comment=\"\">\n      <change afterPath=\"$PROJECT_DIR$/YamiTetris/tetris/xxx.py\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/YamiTetris/tetris/Board.py\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/YamiTetris/tetris/Board.py\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/YamiTetris/tetris/Database.py\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/YamiTetris/tetris/Database.py\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/YamiTetris/tetris/Rank.py\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/YamiTetris/tetris/Rank.py\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/YamiTetris/tetris/Tetris.py\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/YamiTetris/tetris/Tetris.py\" afterDir=\"false\" />\n    </list>\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\n  </component>\n  <component name=\"FileTemplateManagerImpl\">\n    <option name=\"RECENT_TEMPLATES\">\n      <list>\n        <option value=\"Python Script\" />\n      </list>\n    </option>\n  </component>\n  <component name=\"Git.Settings\">\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\n  </component>\n  <component name=\"ProjectId\" id=\"1kpJkPl8vn91zgQCzPlHDGEiHzu\" />\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\" />\n  <component name=\"ProjectViewState\">\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\n    <option name=\"showLibraryContents\" value=\"true\" />\n  </component>\n  <component name=\"PropertiesComponent\">\n    <property name=\"RunOnceActivity.OpenProjectViewOnStart\" value=\"true\" />\n    <property name=\"last_opened_file_path\" value=\"$PROJECT_DIR$/YamiTetris/tetris\" />\n  </component>\n  <component name=\"RecentsManager\">\n    <key name=\"CopyFile.RECENT_KEYS\">\n      <recent name=\"$PROJECT_DIR$/YamiTetris/tetris\" />\n    </key>\n  </component>\n  <component name=\"RunManager\" selected=\"Python.Rank\">\n    <configuration name=\"AITetris\" type=\"PythonConfigurationType\" factoryName=\"Python\" temporary=\"true\" nameIsGenerated=\"true\">\n      <module name=\"2020-2-OSSP-CP--YamiYami_Z_Z-5\" />\n      <option name=\"INTERPRETER_OPTIONS\" value=\"\" />\n      <option name=\"PARENT_ENVS\" value=\"true\" />\n      <envs>\n        <env name=\"PYTHONUNBUFFERED\" value=\"1\" />\n      </envs>\n      <option name=\"SDK_HOME\" value=\"\" />\n      <option name=\"WORKING_DIRECTORY\" value=\"$PROJECT_DIR$/YamiTetris/tetris\" />\n      <option name=\"IS_MODULE_SDK\" value=\"true\" />\n      <option name=\"ADD_CONTENT_ROOTS\" value=\"true\" />\n      <option name=\"ADD_SOURCE_ROOTS\" value=\"true\" />\n      <option name=\"SCRIPT_NAME\" value=\"$PROJECT_DIR$/YamiTetris/tetris/AITetris.py\" />\n      <option name=\"PARAMETERS\" value=\"\" />\n      <option name=\"SHOW_COMMAND_LINE\" value=\"false\" />\n      <option name=\"EMULATE_TERMINAL\" value=\"false\" />\n      <option name=\"MODULE_MODE\" value=\"false\" />\n      <option name=\"REDIRECT_INPUT\" value=\"false\" />\n      <option name=\"INPUT_FILE\" value=\"\" />\n      <method v=\"2\" />\n    </configuration>\n    <configuration name=\"Rank\" type=\"PythonConfigurationType\" factoryName=\"Python\" temporary=\"true\" nameIsGenerated=\"true\">\n      <module name=\"2020-2-OSSP-CP--YamiYami_Z_Z-5\" />\n      <option name=\"INTERPRETER_OPTIONS\" value=\"\" />\n      <option name=\"PARENT_ENVS\" value=\"true\" />\n      <envs>\n        <env name=\"PYTHONUNBUFFERED\" value=\"1\" />\n      </envs>\n      <option name=\"SDK_HOME\" value=\"\" />\n      <option name=\"WORKING_DIRECTORY\" value=\"$PROJECT_DIR$/YamiTetris/tetris\" />\n      <option name=\"IS_MODULE_SDK\" value=\"true\" />\n      <option name=\"ADD_CONTENT_ROOTS\" value=\"true\" />\n      <option name=\"ADD_SOURCE_ROOTS\" value=\"true\" />\n      <option name=\"SCRIPT_NAME\" value=\"$PROJECT_DIR$/YamiTetris/tetris/Rank.py\" />\n      <option name=\"PARAMETERS\" value=\"\" />\n      <option name=\"SHOW_COMMAND_LINE\" value=\"false\" />\n      <option name=\"EMULATE_TERMINAL\" value=\"false\" />\n      <option name=\"MODULE_MODE\" value=\"false\" />\n      <option name=\"REDIRECT_INPUT\" value=\"false\" />\n      <option name=\"INPUT_FILE\" value=\"\" />\n      <method v=\"2\" />\n    </configuration>\n    <configuration name=\"Tetris\" type=\"PythonConfigurationType\" factoryName=\"Python\" temporary=\"true\" nameIsGenerated=\"true\">\n      <module name=\"2020-2-OSSP-CP--YamiYami_Z_Z-5\" />\n      <option name=\"INTERPRETER_OPTIONS\" value=\"\" />\n      <option name=\"PARENT_ENVS\" value=\"true\" />\n      <envs>\n        <env name=\"PYTHONUNBUFFERED\" value=\"1\" />\n      </envs>\n      <option name=\"SDK_HOME\" value=\"\" />\n      <option name=\"WORKING_DIRECTORY\" value=\"$PROJECT_DIR$/YamiTetris/tetris\" />\n      <option name=\"IS_MODULE_SDK\" value=\"true\" />\n      <option name=\"ADD_CONTENT_ROOTS\" value=\"true\" />\n      <option name=\"ADD_SOURCE_ROOTS\" value=\"true\" />\n      <option name=\"SCRIPT_NAME\" value=\"$PROJECT_DIR$/YamiTetris/tetris/Tetris.py\" />\n      <option name=\"PARAMETERS\" value=\"\" />\n      <option name=\"SHOW_COMMAND_LINE\" value=\"false\" />\n      <option name=\"EMULATE_TERMINAL\" value=\"false\" />\n      <option name=\"MODULE_MODE\" value=\"false\" />\n      <option name=\"REDIRECT_INPUT\" value=\"false\" />\n      <option name=\"INPUT_FILE\" value=\"\" />\n      <method v=\"2\" />\n    </configuration>\n    <configuration name=\"score_test\" type=\"PythonConfigurationType\" factoryName=\"Python\" temporary=\"true\" nameIsGenerated=\"true\">\n      <module name=\"2020-2-OSSP-CP--YamiYami_Z_Z-5\" />\n      <option name=\"INTERPRETER_OPTIONS\" value=\"\" />\n      <option name=\"PARENT_ENVS\" value=\"true\" />\n      <envs>\n        <env name=\"PYTHONUNBUFFERED\" value=\"1\" />\n      </envs>\n      <option name=\"SDK_HOME\" value=\"\" />\n      <option name=\"WORKING_DIRECTORY\" value=\"$PROJECT_DIR$/YamiTetris/tetris\" />\n      <option name=\"IS_MODULE_SDK\" value=\"true\" />\n      <option name=\"ADD_CONTENT_ROOTS\" value=\"true\" />\n      <option name=\"ADD_SOURCE_ROOTS\" value=\"true\" />\n      <option name=\"SCRIPT_NAME\" value=\"$PROJECT_DIR$/YamiTetris/tetris/score_test.py\" />\n      <option name=\"PARAMETERS\" value=\"\" />\n      <option name=\"SHOW_COMMAND_LINE\" value=\"false\" />\n      <option name=\"EMULATE_TERMINAL\" value=\"false\" />\n      <option name=\"MODULE_MODE\" value=\"false\" />\n      <option name=\"REDIRECT_INPUT\" value=\"false\" />\n      <option name=\"INPUT_FILE\" value=\"\" />\n      <method v=\"2\" />\n    </configuration>\n    <configuration name=\"xxx\" type=\"PythonConfigurationType\" factoryName=\"Python\" temporary=\"true\" nameIsGenerated=\"true\">\n      <module name=\"2020-2-OSSP-CP--YamiYami_Z_Z-5\" />\n      <option name=\"INTERPRETER_OPTIONS\" value=\"\" />\n      <option name=\"PARENT_ENVS\" value=\"true\" />\n      <envs>\n        <env name=\"PYTHONUNBUFFERED\" value=\"1\" />\n      </envs>\n      <option name=\"SDK_HOME\" value=\"\" />\n      <option name=\"WORKING_DIRECTORY\" value=\"$PROJECT_DIR$/YamiTetris/tetris\" />\n      <option name=\"IS_MODULE_SDK\" value=\"true\" />\n      <option name=\"ADD_CONTENT_ROOTS\" value=\"true\" />\n      <option name=\"ADD_SOURCE_ROOTS\" value=\"true\" />\n      <option name=\"SCRIPT_NAME\" value=\"$PROJECT_DIR$/YamiTetris/tetris/xxx.py\" />\n      <option name=\"PARAMETERS\" value=\"\" />\n      <option name=\"SHOW_COMMAND_LINE\" value=\"false\" />\n      <option name=\"EMULATE_TERMINAL\" value=\"false\" />\n      <option name=\"MODULE_MODE\" value=\"false\" />\n      <option name=\"REDIRECT_INPUT\" value=\"false\" />\n      <option name=\"INPUT_FILE\" value=\"\" />\n      <method v=\"2\" />\n    </configuration>\n    <recent_temporary>\n      <list>\n        <item itemvalue=\"Python.Rank\" />\n        <item itemvalue=\"Python.Tetris\" />\n        <item itemvalue=\"Python.xxx\" />\n        <item itemvalue=\"Python.score_test\" />\n        <item itemvalue=\"Python.AITetris\" />\n      </list>\n    </recent_temporary>\n  </component>\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\n  <component name=\"TaskManager\">\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\n      <changelist id=\"b3ee30dc-acd8-4962-8768-2b0bffac3f41\" name=\"Default Changelist\" comment=\"\" />\n      <created>1606391797859</created>\n      <option name=\"number\" value=\"Default\" />\n      <option name=\"presentableId\" value=\"Default\" />\n      <updated>1606391797859</updated>\n    </task>\n    <servers />\n  </component>\n  <component name=\"Vcs.Log.Tabs.Properties\">\n    <option name=\"TAB_STATES\">\n      <map>\n        <entry key=\"MAIN\">\n          <value>\n            <State>\n              <option name=\"FILTERS\">\n                <map>\n                  <entry key=\"branch\">\n                    <value>\n                      <list>\n                        <option value=\"origin/aimode_v2\" />\n                      </list>\n                    </value>\n                  </entry>\n                </map>\n              </option>\n            </State>\n          </value>\n        </entry>\n      </map>\n    </option>\n    <option name=\"oldMeFiltersMigrated\" value=\"true\" />\n  </component>\n  <component name=\"VcsManagerConfiguration\">\n    <MESSAGE value=\"middle\" />\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"middle\" />\n  </component>\n  <component name=\"WindowStateProjectService\">\n    <state width=\"1086\" height=\"290\" key=\"GridCell.Tab.0.bottom\" timestamp=\"1606468194373\">\n      <screen x=\"65\" y=\"24\" width=\"1855\" height=\"926\" />\n    </state>\n    <state width=\"1515\" height=\"67\" key=\"GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824\" timestamp=\"1606391133641\" />\n    <state width=\"1086\" height=\"290\" key=\"GridCell.Tab.0.bottom/65.24.1855.926@65.24.1855.926\" timestamp=\"1606468194373\" />\n    <state width=\"879\" height=\"143\" key=\"GridCell.Tab.0.bottom/65.24.902.926@65.24.902.926\" timestamp=\"1606412800696\" />\n    <state width=\"1086\" height=\"290\" key=\"GridCell.Tab.0.center\" timestamp=\"1606468194373\">\n      <screen x=\"65\" y=\"24\" width=\"1855\" height=\"926\" />\n    </state>\n    <state width=\"1515\" height=\"67\" key=\"GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824\" timestamp=\"1606391133640\" />\n    <state width=\"1086\" height=\"290\" key=\"GridCell.Tab.0.center/65.24.1855.926@65.24.1855.926\" timestamp=\"1606468194373\" />\n    <state width=\"879\" height=\"143\" key=\"GridCell.Tab.0.center/65.24.902.926@65.24.902.926\" timestamp=\"1606412800696\" />\n    <state width=\"1086\" height=\"290\" key=\"GridCell.Tab.0.left\" timestamp=\"1606468194373\">\n      <screen x=\"65\" y=\"24\" width=\"1855\" height=\"926\" />\n    </state>\n    <state width=\"1515\" height=\"67\" key=\"GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824\" timestamp=\"1606391133640\" />\n    <state width=\"1086\" height=\"290\" key=\"GridCell.Tab.0.left/65.24.1855.926@65.24.1855.926\" timestamp=\"1606468194373\" />\n    <state width=\"879\" height=\"143\" key=\"GridCell.Tab.0.left/65.24.902.926@65.24.902.926\" timestamp=\"1606412800661\" />\n    <state width=\"1086\" height=\"290\" key=\"GridCell.Tab.0.right\" timestamp=\"1606468194373\">\n      <screen x=\"65\" y=\"24\" width=\"1855\" height=\"926\" />\n    </state>\n    <state width=\"1515\" height=\"67\" key=\"GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824\" timestamp=\"1606391133640\" />\n    <state width=\"1086\" height=\"290\" key=\"GridCell.Tab.0.right/65.24.1855.926@65.24.1855.926\" timestamp=\"1606468194373\" />\n    <state width=\"879\" height=\"143\" key=\"GridCell.Tab.0.right/65.24.902.926@65.24.902.926\" timestamp=\"1606412800696\" />\n    <state x=\"581\" y=\"325\" key=\"com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2\" timestamp=\"1606390951040\">\n      <screen x=\"0\" y=\"0\" width=\"1536\" height=\"824\" />\n    </state>\n    <state x=\"581\" y=\"325\" key=\"com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.824@0.0.1536.824\" timestamp=\"1606390951040\" />\n    <state x=\"191\" y=\"74\" width=\"1655\" height=\"754\" key=\"dock-window-1\" timestamp=\"1606463562346\">\n      <screen x=\"65\" y=\"24\" width=\"1855\" height=\"926\" />\n    </state>\n    <state x=\"191\" y=\"74\" width=\"1655\" height=\"754\" key=\"dock-window-1/65.24.1855.926@65.24.1855.926\" timestamp=\"1606463562346\" />\n    <state x=\"165\" y=\"96\" width=\"1655\" height=\"754\" key=\"dock-window-2\" timestamp=\"1606461456485\">\n      <screen x=\"65\" y=\"24\" width=\"1855\" height=\"926\" />\n    </state>\n    <state x=\"165\" y=\"96\" width=\"1655\" height=\"754\" key=\"dock-window-2/65.24.1855.926@65.24.1855.926\" timestamp=\"1606461456485\" />\n    <state x=\"655\" y=\"203\" width=\"672\" height=\"678\" key=\"search.everywhere.popup\" timestamp=\"1606460465861\">\n      <screen x=\"65\" y=\"24\" width=\"1855\" height=\"926\" />\n    </state>\n    <state x=\"655\" y=\"203\" width=\"672\" height=\"678\" key=\"search.everywhere.popup/65.24.1855.926@65.24.1855.926\" timestamp=\"1606460465861\" />\n  </component>\n  <component name=\"XDebuggerManager\">\n    <breakpoint-manager>\n      <breakpoints>\n        <line-breakpoint enabled=\"true\" suspend=\"THREAD\" type=\"python-line\">\n          <url>file://$PROJECT_DIR$/YamiTetris/tetris/Board.py</url>\n          <line>437</line>\n          <option name=\"timeStamp\" value=\"1\" />\n        </line-breakpoint>\n      </breakpoints>\n    </breakpoint-manager>\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/workspace.xml	(revision f0a95a118a21f49f7aaf20ddf081c1b3b23e3309)
++++ .idea/workspace.xml	(date 1606475370944)
+@@ -27,12 +27,9 @@
+   </component>
+   <component name="ChangeListManager">
+     <list default="true" id="b3ee30dc-acd8-4962-8768-2b0bffac3f41" name="Default Changelist" comment="">
+-      <change afterPath="$PROJECT_DIR$/YamiTetris/tetris/xxx.py" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/YamiTetris/tetris/Board.py" beforeDir="false" afterPath="$PROJECT_DIR$/YamiTetris/tetris/Board.py" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/YamiTetris/tetris/Database.py" beforeDir="false" afterPath="$PROJECT_DIR$/YamiTetris/tetris/Database.py" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/YamiTetris/tetris/Rank.py" beforeDir="false" afterPath="$PROJECT_DIR$/YamiTetris/tetris/Rank.py" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/YamiTetris/tetris/Tetris.py" beforeDir="false" afterPath="$PROJECT_DIR$/YamiTetris/tetris/Tetris.py" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/YamiTetris/tetris/xxx.py" beforeDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -64,8 +61,8 @@
+       <recent name="$PROJECT_DIR$/YamiTetris/tetris" />
+     </key>
+   </component>
+-  <component name="RunManager" selected="Python.Rank">
+-    <configuration name="AITetris" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
++  <component name="RunManager" selected="Python.Menu">
++    <configuration name="Database" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+       <module name="2020-2-OSSP-CP--YamiYami_Z_Z-5" />
+       <option name="INTERPRETER_OPTIONS" value="" />
+       <option name="PARENT_ENVS" value="true" />
+@@ -77,7 +74,7 @@
+       <option name="IS_MODULE_SDK" value="true" />
+       <option name="ADD_CONTENT_ROOTS" value="true" />
+       <option name="ADD_SOURCE_ROOTS" value="true" />
+-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/YamiTetris/tetris/AITetris.py" />
++      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/YamiTetris/tetris/Database.py" />
+       <option name="PARAMETERS" value="" />
+       <option name="SHOW_COMMAND_LINE" value="false" />
+       <option name="EMULATE_TERMINAL" value="false" />
+@@ -86,7 +83,7 @@
+       <option name="INPUT_FILE" value="" />
+       <method v="2" />
+     </configuration>
+-    <configuration name="Rank" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
++    <configuration name="Menu" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+       <module name="2020-2-OSSP-CP--YamiYami_Z_Z-5" />
+       <option name="INTERPRETER_OPTIONS" value="" />
+       <option name="PARENT_ENVS" value="true" />
+@@ -98,7 +95,7 @@
+       <option name="IS_MODULE_SDK" value="true" />
+       <option name="ADD_CONTENT_ROOTS" value="true" />
+       <option name="ADD_SOURCE_ROOTS" value="true" />
+-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/YamiTetris/tetris/Rank.py" />
++      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/YamiTetris/tetris/Menu.py" />
+       <option name="PARAMETERS" value="" />
+       <option name="SHOW_COMMAND_LINE" value="false" />
+       <option name="EMULATE_TERMINAL" value="false" />
+@@ -107,7 +104,7 @@
+       <option name="INPUT_FILE" value="" />
+       <method v="2" />
+     </configuration>
+-    <configuration name="Tetris" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
++    <configuration name="Rank" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+       <module name="2020-2-OSSP-CP--YamiYami_Z_Z-5" />
+       <option name="INTERPRETER_OPTIONS" value="" />
+       <option name="PARENT_ENVS" value="true" />
+@@ -119,7 +116,7 @@
+       <option name="IS_MODULE_SDK" value="true" />
+       <option name="ADD_CONTENT_ROOTS" value="true" />
+       <option name="ADD_SOURCE_ROOTS" value="true" />
+-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/YamiTetris/tetris/Tetris.py" />
++      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/YamiTetris/tetris/Rank.py" />
+       <option name="PARAMETERS" value="" />
+       <option name="SHOW_COMMAND_LINE" value="false" />
+       <option name="EMULATE_TERMINAL" value="false" />
+@@ -128,7 +125,7 @@
+       <option name="INPUT_FILE" value="" />
+       <method v="2" />
+     </configuration>
+-    <configuration name="score_test" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
++    <configuration name="Tetris" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+       <module name="2020-2-OSSP-CP--YamiYami_Z_Z-5" />
+       <option name="INTERPRETER_OPTIONS" value="" />
+       <option name="PARENT_ENVS" value="true" />
+@@ -140,7 +137,7 @@
+       <option name="IS_MODULE_SDK" value="true" />
+       <option name="ADD_CONTENT_ROOTS" value="true" />
+       <option name="ADD_SOURCE_ROOTS" value="true" />
+-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/YamiTetris/tetris/score_test.py" />
++      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/YamiTetris/tetris/Tetris.py" />
+       <option name="PARAMETERS" value="" />
+       <option name="SHOW_COMMAND_LINE" value="false" />
+       <option name="EMULATE_TERMINAL" value="false" />
+@@ -172,11 +169,11 @@
+     </configuration>
+     <recent_temporary>
+       <list>
++        <item itemvalue="Python.Menu" />
++        <item itemvalue="Python.Database" />
+         <item itemvalue="Python.Rank" />
+         <item itemvalue="Python.Tetris" />
+         <item itemvalue="Python.xxx" />
+-        <item itemvalue="Python.score_test" />
+-        <item itemvalue="Python.AITetris" />
+       </list>
+     </recent_temporary>
+   </component>
+@@ -220,29 +217,29 @@
+     <option name="LAST_COMMIT_MESSAGE" value="middle" />
+   </component>
+   <component name="WindowStateProjectService">
+-    <state width="1086" height="290" key="GridCell.Tab.0.bottom" timestamp="1606468194373">
++    <state width="1832" height="459" key="GridCell.Tab.0.bottom" timestamp="1606474748261">
+       <screen x="65" y="24" width="1855" height="926" />
+     </state>
+     <state width="1515" height="67" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1606391133641" />
+-    <state width="1086" height="290" key="GridCell.Tab.0.bottom/65.24.1855.926@65.24.1855.926" timestamp="1606468194373" />
++    <state width="1832" height="459" key="GridCell.Tab.0.bottom/65.24.1855.926@65.24.1855.926" timestamp="1606474748261" />
+     <state width="879" height="143" key="GridCell.Tab.0.bottom/65.24.902.926@65.24.902.926" timestamp="1606412800696" />
+-    <state width="1086" height="290" key="GridCell.Tab.0.center" timestamp="1606468194373">
++    <state width="1832" height="459" key="GridCell.Tab.0.center" timestamp="1606474748257">
+       <screen x="65" y="24" width="1855" height="926" />
+     </state>
+     <state width="1515" height="67" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1606391133640" />
+-    <state width="1086" height="290" key="GridCell.Tab.0.center/65.24.1855.926@65.24.1855.926" timestamp="1606468194373" />
++    <state width="1832" height="459" key="GridCell.Tab.0.center/65.24.1855.926@65.24.1855.926" timestamp="1606474748257" />
+     <state width="879" height="143" key="GridCell.Tab.0.center/65.24.902.926@65.24.902.926" timestamp="1606412800696" />
+-    <state width="1086" height="290" key="GridCell.Tab.0.left" timestamp="1606468194373">
++    <state width="1832" height="459" key="GridCell.Tab.0.left" timestamp="1606474748257">
+       <screen x="65" y="24" width="1855" height="926" />
+     </state>
+     <state width="1515" height="67" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1606391133640" />
+-    <state width="1086" height="290" key="GridCell.Tab.0.left/65.24.1855.926@65.24.1855.926" timestamp="1606468194373" />
++    <state width="1832" height="459" key="GridCell.Tab.0.left/65.24.1855.926@65.24.1855.926" timestamp="1606474748257" />
+     <state width="879" height="143" key="GridCell.Tab.0.left/65.24.902.926@65.24.902.926" timestamp="1606412800661" />
+-    <state width="1086" height="290" key="GridCell.Tab.0.right" timestamp="1606468194373">
++    <state width="1832" height="459" key="GridCell.Tab.0.right" timestamp="1606474748258">
+       <screen x="65" y="24" width="1855" height="926" />
+     </state>
+     <state width="1515" height="67" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1606391133640" />
+-    <state width="1086" height="290" key="GridCell.Tab.0.right/65.24.1855.926@65.24.1855.926" timestamp="1606468194373" />
++    <state width="1832" height="459" key="GridCell.Tab.0.right/65.24.1855.926@65.24.1855.926" timestamp="1606474748258" />
+     <state width="879" height="143" key="GridCell.Tab.0.right/65.24.902.926@65.24.902.926" timestamp="1606412800696" />
+     <state x="581" y="325" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1606390951040">
+       <screen x="0" y="0" width="1536" height="824" />

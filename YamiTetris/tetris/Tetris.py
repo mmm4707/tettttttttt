@@ -4,6 +4,8 @@ from Board import *
 from mini_Board import *
 
 
+
+
 #            R    G    B
 BLACK = (0, 0, 0)
 RED = (225, 13, 27)
@@ -18,6 +20,7 @@ WHITE = (255, 255, 255)
 
 # 나중에 사용할 사이즈 조절용 변수임
 resize = 1
+surver = False
 
 class Tetris:
 
@@ -28,12 +31,12 @@ class Tetris:
         self.block_size = 25*resize  # 블럭 하나당 크기
         self.display_width = (self.width+4)*self.block_size
         self.display_height = self.height*self.block_size
-
         self.screen = pygame.display.set_mode((self.display_width,  self.display_height),RESIZABLE)
         self.clock = pygame.time.Clock()
         self.board = Board(self.screen)
         self.music_on_off = True
         self.check_reset = True
+        self.game_mode = "original"
 
     #각 키를 누를떄 실행되는 method
     def handle_key(self, event_key):
@@ -56,25 +59,8 @@ class Tetris:
             else:
                 pygame.mixer.music.stop()
 
-    #가장 높은 점수 불러 오는 부분
-    def HighScore(self):
-        try:
-            f = open('assets/save.txt', 'r')
-            l = f.read()
-            f.close()
-            if int(l) < self.board.score:
-                h_s = self.board.score
-                f = open('assets/save.txt', 'w')
-                f.write(str(self.board.score))
-                f.close()
-            else:
-                h_s = l
-            self.board.HS(str(h_s))
-        except:
-            f = open('assets/save.txt', 'w')
-            f.write(str(self.board.score))
-            f.close()
-            self.board.HS(str(self.board.score))
+#여기에 있던 high스코어 저장하는 것 삭제
+
 
     #실행하기
     def run(self):
@@ -106,9 +92,20 @@ class Tetris:
                 #pygame.mixer.music.stop() #음악 멈추기     오류나서 일단 뺴
                 #pygame.mixer.music.stop() #음악 멈추기     오류나서 일단 뺴
                 self.board.GameOver()  #게임 오버 보드 불러오기
-                self.HighScore()          #하이스코어 표기
+
+                #요기에 아이디 입력 해주는 칸 만들어야함
+                ###################
+                #예시
+                self.ID = "test"  #입력 받은 id가 yutan인 경우에
+
+                #아이디 입력하는 메소드 만들어서 불러와야함
+               # self.board.save_score(self.game_mode,self.ID)
+
+                ####################
+                self.board.show_my_score()          #게임 종료 될떄 나의 점수!!
                 self.check_reset = True
                 self.board.init_board()
+
 
             for event in pygame.event.get(): #게임진행중 - event는 키보드 누를떄 특정 동작 수할떄 발생
                 if event.type == QUIT: #종류 이벤트가 발생한 경우
@@ -116,18 +113,16 @@ class Tetris:
                     sys.exit() #게임을 종료한다ㅏ.
                 elif event.type == KEYUP and event.key == K_p: # 일시 정지 버튼 누르면
                     self.screen.fill(BLACK)         #일시 정지 화면
-                    #pygame.mixer.music.stop()       #일시 정지 노래 중둠    오류나서 일단 뺴
+                    #pygame.mixer.music.stop()       #일시 정지 노래 중둠    오류나서  일단 뺴
                     self.board.pause()
                     #pygame.mixer.music.play(-1, 0.0)
                 elif event.type == KEYDOWN: #키보드를 누르면
                     self.handle_key(event.key) #handle 메소드 실행
                 elif event.type == pygame.USEREVENT:
                     self.board.drop_piece()
-
                 #화면 크기 조절해 보기
                 elif event.type == VIDEORESIZE:
                     screen = pygame.display.set_mode((event.w, event.h),pygame.RESIZABLE )
-
 
             # self.screen.fill(BLACK)
             self.board.draw(self)
