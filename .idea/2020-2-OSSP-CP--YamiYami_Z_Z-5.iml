@@ -5,6 +5,10 @@
       <excludeFolder url="file://$MODULE_DIR$/venv" />
     </content>
     <orderEntry type="inheritedJdk" />
+
+    <content url="file://$MODULE_DIR$" />
+    <orderEntry type="jdk" jdkName="Python 3.6 (Tetris) (4)" jdkType="Python SDK" />
+
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
 </module>
