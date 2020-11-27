@@ -1,6 +1,7 @@
 import pygame, sys, datetime, time
 from pygame.locals import *
 from Piece import *
+from Menu import *
 import threading
 
 
@@ -392,61 +393,3 @@ class Board:
         self.screen.blit(textSurfaceObj, textRectObj)
         self.screen.blit(textSurfaceObj2, textRectObj2)
         pygame.display.update()
-        running = True
-        while running:
-            for event in pygame.event.get():
-                if event.type == QUIT:
-                    pygame.quit()
-                    sys.exit()
-                elif event.type == KEYDOWN: #아무 거나 누르면 다시 시작
-                    running = False
-
-#새로운 게임 시작하기 배경
-    def newGame(self):
-        fontObj = pygame.font.Font('assets/Roboto-Bold.ttf', self.font_size_big*2*resize)
-        textSurfaceObj = fontObj.render('Tetris', True, GREEN)
-        textRectObj = textSurfaceObj.get_rect()
-        textRectObj.center = ((self.start_status_bar_x+self.status_width)/2, self.block_size*8)
-        fontObj2 = pygame.font.Font('assets/Roboto-Bold.ttf', self.font_size_middle*resize)
-        textSurfaceObj2 = fontObj2.render('Press a key to continue', True, GREEN)
-        textRectObj2 = textSurfaceObj2.get_rect()
-        textRectObj2.center = ((self.start_status_bar_x+self.status_width)/2, self.block_size*12)
-        self.screen.fill(BLACK)
-        self.screen.blit(textSurfaceObj, textRectObj)
-        self.screen.blit(textSurfaceObj2, textRectObj2)
-        pygame.display.update()
-        running = True
-        while running:
-            for event in pygame.event.get():
-                if event.type == QUIT:
-                    pygame.quit()
-                    sys.exit()
-                elif event.type == KEYDOWN:
-                    running = False
-
-#가장 높은 점수 보여주기 배경
-    def HS(self, txt="no"):
-        if txt != "no":
-            fontObj = pygame.font.Font('assets/Roboto-Bold.ttf', self.font_size_big*2*resize)
-            textSurfaceObj = fontObj.render('HighScore : '+txt, True, GREEN)
-            textRectObj = textSurfaceObj.get_rect()
-            textRectObj.center = ((self.start_status_bar_x+self.status_width)/2, self.block_size*8)
-            fontObj2 = pygame.font.Font('assets/Roboto-Bold.ttf', self.font_size_middle*resize)
-            textSurfaceObj2 = fontObj2.render('Press a key to continue', True, GREEN)
-            textRectObj2 = textSurfaceObj2.get_rect()
-            textRectObj2.center = ((self.start_status_bar_x+self.status_width)/2, self.block_size*12)
-            self.screen.fill(BLACK)
-            self.screen.blit(textSurfaceObj, textRectObj)
-            self.screen.blit(textSurfaceObj2, textRectObj2)
-            pygame.display.update()
-            running = True
-            while running:
-                for event in pygame.event.get():
-                    if event.type == QUIT:
-                        pygame.quit()
-                        sys.exit()
-                    elif event.type == KEYDOWN:
-                        running = False
-
-#스킬 사용 remove
-
