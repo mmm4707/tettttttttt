@@ -16,17 +16,16 @@
         <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
       </path>
     </expand>
-    <select />
+    <select>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="BRANCH:Two_mode" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6dabf8e4-bbae-447d-aecb-6aaca16560a8" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/YamiTetris/tetris/Two_Board.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/YamiTetris/tetris/Twohands.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/2020-2-OSSP-CP--YamiYami_Z_Z-5.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/2020-2-OSSP-CP--YamiYami_Z_Z-5.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/YamiTetris/tetris/Menu.py" beforeDir="false" afterPath="$PROJECT_DIR$/YamiTetris/tetris/Menu.py" afterDir="false" />
-    </list>
+    <list default="true" id="6dabf8e4-bbae-447d-aecb-6aaca16560a8" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -176,10 +175,59 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="Two_mode" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
     </option>
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="master" />
+                </option>
+              </RecentGroup>
+            </list>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="WindowStateProjectService">
+    <state width="1048" height="232" key="GridCell.Tab.0.bottom" timestamp="1606033868123">
+      <screen x="67" y="27" width="1853" height="923" />
+    </state>
+    <state width="1048" height="232" key="GridCell.Tab.0.bottom/67.27.1071.913@67.27.1071.913" timestamp="1606033099808" />
+    <state width="1048" height="232" key="GridCell.Tab.0.bottom/67.27.1853.923@67.27.1853.923" timestamp="1606033868123" />
+    <state width="1048" height="232" key="GridCell.Tab.0.center" timestamp="1606033868120">
+      <screen x="67" y="27" width="1853" height="923" />
+    </state>
+    <state width="1048" height="232" key="GridCell.Tab.0.center/67.27.1071.913@67.27.1071.913" timestamp="1606033099804" />
+    <state width="1048" height="232" key="GridCell.Tab.0.center/67.27.1853.923@67.27.1853.923" timestamp="1606033868120" />
+    <state width="1048" height="232" key="GridCell.Tab.0.left" timestamp="1606033868119">
+      <screen x="67" y="27" width="1853" height="923" />
+    </state>
+    <state width="1048" height="232" key="GridCell.Tab.0.left/67.27.1071.913@67.27.1071.913" timestamp="1606033099803" />
+    <state width="1048" height="232" key="GridCell.Tab.0.left/67.27.1853.923@67.27.1853.923" timestamp="1606033868119" />
+    <state width="1048" height="232" key="GridCell.Tab.0.right" timestamp="1606033868121">
+      <screen x="67" y="27" width="1853" height="923" />
+    </state>
+    <state width="1048" height="232" key="GridCell.Tab.0.right/67.27.1071.913@67.27.1071.913" timestamp="1606033099807" />
+    <state width="1048" height="232" key="GridCell.Tab.0.right/67.27.1853.923@67.27.1853.923" timestamp="1606033868121" />
   </component>
 </project>
