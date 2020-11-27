@@ -53,7 +53,8 @@ def start_the_game():
 
 def start_the_Mini():
     ## 미니 게임 모드 만들면 여기다 실행 코드만 넣으세요
-    pass
+    if __name__ == "__main__":
+        Mini().run()
 
 
 def start_the_Twohands():
