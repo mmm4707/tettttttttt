@@ -209,19 +209,12 @@ class Mini:
         while True:
 
             if self.check_reset:
-                self.board.newGame()
                 self.check_reset = False
                 #pygame.mixer.music.play(-1, 0.0)  ## 수정 필요 오류 나서 일단 빼둠
 
             if self.board.game_over():
-                self.screen.fill(BLACK) #게임 오버 배경 색
-                #pygame.mixer.music.stop() #음악 멈추기     오류나서 일단 뺴
-                #pygame.mixer.music.stop() #음악 멈추기     오류나서 일단 뺴
-                self.board.GameOver()  #게임 오버 보드 불러오기
-                self.HighScore()          #하이스코어 표기
-                self.check_reset = True
-                self.board.init_board()
-
+                pygame.quit()
+                break
             for event in pygame.event.get(): #게임진행중 - event는 키보드 누를떄 특정 동작 수할떄 발생
                 if event.type == QUIT: #종류 이벤트가 발생한 경우
                     pygame.quit() #모든 호출 종
@@ -247,7 +240,3 @@ class Mini:
             pygame.display.update() #이게 나오면 구현 시
             self.clock.tick(30) # 초당 프레임 관련
 
-
-
-if __name__ == "__main__":
-    Mini().run()

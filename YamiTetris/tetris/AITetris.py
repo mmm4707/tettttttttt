@@ -262,20 +262,14 @@ class AITetris(object):
         while True:
 
             if self.check_reset:
-                self.board.newGame()
                 self.ai_init_game()
                 self.check_reset = False
                 #pygame.mixer.music.play(-1, 0.0)  ## 수정 필요 오류 나서 일단 빼둠
 
             #게임 종료시 어떻게 할건가
             if self.board.game_over() or self.board.score  < self.ai_score:
-                self.screen.fill(BLACK) #게임 오버 배경 색
-                #pygame.mixer.music.stop() #음악 멈추기     오류나서 일단 뺴
-                #pygame.mixer.music.stop() #음악 멈추기     오류나서 일단 뺴
-                self.board.GameOver()  #게임 오버 보드 불러오기
-                self.HighScore()          #하이스코어 표기
-                self.check_reset = True
-                self.board.init_board()
+                pygame.quit()
+                break
 
             Ai.choose(self.ai_board, self.stone, self.next_stone, self.stone_x, weights, self)
 
@@ -298,12 +292,3 @@ class AITetris(object):
             pygame.display.update() #이게 나오면 구현 시
             self.clock.tick(fps) # 초당 프레임 관련
 
-if __name__ == '__main__':
-    weights = [3.39357083734159515, -1.8961941343266449, -5.107694873375318, -3.6314963941589093, -2.9262681134021786,
-               -2.146136640641482, -7.204192964669836, -3.476853402227247, -6.813002842291903, 4.152001386170861,
-               -21.131715861293525, -10.181622180279133, -5.351108175564556, -2.6888972099986956, -2.684925769670947,
-               -4.504495386829769, -7.4527302422826, -6.3489634714511505, -4.701455626343827, -10.502314845278828,
-               0.6969259450910086, -4.483319180395864, -2.471375907554622, -6.245643268054767, -1.899364785170105,
-               -5.3416512085013395, -4.072687054171711, -5.936652569831475, -2.3140398163110643, -4.842883337741306,
-               17.677262456993276, -4.42668539845469, -6.8954976464473585, 4.481308299774875]  # 21755 lignes
-    AITetris(4).run(weights)
