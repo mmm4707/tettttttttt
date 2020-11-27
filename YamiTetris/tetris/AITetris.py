@@ -4,7 +4,6 @@ from ai_Board import *
 import random
 from ai import Ai
 
-
 #            R    G    B
 BLACK = (0, 0, 0)
 RED = (225, 13, 27)

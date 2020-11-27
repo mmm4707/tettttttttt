@@ -1,13 +1,8 @@
 import pygame
-
 import pygame_menu
-
 from Menu import *
-
 from Tetris import *
-
 from Twohands import *
-
 from AITetris import *
 
 import sys
@@ -15,9 +10,7 @@ import sys
 running=True
 while running:
     menu = Menu()
-
     menu.run()
-
 
     if menu.Mode == 1:
 
@@ -25,8 +18,8 @@ while running:
             Tetris().run()
 
     if menu.Mode == 2:
-        pass
-
+        if __name__ == "__main__":
+            Mini().run()
     if menu.Mode == 3:
 
         if __name__ == "__main__":

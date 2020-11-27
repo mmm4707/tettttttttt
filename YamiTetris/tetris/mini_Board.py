@@ -1,6 +1,7 @@
 import pygame, sys, datetime, time
 from pygame.locals import *
 from Piece import *
+from Menu import *
 import threading
 
 
@@ -418,37 +419,3 @@ class mini_Board:
         self.screen.blit(textSurfaceObj, textRectObj)
         self.screen.blit(textSurfaceObj2, textRectObj2)
         pygame.display.update()
-        running = True
-        while running:
-            for event in pygame.event.get():
-                if event.type == QUIT:
-                    pygame.quit()
-                    sys.exit()
-                elif event.type == KEYDOWN:
-                    running = False
-
-#가장 높은 점수 보여주기 배경
-    def HS(self, txt="no"):
-        if txt != "no":
-            fontObj = pygame.font.Font('assets/Roboto-Bold.ttf', self.font_size_big*2*resize)
-            textSurfaceObj = fontObj.render('HighScore : '+txt, True, GREEN)
-            textRectObj = textSurfaceObj.get_rect()
-            textRectObj.center = (self.text_center_x, self.text_center_y)
-            fontObj2 = pygame.font.Font('assets/Roboto-Bold.ttf', self.font_size_middle*resize)
-            textSurfaceObj2 = fontObj2.render('Press a key to continue', True, GREEN)
-            textRectObj2 = textSurfaceObj2.get_rect()
-            textRectObj2.center = (self.text_center_x, self.text_bottom)
-            self.screen.fill(BLACK)
-            self.screen.blit(textSurfaceObj, textRectObj)
-            self.screen.blit(textSurfaceObj2, textRectObj2)
-            pygame.display.update()
-            running = True
-            while running:
-                for event in pygame.event.get():
-                    if event.type == QUIT:
-                        pygame.quit()
-                        sys.exit()
-                    elif event.type == KEYDOWN:
-                        running = False
-
-#스킬 사용 remove
