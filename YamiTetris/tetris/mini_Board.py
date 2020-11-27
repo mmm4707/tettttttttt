@@ -1,7 +1,6 @@
 import pygame, sys, datetime, time
 from pygame.locals import *
 from Piece import *
-from Menu import *
 import threading
 
 
