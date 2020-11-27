@@ -15,12 +15,29 @@
         <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
         <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
       </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:up" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
     </expand>
     <select>
       <path>
         <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+
         <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
         <item name="BRANCH:Run" type="e8cecc67:BranchNodeDescriptor" />
+
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="BRANCH:origin/aimode_v2" type="e8cecc67:BranchNodeDescriptor" />
+
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+
+        <item name="BRANCH:Two_mode" type="e8cecc67:BranchNodeDescriptor" />
+
+        <item name="BRANCH:master" type="e8cecc67:BranchNodeDescriptor" />
+
       </path>
     </select>
   </component>
@@ -35,16 +52,35 @@
       <change beforePath="$PROJECT_DIR$/YamiTetris/tetris/Two_Board.py" beforeDir="false" afterPath="$PROJECT_DIR$/YamiTetris/tetris/Two_Board.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/YamiTetris/tetris/Twohands.py" beforeDir="false" afterPath="$PROJECT_DIR$/YamiTetris/tetris/Twohands.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/YamiTetris/tetris/ai_Board.py" beforeDir="false" afterPath="$PROJECT_DIR$/YamiTetris/tetris/ai_Board.py" afterDir="false" />
+
+    <list default="true" id="b3ee30dc-acd8-4962-8768-2b0bffac3f41" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/YamiTetris/tetris/Board.py" beforeDir="false" afterPath="$PROJECT_DIR$/YamiTetris/tetris/Board.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/YamiTetris/tetris/Rank.py" beforeDir="false" afterPath="$PROJECT_DIR$/YamiTetris/tetris/Rank.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/YamiTetris/tetris/Tetris.py" beforeDir="false" afterPath="$PROJECT_DIR$/YamiTetris/tetris/Tetris.py" afterDir="false" />
     </list>
+
+    <list default="true" id="6dabf8e4-bbae-447d-aecb-6aaca16560a8" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectId" id="1kdZJGwtOOwlqEyyC2bLPwvvf1O" />
+  <component name="ProjectId" id="1kpJkPl8vn91zgQCzPlHDGEiHzu" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -52,9 +88,18 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/YamiTetris/tetris" />
   </component>
   <component name="RunManager" selected="Python.Run">
     <configuration name="Piece" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/YamiTetris/tetris" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Python.Tetris">
+    <configuration name="Board" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="2020-2-OSSP-CP--YamiYami_Z_Z-5" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -67,6 +112,8 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/YamiTetris/tetris/Piece.py" />
+
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/YamiTetris/tetris/Board.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -76,6 +123,7 @@
       <method v="2" />
     </configuration>
     <configuration name="Run" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="Menu" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="2020-2-OSSP-CP--YamiYami_Z_Z-5" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -87,7 +135,31 @@
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
+ 
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/YamiTetris/tetris/Run.py" />
+
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/YamiTetris/tetris/Menu.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Rank" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="2020-2-OSSP-CP--YamiYami_Z_Z-5" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="$PROJECT_DIR$/venv/bin/python" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/YamiTetris/tetris" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/YamiTetris/tetris/Rank.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -117,7 +189,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="Two_Board" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="xxx" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="2020-2-OSSP-CP--YamiYami_Z_Z-5" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -129,28 +201,7 @@
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/YamiTetris/tetris/Two_Board.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="Twohands" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="2020-2-OSSP-CP--YamiYami_Z_Z-5" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="$PROJECT_DIR$/venv/bin/python" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/YamiTetris/tetris" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/YamiTetris/tetris/Twohands.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/YamiTetris/tetris/xxx.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -166,17 +217,22 @@
         <item itemvalue="Python.Two_Board" />
         <item itemvalue="Python.Tetris" />
         <item itemvalue="Python.Piece" />
+        <item itemvalue="Python.Tetris" />
+        <item itemvalue="Python.Rank" />
+        <item itemvalue="Python.Board" />
+        <item itemvalue="Python.Menu" />
+        <item itemvalue="Python.xxx" />
       </list>
     </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="6dabf8e4-bbae-447d-aecb-6aaca16560a8" name="Default Changelist" comment="" />
-      <created>1606032354911</created>
+      <changelist id="b3ee30dc-acd8-4962-8768-2b0bffac3f41" name="Default Changelist" comment="" />
+      <created>1606391797859</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1606032354911</updated>
+      <updated>1606391797859</updated>
     </task>
     <servers />
   </component>
@@ -192,6 +248,14 @@
                     <value>
                       <list>
                         <option value="Run" />
+
+ 
+                        <option value="origin/aimode_v2" />
+
+                        <option value="Two_mode" />
+ 
+
+                        <option value="master" />
                       </list>
                     </value>
                   </entry>
@@ -252,5 +316,102 @@
       <screen x="67" y="27" width="1853" height="923" />
     </state>
     <state x="588" y="223" width="800" height="528" key="Vcs.Push.Dialog.v2/67.27.1853.923@67.27.1853.923" timestamp="1606473279496" />
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="middle" />
+    <option name="LAST_COMMIT_MESSAGE" value="middle" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state width="1832" height="587" key="GridCell.Tab.0.bottom" timestamp="1606478499932">
+      <screen x="65" y="24" width="1855" height="926" />
+    </state>
+    <state width="1515" height="67" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1606391133641" />
+    <state width="1832" height="587" key="GridCell.Tab.0.bottom/65.24.1855.926@65.24.1855.926" timestamp="1606478499932" />
+    <state width="879" height="143" key="GridCell.Tab.0.bottom/65.24.902.926@65.24.902.926" timestamp="1606412800696" />
+    <state width="1832" height="587" key="GridCell.Tab.0.center" timestamp="1606478499931">
+      <screen x="65" y="24" width="1855" height="926" />
+    </state>
+    <state width="1515" height="67" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1606391133640" />
+    <state width="1832" height="587" key="GridCell.Tab.0.center/65.24.1855.926@65.24.1855.926" timestamp="1606478499931" />
+    <state width="879" height="143" key="GridCell.Tab.0.center/65.24.902.926@65.24.902.926" timestamp="1606412800696" />
+    <state width="1832" height="587" key="GridCell.Tab.0.left" timestamp="1606478499931">
+      <screen x="65" y="24" width="1855" height="926" />
+    </state>
+    <state width="1515" height="67" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1606391133640" />
+    <state width="1832" height="587" key="GridCell.Tab.0.left/65.24.1855.926@65.24.1855.926" timestamp="1606478499931" />
+    <state width="879" height="143" key="GridCell.Tab.0.left/65.24.902.926@65.24.902.926" timestamp="1606412800661" />
+    <state width="1832" height="587" key="GridCell.Tab.0.right" timestamp="1606478499931">
+      <screen x="65" y="24" width="1855" height="926" />
+    </state>
+    <state width="1515" height="67" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1606391133640" />
+    <state width="1832" height="587" key="GridCell.Tab.0.right/65.24.1855.926@65.24.1855.926" timestamp="1606478499931" />
+    <state width="879" height="143" key="GridCell.Tab.0.right/65.24.902.926@65.24.902.926" timestamp="1606412800696" />
+    <state x="581" y="325" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1606390951040">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="581" y="325" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.824@0.0.1536.824" timestamp="1606390951040" />
+    <state x="191" y="74" width="1655" height="754" key="dock-window-1" timestamp="1606463562346">
+      <screen x="65" y="24" width="1855" height="926" />
+    </state>
+    <state x="191" y="74" width="1655" height="754" key="dock-window-1/65.24.1855.926@65.24.1855.926" timestamp="1606463562346" />
+    <state x="165" y="96" width="1655" height="754" key="dock-window-2" timestamp="1606461456485">
+      <screen x="65" y="24" width="1855" height="926" />
+    </state>
+    <state x="165" y="96" width="1655" height="754" key="dock-window-2/65.24.1855.926@65.24.1855.926" timestamp="1606461456485" />
+    <state x="655" y="203" width="672" height="678" key="search.everywhere.popup" timestamp="1606460465861">
+      <screen x="65" y="24" width="1855" height="926" />
+    </state>
+    <state x="655" y="203" width="672" height="678" key="search.everywhere.popup/65.24.1855.926@65.24.1855.926" timestamp="1606460465861" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/YamiTetris/tetris/Board.py</url>
+          <line>438</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="master" />
+                </option>
+              </RecentGroup>
+            </list>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state width="1048" height="232" key="GridCell.Tab.0.bottom" timestamp="1606033868123">
+      <screen x="67" y="27" width="1853" height="923" />
+    </state>
+    <state width="1048" height="232" key="GridCell.Tab.0.bottom/67.27.1071.913@67.27.1071.913" timestamp="1606033099808" />
+    <state width="1048" height="232" key="GridCell.Tab.0.bottom/67.27.1853.923@67.27.1853.923" timestamp="1606033868123" />
+    <state width="1048" height="232" key="GridCell.Tab.0.center" timestamp="1606033868120">
+      <screen x="67" y="27" width="1853" height="923" />
+    </state>
+    <state width="1048" height="232" key="GridCell.Tab.0.center/67.27.1071.913@67.27.1071.913" timestamp="1606033099804" />
+    <state width="1048" height="232" key="GridCell.Tab.0.center/67.27.1853.923@67.27.1853.923" timestamp="1606033868120" />
+    <state width="1048" height="232" key="GridCell.Tab.0.left" timestamp="1606033868119">
+      <screen x="67" y="27" width="1853" height="923" />
+    </state>
+    <state width="1048" height="232" key="GridCell.Tab.0.left/67.27.1071.913@67.27.1071.913" timestamp="1606033099803" />
+    <state width="1048" height="232" key="GridCell.Tab.0.left/67.27.1853.923@67.27.1853.923" timestamp="1606033868119" />
+    <state width="1048" height="232" key="GridCell.Tab.0.right" timestamp="1606033868121">
+      <screen x="67" y="27" width="1853" height="923" />
+    </state>
+    <state width="1048" height="232" key="GridCell.Tab.0.right/67.27.1071.913@67.27.1071.913" timestamp="1606033099807" />
+    <state width="1048" height="232" key="GridCell.Tab.0.right/67.27.1853.923@67.27.1853.923" timestamp="1606033868121" />
   </component>
 </project>

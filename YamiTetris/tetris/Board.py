@@ -3,6 +3,7 @@ from pygame.locals import *
 from Piece import *
 from Menu import *
 import threading
+#from Database import Database
 
 
 
@@ -36,6 +37,7 @@ class Board:
         self.block_size = 25*resize  #바꾸면 맵 블럭크기 변경
         self.init_board() # 보드 생성 메소드 실행
         self.generate_piece() # 블럭 생성 메소드 실행
+        #self.database = Database()
 
         # 상태 줄 정보
         self.start_status_bar_x = self.width * self.block_size
@@ -56,7 +58,7 @@ class Board:
         self.board = []
         self.score = 0 #시작 점수
         self.level = 1 #시작 level
-        self.goal = 5  #level up 도달 목표
+        self.goal = 5  #level up 도달 목표 a
         self.skill = 0 #skill 퍼센트
         self.combo=0 # combo 수
         self.timer0 = threading.Timer(10, self.combo_null)
@@ -78,7 +80,7 @@ class Board:
         self.next_piece = Piece()
         self.piece_x, self.piece_y = 3, 0
 
-    def nextpiece(self):  #다음에 나올 블럭 그려주
+    def nextpiece(self):  #다음에 나올 블럭 그려주기
         self.piece = self.next_piece
         self.next_piece = Piece()
         self.piece_x, self.piece_y = 3, 0
@@ -88,6 +90,7 @@ class Board:
             for x, block in enumerate(row):
                 if block:
                     self.board[y+self.piece_y][x+self.piece_x] = block
+
         self.nextpiece()
         self.score += self.level
 
@@ -241,8 +244,8 @@ class Board:
     #추가 - 레벨별 스피드 조절
     def level_speed(self):
         if self.level <= 9:
-            speed_chage_per_level = 60
-            pygame.time.set_timer(pygame.USEREVENT, (max_speed - speed_chage_per_level * self.level))
+            speed_change_per_level = 60
+            pygame.time.set_timer(pygame.USEREVENT, (max_speed - speed_change_per_level * self.level))
         else :
             pygame.time.set_time(pygame.USEREVENT, min_speed)
 
@@ -253,11 +256,11 @@ class Board:
     def game_over(self):
         return sum(self.board[0]) > 0 or sum(self.board[1]) > 0
 
-#블럭 모양 만들어주기 ?
+   # 현재 내려오고 있는 블럭 그려주기
     def draw_blocks(self, array2d, color=WHITE, dx=0, dy=0):
         for y, row in enumerate(array2d):
             y += dy
-            if y >= 2 and y < self.height:
+            if y >= 0 and y < self.height:
                 for x, block in enumerate(row):
                     if block:
                         x += dx
@@ -274,7 +277,7 @@ class Board:
     def draw_shadow(self, array2d, dx, dy):  # 그림자 오류 디버깅     #########
         for y, row in enumerate(array2d):
             y += dy
-            if y >= 2 and y < self.height:
+            if y >= 0 and y < self.height:
                 for x, block in enumerate(row):
                     x += dx
                     if block:
@@ -289,7 +292,6 @@ class Board:
 
     #다음 블럭 모양 만들어 주기 ?
     def draw_next_piece(self, array2d, color=WHITE):
-
         for y, row in enumerate(array2d):
             for x, block in enumerate(row):
                 if block:
@@ -312,16 +314,9 @@ class Board:
                  (x_pix, y_pix, self.block_size, self.block_size),1)
 
         self.draw_shadow(self.piece, dx = self.piece_x, dy=self.piece_y) #그림자 기능 추가
-
-        self.draw_blocks(self.piece, dx=self.piece_x, dy=self.piece_y)
-
+        self.draw_blocks(self.piece, dx=self.piece_x, dy=self.piece_y-2)
         self.draw_blocks(self.board)
-
-
-
-
-        pygame.draw.rect(self.screen, WHITE, Rect(self.start_status_bar_x, self.start_status_bar_y, self.start_status_bar_x+ self.status_width,self.start_status_bar_y +self.status_height))
-
+        pygame.draw.rect(self.screen, WHITE, Rect(self.start_status_bar_x, self.start_status_bar_y,self.status_width,self.status_height))
 
         self.draw_next_piece(self.next_piece)
 
@@ -393,3 +388,32 @@ class Board:
         self.screen.blit(textSurfaceObj, textRectObj)
         self.screen.blit(textSurfaceObj2, textRectObj2)
         pygame.display.update()
+
+    #게임 끝나면 점수 보여주는 곳
+    def show_my_score(self):
+        fontObj = pygame.font.Font('assets/Roboto-Bold.ttf', self.font_size_big*2*resize)
+        textSurfaceObj = fontObj.render('My Score : '+str(self.score), True, GREEN)
+        textRectObj = textSurfaceObj.get_rect()
+        textRectObj.center = ((self.start_status_bar_x+self.status_width)/2, self.block_size*8)
+        fontObj2 = pygame.font.Font('assets/Roboto-Bold.ttf', self.font_size_middle*resize)
+        textSurfaceObj2 = fontObj2.render('Press a key to continue', True, GREEN)
+        textRectObj2 = textSurfaceObj2.get_rect()
+        textRectObj2.center = ((self.start_status_bar_x+self.status_width)/2, self.block_size*12)
+        self.screen.fill(BLACK)
+        self.screen.blit(textSurfaceObj, textRectObj)
+        self.screen.blit(textSurfaceObj2, textRectObj2)
+        pygame.display.update()
+        running = True
+        while running:
+            for event in pygame.event.get():
+                if event.type == QUIT:
+                    pygame.quit()
+                    sys.exit()
+                elif event.type == KEYDOWN:
+                    running = False
+
+    def save_score(self, game_mode, ID):
+        self.database.add_data(game_mode, ID, self.score)
+
+
+

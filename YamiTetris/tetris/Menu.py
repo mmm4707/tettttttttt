@@ -10,8 +10,6 @@ class Menu:
     def __init__(self):
         pygame.init()
 
-        self.surface = pygame.display.set_mode((800, 600))
-
         self.menu = pygame_menu.Menu(600, 400, 'Yami Tetris', theme=pygame_menu.themes.THEME_BLUE)
 
         self.Mode = 0
@@ -103,7 +101,4 @@ class Menu:
 
         pass
 
-    def show_the_Ai(self):
-        ## ai 모드 랭크 보여주
 
-        pass
