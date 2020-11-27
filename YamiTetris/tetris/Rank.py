@@ -5,10 +5,6 @@ import pygame, sys, time
 from pygame.locals import *
 
 
-
-database = Database()
-print(database.load_data("original"))
-
 BLACK = (0, 0, 0)
 RED = (225, 13, 27)
 GREEN = (98, 190, 68)

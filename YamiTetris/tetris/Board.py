@@ -2,7 +2,7 @@ import pygame, sys, datetime, time
 from pygame.locals import *
 from Piece import *
 import threading
-from Database import Database
+#from Database import Database
 
 
 
@@ -36,7 +36,7 @@ class Board:
         self.block_size = 25*resize  #바꾸면 맵 블럭크기 변경
         self.init_board() # 보드 생성 메소드 실행
         self.generate_piece() # 블럭 생성 메소드 실행
-        self.database = Database()
+        #self.database = Database()
 
         # 상태 줄 정보
         self.start_status_bar_x = self.width * self.block_size
@@ -419,9 +419,8 @@ class Board:
                 elif event.type == KEYDOWN:
                     running = False
 
-
+    #게임 끝나면 점수 보여주는 곳
     def show_my_score(self):
-
         fontObj = pygame.font.Font('assets/Roboto-Bold.ttf', self.font_size_big*2*resize)
         textSurfaceObj = fontObj.render('My Score : '+str(self.score), True, GREEN)
         textRectObj = textSurfaceObj.get_rect()

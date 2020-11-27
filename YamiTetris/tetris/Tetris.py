@@ -35,7 +35,6 @@ class Tetris:
         self.board = Board(self.screen)
         self.music_on_off = True
         self.check_reset = True
-
         self.game_mode = "original"
 
     #각 키를 누를떄 실행되는 method
@@ -99,7 +98,8 @@ class Tetris:
                 self.ID = "test"  #입력 받은 id가 yutan인 경우에
 
                 #아이디 입력하는 메소드 만들어서 불러와야함
-                self.board.save_score(self.game_mode,self.ID)
+               # self.board.save_score(self.game_mode,self.ID)
+
                 ####################
                 self.board.show_my_score()          #게임 종료 될떄 나의 점수!!
                 self.check_reset = True
