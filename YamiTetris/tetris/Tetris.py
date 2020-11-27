@@ -83,29 +83,12 @@ class Tetris:
         while True:
 
             if self.check_reset:
-                self.board.newGame()
                 self.check_reset = False
                 #pygame.mixer.music.play(-1, 0.0)  ## 수정 필요 오류 나서 일단 빼둠
 
             if self.board.game_over():
-                self.screen.fill(BLACK) #게임 오버 배경 색
-                #pygame.mixer.music.stop() #음악 멈추기     오류나서 일단 뺴
-                #pygame.mixer.music.stop() #음악 멈추기     오류나서 일단 뺴
-                self.board.GameOver()  #게임 오버 보드 불러오기
-
-                #요기에 아이디 입력 해주는 칸 만들어야함
-                ###################
-                #예시
-                self.ID = "test"  #입력 받은 id가 yutan인 경우에
-
-                #아이디 입력하는 메소드 만들어서 불러와야함
-               # self.board.save_score(self.game_mode,self.ID)
-
-                ####################
-                self.board.show_my_score()          #게임 종료 될떄 나의 점수!!
-                self.check_reset = True
-                self.board.init_board()
-
+                pygame.quit()
+                break
 
             for event in pygame.event.get(): #게임진행중 - event는 키보드 누를떄 특정 동작 수할떄 발생
                 if event.type == QUIT: #종류 이벤트가 발생한 경우
@@ -209,18 +192,12 @@ class Mini:
         while True:
 
             if self.check_reset:
-                self.board.newGame()
                 self.check_reset = False
                 #pygame.mixer.music.play(-1, 0.0)  ## 수정 필요 오류 나서 일단 빼둠
 
             if self.board.game_over():
-                self.screen.fill(BLACK) #게임 오버 배경 색
-                #pygame.mixer.music.stop() #음악 멈추기     오류나서 일단 뺴
-                #pygame.mixer.music.stop() #음악 멈추기     오류나서 일단 뺴
-                self.board.GameOver()  #게임 오버 보드 불러오기
-                self.HighScore()          #하이스코어 표기
-                self.check_reset = True
-                self.board.init_board()
+                pygame.quit()
+                break
 
             for event in pygame.event.get(): #게임진행중 - event는 키보드 누를떄 특정 동작 수할떄 발생
                 if event.type == QUIT: #종류 이벤트가 발생한 경우
@@ -247,7 +224,3 @@ class Mini:
             pygame.display.update() #이게 나오면 구현 시
             self.clock.tick(30) # 초당 프레임 관련
 
-
-
-if __name__ == "__main__":
-    Mini().run()
