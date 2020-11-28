@@ -4,7 +4,6 @@ from ai_Board import *
 import random
 from ai import Ai
 
-
 #            R    G    B
 BLACK = (0, 0, 0)
 RED = (225, 13, 27)
@@ -262,20 +261,14 @@ class AITetris(object):
         while True:
 
             if self.check_reset:
-                self.board.newGame()
                 self.ai_init_game()
                 self.check_reset = False
                 #pygame.mixer.music.play(-1, 0.0)  ## 수정 필요 오류 나서 일단 빼둠
 
             #게임 종료시 어떻게 할건가
             if self.board.game_over() or self.board.score  < self.ai_score:
-                self.screen.fill(BLACK) #게임 오버 배경 색
-                #pygame.mixer.music.stop() #음악 멈추기     오류나서 일단 뺴
-                #pygame.mixer.music.stop() #음악 멈추기     오류나서 일단 뺴
-                self.board.GameOver()  #게임 오버 보드 불러오기
-                self.HighScore()          #하이스코어 표기
-                self.check_reset = True
-                self.board.init_board()
+                pygame.quit()
+                break
 
             Ai.choose(self.ai_board, self.stone, self.next_stone, self.stone_x, weights, self)
 
@@ -307,3 +300,4 @@ if __name__ == '__main__':
                -5.3416512085013395, -4.072687054171711, -5.936652569831475, -2.3140398163110643, -4.842883337741306,
                17.677262456993276, -4.42668539845469, -6.8954976464473585, 4.481308299774875]  # 21755 lignes
     AITetris(4).run(weights)
+
