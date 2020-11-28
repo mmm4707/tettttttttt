@@ -177,6 +177,10 @@ class Twohands:
                 # pygame.mixer.music.play(-1, 0.0)  ## 수정 필요 오류 나서 일단 빼둠
 
             if self.board.game_over():
+                self.Score=self.board.score
+                self.board.show_my_score()
+                Menu().show_score(self.mode,self.Score)
+                print('test')
                 pygame.quit()
                 break
             for event in pygame.event.get():  # 게임진행중 - event는 키보드 누를떄 특정 동작 수할떄 발생

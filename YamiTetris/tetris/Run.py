@@ -13,7 +13,6 @@ while running:
     menu.run()
 
     if menu.Mode == 1:
-
         if __name__ == "__main__":
             Tetris().run()
 

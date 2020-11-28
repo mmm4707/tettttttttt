@@ -36,6 +36,9 @@ class Tetris:
         self.board = Board(self.screen, self.mode)
         self.music_on_off = True
         self.check_reset = True
+        self.Id=0
+        self.Score=0
+
 
     #각 키를 누를떄 실행되는 method
     def handle_key(self, event_key, mode):
@@ -86,6 +89,10 @@ class Tetris:
                 #pygame.mixer.music.play(-1, 0.0)  ## 수정 필요 오류 나서 일단 빼둠
 
             if self.board.game_over():
+                self.Score=self.board.score
+                self.board.show_my_score()
+                Menu().show_score(self.mode,self.Score)
+                print('test')
                 pygame.quit()
                 break
 
@@ -122,7 +129,6 @@ class Mini:
         self.block_size = 35*resize  # 블럭 하나당 크기
         self.display_width = (self.width+4)*self.block_size
         self.display_height = self.height*self.block_size
-
         self.screen = pygame.display.set_mode((self.display_width,  self.display_height),RESIZABLE)
         self.clock = pygame.time.Clock()
         self.board = Board(self.screen, 'mini')
@@ -195,6 +201,10 @@ class Mini:
                 #pygame.mixer.music.play(-1, 0.0)  ## 수정 필요 오류 나서 일단 빼둠
 
             if self.board.game_over():
+                self.Score=self.board.score
+                self.board.show_my_score()
+                Menu().show_score(self.mode,self.Score)
+                print('test')
                 pygame.quit()
                 break
 
