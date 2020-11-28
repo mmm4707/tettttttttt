@@ -57,7 +57,6 @@ class Board:
 
 
 
-
     def level(self):
         return self.level
 
@@ -106,10 +105,6 @@ class Board:
                     self.board[y+self.piece_y][x+self.piece_x] = block
         self.nextpiece(self.mode)
         self.score += self.level
-
-        #스킬 점수 설정 , 제거해야할 부분
-        '''if self.skill < 100:
-            self.skill += 2'''
 
 
 #충돌 관련
@@ -238,7 +233,7 @@ class Board:
 
 
             #콤보 *level * 10 만큼 점수 올려주기
-            self.score=self.level*self.combo*10
+            self.score += self.level*self.combo*10
 
             #level * 10 만큼 점수 올려주기
             self.score += 10 * self.level
