@@ -107,19 +107,18 @@ class Tetris:
                     screen = pygame.display.set_mode((event.w, event.h),pygame.RESIZABLE )
 
             # self.screen.fill(BLACK)
-            self.board.draw(self)
+            self.board.draw(self, self.mode)
             pygame.display.update() #이게 나오면 구현 시
             self.clock.tick(30) # 초당 프레임 관련
 
 
 class Mini:
-
     #생성자
     def __init__(self):
         self.mode = 'mini'
         self.width = 5  # 가로 칸수
-        self.height = 15  # 세로 칸 수
-        self.block_size = 35*resize  # 블럭 하나당 크기
+        self.heik_ght = 15  # 세로 칸 수
+        self.blocsize = 35*resize  # 블럭 하나당 크기
         self.display_width = (self.width+4)*self.block_size
         self.display_height = self.height*self.block_size
 
@@ -132,7 +131,7 @@ class Mini:
     #각 키를 누를떄 실행되는 method
     def handle_key(self, event_key, mode):
         if event_key == K_DOWN or event_key == K_s:
-            self.board.drop_piece()
+            self.board.drop_piece(self.mode)
         elif event_key == K_LEFT or event_key == K_a:
             self.board.move_piece(dx=-1, dy=0)
         elif event_key == K_RIGHT or event_key == K_d:
@@ -219,6 +218,6 @@ class Mini:
 
 
             # self.screen.fill(BLACK)
-            self.board.draw(self)
+            self.board.draw(self, self.mode)
             pygame.display.update() #이게 나오면 구현 시
             self.clock.tick(30) # 초당 프레임 관련

@@ -2,7 +2,7 @@ import pygame, sys, time
 
 from pygame.locals import *
 
-from Two_Board import *
+from Board import *
 
 #            R    G    B
 
@@ -34,24 +34,25 @@ class Twohands:
     # 생성자
 
     def __init__(self):
-
-        self.screen = pygame.display.set_mode((700, 450))  # 고정 크기의 창을 만들어준다.
-
+        self.mode = 'two'
+        self.width = 20  # 가로 칸수
+        self.height = 18  # 세로 칸 수
+        self.block_size = 25*resize  # 블럭 하나당 크기
+        self.display_width = (self.width+6)*self.block_size
+        self.display_height = self.height*self.block_size
+        self.screen = pygame.display.set_mode((self.display_width, self.display_height),RESIZABLE)  # 고정 크기의 창을 만들어준다.
         self.clock = pygame.time.Clock()
-
-        self.board = Two_Board(self.screen)
-
+        self.board = Board(self.screen, self.mode)
         self.music_on_off = True
-
         self.check_reset = True
 
     # 각 키를 누를떄 실행되는 method
 
-    def handle_key(self, event_key):
+    def handle_key(self, event_key, mode):
 
         if event_key == K_s:
 
-            self.board.drop_piece()
+            self.board.drop_piece(self.mode)
 
         elif event_key == K_a:
 
@@ -67,7 +68,7 @@ class Twohands:
 
         elif event_key == K_e:
 
-            self.board.full_drop_piece()
+            self.board.full_drop_piece(self.mode)
 
         if event_key == K_DOWN:
 
@@ -161,9 +162,9 @@ class Twohands:
 
         self.board.level_speed()  # 추가 - level1에서 속도
 
-        start_sound = pygame.mixer.Sound('assets/sounds/Start.wav')
+        '''start_sound = pygame.mixer.Sound('assets/sounds/Start.wav')
 
-        start_sound.play()
+        start_sound.play()'''
 
         # bgm = pygame.mixer.music.load('assets/sounds/bensound-ukulele.mp3')  # (기존 파일은 소리가 안남) 다른 mp3 파일은 소리 난다. 게임진행 bgm변경
 
@@ -198,17 +199,17 @@ class Twohands:
 
                 elif event.type == KEYDOWN:  # 키보드를 누르면
 
-                    self.handle_key(event.key)  # handle 메소드 실행
+                    self.handle_key(event.key, self.mode)  # handle 메소드 실행
 
                 elif event.type == pygame.USEREVENT:
 
-                    self.board.drop_piece()
+                    self.board.drop_piece(self.mode)
 
                     self.board.drop_piece2()
 
             # self.screen.fill(BLACK)
 
-            self.board.draw()
+            self.board.draw(self, self.mode)
 
             pygame.display.update()  # 이게 나오면 구현 시
 

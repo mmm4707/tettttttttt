@@ -40,15 +40,24 @@ class Board:
         if(mode=='mini'):
             self.width = 5  #맵의 좌에서 우로 사이즈
             self.height = 15 #맵 위에서 아래로 사이즈
-            self.block_size = 35*resize  #바꾸면 맵 블럭크기 변경
+            self.block_size = 35*resize  #바꾸면 맵 블럭크  기 변경
+        if(mode=='two'):
+            self.width = 20  # 맵의 좌에서 우로 사이즈
+            self.height = 18  # 맵 위에서 아래로 사이즈
+            self.block_size = 25  # 바꾸면 맵 블럭크기 변g경
         self.init_board() # 보드 생성 메소드 실행
         self.generate_piece(self.mode) # 블럭 생성 메소드 실행
+        if(mode=='two'):
+            self.generate_piece2()
         #self.database = Database()
 
         # 상태 줄 정보
         self.start_status_bar_x = self.width * self.block_size
         self.start_status_bar_y = 0
-        self.status_width = self.block_size * 4
+        if mode=='two':
+            self.status_width = self.block_size * 6
+        else:
+            self.status_width = self.block_size * 4
         self.status_height = self.height * self.block_size
         self.font_size_small = 14
         self.font_size_middle = 16
@@ -78,18 +87,36 @@ class Board:
     def generate_piece(self, mode):
         self.piece = Piece()
         self.next_piece = Piece()
+
         if(mode=='basic'):
             self.piece_x, self.piece_y = 3, -2
+
+        if(mode=='basic' or 'two'):
+            self.piece_x, self.piece_y = 3, -2
+
         if(mode=='mini'):
-            self.piece_x, self.piece_y = 0, 0
+            self.piece_x, self.piece_y = 0, -2
+
+    def generate_piece2(self):
+        self.piece2 = Piece()
+        self.next_piece2 = Piece()
+        self.piece_x2, self.piece_y2 = 12, -2
 
     def nextpiece(self, mode):  #다음에 나올 블럭 그려주기
         self.piece = self.next_piece
         self.next_piece = Piece()
+
         if(mode=='basic'):
             self.piece_x, self.piece_y = 3, -2
+        if(mode=='basic' or 'two'):
+            self.piece_x, self.piece_y = 3, -2
         if(mode=='mini'):
-            self.piece_x, self.piece_y = 0, 0
+            self.piece_x, self.piece_y = 0, -2
+
+    def nextpiece2(self):  # 다음에 나올 블럭 그려주
+        self.piece2 = self.next_piece2
+        self.next_piece2 = Piece()
+        self.piece_x2, self.piece_y2 = 12, -2
 
     def absorb_piece(self, mode):
         for y, row in enumerate(self.piece):
@@ -99,9 +126,34 @@ class Board:
         self.nextpiece(self.mode)
         self.score += self.level
 
+    def absorb_piece2(self):
+        for y, row in enumerate(self.piece2):
+            for x, block in enumerate(row):
+                if block:
+                    self.board[y + self.piece_y2][x + self.piece_x2] = block
+        self.nextpiece2()
+        self.score += self.level
+
+
+        #스킬 점수 설정 , 제거해야할 부분
+        '''if self.skill < 100:
+            self.skill += 2'''
+
 
 #충돌 관련
     def block_collide_with_board(self, x, y):
+        #왼쪽 끝점 기준 (0,0)
+        if x < 0:               # 왼쪽 벽
+            return Board.COLLIDE_ERROR['left_wall']
+        elif x >= self.width:   #가로 길이 넘어가면
+            return Board.COLLIDE_ERROR['right_wall']
+        elif y >= self.height:  #세로 기리 넘어가면
+            return Board.COLLIDE_ERROR['bottom']
+        elif self.board[y][x]: #블럭이 다 쌓이면 ??
+            return Board.COLLIDE_ERROR['overlap']
+        return Board.COLLIDE_ERROR['no_error']
+
+    def block_collide_with_Two_Baord2(self, x, y):
         #왼쪽 끝점 기준 (0,0)
         if x < 0:               # 왼쪽 벽
             return Board.COLLIDE_ERROR['left_wall']
@@ -122,6 +174,16 @@ class Board:
                         return collide
         return Board.COLLIDE_ERROR['no_error']
 
+
+    def collide_with_Two_Board2(self, dx, dy):
+        for y, row in enumerate(self.piece2):
+            for x, block in enumerate(row):
+                if block:
+                    collide = self.block_collide_with_Two_Baord2(x=x + dx, y=y + dy)
+                    if collide:
+                        return collide
+        return Board.COLLIDE_ERROR['no_error']
+
 #블럭이 움직일 수 있는 경우 판단
     def can_move_piece(self, dx, dy):
         _dx = self.piece_x + dx
@@ -130,9 +192,19 @@ class Board:
             return False
         return True
 
+    def can_move_piece2(self, dx, dy):
+        _dx = self.piece_x2 + dx
+        _dy = self.piece_y2 + dy
+        if self.collide_with_Two_Board2(dx=_dx, dy=_dy):
+            return False
+        return True
+
 #아래로 한칸 내려가는 것
     def can_drop_piece(self):
         return self.can_move_piece(dx=0, dy=1)
+
+    def can_drop_piece2(self):
+        return self.can_move_piece2(dx=0, dy=1)
 
 #블럭 회전 시도
     def try_rotate_piece(self, clockwise=True):
@@ -161,12 +233,50 @@ class Board:
                 self.piece.rotate(not clockwise)
         else:
             self.piece.rotate(not clockwise)
+
+
+    def try_rotate_piece2(self, clockwise=True):
+        self.piece2.rotate(clockwise)
+        collide = self.collide_with_Two_Board2(dx=self.piece_x2, dy=self.piece_y2)
+        # 충돌하지 않는 다면 패스
+        if not collide:
+            pass
+
+        # 왼쪽벽과 충돌하는 경우
+        elif collide == Board.COLLIDE_ERROR['left_wall']:
+            if self.can_move_piece2(dx=1, dy=0):
+                self.move_piece2(dx=1, dy=0)
+            elif self.can_move_piece2(dx=2, dy=0):
+                self.move_piece2(dx=2, dy=0)
+            else:
+                self.piece2.rotate(not clockwise)
+
+            # 오른쪽 벽과 충돌하는 경우
+        elif collide == Board.COLLIDE_ERROR['right_wall']:
+            if self.can_move_piece2(dx=-1, dy=0):
+                self.move_piece2(dx=-1, dy=0)
+            elif self.can_move_piece2(dx=-2, dy=0):
+                self.move_piece2(dx=-2, dy=0)
+            else:
+                self.piece2.rotate(not clockwise)
+
+        else:
+            self.piece2.rotate(not clockwise)
+
 #블럭 움직이기
     def move_piece(self, dx, dy):
         #만약 움직이는 가능하다면
         if self.can_move_piece(dx, dy):
             self.piece_x += dx
             self.piece_y += dy
+
+    def move_piece2(self, dx, dy):
+
+        if self.can_move_piece2(dx, dy):
+            self.piece_x2 += dx
+
+            self.piece_y2 += dy
+
 #블럭 내리기
     def drop_piece(self, mode):
         if self.can_drop_piece():
@@ -175,16 +285,32 @@ class Board:
             self.absorb_piece(self.mode)
             self.delete_lines()
 
+    def drop_piece2(self):
+        if self.can_drop_piece2():
+            self.move_piece2(dx=0, dy=1)
+        else:
+            self.absorb_piece2()
+            self.delete_lines()
+
+
 # 블럭 완전히 밑으로 내리기(내릴 수 없을떄 까지)
     def full_drop_piece(self, mode):
         while self.can_drop_piece():
             self.drop_piece(self.mode)
         self.drop_piece(self.mode)
 
+    def full_drop_piece2(self):
+        while self.can_drop_piece2():
+            self.drop_piece2()
+        self.drop_piece2()
+
+
 #블럭 회전 시키기
     def rotate_piece(self, clockwise=True):
         self.try_rotate_piece(clockwise)
 
+    def rotate_piece2(self, clockwise=True):
+        self.try_rotate_piece2(clockwise)
 
     def pos_to_pixel(self, x, y):
         return self.block_size*x, self.block_size*(y)
@@ -273,6 +399,24 @@ class Board:
                         pygame.draw.rect(self.screen, BLACK,
                                         (x_pix, y_pix, self.block_size, self.block_size), 1)
 
+    def draw_blocks2(self, array2d, color=WHITE, dx=0, dy=0):
+        for y, row in enumerate(array2d):
+            y += dy
+            if y >= 0 and y < self.height:
+                for x, block in enumerate(row):
+                    if block:
+                        x += dx
+                        x_pix, y_pix = self.pos_to_pixel(x, y)
+                        tmp = 1
+                        while self.can_move_piece2(0, tmp):
+                            tmp += 1
+                        x_s, y_s = self.pos_to_pixel(x, y+tmp-1)
+                        pygame.draw.rect(self.screen, self.piece2.T_COLOR[block-1],
+                                        (x_pix, y_pix, self.block_size, self.block_size))
+                        pygame.draw.rect(self.screen, BLACK,
+                                        (x_pix, y_pix, self.block_size, self.block_size), 1)
+
+
     def draw_shadow(self, array2d, dx, dy):  # 그림자 오류 디버깅     #########
         for y, row in enumerate(array2d):
             y += dy
@@ -289,6 +433,23 @@ class Board:
                         pygame.draw.rect(self.screen, BLACK,
                                          (x_s, y_s, self.block_size, self.block_size), 1)
 
+    def draw_shadow2(self, array2d, dx, dy):  # 그림자 오류 디버깅     #########
+        for y, row in enumerate(array2d):
+            y += dy
+            if y >= 0 and y < self.height:
+                for x, block in enumerate(row):
+                    x += dx
+                    if block:
+                        tmp = 1
+                        while self.can_move_piece2(0, tmp):
+                            tmp += 1
+                        x_s, y_s = self.pos_to_pixel(x, y + tmp - 1)
+                        pygame.draw.rect(self.screen, self.piece2.T_COLOR[7],
+                                         (x_s, y_s, self.block_size, self.block_size))
+                        pygame.draw.rect(self.screen, BLACK,
+                                         (x_s, y_s, self.block_size, self.block_size), 1)
+
+
     #다음 블럭 모양 만들어 주기 ?
     def draw_next_piece(self, array2d, color=WHITE):
         for y, row in enumerate(array2d):
@@ -298,9 +459,18 @@ class Board:
                     pygame.draw.rect(self.screen, self.piece.T_COLOR[block-1],(x_pix+self.start_status_bar_x,   y_pix+self.block_size*2, self.block_size * 0.5, self.block_size * 0.5))
                     pygame.draw.rect(self.screen, BLACK, (x_pix+self.start_status_bar_x,   y_pix+self.block_size*2, self.block_size * 0.5, self.block_size * 0.5),1)
 
+    def draw_next_piece2(self, array2d, color=WHITE):
+        for y, row in enumerate(array2d):
+            for x, block in enumerate(row):
+                if block:
+                    x_pix, y_pix = self.pos_to_pixel_next(x,y)
+                    pygame.draw.rect(self.screen, self.piece2.T_COLOR[block-1],(x_pix+self.start_status_bar_x+50,   y_pix+self.block_size*2, self.block_size * 0.5, self.block_size * 0.5))
+                    pygame.draw.rect(self.screen, BLACK, (x_pix+self.start_status_bar_x+50,   y_pix+self.block_size*2, self.block_size * 0.5, self.block_size * 0.5),1)
+
+
 
 #보드 내 필요한 내용 들 넣어주기
-    def draw(self,tetris):
+    def draw(self,tetris, mode):
         now = datetime.datetime.now()
         nowTime = now.strftime('%H:%M:%S')
         self.screen.fill(BLACK)
@@ -313,11 +483,21 @@ class Board:
                  (x_pix, y_pix, self.block_size, self.block_size),1)
 
         self.draw_shadow(self.piece, dx = self.piece_x, dy=self.piece_y) #그림자 기능 추가
+        self.draw_blocks(self.piece, dx = self.piece_x, dy=self.piece_y)
+
+        if self.mode=='two':
+            self.draw_shadow2(self.piece2, dx=self.piece_x2, dy=self.piece_y2)  # 그림자 기능 추가
         self.draw_blocks(self.piece, dx=self.piece_x, dy=self.piece_y)
+
+        if self.mode=='two':
+            self.draw_blocks2(self.piece2, dx=self.piece_x2, dy=self.piece_y2)
+
         self.draw_blocks(self.board)
         pygame.draw.rect(self.screen, WHITE, Rect(self.start_status_bar_x, self.start_status_bar_y,self.status_width,self.status_height))
 
         self.draw_next_piece(self.next_piece)
+        if self.mode=='two':
+            self.draw_next_piece2(self.next_piece2)
 
 
         next_text = pygame.font.Font('assets/Roboto-Bold.ttf', self.font_size_big*resize).render('NEXT', True, BLACK)

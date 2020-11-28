@@ -1,4 +1,4 @@
-import pygame , sys, datetime, time
+'''import pygame , sys, datetime, time
 
 from pygame.locals import *
 
@@ -33,7 +33,6 @@ class Two_Board:
                      'bottom': 3, 'overlap': 4}
 
     def __init__(self, screen):
-
         self.screen = screen
 
         self.width = 10*2  # 맵의 좌에서 우로 사이즈
@@ -804,4 +803,4 @@ class Two_Board:
         self.screen.blit(textSurfaceObj2, textRectObj2)
 
         pygame.display.update()
-
+'''
