@@ -5,7 +5,7 @@ class Database:
     def __init__(self):
         self.score_db = pymysql.connect(
         user = 'yutan0565',
-        passwd = '12345678', # 데이터 서버 비밀번호는 나만 알음...  #요거 문제 해겨 하긴 해야함
+        passwd = 'tetris1234', # 데이터 서버 비밀번호는 나만 알음...  #요거 문제 해겨 하긴 해야함
         host = 'db-tetris.cn66pqzgn9vt.ap-northeast-2.rds.amazonaws.com',
         db = 'TetrisDB',
         charset = 'utf8'

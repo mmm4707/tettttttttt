@@ -199,19 +199,6 @@ class AITetris:
                 pygame.quit()
                 break
 
-            if self.board_for_ai.game_over() or self.board_for_ai.score  < self.ai_score:
-                self.screen.fill(BLACK) #게임 오버 배경 색
-                #pygame.mixer.music.stop() #음악 멈추기     오류나서 일단 뺴
-                #pygame.mixer.music.stop() #음악 멈추기     오류나서 일단 뺴
-                self.board_for_ai.GameOver()  #게임 오버 보드 불러오기
-                self.board_for_ai.show_my_score()
-
-
-                #점수 저장 및 데이터 베이스에 저장 기능 추가하기
-
-                self.check_reset = True
-                self.board_for_ai.init_board()
-
 
             Ai.choose(self.ai_board, self.stone, self.next_stone, self.stone_x, weights, self)
 
@@ -228,9 +215,7 @@ class AITetris:
                     self.handle_key(event.key) #handle 메소드 실행
                 elif event.type == pygame.USEREVENT :
                     self.board_for_ai.drop_piece()
-                    self.board_for_ai.drop_piece()
                 elif event.type == pygame.USEREVENT + 1:
-
                     self.ai_drop(False)
 
             self.board_for_ai.draw(self)

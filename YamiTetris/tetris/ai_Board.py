@@ -287,8 +287,6 @@ class AIBoard:
             pygame.time.set_timer(pygame.USEREVENT + 1, (AI_start_speed - 20 * self.level))
 
 
-
-
     def game_over(self):
         return sum(self.board[0]) > 0 or sum(self.board[1]) > 0
 
@@ -403,7 +401,7 @@ class AIBoard:
                  (x_pix, y_pix, self.block_size, self.block_size),1)
 
         self.draw_shadow(self.piece, dx = self.piece_x, dy=self.piece_y) #그림자 기능 추가
-        self.draw_blocks(self.piece, dx=self.piece_x, dy=self.piece_y)
+        self.draw_blocks(self.piece, dx=self.piece_x, dy=self.piece_y-2)
         self.draw_blocks(self.board)
         pygame.draw.rect(self.screen, WHITE, Rect(self.start_status_bar_x, self.start_status_bar_y,
                                                   self.status_width,

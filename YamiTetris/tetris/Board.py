@@ -54,13 +54,6 @@ class Board:
         self.font_size_middle = 16
         self.font_size_big = 18
 
-
-
-
-    def level(self):
-        return self.level
-
-
     def init_board(self):
         self.board = []
         self.score = 0 #시작 점수

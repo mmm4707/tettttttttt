@@ -46,13 +46,10 @@ class Rank():
         twohands_bar_text = fontObj1.render('TwoHands Mode', True, GREEN)
         mini_bar_text = fontObj1.render('Mini Mode', True, GREEN)
 
-        print("1")
+
         original_data = self.database.load_data("original")
-        print("2")
         twohands_data = self.database.load_data("twohands")
-        print("3")
         mini_data = self.database.load_data("mini")
-        print("4")
         print(original_data)
 
         original_1_name = fontObj2.render("#1    "+str(original_data[0]['ID']),True, GREEN)
@@ -132,13 +129,6 @@ class Rank():
         self.screen.blit(mini_5_name, (self.block_size * 20.5, self.block_size * 12))
         self.screen.blit(mini_5_score, (self.block_size * 24.5, self.block_size * 12))
 
-
-
-
-
-
-
-
         pygame.display.update()
 
     #실행하기
@@ -155,7 +145,6 @@ class Rank():
         #bgm = pygame.mixer.music.load('assets/sounds/bensound-ukulele.mp3')  # (기존 파일은 소리가 안남) 다른 mp3 파일은 소리 난다. 게임진행 bgm변경
 
         while True:
-
             for event in pygame.event.get(): #게임진행중 - event는 키보드 누를떄 특정 동작 수할떄 발생
                 if event.type == QUIT: #종류 이벤트가 발생한 경우
                     pygame.quit() #모든 호출 종
@@ -164,9 +153,7 @@ class Rank():
                 elif event.type == VIDEORESIZE:
                     screen = pygame.display.set_mode((event.w, event.h),pygame.RESIZABLE )
 
-
             # self.screen.fill(BLACK)
-
            #이게 나오면 구현 시
 
 
