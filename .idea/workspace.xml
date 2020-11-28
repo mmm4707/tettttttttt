@@ -10,6 +10,7 @@
         <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
         <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
       </path>
+<<<<<<< HEAD
       <path>
         <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
         <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
@@ -20,6 +21,8 @@
         <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
         <item name="GROUP_NODE:up" type="e8cecc67:BranchNodeDescriptor" />
       </path>
+=======
+>>>>>>> 97276a1e9362af5761aa57bd6e315f3330beec18
     </expand>
     <select>
       <path>
@@ -30,6 +33,7 @@
 
         <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
         <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+<<<<<<< HEAD
         <item name="BRANCH:origin/aimode_v2" type="e8cecc67:BranchNodeDescriptor" />
 
         <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
@@ -38,10 +42,13 @@
 
         <item name="BRANCH:master" type="e8cecc67:BranchNodeDescriptor" />
 
+=======
+>>>>>>> 97276a1e9362af5761aa57bd6e315f3330beec18
       </path>
     </select>
   </component>
   <component name="ChangeListManager">
+<<<<<<< HEAD
     <list default="true" id="6dabf8e4-bbae-447d-aecb-6aaca16560a8" name="Default Changelist" comment="">
       <change afterPath="$PROJECT_DIR$/YamiTetris/tetris/Run.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
@@ -56,6 +63,27 @@
     <list default="true" id="b3ee30dc-acd8-4962-8768-2b0bffac3f41" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/YamiTetris/tetris/AITetris.py" beforeDir="false" afterPath="$PROJECT_DIR$/YamiTetris/tetris/AITetris.py" afterDir="false" />
+=======
+    <list default="true" id="b3ee30dc-acd8-4962-8768-2b0bffac3f41" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/2020-2-OSSP-CP--YamiYami_Z_Z-5.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/2020-2-OSSP-CP--YamiYami_Z_Z-5.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2020-11-19__11_53__Default_Changelist_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2020-11-19_오후_11_53_[Default_Changelist]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2020-11-26__6_36__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2020-11-26__6_36__Default_Changelist_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2020-11-26__6_36__Default_Changelist_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2020-11-26__6_36__Default_Changelist_1.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2020-11-26__6_53__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2020-11-26__6_53__Default_Changelist_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2020-11-26__7_28__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2020-11-26__7_28__Default_Changelist_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2020-11-26__7_30__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2020-11-26__7_30__Default_Changelist_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2020-11-26__7_31__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2020-11-26__7_31__Default_Changelist_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2020-11-26__8_35__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2020-11-26__8_35__Default_Changelist_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2020-11-26__8_36__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2020-11-26__8_36__Default_Changelist_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_20__11__27___8_14__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_20__11__27___8_14__Default_Changelist_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/YamiTetris/tetris/AITetris.py" beforeDir="false" afterPath="$PROJECT_DIR$/YamiTetris/tetris/AITetris.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/YamiTetris/tetris/Board.py" beforeDir="false" afterPath="$PROJECT_DIR$/YamiTetris/tetris/Board.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/YamiTetris/tetris/Database.py" beforeDir="false" afterPath="$PROJECT_DIR$/YamiTetris/tetris/Database.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/YamiTetris/tetris/ai_Board.py" beforeDir="false" afterPath="$PROJECT_DIR$/YamiTetris/tetris/ai_Board.py" afterDir="false" />
+>>>>>>> 97276a1e9362af5761aa57bd6e315f3330beec18
       <change beforePath="$PROJECT_DIR$/YamiTetris/tetris/assets/ai_save.txt" beforeDir="false" afterPath="$PROJECT_DIR$/YamiTetris/tetris/assets/ai_save.txt" afterDir="false" />
     </list>
 
@@ -88,12 +116,15 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/YamiTetris/tetris" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RunManager" selected="Python.Run">
     <configuration name="Piece" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
 
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\yutan\Desktop\오픈소스프로젝트\2020-2-OSSP-CP--YamiYami_Z_Z-5\YamiTetris\tetris" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/YamiTetris/tetris" />
     </key>
@@ -112,12 +143,16 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
 <<<<<<< HEAD
+<<<<<<< HEAD
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/YamiTetris/tetris/AITetris.py" />
 =======
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/YamiTetris/tetris/Piece.py" />
 
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/YamiTetris/tetris/Board.py" />
 >>>>>>> upstream/master
+=======
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/YamiTetris/tetris/AITetris.py" />
+>>>>>>> 97276a1e9362af5761aa57bd6e315f3330beec18
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -127,11 +162,15 @@
       <method v="2" />
     </configuration>
 <<<<<<< HEAD
+<<<<<<< HEAD
     <configuration name="Board" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
 =======
     <configuration name="Run" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
     <configuration name="Menu" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
 >>>>>>> upstream/master
+=======
+    <configuration name="Tetris" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+>>>>>>> 97276a1e9362af5761aa57bd6e315f3330beec18
       <module name="2020-2-OSSP-CP--YamiYami_Z_Z-5" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -143,6 +182,7 @@
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
+<<<<<<< HEAD
 <<<<<<< HEAD
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/YamiTetris/tetris/Board.py" />
 =======
@@ -151,6 +191,9 @@
 
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/YamiTetris/tetris/Menu.py" />
 >>>>>>> upstream/master
+=======
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/YamiTetris/tetris/Tetris.py" />
+>>>>>>> 97276a1e9362af5761aa57bd6e315f3330beec18
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -159,7 +202,11 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+<<<<<<< HEAD
     <configuration name="Menu" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+=======
+    <configuration name="ai_Board" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+>>>>>>> 97276a1e9362af5761aa57bd6e315f3330beec18
       <module name="2020-2-OSSP-CP--YamiYami_Z_Z-5" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -171,7 +218,11 @@
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
+<<<<<<< HEAD
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/YamiTetris/tetris/Menu.py" />
+=======
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/YamiTetris/tetris/ai_Board.py" />
+>>>>>>> 97276a1e9362af5761aa57bd6e315f3330beec18
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -180,7 +231,11 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+<<<<<<< HEAD
     <configuration name="Rank" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+=======
+    <configuration name="test (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+>>>>>>> 97276a1e9362af5761aa57bd6e315f3330beec18
       <module name="2020-2-OSSP-CP--YamiYami_Z_Z-5" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -192,7 +247,11 @@
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
+<<<<<<< HEAD
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/YamiTetris/tetris/Rank.py" />
+=======
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/YamiTetris/tetris/test.py" />
+>>>>>>> 97276a1e9362af5761aa57bd6e315f3330beec18
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -201,19 +260,32 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+<<<<<<< HEAD
     <configuration name="Tetris" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+=======
+    <configuration name="test" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+>>>>>>> 97276a1e9362af5761aa57bd6e315f3330beec18
       <module name="2020-2-OSSP-CP--YamiYami_Z_Z-5" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
+<<<<<<< HEAD
       <option name="SDK_HOME" value="$PROJECT_DIR$/venv/bin/python" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/YamiTetris/tetris" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/YamiTetris/tetris/Tetris.py" />
+=======
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/YamiTetris/tetris/logs" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="C:\Users\yutan\Desktop\오픈소스프로젝트\2020-2-OSSP-CP--YamiYami_Z_Z-5\YamiTetris\tetris\test.py" />
+>>>>>>> 97276a1e9362af5761aa57bd6e315f3330beec18
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -224,6 +296,7 @@
     </configuration>
     <recent_temporary>
       <list>
+<<<<<<< HEAD
 <<<<<<< HEAD
         <item itemvalue="Python.AITetris" />
 =======
@@ -237,6 +310,13 @@
         <item itemvalue="Python.Rank" />
         <item itemvalue="Python.Board" />
         <item itemvalue="Python.Menu" />
+=======
+        <item itemvalue="Python.AITetris" />
+        <item itemvalue="Python.ai_Board" />
+        <item itemvalue="Python.Tetris" />
+        <item itemvalue="Python.test (1)" />
+        <item itemvalue="Python.test" />
+>>>>>>> 97276a1e9362af5761aa57bd6e315f3330beec18
       </list>
     </recent_temporary>
   </component>
@@ -256,6 +336,7 @@
       <map>
         <entry key="MAIN">
           <value>
+<<<<<<< HEAD
             <State>
               <option name="FILTERS">
                 <map>
@@ -277,6 +358,9 @@
                 </map>
               </option>
             </State>
+=======
+            <State />
+>>>>>>> 97276a1e9362af5761aa57bd6e315f3330beec18
           </value>
         </entry>
       </map>
@@ -338,6 +422,7 @@
     <option name="LAST_COMMIT_MESSAGE" value="middle" />
   </component>
   <component name="WindowStateProjectService">
+<<<<<<< HEAD
     <state width="1086" height="260" key="GridCell.Tab.0.bottom" timestamp="1606563663005">
       <screen x="65" y="24" width="1855" height="926" />
     </state>
@@ -361,6 +446,35 @@
     </state>
     <state width="1515" height="67" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1606391133640" />
     <state width="1086" height="260" key="GridCell.Tab.0.right/65.24.1855.926@65.24.1855.926" timestamp="1606563663004" />
+=======
+    <state x="549" y="167" key="FileChooserDialogImpl" timestamp="1606488107167">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1606488107167" />
+    <state width="1515" height="214" key="GridCell.Tab.0.bottom" timestamp="1606562956313">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1515" height="214" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1606562956313" />
+    <state width="1832" height="587" key="GridCell.Tab.0.bottom/65.24.1855.926@65.24.1855.926" timestamp="1606478499932" />
+    <state width="879" height="143" key="GridCell.Tab.0.bottom/65.24.902.926@65.24.902.926" timestamp="1606412800696" />
+    <state width="1515" height="214" key="GridCell.Tab.0.center" timestamp="1606562956312">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1515" height="214" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1606562956312" />
+    <state width="1832" height="587" key="GridCell.Tab.0.center/65.24.1855.926@65.24.1855.926" timestamp="1606478499931" />
+    <state width="879" height="143" key="GridCell.Tab.0.center/65.24.902.926@65.24.902.926" timestamp="1606412800696" />
+    <state width="1515" height="214" key="GridCell.Tab.0.left" timestamp="1606562956311">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1515" height="214" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1606562956311" />
+    <state width="1832" height="587" key="GridCell.Tab.0.left/65.24.1855.926@65.24.1855.926" timestamp="1606478499931" />
+    <state width="879" height="143" key="GridCell.Tab.0.left/65.24.902.926@65.24.902.926" timestamp="1606412800661" />
+    <state width="1515" height="214" key="GridCell.Tab.0.right" timestamp="1606562956312">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1515" height="214" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1606562956312" />
+    <state width="1832" height="587" key="GridCell.Tab.0.right/65.24.1855.926@65.24.1855.926" timestamp="1606478499931" />
+>>>>>>> 97276a1e9362af5761aa57bd6e315f3330beec18
     <state width="879" height="143" key="GridCell.Tab.0.right/65.24.902.926@65.24.902.926" timestamp="1606412800696" />
     <state x="581" y="325" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1606390951040">
       <screen x="0" y="0" width="1536" height="824" />
@@ -388,7 +502,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/YamiTetris/tetris/Board.py</url>
-          <line>438</line>
+          <line>428</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
       </breakpoints>
