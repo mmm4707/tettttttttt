@@ -30,13 +30,19 @@ class Board:
     #충돌에러
     COLLIDE_ERROR = {'no_error' : 0, 'right_wall':1, 'left_wall':2,'bottom':3, 'overlap':4}
 
-    def __init__(self, screen):
+    def __init__(self, screen, mode):
         self.screen = screen
-        self.width = 10  #맵의 좌에서 우로 사이즈
-        self.height = 18 #맵 위에서 아래로 사이즈
-        self.block_size = 25*resize  #바꾸면 맵 블럭크기 변경
+        self.mode = mode
+        if (mode=='basic'):
+            self.width = 10  #맵의 좌에서 우로 사이즈
+            self.height = 18 #맵 위에서 아래로 사이즈
+            self.block_size = 25*resize  #바꾸면 맵 블럭크기 변경
+        if(mode=='mini'):
+            self.width = 5  #맵의 좌에서 우로 사이즈
+            self.height = 15 #맵 위에서 아래로 사이즈
+            self.block_size = 35*resize  #바꾸면 맵 블럭크기 변경
         self.init_board() # 보드 생성 메소드 실행
-        self.generate_piece() # 블럭 생성 메소드 실행
+        self.generate_piece(self.mode) # 블럭 생성 메소드 실행
         #self.database = Database()
 
         # 상태 줄 정보
@@ -47,6 +53,8 @@ class Board:
         self.font_size_small = 14
         self.font_size_middle = 16
         self.font_size_big = 18
+
+
 
 
 
@@ -75,28 +83,33 @@ class Board:
         for _ in range(self.height):
             self.board.append([0]*self.width)
 
-    def generate_piece(self):
+    def generate_piece(self, mode):
         self.piece = Piece()
         self.next_piece = Piece()
-        self.piece_x, self.piece_y = 3, 0
+        if(mode=='basic'):
+            self.piece_x, self.piece_y = 3, 0
+        if(mode=='mini'):
+            self.piece_x, self.piece_y = 0, 0
 
-    def nextpiece(self):  #다음에 나올 블럭 그려주기
+    def nextpiece(self, mode):  #다음에 나올 블럭 그려주기
         self.piece = self.next_piece
         self.next_piece = Piece()
-        self.piece_x, self.piece_y = 3, 0
+        if(mode=='basic'):
+            self.piece_x, self.piece_y = 3, 0
+        if(mode=='mini'):
+            self.piece_x, self.piece_y = 0, 0
 
-    def absorb_piece(self):
+    def absorb_piece(self, mode):
         for y, row in enumerate(self.piece):
             for x, block in enumerate(row):
                 if block:
                     self.board[y+self.piece_y][x+self.piece_x] = block
-
-        self.nextpiece()
+        self.nextpiece(self.mode)
         self.score += self.level
 
         #스킬 점수 설정 , 제거해야할 부분
-        if self.skill < 100:
-            self.skill += 2
+        '''if self.skill < 100:
+            self.skill += 2'''
 
 
 #충돌 관련
@@ -167,18 +180,18 @@ class Board:
             self.piece_x += dx
             self.piece_y += dy
 #블럭 내리기
-    def drop_piece(self):
+    def drop_piece(self, mode):
         if self.can_drop_piece():
             self.move_piece(dx=0, dy=1)
         else:
-            self.absorb_piece()
+            self.absorb_piece(self.mode)
             self.delete_lines()
 
 # 블럭 완전히 밑으로 내리기(내릴 수 없을떄 까지)
-    def full_drop_piece(self):
+    def full_drop_piece(self, mode):
         while self.can_drop_piece():
-            self.drop_piece()
-        self.drop_piece()
+            self.drop_piece(self.mode)
+        self.drop_piece(self.mode)
 
 #블럭 회전 시키기
     def rotate_piece(self, clockwise=True):
@@ -212,8 +225,8 @@ class Board:
         remove = [y for y, row in enumerate(self.board) if all(row)]
         for y in remove:
             #라인 제거 할떄 소리
-            line_sound = pygame.mixer.Sound("assets/sounds/Line_Clear.wav")
-            line_sound.play()
+            '''line_sound = pygame.mixer.Sound("assets/sounds/Line_Clear.wav")
+            line_sound.play()'''
             #라인 삭제 실행
             self.delete_line(y)
 
@@ -414,6 +427,3 @@ class Board:
 
     def save_score(self, game_mode, ID):
         self.database.add_data(game_mode, ID, self.score)
-
-
-

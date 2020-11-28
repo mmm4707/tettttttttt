@@ -1,7 +1,6 @@
 import pygame, sys, time
 from pygame.locals import *
 from Board import *
-from mini_Board import *
 
 
 
@@ -26,6 +25,7 @@ class Tetris:
 
     #생성자
     def __init__(self):
+        self.mode = 'basic'
         self.width = 10  # 가로 칸수
         self.height = 18  # 세로 칸 수
         self.block_size = 25*resize  # 블럭 하나당 크기
@@ -33,15 +33,14 @@ class Tetris:
         self.display_height = self.height*self.block_size
         self.screen = pygame.display.set_mode((self.display_width,  self.display_height),RESIZABLE)
         self.clock = pygame.time.Clock()
-        self.board = Board(self.screen)
+        self.board = Board(self.screen, self.mode)
         self.music_on_off = True
         self.check_reset = True
-        self.game_mode = "original"
 
     #각 키를 누를떄 실행되는 method
-    def handle_key(self, event_key):
+    def handle_key(self, event_key, mode):
         if event_key == K_DOWN or event_key == K_s:
-            self.board.drop_piece()
+            self.board.drop_piece(self.mode)
         elif event_key == K_LEFT or event_key == K_a:
             self.board.move_piece(dx=-1, dy=0)
         elif event_key == K_RIGHT or event_key == K_d:
@@ -49,7 +48,7 @@ class Tetris:
         elif event_key == K_UP or event_key == K_w:
             self.board.rotate_piece()
         elif event_key == K_SPACE:
-            self.board.full_drop_piece()
+            self.board.full_drop_piece(self.mode)
         elif event_key == K_q: #스킬 부분
             self.board.ultimate()
         elif event_key == K_m: # 소리 설정
@@ -100,9 +99,9 @@ class Tetris:
                     self.board.pause()
                     #pygame.mixer.music.play(-1, 0.0)
                 elif event.type == KEYDOWN: #키보드를 누르면
-                    self.handle_key(event.key) #handle 메소드 실행
+                    self.handle_key(event.key, self.mode) #handle 메소드 실행
                 elif event.type == pygame.USEREVENT:
-                    self.board.drop_piece()
+                    self.board.drop_piece(self.mode)
                 #화면 크기 조절해 보기
                 elif event.type == VIDEORESIZE:
                     screen = pygame.display.set_mode((event.w, event.h),pygame.RESIZABLE )
@@ -117,7 +116,7 @@ class Mini:
 
     #생성자
     def __init__(self):
-
+        self.mode = 'mini'
         self.width = 5  # 가로 칸수
         self.height = 15  # 세로 칸 수
         self.block_size = 35*resize  # 블럭 하나당 크기
@@ -126,12 +125,12 @@ class Mini:
 
         self.screen = pygame.display.set_mode((self.display_width,  self.display_height),RESIZABLE)
         self.clock = pygame.time.Clock()
-        self.board = mini_Board(self.screen)
+        self.board = Board(self.screen, 'mini')
         self.music_on_off = True
         self.check_reset = True
 
     #각 키를 누를떄 실행되는 method
-    def handle_key(self, event_key):
+    def handle_key(self, event_key, mode):
         if event_key == K_DOWN or event_key == K_s:
             self.board.drop_piece()
         elif event_key == K_LEFT or event_key == K_a:
@@ -141,7 +140,7 @@ class Mini:
         elif event_key == K_UP or event_key == K_w:
             self.board.rotate_piece()
         elif event_key == K_SPACE:
-            self.board.full_drop_piece()
+            self.board.full_drop_piece(self.mode)
         elif event_key == K_q: #스킬 부분
             self.board.ultimate()
         elif event_key == K_m: # 소리 설정
@@ -209,9 +208,9 @@ class Mini:
                     self.board.pause()
                     #pygame.mixer.music.play(-1, 0.0)
                 elif event.type == KEYDOWN: #키보드를 누르면
-                    self.handle_key(event.key) #handle 메소드 실행
+                    self.handle_key(event.key, self.mode) #handle 메소드 실행
                 elif event.type == pygame.USEREVENT:
-                    self.board.drop_piece()
+                    self.board.drop_piece(self.mode)
 
                 #화면 크기 조절해 보기
                 elif event.type == VIDEORESIZE:
@@ -223,4 +222,3 @@ class Mini:
             self.board.draw(self)
             pygame.display.update() #이게 나오면 구현 시
             self.clock.tick(30) # 초당 프레임 관련
-
