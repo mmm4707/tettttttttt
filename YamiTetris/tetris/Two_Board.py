@@ -36,9 +36,9 @@ class Two_Board:
 
         self.screen = screen
 
-        self.width = 20  # 맵의 좌에서 우로 사이즈
+        self.width = 10*2  # 맵의 좌에서 우로 사이즈
 
-        self.height = 20  # 맵 위에서 아래로 사이즈
+        self.height = 18  # 맵 위에서 아래로 사이즈
 
         self.block_size = 25  # 바꾸면 맵 블럭크기 변g경
 
@@ -71,7 +71,7 @@ class Two_Board:
 
         self.next_piece = Piece()
 
-        self.piece_x, self.piece_y = 3, 0
+        self.piece_x, self.piece_y = 3, -2
 
     def generate_piece2(self):
 
@@ -79,7 +79,7 @@ class Two_Board:
 
         self.next_piece2 = Piece()
 
-        self.piece_x2, self.piece_y2 = 9, 0
+        self.piece_x2, self.piece_y2 = 9, -2
 
     def nextpiece(self):  # 다음에 나올 블럭 그려주
 
@@ -87,7 +87,7 @@ class Two_Board:
 
         self.next_piece = Piece()
 
-        self.piece_x, self.piece_y = 3, 0
+        self.piece_x, self.piece_y = 3, -2
 
     def nextpiece2(self):  # 다음에 나올 블럭 그려주
 
@@ -95,7 +95,7 @@ class Two_Board:
 
         self.next_piece2 = Piece()
 
-        self.piece_x2, self.piece_y2 = 9, 0
+        self.piece_x2, self.piece_y2 = 9, -2
 
     def absorb_piece(self):
 

@@ -122,7 +122,7 @@ class AIBoard:
     def generate_piece(self):
         self.piece = Piece()
         self.next_piece = Piece()
-        self.piece_x, self.piece_y = 3, 0
+        self.piece_x, self.piece_y = 3, -2
 
 
     def nextpiece(self):  #다음에 나올 블럭 그려주
@@ -401,7 +401,7 @@ class AIBoard:
                  (x_pix, y_pix, self.block_size, self.block_size),1)
 
         self.draw_shadow(self.piece, dx = self.piece_x, dy=self.piece_y) #그림자 기능 추가
-        self.draw_blocks(self.piece, dx=self.piece_x, dy=self.piece_y-2)
+        self.draw_blocks(self.piece, dx=self.piece_x, dy=self.piece_y)
         self.draw_blocks(self.board)
         pygame.draw.rect(self.screen, WHITE, Rect(self.start_status_bar_x, self.start_status_bar_y,
                                                   self.status_width,
