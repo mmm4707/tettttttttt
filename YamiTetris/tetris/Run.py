@@ -26,8 +26,8 @@ while running:
         if __name__ == "__main__":
             tetris.run()
 
-    if menu.Mode == 4:
-
+    if menu.Mode == 'ai':
+        tetris.mode='ai'
         weights = [3.39357083734159515, -1.8961941343266449, -5.107694873375318, -3.6314963941589093,
 
                    -2.9262681134021786,

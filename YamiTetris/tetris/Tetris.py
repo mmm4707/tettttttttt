@@ -83,15 +83,17 @@ class Tetris:
             else:
                 pygame.mixer.music.stop()
     #실행하기
-    def run(self):
+    def run(self, weights):
         pygame.init()
         self.board = Board(self.mode)
         icon = pygame.image.load('assets/images/icon.PNG')  # png -> PNG로 수정
         pygame.display.set_icon(icon)
         pygame.display.set_caption('Tetris')
-
         self.board.level_speed() #추가 - level1에서 속도
 
+
+        self.gameover =False # ai 관련
+        self.puased= False # ai 관련
         #start_sound = pygame.mixer.Sound('assets/sounds/Start.wav')
         #start_sound.play()
         #bgm = pygame.mixer.music.load('assets/sounds/bensound-ukulele.mp3')  # (기존 파일은 소리가 안남) 다른 mp3 파일은 소리 난다. 게임진행 bgm변경
@@ -104,6 +106,7 @@ class Tetris:
         while True:
 
             if self.check_reset:
+
                 self.check_reset = False
                 #pygame.mixer.music.play(-1, 0.0)  ## 수정 필요 오류 나서 일단 빼둠
 
