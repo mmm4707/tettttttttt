@@ -48,16 +48,9 @@ user_start_speed = 600
 AI_start_speed = 300
 
 
-base_width = 350
-base_height = 450
-
-cell_size =   25
-cols =        10
-rows =        18
 
 
-max_speed = 750
-min_speed = 150
+
 
 resize = 1
 
@@ -128,7 +121,7 @@ class AIBoard:
     def nextpiece(self):  #다음에 나올 블럭 그려주
         self.piece = self.next_piece
         self.next_piece = Piece()
-        self.piece_x, self.piece_y = 3, 0
+        self.piece_x, self.piece_y = 3, -2
 
 
     def absorb_piece(self):
@@ -473,7 +466,6 @@ class AIBoard:
         textSurfaceObj2 = fontObj2.render('Press p to continue', True, GREEN)
         textRectObj2 = textSurfaceObj2.get_rect()
         textRectObj2.center = (self.display_width/2, self.start_status_bar_y + self.block_size *11 )
-
         #스크린에 표시
         self.screen.blit(textSurfaceObj, textRectObj)
         self.screen.blit(textSurfaceObj2, textRectObj2)
