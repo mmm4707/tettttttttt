@@ -2,7 +2,6 @@ import pygame
 import pygame_menu
 from Menu import *
 from Tetris import *
-from Twohands import *
 from AITetris import *
 
 import sys
@@ -11,21 +10,24 @@ running=True
 while running:
     menu = Menu()
     menu.run()
-
-    if menu.Mode == 1:
+    tetris=Tetris()
+    print('ok? ')
+    if menu.Mode == 'basic':
+        tetris.mode='basic'
         if __name__ == "__main__":
-            Tetris().run()
+            tetris.run()
 
-    if menu.Mode == 2:
+    if menu.Mode == 'mini':
+        tetris.mode='mini'
         if __name__ == "__main__":
-            Mini().run()
-    if menu.Mode == 3:
-
+            tetris.run()
+    if menu.Mode == 'two':
+        tetris.mode='two'
         if __name__ == "__main__":
-            Twohands().run()
+            tetris.run()
 
-    if menu.Mode == 4:
-
+    if menu.Mode == 'ai':
+        tetris.mode='ai'
         weights = [3.39357083734159515, -1.8961941343266449, -5.107694873375318, -3.6314963941589093,
 
                    -2.9262681134021786,

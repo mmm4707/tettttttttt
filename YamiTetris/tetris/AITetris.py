@@ -186,35 +186,24 @@ class AITetris:
         while True:
 
             if self.check_reset:
-
                 self.board_for_ai.newGame()
-
                 self.ai_init_game()
                 self.check_reset = False
                 #pygame.mixer.music.play(-1, 0.0)  ## 수정 필요 오류 나서 일단 빼둠
-
             #게임 종료시 어떻게 할건가
-
             if self.board_for_ai.game_over() or self.board_for_ai.score  < self.ai_score:
                 pygame.quit()
                 break
-
             if self.board_for_ai.game_over() or self.board_for_ai.score  < self.ai_score:
                 self.screen.fill(BLACK) #게임 오버 배경 색
                 #pygame.mixer.music.stop() #음악 멈추기     오류나서 일단 뺴
                 #pygame.mixer.music.stop() #음악 멈추기     오류나서 일단 뺴
                 self.board_for_ai.GameOver()  #게임 오버 보드 불러오기
                 self.board_for_ai.show_my_score()
-
-
                 #점수 저장 및 데이터 베이스에 저장 기능 추가하기
-
                 self.check_reset = True
                 self.board_for_ai.init_board()
-
-
             Ai.choose(self.ai_board, self.stone, self.next_stone, self.stone_x, weights, self)
-
             for event in pygame.event.get(): #게임진행중 - event는 키보드 누를떄 특정 동작 수할떄 발생
                 if event.type == QUIT: #종류 이벤트가 발생한 경우
                     pygame.quit() #모든 호출 종
