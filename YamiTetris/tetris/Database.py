@@ -23,7 +23,7 @@ class Database:
             sql = "select * from mini_score order by score desc"
         curs.execute(sql)
         data = curs.fetchall() #리스트 안에 딕셔너리가 있는 형태
-
+        curs.close()
         return data
 
     def add_data(self,game_mode,  ID, score):
@@ -37,3 +37,4 @@ class Database:
             sql = "INSERT INTO mini_score (ID, score) VALUES (%s, %s)"
         curs.execute(sql, (ID, score))
         self.score_db.commit()  #서버로 추가 사항 보내기
+        curs.close()

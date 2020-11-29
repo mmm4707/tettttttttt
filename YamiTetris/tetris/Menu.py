@@ -9,8 +9,8 @@ class Menu:
 
     def __init__(self):
         pygame.init()
-        self.surface=pygame.display.set_mode((800,600))
-        self.menu = pygame_menu.Menu(600, 800, 'Yami Tetris', theme=pygame_menu.themes.THEME_BLUE)
+        self.surface=pygame.display.set_mode((600,600))
+        self.menu = pygame_menu.Menu(600, 600, 'Yami Tetris', theme=pygame_menu.themes.THEME_BLUE)
         self.database = Database()
         self.Mode = 0
         self.id=0
@@ -38,6 +38,10 @@ class Menu:
 
         self.menu.clear()
 
+        self.menu.add_label("--Show game--",max_char=0,selectable=False,fontsize=20)
+
+        self.menu.add_vertical_margin(30)
+
         self.menu.add_button('Single mode', self.start_the_game)
 
         self.menu.add_button('MiNi mode', self.start_the_Mini)
@@ -52,6 +56,10 @@ class Menu:
 
         self.menu.clear()
 
+        self.menu.add_label("--Show Rank--", max_char=0, selectable=False, fontsize=20)
+
+        self.menu.add_vertical_margin(30)
+
         self.menu.add_button('Single mode', self.Single_the_rank)
 
         self.menu.add_button('Twohands mode', self.Twohands_the_rank)
@@ -62,10 +70,10 @@ class Menu:
 
 
     def show_score(self ,game_mode,game_score):
-        self.surface=pygame.display.set_mode((800,600))
+        self.surface=pygame.display.set_mode((600,600))
         self.mode=game_mode
         self.score=game_score
-        self.menu.add_button(self.mode, self.show_the_rank)
+        self.menu.add_button(self.mode+' Mode', self.show_the_rank)
         self.menu.add_text_input('ID: ', onreturn=self.save_id)
         self.menu.add_button('Next_game',self.stop)
         self.menu.add_button("Exit",pygame_menu.events.EXIT,align=pygame_menu.locals.ALIGN_RIGHT)
@@ -81,6 +89,9 @@ class Menu:
 
     def Single_the_rank(self):
         self.menu.clear()
+        self.menu.add_label("--Single Rank--", max_char=0, selectable=False, fontsize=20)
+
+        self.menu.add_vertical_margin(30)
         original_data = self.database.load_data("basic")
         original_1_name = str(original_data[0]['ID'])
         original_1_score ='{0:>05s}'.format(str(original_data[0]['score']))
@@ -108,6 +119,9 @@ class Menu:
 
     def Twohands_the_rank(self):
         self.menu.clear()
+        self.menu.add_label("--Two Rank--", max_char=0, selectable=False, fontsize=20)
+
+        self.menu.add_vertical_margin(30)
         twohands_data = self.database.load_data("two")
         original_1_name = str(twohands_data[0]['ID'])
         original_1_score ='{0:>05s}'.format(str(twohands_data[0]['score']))
@@ -134,6 +148,9 @@ class Menu:
 
     def Mini_the_rank(self):
         self.menu.clear()
+        self.menu.add_label("--Mini Rank--", max_char=0, selectable=False, fontsize=20)
+
+        self.menu.add_vertical_margin(30)
         mini_data = self.database.load_data("mini")
         original_1_name = str(mini_data[0]['ID'])
         original_1_score ='{0:>05s}'.format(str(mini_data[0]['score']))
@@ -160,17 +177,17 @@ class Menu:
 
 
     def start_the_game(self):
-        self.Mode = 1
+        self.Mode = 'basic'
 
         self.menu.disable()
 
     def start_the_Mini(self):
-        self.Mode = 2
+        self.Mode = 'mini'
 
         self.menu.disable()
 
     def start_the_Twohands(self):
-        self.Mode = 3
+        self.Mode = 'two'
 
         self.menu.disable()
 

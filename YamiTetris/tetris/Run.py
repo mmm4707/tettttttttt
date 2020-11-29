@@ -12,16 +12,16 @@ while running:
     menu.run()
     tetris=Tetris()
     print('ok? ')
-    if menu.Mode == 1:
+    if menu.Mode == 'basic':
         tetris.mode='basic'
         if __name__ == "__main__":
             tetris.run()
 
-    if menu.Mode == 2:
+    if menu.Mode == 'mini':
         tetris.mode='mini'
         if __name__ == "__main__":
             tetris.run()
-    if menu.Mode == 3:
+    if menu.Mode == 'two':
         tetris.mode='two'
         if __name__ == "__main__":
             tetris.run()
