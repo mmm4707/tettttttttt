@@ -31,8 +31,10 @@ class Board:
     #충돌에러
     COLLIDE_ERROR = {'no_error' : 0, 'right_wall':1, 'left_wall':2,'bottom':3, 'overlap':4}
 
-    def __init__(self, mode):
+    def __init__(self,  mode):
+
         self.mode = mode
+
         if (mode=='basic'):
             self.width = 10  #맵의 좌에서 우로 사이즈
             self.height = 18 #맵 위에서 아래로 사이즈
@@ -47,6 +49,7 @@ class Board:
             self.width = 20  # 맵의 좌에서 우로 사이즈
             self.height = 18  # 맵 위에서 아래로 사이즈
             self.block_size = 25  # 바꾸면 맵 블럭크기 변g경
+
             self.display_width = (self.width + 4) * self.block_size
         if(mode == "ai"):
             self.width = 10  # 맵의 좌에서 우로 사이즈
@@ -56,11 +59,16 @@ class Board:
 
         self.display_height = self.height * self.block_size
         self.screen = pygame.display.set_mode((self.display_width, self.display_height), RESIZABLE)
+
+        self.screen = pygame.display.set_mode((self.display_width, self.display_height), RESIZABLE)
+
+
         self.init_board() # 보드 생성 메소드 실행
         self.generate_piece(self.mode) # 블럭 생성 메소드 실행
         if(mode=='two'):
             self.generate_piece2()
         #self.database = Database()
+
 
         # 상태 줄 정보
         self.start_status_bar_x = self.width * self.block_size

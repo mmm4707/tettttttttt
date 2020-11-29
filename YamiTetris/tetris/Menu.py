@@ -192,7 +192,7 @@ class Menu:
         self.menu.disable()
 
     def start_the_Ai(self):
-        self.Mode = 4
+        self.Mode = 'ai'
 
         self.menu.disable()
 
