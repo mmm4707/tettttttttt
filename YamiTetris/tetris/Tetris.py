@@ -83,7 +83,7 @@ class Tetris:
             else:
                 pygame.mixer.music.stop()
     #실행하기
-    def run(self, weights):
+    def run(self):
         pygame.init()
         self.board = Board(self.mode)
         icon = pygame.image.load('assets/images/icon.PNG')  # png -> PNG로 수정
