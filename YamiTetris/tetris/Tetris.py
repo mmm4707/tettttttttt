@@ -1,6 +1,9 @@
 import pygame, sys, time
 from pygame.locals import *
 from Board import *
+import random
+from ai import Ai
+
 #            R    G    B
 BLACK = (0, 0, 0)
 RED = (225, 13, 27)
@@ -12,10 +15,10 @@ PINK = (242, 64, 235)
 CYON = (70, 230, 210)
 GRAY = (26, 26, 26)
 WHITE = (255, 255, 255)
-
+colors = [BLACK, RED, GREEN, BLUE, ORANGE, YELLOW, PINK, CYON, GRAY]
 # 나중에 사용할 사이즈 조절용 변수임
 resize = 1
-surver = False
+
 
 class Tetris:
 
