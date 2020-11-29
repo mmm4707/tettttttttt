@@ -21,8 +21,7 @@ GRAY = (26, 26, 26)
 WHITE = (255, 255, 255)
 colors = [ BLACK, RED, GREEN, BLUE, ORANGE, YELLOW, PINK, CYON, GRAY]
 
-user_start_speed = 600
-AI_start_speed = 300
+
 
 # 나중에 사용할 사이즈 조절용 변수임
 resize = 1
@@ -34,6 +33,11 @@ class Board:
     def __init__(self,  mode):
 
         self.mode = mode
+        self.user_start_speed = 600
+        self.AI_start_speed = self.user_start_speed/2
+        self.user_per_speed = 40
+        self.AI_per_speed = self.user_per_speed/2
+
 
         if (mode=='basic'):
             self.width = 10  #맵의 좌에서 우로 사이즈
@@ -385,11 +389,11 @@ class Board:
         # 추가 - 레벨별 스피드 조절
     def level_speed(self):
         if self.level <= 9:
-            pygame.time.set_timer(pygame.USEREVENT, (user_start_speed - 40 * self.level))
-            pygame.time.set_timer(pygame.USEREVENT + 1, (AI_start_speed - 20 * self.level))
+            pygame.time.set_timer(pygame.USEREVENT, (self.user_start_speed -  self.user_per_speed * self.level))
+            pygame.time.set_timer(pygame.USEREVENT + 1, (self.AI_start_speed -  self.AI_speed * self.level))
         elif self.level >= 10:
-            pygame.time.set_timer(pygame.USEREVENT, (user_start_speed - 40 * self.level))
-            pygame.time.set_timer(pygame.USEREVENT + 1, (AI_start_speed - 20 * self.level))
+            pygame.time.set_timer(pygame.USEREVENT, (self.user_start_speed -  self.user_per_speed * self.level))
+            pygame.time.set_timer(pygame.USEREVENT + 1, (self.AI_start_speed -  self.AI_speed * self.level))
 
     def game_over(self):
         return sum(self.board[0]) > 0 or sum(self.board[1]) > 0
