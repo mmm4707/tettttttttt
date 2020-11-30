@@ -34,9 +34,9 @@ class Board:
 
         self.mode = mode
         self.user_start_speed = 600
-        self.AI_start_speed = self.user_start_speed/2
+        self.AI_start_speed = int(self.user_start_speed/2)
         self.user_per_speed = 40
-        self.AI_per_speed = self.user_per_speed/2
+        self.AI_per_speed = int(self.user_per_speed/2)
 
 
         if (mode=='basic'):
@@ -390,10 +390,10 @@ class Board:
     def level_speed(self):
         if self.level <= 9:
             pygame.time.set_timer(pygame.USEREVENT, (self.user_start_speed -  self.user_per_speed * self.level))
-            pygame.time.set_timer(pygame.USEREVENT + 1, (self.AI_start_speed -  self.AI_speed * self.level))
+            pygame.time.set_timer(pygame.USEREVENT + 1, (self.AI_start_speed -  self.AI_per_speed * self.level))
         elif self.level >= 10:
             pygame.time.set_timer(pygame.USEREVENT, (self.user_start_speed -  self.user_per_speed * self.level))
-            pygame.time.set_timer(pygame.USEREVENT + 1, (self.AI_start_speed -  self.AI_speed * self.level))
+            pygame.time.set_timer(pygame.USEREVENT + 1, (self.AI_start_speed -  self.AI_per_speed * self.level))
 
     def game_over(self):
         return sum(self.board[0]) > 0 or sum(self.board[1]) > 0
@@ -598,9 +598,9 @@ class Board:
                                                       self.ai_start_status_bar_x + self.status_width,
                                                       self.ai_start_status_bar_y + self.status_height))
 
-            ai_score_text = pygame.font.Font('ai_v2/python3_v/tetris/assets/Roboto-Bold.ttf',
+            ai_score_text = pygame.font.Font('assets/Roboto-Bold.ttf',
                                              self.font_size_big * resize).render('SCORE', True, BLACK)  # 점수 글씨
-            ai_score_value = pygame.font.Font('ai_v2/python3_v/tetris/assets/Roboto-Bold.ttf',
+            ai_score_value = pygame.font.Font('assets/Roboto-Bold.ttf',
                                               self.font_size_middle * resize).render(str(tetris.ai_score), True,
                                                                                      BLACK)  # 점수 표시해주기
 
@@ -615,9 +615,9 @@ class Board:
             self.draw_matrix(tetris.stone, (tetris.stone_x + self.width + (self.status_width / self.block_size),
                                             tetris.stone_y))  # 테트리스 블럭을 그려준다. 블럭의 왼쪽 끝 좌표부터 - 시작 블럭
 
-            computer_said1 = pygame.font.Font('ai_v2/python3_v/tetris/assets/Roboto-Bold.ttf',
+            computer_said1 = pygame.font.Font('assets/Roboto-Bold.ttf',
                                               self.font_size_middle * resize).render("YOU CAN'T", True, BLACK)
-            computer_said2 = pygame.font.Font('ai_v2/python3_v/tetris/assets/Roboto-Bold.ttf',
+            computer_said2 = pygame.font.Font('assets/Roboto-Bold.ttf',
                                               self.font_size_middle * resize).render("DEFEAT ME", True, BLACK)
 
             self.screen.blit(computer_said1, (

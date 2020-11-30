@@ -2,7 +2,7 @@ import pygame
 import pygame_menu
 from Menu import *
 from Tetris import *
-from AITetris import *
+
 
 import sys
 
@@ -47,4 +47,4 @@ while running:
                    17.677262456993276, -4.42668539845469, -6.8954976464473585, 4.481308299774875]  # 21755 lignes
 
         if __name__ == '__main__':
-            AITetris(4).run(weights)
+            tetris.run()
