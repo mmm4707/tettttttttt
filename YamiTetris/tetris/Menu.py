@@ -9,7 +9,6 @@ class Menu:
 
     def __init__(self):
         pygame.init()
-
         self.surface=pygame.display.set_mode((600,600))
         self.menu = pygame_menu.Menu(600, 600, 'Yami Tetris', theme=pygame_menu.themes.THEME_BLUE)
         self.database = Database()
@@ -23,11 +22,13 @@ class Menu:
 
 
         self.menu.add_button('Select mode', self.show_game)
+
         self.menu.add_button('Show Rank', self.show_rank)
         self.menu.add_button('Quit', pygame_menu.events.EXIT)
         self.menu.mainloop(self.surface)
 
     def reset(self):  ## 뒤로 갈때 보여줄 목록들
+        Sound.click.play()
 
         self.menu.clear()
 
@@ -38,6 +39,7 @@ class Menu:
         self.menu.add_button('Quit', pygame_menu.events.EXIT)
 
     def show_game(self):  ## 게임 목록 들어가면 나오는 목록들
+        Sound.click.play()
 
         self.menu.clear()
 
@@ -56,6 +58,7 @@ class Menu:
         self.menu.add_button('back', self.reset)
 
     def show_rank(self):  ## 랭크 들어가면 나오는 목록들기
+        Sound.click.play()
 
         self.menu.clear()
 
@@ -73,6 +76,7 @@ class Menu:
 
 
     def show_score(self ,game_mode,game_score):
+
         self.surface=pygame.display.set_mode((600,600))
         self.mode=game_mode
         self.score=game_score
@@ -87,10 +91,12 @@ class Menu:
         self.database.add_data(self.mode,self.id,int(self.score))
 
     def stop(self):
+        Sound.click.play()
         self.menu.disable()
 
 
     def Single_the_rank(self):
+        Sound.click.play()
         self.menu.clear()
         self.menu.add_label("--Single Rank--", max_char=0, selectable=False, fontsize=20)
 
@@ -121,6 +127,7 @@ class Menu:
 
 
     def Twohands_the_rank(self):
+        Sound.click.play()
         self.menu.clear()
         self.menu.add_label("--Two Rank--", max_char=0, selectable=False, fontsize=20)
 
@@ -150,6 +157,7 @@ class Menu:
         self.menu.add_button('back', self.reset)
 
     def Mini_the_rank(self):
+        Sound.click.play()
         self.menu.clear()
         self.menu.add_label("--Mini Rank--", max_char=0, selectable=False, fontsize=20)
 
@@ -180,36 +188,43 @@ class Menu:
 
 
     def start_the_game(self):
+        Sound.click.play()
         self.Mode = 'basic'
 
         self.menu.disable()
 
     def start_the_Mini(self):
+        Sound.click.play()
         self.Mode = 'mini'
 
         self.menu.disable()
 
     def start_the_Twohands(self):
+        Sound.click.play()
         self.Mode = 'two'
 
         self.menu.disable()
 
     def start_the_Ai(self):
+        Sound.click.play()
         self.Mode = 'ai'
 
         self.menu.disable()
 
     def show_the_rank(self):
+        Sound.click.play()
         ## 일반게임 랭크 보여주기
 
         pass
 
     def show_the_Mini(self):
+        Sound.click.play()
         ## 미니 게임 랭크 보여주기
 
         pass
 
     def show_the_Twohands(self):
+        Sound.click.play()
         ## 투핸드 모드 랭크 보여주기
 
         pass

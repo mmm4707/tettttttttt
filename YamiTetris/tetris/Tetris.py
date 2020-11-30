@@ -205,8 +205,7 @@ class Tetris:
                 pygame.mixer.music.stop()
     #실행하기
     def run(self):
-        pygame.mixer.pre_init(4, -16, 2)
-        pygame.mixer.init()
+
         pygame.init()
         self.board = Board(self.mode)
         icon = pygame.image.load('assets/images/icon.PNG')  # png -> PNG로 수정
@@ -249,6 +248,8 @@ class Tetris:
 
 
             if self.board.game_over():
+                Sound.base_bgm.stop()
+                Sound.ai_bgm.stop()
                 Sound.game_over.play()
                 self.Score=self.board.score
                 self.board.show_my_score()

@@ -153,6 +153,7 @@ class Board:
 
 
     def absorb_piece2(self):
+        Sound.block_fall.play()
         for y, row in enumerate(self.piece2):
             for x, block in enumerate(row):
                 if block:
@@ -361,12 +362,15 @@ class Board:
         for y in remove:
             #라인 제거 할떄 소리
 
+            #콤보 사운드 할거면 여기
             Sound.line_clear.play()
+
             #라인 삭제 실행
             self.delete_line(y)
             self.combo_null_start()
             #라인 삭제시 콤보 점수 1 증가
             self.combo+=1
+
             #콤보 *level * 10 만큼 점수 올려주기
             self.score += self.level*self.combo*10
             #level * 10 만큼 점수 올려주기
