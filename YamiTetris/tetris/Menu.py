@@ -1,5 +1,5 @@
 import pygame
-
+from sound import Sound
 import pygame_menu
 
 
@@ -9,6 +9,7 @@ class Menu:
 
     def __init__(self):
         pygame.init()
+
         self.surface=pygame.display.set_mode((600,600))
         self.menu = pygame_menu.Menu(600, 600, 'Yami Tetris', theme=pygame_menu.themes.THEME_BLUE)
         self.database = Database()
@@ -19,6 +20,8 @@ class Menu:
         self.score=0
 
     def run(self):
+
+
         self.menu.add_button('Select mode', self.show_game)
         self.menu.add_button('Show Rank', self.show_rank)
         self.menu.add_button('Quit', pygame_menu.events.EXIT)

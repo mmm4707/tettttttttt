@@ -3,7 +3,8 @@ from pygame.locals import *
 from Piece import *
 from Menu import *
 import threading
-#from Database import Database
+from sound import Sound
+
 
 
 
@@ -31,7 +32,6 @@ class Board:
     COLLIDE_ERROR = {'no_error' : 0, 'right_wall':1, 'left_wall':2,'bottom':3, 'overlap':4}
 
     def __init__(self,  mode):
-
         self.mode = mode
         self.user_start_speed = 600
         self.AI_start_speed = int(self.user_start_speed/2)
@@ -143,12 +143,14 @@ class Board:
         self.piece_x2, self.piece_y2 = 12, -2
 
     def absorb_piece(self, mode):
+        Sound.block_fall.play()
         for y, row in enumerate(self.piece):
             for x, block in enumerate(row):
                 if block:
                     self.board[y+self.piece_y][x+self.piece_x] = block
         self.nextpiece(self.mode)
         self.score += self.level
+
 
     def absorb_piece2(self):
         for y, row in enumerate(self.piece2):
@@ -157,11 +159,6 @@ class Board:
                     self.board[y + self.piece_y2][x + self.piece_x2] = block
         self.nextpiece2()
         self.score += self.level
-
-
-        #스킬 점수 설정 , 제거해야할 부분
-        '''if self.skill < 100:
-            self.skill += 2'''
 
 
 #충돌 관련
@@ -363,14 +360,13 @@ class Board:
         remove = [y for y, row in enumerate(self.board) if all(row)]
         for y in remove:
             #라인 제거 할떄 소리
-            '''line_sound = pygame.mixer.Sound("assets/sounds/Line_Clear.wav")
-            line_sound.play()'''
+
+            Sound.line_clear.play()
             #라인 삭제 실행
             self.delete_line(y)
             self.combo_null_start()
             #라인 삭제시 콤보 점수 1 증가
             self.combo+=1
-
             #콤보 *level * 10 만큼 점수 올려주기
             self.score += self.level*self.combo*10
             #level * 10 만큼 점수 올려주기
@@ -382,6 +378,8 @@ class Board:
                 if self.level < 10:  #레벨이 10보다 작다면
                     self.level += 1  #레햣 벨 올려주고
                     self.goal = 5 * self.level  #레벨 * 5 만큼 골 수 변경
+
+                    Sound.level_up.play()
                 else:  #레벨 10부터느 골수는 없음 ( - ) 로 표시
                     self.goal = '-'
             self.level_speed()  #추가 - level증가에 따른 속도 증가
@@ -396,6 +394,7 @@ class Board:
             pygame.time.set_timer(pygame.USEREVENT + 1, (self.AI_start_speed -  self.AI_per_speed * self.level))
 
     def game_over(self):
+
         return sum(self.board[0]) > 0 or sum(self.board[1]) > 0
 
    # 현재 내려오고 있는 블럭 그려주기
