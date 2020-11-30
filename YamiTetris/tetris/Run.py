@@ -2,11 +2,12 @@ import pygame
 import pygame_menu
 from Menu import *
 from Tetris import *
-
 import sys
 
 running=True
 while running:
+    
+
     menu = Menu()
     menu.run()
     tetris=Tetris()

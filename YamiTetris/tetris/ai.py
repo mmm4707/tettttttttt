@@ -1,13 +1,15 @@
 from field import Field
 import copy
 
-def rotate_clockwise(shape):
-    return [ [ shape[y][x]
-            for y in range(len(shape)) ]
-        for x in range(len(shape[0]) - 1, -1, -1) ]
+
 
 
 class Ai:
+
+    def rotate_clockwise(shape):
+        return [[shape[y][x]
+                 for y in range(len(shape))]
+                for x in range(len(shape[0]) - 1, -1, -1)]
 
     @staticmethod
     def best(field, workingPieces, workingPieceIndex, weights, level):
@@ -36,7 +38,7 @@ class Ai:
                         bestOffset = offset
                         bestRotation = rotation
                 field.undo(level)
-            workingPiece = rotate_clockwise(workingPiece)
+            workingPiece = Ai.rotate_clockwise(workingPiece)
 
         return bestOffset, bestRotation, bestScore
 
