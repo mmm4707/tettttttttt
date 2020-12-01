@@ -44,21 +44,13 @@ ai_tetris_shapes = [
 ]
 
 weights = [3.39357083734159515, -1.8961941343266449, -5.107694873375318, -3.6314963941589093,
-
            -2.9262681134021786,
-
            -2.146136640641482, -7.204192964669836, -3.476853402227247, -6.813002842291903, 4.152001386170861,
-
            -21.131715861293525, -10.181622180279133, -5.351108175564556, -2.6888972099986956,
-
            -2.684925769670947,
-
            -4.504495386829769, -7.4527302422826, -6.3489634714511505, -4.701455626343827, -10.502314845278828,
-
            0.6969259450910086, -4.483319180395864, -2.471375907554622, -6.245643268054767, -1.899364785170105,
-
            -5.3416512085013395, -4.072687054171711, -5.936652569831475, -2.3140398163110643, -4.842883337741306,
-
            17.677262456993276, -4.42668539845469, -6.8954976464473585, 4.481308299774875]  # 21755 lignes
 
 
@@ -80,7 +72,7 @@ class Tetris:
         self.delay = 150
         self.interval = 100
         self.game=False
-        random.seed(4)
+        random.seed(6)
 
         self.ai_speed = 180
 
@@ -96,14 +88,17 @@ class Tetris:
             self.board.rotate_piece()
         elif event_key == K_SPACE:
             self.board.full_drop_piece(mode)
-        elif event_key == K_q: #스킬 부분
-            self.board.ultimate()
         elif event_key == K_m: # 소리 설정
             self.music_on_off = not self.music_on_off
+         
             if self.music_on_off:
-                pygame.mixer.music.play(-1, 0.0)
+                if self.mode == 'ai':
+                    Sound.ai_bgm.play()
+                else:
+                    Sound.base_bgm.play()
             else:
-                pygame.mixer.music.stop()
+                Sound.base_bgm.stop()
+                Sound.ai_bgm.stop()
 
 
     def ai_new_stone(self):
@@ -124,7 +119,7 @@ class Tetris:
 
 
     def ai_add_cl_lines(self, n):
-        linescores = [0, 40, 80, 120, 160]
+        linescores = [0, 20, 40, 60,80]
         self.ai_lines += n  # 지운 개수 추가하기
         self.ai_score += linescores[n] * self.board.level * 2  # 점수  = 원래 점수 + 한번에지운 라인개수에 해당하는 점수 * 레벨
 
@@ -141,7 +136,7 @@ class Tetris:
                 self.stone_x = new_x  # 새로운 좌표로 이동
 
     def ai_drop(self, manual):
-        if not self.gameover and not self.paused:  # 게임 종료, 정지 상태가 아니라면
+        if not self.gameover and not self.paused:  # 게임 종료, 정지 상ef태가 아니라면
             self.ai_score += 1 if manual else 0  # 내릴 수 있다면  스코어+1, 내릴수 없다면 +0
             self.stone_y += 1  # y축 좌표 +1
             if self.board.ai_check_collision(self.ai_board, self.stone, (self.stone_x, self.stone_y)):  # 벽에 부딪히지 않는 경우에는
@@ -178,14 +173,11 @@ class Tetris:
             'RIGHT': lambda: self.ai_move(+1),
             'DOWN': lambda: self.ai_drop(True),
             'UP': self.rotate_stone,
-            # 'p':        self.toggle_pause,
             'SPACE': self.ai_start_game
         }
         # 받아온 moves에 저장되어 있는 동작 수행하기  -- (ai에서 학습된 것을 통해 결정 되는 부분)
         for ai_action in ai_moves:
             ai_key_actions[ai_action]()
-
-
 
     def handle_key2(self, event_key, mode):
         if event_key == K_s:
@@ -208,13 +200,9 @@ class Tetris:
             self.board.rotate_piece2()
         elif event_key == K_SPACE:
             self.board.full_drop_piece2()
-        elif event_key == K_m:  # 소리 설정
-            self.music_on_off = not self.music_on_off
-            if self.music_on_off:
-                pygame.mixer.music.play(-1, 0.0)
-            else:
-                pygame.mixer.music.stop()
-    #실행하기
+
+
+                #실행하기
     def run(self):
         pygame.init()
         self.board = Board(self.mode)
@@ -250,7 +238,9 @@ class Tetris:
 
             if self.mode =='ai':
                 if self.board.game_over() or self.board.score < self.ai_score:
+                    Sound.ai_bgm.stop()
                     self.board.show_my_score()
+                    
                     break
 
 
@@ -267,11 +257,12 @@ class Tetris:
                 if event.type == QUIT: #종류 이벤트가 발생한 경우
                     pygame.quit() #모든 호출 종
                     sys.exit() #게임을 종료한다ㅏ.
-                elif event.type == KEYUP and event.key == K_p: # 일시 정지 버튼 누르면
-                    self.screen.fill(BLACK)         #일시 정지 화면
-                    pygame.mixer.music.stop()       #일시 정지 노래 중둠    오류나서  일단 뺴
+                elif event.type == KEYUP and event.key == K_p: # 일시 정지 버튼 누르면    
+                    Sound.base_bgm.stop()
+                    Sound.ai_bgm.stop()  #일시 정지 노래 중둠    오류나서  일단 뺴
                     self.board.pause()
-                    pygame.mixer.music.play(-1, 0.0)
+
+
                 elif event.type == KEYDOWN: #키보드를 누르면
                     if self.mode=='two':
                         self.handle_key2(event.key, self.mode)  # handle 메소드 실행

@@ -636,6 +636,7 @@ class Board:
 
     #게임 일시정지
     def pause(self):
+        self.screen.fill(BLACK)
         fontObj = pygame.font.Font('assets/Roboto-Bold.ttf', self.font_size_big*2*resize) #글씨 폰트 설정
         textSurfaceObj = fontObj.render('Paused', True, GREEN)  #위 폰트로 초록색 글씨
         textRectObj = textSurfaceObj.get_rect()
@@ -656,6 +657,7 @@ class Board:
         #스크린에 표시
         self.screen.blit(textSurfaceObj, textRectObj)
         self.screen.blit(textSurfaceObj2, textRectObj2)
+        pygame.display.update()
 
         running = True
         while running:
@@ -664,6 +666,10 @@ class Board:
                     pygame.quit()
                     sys.exit()
                 elif event.type == KEYUP and event.key == K_p: #p 누르면 다싯 시작
+                    if self.mode == 'ai':
+                        Sound.ai_bgm.play()
+                    else:
+                        Sound.base_bgm.play()
                     running = False
 #게임 오버 배경
     def GameOver(self):
@@ -680,7 +686,7 @@ class Board:
 
         textRectObj2 = textSurfaceObj2.get_rect()
         if self.mode == 'ai':
-            textRectObj2.center = ((self.start_status_bar_x+self.status_width)/2, self.block_size*12)
+            textRectObj2.center = (self.display_width/2, self.block_size*12)
         else:
             textRectObj2.center = (self.display_width / 2, self.start_status_bar_y + self.block_size * 11)
 
@@ -693,11 +699,11 @@ class Board:
         fontObj = pygame.font.Font('assets/Roboto-Bold.ttf', self.font_size_big*2*resize)
         textSurfaceObj = fontObj.render('My Score : '+str(self.score), True, GREEN)
         textRectObj = textSurfaceObj.get_rect()
-        textRectObj.center = ((self.start_status_bar_x+self.status_width)/2, self.block_size*8)
+        textRectObj.center = (self.display_width/2, self.block_size*8)
         fontObj2 = pygame.font.Font('assets/Roboto-Bold.ttf', self.font_size_middle*resize)
         textSurfaceObj2 = fontObj2.render('Press a key to continue', True, GREEN)
         textRectObj2 = textSurfaceObj2.get_rect()
-        textRectObj2.center = ((self.start_status_bar_x+self.status_width)/2, self.block_size*12)
+        textRectObj2.center = (self.display_width/2, self.block_size*12)
         self.screen.fill(BLACK)
         self.screen.blit(textSurfaceObj, textRectObj)
         self.screen.blit(textSurfaceObj2, textRectObj2)

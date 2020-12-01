@@ -21,7 +21,7 @@ class Sound:
     click.set_volume(1)
 
     game_over = pygame.mixer.Sound('assets/sounds/game_over.wav')
-    game_over.set_volume(0.2)
+    game_over.set_volume(0.05)
 
     line_clear = pygame.mixer.Sound('assets/sounds/Line_Clear.wav')
     line_clear.set_volume(0.2)
