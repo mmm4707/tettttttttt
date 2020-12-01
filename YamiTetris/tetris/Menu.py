@@ -85,7 +85,7 @@ class Menu:
         self.mode=game_mode
         self.score=game_score
         self.menu.add_button(self.mode+' Mode', self.show_the_rank)
-        self.menu.add_text_input('ID: ', onreturn=self.save_id)
+        self.menu.add_text_input('ID: ', maxchar=3, onreturn=self.save_id)
         self.menu.add_button("Exit",pygame_menu.events.EXIT,align=pygame_menu.locals.ALIGN_RIGHT)
         self.menu.mainloop(self.surface)
 
