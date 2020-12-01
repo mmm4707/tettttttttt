@@ -3,6 +3,7 @@ from pygame.locals import *
 from Board import *
 import random
 from ai import Ai
+from sound import Sound
 
 #            R    G    B
 BLACK = (0, 0, 0)
@@ -123,7 +124,7 @@ class Tetris:
 
 
     def ai_add_cl_lines(self, n):
-        linescores = [0, 50, 100, 150, 200]
+        linescores = [0, 40, 80, 120, 160]
         self.ai_lines += n  # 지운 개수 추가하기
         self.ai_score += linescores[n] * self.board.level * 2  # 점수  = 원래 점수 + 한번에지운 라인개수에 해당하는 점수 * 레벨
 
@@ -216,7 +217,6 @@ class Tetris:
     #실행하기
     def run(self):
         pygame.init()
-        self.game=False
         self.board = Board(self.mode)
         icon = pygame.image.load('assets/images/icon.PNG')  # png -> PNG로 수정
         pygame.display.set_icon(icon)
@@ -224,15 +224,13 @@ class Tetris:
         self.board.level_speed() #추가 - level1에서 속도
         self.gameover =False # ai 관련
         self.paused= False # ai 관련
-        #start_sound = pygame.mixer.Sound('assets/sounds/Start.wav')
-        #start_sound.play()
-        #bgm = pygame.mixer.music.load('assets/sounds/bensound-ukulele.mp3')  # (기존 파일은 소리가 안남) 다른 mp3 파일은 소리 난다. 게임진행 bgm변경
         if self.mode == 'ai':
             self.next_stone = ai_tetris_shapes[
                 random.randint(0, len(ai_tetris_shapes) - 1)]  # 다음 블럭 랜덤으로 고르기 0~6 사이의 랜덤 숫자를 통해 고르기
             self.ai_init_game()
 
-
+        delay=150
+        interval=100
         pygame.key.set_repeat(self.delay, self.interval)
 
 
@@ -252,6 +250,9 @@ class Tetris:
 
 
             if self.board.game_over():
+                Sound.base_bgm.stop()
+                Sound.ai_bgm.stop()
+                Sound.game_over.play()
                 self.Score=self.board.score
                 self.board.show_my_score()
                 break
@@ -263,9 +264,9 @@ class Tetris:
                     sys.exit() #게임을 종료한다ㅏ.
                 elif event.type == KEYUP and event.key == K_p: # 일시 정지 버튼 누르면
                     self.screen.fill(BLACK)         #일시 정지 화면
-                    #pygame.mixer.music.stop()       #일시 정지 노래 중둠    오류나서  일단 뺴
+                    pygame.mixer.music.stop()       #일시 정지 노래 중둠    오류나서  일단 뺴
                     self.board.pause()
-                    #pygame.mixer.music.play(-1, 0.0)
+                    pygame.mixer.music.play(-1, 0.0)
                 elif event.type == KEYDOWN: #키보드를 누르면
                     if self.mode=='two':
                         self.handle_key2(event.key, self.mode)  # handle 메소드 실행

@@ -1,4 +1,5 @@
 import pygame
+from sound import Sound
 import pygame_menu
 from Tetris import *
 from Database import *
@@ -26,6 +27,7 @@ class Menu:
 
 
     def reset(self):  ## 뒤로 갈때 보여줄 목록들
+        Sound.click.play()
         self.surface=pygame.display.set_mode((600,600))
 
         self.menu.clear()
@@ -41,6 +43,8 @@ class Menu:
         self.menu.mainloop(self.surface)
 
     def show_game(self):  ## 게임 목록 들어가면 나오는 목록들
+
+        Sound.click.play()
 
         self.menu.clear()
 
@@ -59,6 +63,7 @@ class Menu:
         self.menu.add_button('back', self.reset)
 
     def show_rank(self):  ## 랭크 들어가면 나오는 목록들기
+        Sound.click.play()
 
         self.menu.clear()
 
@@ -90,10 +95,12 @@ class Menu:
         self.reset()
 
     def stop(self):
+        Sound.click.play()
         self.menu.disable()
 
 
     def Single_the_rank(self):
+        Sound.click.play()
         self.menu.clear()
         self.menu.add_label("--Single Rank--", max_char=0, selectable=False, fontsize=20)
 
@@ -124,6 +131,7 @@ class Menu:
 
 
     def Twohands_the_rank(self):
+        Sound.click.play()
         self.menu.clear()
         self.menu.add_label("--Two Rank--", max_char=0, selectable=False, fontsize=20)
 
@@ -153,6 +161,7 @@ class Menu:
         self.menu.add_button('back', self.reset)
 
     def Mini_the_rank(self):
+        Sound.click.play()
         self.menu.clear()
         self.menu.add_label("--Mini Rank--", max_char=0, selectable=False, fontsize=20)
 
@@ -183,6 +192,7 @@ class Menu:
 
 
     def start_the_game(self):
+
         self.Mode = 'basic'
         self.tetris.mode = 'basic'
         if __name__ == "__main__":
