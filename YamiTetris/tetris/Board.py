@@ -1,9 +1,9 @@
 import pygame, sys, datetime, time
 from pygame.locals import *
 from Piece import *
-from Menu import *
 import threading
-#from Database import Database
+from sound import Sound
+
 
 
 
@@ -21,8 +21,7 @@ GRAY = (26, 26, 26)
 WHITE = (255, 255, 255)
 colors = [ BLACK, RED, GREEN, BLUE, ORANGE, YELLOW, PINK, CYON, GRAY]
 
-user_start_speed = 600
-AI_start_speed = 300
+
 
 # 나중에 사용할 사이즈 조절용 변수임
 resize = 1
@@ -34,8 +33,16 @@ class Board:
 
     def __init__(self,  mode):
         self.mode = mode
+
         self.two_status_size = 6
         self.status_size = 4
+
+        self.user_start_speed = 600
+        self.AI_start_speed = int(self.user_start_speed/2)
+        self.user_per_speed = 40
+        self.AI_per_speed = int(self.user_per_speed/2)
+
+
 
         if (mode=='basic'):
             self.width = 10  #맵의 좌에서 우로 사이즈
@@ -141,6 +148,7 @@ class Board:
         self.piece_x2, self.piece_y2 = 12, -2
 
     def absorb_piece(self, mode):
+        Sound.block_fall.play()
         for y, row in enumerate(self.piece):
             for x, block in enumerate(row):
                 if block:
@@ -148,18 +156,15 @@ class Board:
         self.nextpiece(self.mode)
         self.score += self.level
 
+
     def absorb_piece2(self):
+        Sound.block_fall.play()
         for y, row in enumerate(self.piece2):
             for x, block in enumerate(row):
                 if block:
                     self.board[y + self.piece_y2][x + self.piece_x2] = block
         self.nextpiece2()
         self.score += self.level
-
-
-        #스킬 점수 설정 , 제거해야할 부분
-        '''if self.skill < 100:
-            self.skill += 2'''
 
 
 #충돌 관련
@@ -361,8 +366,10 @@ class Board:
         remove = [y for y, row in enumerate(self.board) if all(row)]
         for y in remove:
             #라인 제거 할떄 소리
-            '''line_sound = pygame.mixer.Sound("assets/sounds/Line_Clear.wav")
-            line_sound.play()'''
+
+            #콤보 사운드 할거면 여기
+            Sound.line_clear.play()
+
             #라인 삭제 실행
             self.delete_line(y)
             self.combo_null_start()
@@ -380,6 +387,8 @@ class Board:
                 if self.level < 10:  #레벨이 10보다 작다면
                     self.level += 1  #레햣 벨 올려주고
                     self.goal = 5 * self.level  #레벨 * 5 만큼 골 수 변경
+
+                    Sound.level_up.play()
                 else:  #레벨 10부터느 골수는 없음 ( - ) 로 표시
                     self.goal = '-'
             self.level_speed()  #추가 - level증가에 따른 속도 증가
@@ -387,13 +396,14 @@ class Board:
         # 추가 - 레벨별 스피드 조절
     def level_speed(self):
         if self.level <= 9:
-            pygame.time.set_timer(pygame.USEREVENT, (user_start_speed - 40 * self.level))
-            pygame.time.set_timer(pygame.USEREVENT + 1, (AI_start_speed - 20 * self.level))
+            pygame.time.set_timer(pygame.USEREVENT, (self.user_start_speed -  self.user_per_speed * self.level))
+            pygame.time.set_timer(pygame.USEREVENT + 1, (self.AI_start_speed -  self.AI_per_speed * self.level))
         elif self.level >= 10:
-            pygame.time.set_timer(pygame.USEREVENT, (user_start_speed - 40 * self.level))
-            pygame.time.set_timer(pygame.USEREVENT + 1, (AI_start_speed - 20 * self.level))
+            pygame.time.set_timer(pygame.USEREVENT, (self.user_start_speed -  self.user_per_speed * self.level))
+            pygame.time.set_timer(pygame.USEREVENT + 1, (self.AI_start_speed -  self.AI_per_speed * self.level))
 
     def game_over(self):
+
         return sum(self.board[0]) > 0 or sum(self.board[1]) > 0
 
    # 현재 내려오고 있는 블럭 그려주기
@@ -596,9 +606,9 @@ class Board:
                                                       self.ai_start_status_bar_x + self.status_width,
                                                       self.ai_start_status_bar_y + (self.height*self.block_size)))
 
-            ai_score_text = pygame.font.Font('ai_v2/python3_v/tetris/assets/Roboto-Bold.ttf',
+            ai_score_text = pygame.font.Font('assets/Roboto-Bold.ttf',
                                              self.font_size_big * resize).render('SCORE', True, BLACK)  # 점수 글씨
-            ai_score_value = pygame.font.Font('ai_v2/python3_v/tetris/assets/Roboto-Bold.ttf',
+            ai_score_value = pygame.font.Font('assets/Roboto-Bold.ttf',
                                               self.font_size_middle * resize).render(str(tetris.ai_score), True,
                                                                                      BLACK)  # 점수 표시해주기
 
@@ -613,9 +623,9 @@ class Board:
             self.draw_matrix(tetris.stone, (tetris.stone_x + self.width + (self.status_width / self.block_size),
                                             tetris.stone_y))  # 테트리스 블럭을 그려준다. 블럭의 왼쪽 끝 좌표부터 - 시작 블럭
 
-            computer_said1 = pygame.font.Font('ai_v2/python3_v/tetris/assets/Roboto-Bold.ttf',
+            computer_said1 = pygame.font.Font('assets/Roboto-Bold.ttf',
                                               self.font_size_middle * resize).render("YOU CAN'T", True, BLACK)
-            computer_said2 = pygame.font.Font('ai_v2/python3_v/tetris/assets/Roboto-Bold.ttf',
+            computer_said2 = pygame.font.Font('assets/Roboto-Bold.ttf',
                                               self.font_size_middle * resize).render("DEFEAT ME", True, BLACK)
 
             self.screen.blit(computer_said1, (
