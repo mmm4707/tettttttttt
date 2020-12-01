@@ -224,6 +224,11 @@ class Tetris:
         self.board.level_speed() #추가 - level1에서 속도
         self.gameover =False # ai 관련
         self.paused= False # ai 관련
+        if self.mode=='ai':
+            Sound.ai_bgm.play()
+        else:
+            Sound.base_bgm.play()
+
         if self.mode == 'ai':
             self.next_stone = ai_tetris_shapes[
                 random.randint(0, len(ai_tetris_shapes) - 1)]  # 다음 블럭 랜덤으로 고르기 0~6 사이의 랜덤 숫자를 통해 고르기

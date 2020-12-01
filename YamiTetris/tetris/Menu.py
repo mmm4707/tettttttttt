@@ -192,6 +192,7 @@ class Menu:
 
 
     def start_the_game(self):
+        Sound.click.play()
 
         self.Mode = 'basic'
         self.tetris.mode = 'basic'
@@ -201,6 +202,8 @@ class Menu:
         self.show_score(self.Mode,self.tetris.Score)
 
     def start_the_Mini(self):
+        Sound.click.play()
+
         self.Mode = 'mini'
         self.tetris.mode='mini'
         if __name__ == "__main__":
@@ -210,6 +213,8 @@ class Menu:
 
 
     def start_the_Twohands(self):
+        Sound.click.play()
+
         self.Mode = 'two'
         self.tetris.mode='two'
         if __name__ == "__main__":
@@ -220,6 +225,8 @@ class Menu:
 
 
     def start_the_Ai(self):
+        Sound.click.play()
+
         self.Mode = 'ai'
         self.tetris.mode='ai'
         if __name__ == '__main__':
