@@ -26,16 +26,22 @@ colors = [ BLACK, RED, GREEN, BLUE, ORANGE, YELLOW, PINK, CYON, GRAY]
 # 나중에 사용할 사이즈 조절용 변수임
 resize = 1
 
+
 class Board:
     #충돌에러
     COLLIDE_ERROR = {'no_error' : 0, 'right_wall':1, 'left_wall':2,'bottom':3, 'overlap':4}
 
     def __init__(self,  mode):
         self.mode = mode
+
+        self.two_status_size = 6
+        self.status_size = 4
+
         self.user_start_speed = 600
         self.AI_start_speed = int(self.user_start_speed/2)
         self.user_per_speed = 40
         self.AI_per_speed = int(self.user_per_speed/2)
+
 
 
         if (mode=='basic'):
@@ -74,13 +80,13 @@ class Board:
 
 
         # 상태 줄 정보
-        self.start_status_bar_x = self.width * self.block_size
+        #(self.width*self.block_size) = self.width * self.block_size
         self.start_status_bar_y = 0
         if mode=='two':
-            self.status_width = self.block_size * 6
+            self.status_width = self.block_size * self.two_status_size
         else:
-            self.status_width = self.block_size * 4
-        self.status_height = self.height * self.block_size
+            self.status_width = self.block_size * self.status_size
+        #(self.height*self.block_size) = self.height * self.block_size
 
         self.ai_start_status_bar_x = self.width * self.block_size + self.display_width / 2
         self.ai_start_status_bar_y = 0
@@ -475,16 +481,16 @@ class Board:
             for x, block in enumerate(row):
                 if block:
                     x_pix, y_pix = self.pos_to_pixel_next(x,y)
-                    pygame.draw.rect(self.screen, self.piece.T_COLOR[block-1],(x_pix+self.start_status_bar_x,   y_pix+self.block_size*2, self.block_size * 0.5, self.block_size * 0.5))
-                    pygame.draw.rect(self.screen, BLACK, (x_pix+self.start_status_bar_x,   y_pix+self.block_size*2, self.block_size * 0.5, self.block_size * 0.5),1)
+                    pygame.draw.rect(self.screen, self.piece.T_COLOR[block-1],(x_pix+(self.width*self.block_size),   y_pix+self.block_size*2, self.block_size * 0.5, self.block_size * 0.5))
+                    pygame.draw.rect(self.screen, BLACK, (x_pix+(self.width*self.block_size),   y_pix+self.block_size*2, self.block_size * 0.5, self.block_size * 0.5),1)
 
     def draw_next_piece2(self, array2d, color=WHITE):
         for y, row in enumerate(array2d):
             for x, block in enumerate(row):
                 if block:
                     x_pix, y_pix = self.pos_to_pixel_next(x,y)
-                    pygame.draw.rect(self.screen, self.piece2.T_COLOR[block-1],(x_pix+self.start_status_bar_x+50,   y_pix+self.block_size*2, self.block_size * 0.5, self.block_size * 0.5))
-                    pygame.draw.rect(self.screen, BLACK, (x_pix+self.start_status_bar_x+50,   y_pix+self.block_size*2, self.block_size * 0.5, self.block_size * 0.5),1)
+                    pygame.draw.rect(self.screen, self.piece2.T_COLOR[block-1],(x_pix+(self.width*self.block_size)+50,   y_pix+self.block_size*2, self.block_size * 0.5, self.block_size * 0.5))
+                    pygame.draw.rect(self.screen, BLACK, (x_pix+(self.width*self.block_size)+50,   y_pix+self.block_size*2, self.block_size * 0.5, self.block_size * 0.5),1)
 
     ###### AI 관련
     def draw_matrix(self, matrix, offset):
@@ -558,7 +564,7 @@ class Board:
             self.draw_blocks2(self.piece2, dx=self.piece_x2, dy=self.piece_y2)
 
         self.draw_blocks(self.board)
-        pygame.draw.rect(self.screen, WHITE, Rect(self.start_status_bar_x, self.start_status_bar_y,self.status_width,self.status_height))
+        pygame.draw.rect(self.screen, WHITE, Rect((self.width*self.block_size), self.start_status_bar_y,self.status_width,(self.height*self.block_size)))
 
         self.draw_next_piece(self.next_piece)
         if self.mode=='two':
@@ -581,24 +587,24 @@ class Board:
         combo_value = pygame.font.Font('assets/Roboto-Bold.ttf', self.font_size_middle*resize).render(str(self.combo), True, BLACK)
 
 
-        self.screen.blit(next_text, (self.start_status_bar_x + self.status_width/15 , self.start_status_bar_y+  self.block_size ))
+        self.screen.blit(next_text, ((self.width*self.block_size) + self.status_width/15 , self.start_status_bar_y+  self.block_size ))
         #self.screen.blit(skill_text, (255, 120))
         #self.screen.blit(skill_value, (255, 140))
-        self.screen.blit(score_text, (self.start_status_bar_x + self.status_width/15, self.start_status_bar_y + self.block_size*5 ))
-        self.screen.blit(score_value, (self.start_status_bar_x + self.status_width/15,self.start_status_bar_y +  self.block_size*6 ))
-        self.screen.blit(level_text, (self.start_status_bar_x + self.status_width/15, self.start_status_bar_y +  self.block_size*8 ))
-        self.screen.blit(level_value, (self.start_status_bar_x + self.status_width/15,self.start_status_bar_y +  self.block_size*9 ))
-        self.screen.blit(goal_text, (self.start_status_bar_x + self.status_width/15, self.start_status_bar_y +  self.block_size*11 ))
-        self.screen.blit(goal_value, (self.start_status_bar_x + self.status_width/15,self.start_status_bar_y +  self.block_size*12 ))
+        self.screen.blit(score_text, ((self.width*self.block_size) + self.status_width/15, self.start_status_bar_y + self.block_size*5 ))
+        self.screen.blit(score_value, ((self.width*self.block_size) + self.status_width/15,self.start_status_bar_y +  self.block_size*6 ))
+        self.screen.blit(level_text, ((self.width*self.block_size) + self.status_width/15, self.start_status_bar_y +  self.block_size*8 ))
+        self.screen.blit(level_value, ((self.width*self.block_size) + self.status_width/15,self.start_status_bar_y +  self.block_size*9 ))
+        self.screen.blit(goal_text, ((self.width*self.block_size) + self.status_width/15, self.start_status_bar_y +  self.block_size*11 ))
+        self.screen.blit(goal_value, ((self.width*self.block_size) + self.status_width/15,self.start_status_bar_y +  self.block_size*12 ))
         # 콤보 화며면에 표시
-        self.screen.blit(combo_text, (self.start_status_bar_x + self.status_width/15, self.start_status_bar_y +  self.block_size*14 ))
-        self.screen.blit(combo_value, (self.start_status_bar_x + self.status_width/15, self.start_status_bar_y +  self.block_size*15 ))
-        self.screen.blit(time_text, (self.start_status_bar_x + self.status_width/15, self.start_status_bar_y +  self.block_size*17 ))
+        self.screen.blit(combo_text, ((self.width*self.block_size) + self.status_width/15, self.start_status_bar_y +  self.block_size*14 ))
+        self.screen.blit(combo_value, ((self.width*self.block_size) + self.status_width/15, self.start_status_bar_y +  self.block_size*15 ))
+        self.screen.blit(time_text, ((self.width*self.block_size) + self.status_width/15, self.start_status_bar_y +  self.block_size*17 ))
 
         if self.mode == 'ai':
             pygame.draw.rect(self.screen, WHITE, Rect(self.ai_start_status_bar_x, self.ai_start_status_bar_y,
                                                       self.ai_start_status_bar_x + self.status_width,
-                                                      self.ai_start_status_bar_y + self.status_height))
+                                                      self.ai_start_status_bar_y + (self.height*self.block_size)))
 
             ai_score_text = pygame.font.Font('assets/Roboto-Bold.ttf',
                                              self.font_size_big * resize).render('SCORE', True, BLACK)  # 점수 글씨
@@ -640,14 +646,14 @@ class Board:
         textSurfaceObj = fontObj.render('Paused', True, GREEN)  #위 폰트로 초록색 글씨
         textRectObj = textSurfaceObj.get_rect()
         if self.mode == 'ai':
-            textRectObj.center = ((self.start_status_bar_x+self.status_width)/2, self.block_size*8)
+            textRectObj.center = (((self.width*self.block_size)+self.status_width)/2, self.block_size*8)
         else:
             textRectObj.center = (self.display_width / 2, self.start_status_bar_y + self.block_size * 8)
 
         fontObj2 = pygame.font.Font('assets/Roboto-Bold.ttf', self.font_size_big*2*resize)
         textSurfaceObj2 = fontObj2.render('Press p to continue', True, GREEN)
         textRectObj2 = textSurfaceObj2.get_rect()
-        textRectObj2.center = ((self.start_status_bar_x+self.status_width)/2,self.block_size*12)
+        textRectObj2.center = (((self.width*self.block_size)+self.status_width)/2,self.block_size*12)
         if self.mode == 'ai':
             textRectObj2.center = (self.display_width / 2, self.start_status_bar_y + self.block_size * 11)
         else:
@@ -671,7 +677,7 @@ class Board:
         textSurfaceObj = fontObj.render('Game over', True, GREEN)
         textRectObj = textSurfaceObj.get_rect()
         if self.mode == 'ai':
-            textRectObj.center = ((self.start_status_bar_x+self.status_width)/2, self.block_size*8)
+            textRectObj.center = (((self.width*self.block_size)+self.status_width)/2, self.block_size*8)
         else:
             textRectObj.center = (self.display_width / 2, self.start_status_bar_y + self.block_size * 8)
 
@@ -680,7 +686,7 @@ class Board:
 
         textRectObj2 = textSurfaceObj2.get_rect()
         if self.mode == 'ai':
-            textRectObj2.center = ((self.start_status_bar_x+self.status_width)/2, self.block_size*12)
+            textRectObj2.center = (((self.width*self.block_size)+self.status_width)/2, self.block_size*12)
         else:
             textRectObj2.center = (self.display_width / 2, self.start_status_bar_y + self.block_size * 11)
 
@@ -693,11 +699,11 @@ class Board:
         fontObj = pygame.font.Font('assets/Roboto-Bold.ttf', self.font_size_big*2*resize)
         textSurfaceObj = fontObj.render('My Score : '+str(self.score), True, GREEN)
         textRectObj = textSurfaceObj.get_rect()
-        textRectObj.center = ((self.start_status_bar_x+self.status_width)/2, self.block_size*8)
+        textRectObj.center = (((self.width*self.block_size)+self.status_width)/2, self.block_size*8)
         fontObj2 = pygame.font.Font('assets/Roboto-Bold.ttf', self.font_size_middle*resize)
         textSurfaceObj2 = fontObj2.render('Press a key to continue', True, GREEN)
         textRectObj2 = textSurfaceObj2.get_rect()
-        textRectObj2.center = ((self.start_status_bar_x+self.status_width)/2, self.block_size*12)
+        textRectObj2.center = (((self.width*self.block_size)+self.status_width)/2, self.block_size*12)
         self.screen.fill(BLACK)
         self.screen.blit(textSurfaceObj, textRectObj)
         self.screen.blit(textSurfaceObj2, textRectObj2)
