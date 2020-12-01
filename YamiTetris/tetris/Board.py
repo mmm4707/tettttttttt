@@ -638,7 +638,7 @@ class Board:
     def pause(self):
         self.screen.fill(BLACK)
         fontObj = pygame.font.Font('assets/Roboto-Bold.ttf', self.font_size_big*2*resize) #글씨 폰트 설정
-        textSurfaceObj = fontObj.render('Paused', True, GREEN)  #위 폰트로 초록색 글씨
+        textSurfaceObj = fontObj.render('Paused', True, WHITE)  #위 폰트로 초록색 글씨
         textRectObj = textSurfaceObj.get_rect()
         if self.mode == 'ai':
             textRectObj.center = ((self.start_status_bar_x+self.status_width)/2, self.block_size*8)
@@ -646,7 +646,7 @@ class Board:
             textRectObj.center = (self.display_width / 2, self.start_status_bar_y + self.block_size * 8)
 
         fontObj2 = pygame.font.Font('assets/Roboto-Bold.ttf', self.font_size_big*2*resize)
-        textSurfaceObj2 = fontObj2.render('Press p to continue', True, GREEN)
+        textSurfaceObj2 = fontObj2.render('Press p to continue', True, WHITE)
         textRectObj2 = textSurfaceObj2.get_rect()
         textRectObj2.center = ((self.start_status_bar_x+self.status_width)/2,self.block_size*12)
         if self.mode == 'ai':
@@ -674,7 +674,7 @@ class Board:
 #게임 오버 배경
     def GameOver(self):
         fontObj = pygame.font.Font('assets/Roboto-Bold.ttf', self.font_size_big*2*resize)
-        textSurfaceObj = fontObj.render('Game over', True, GREEN)
+        textSurfaceObj = fontObj.render('Game over', True, WHITE)
         textRectObj = textSurfaceObj.get_rect()
         if self.mode == 'ai':
             textRectObj.center = ((self.start_status_bar_x+self.status_width)/2, self.block_size*8)
@@ -682,7 +682,7 @@ class Board:
             textRectObj.center = (self.display_width / 2, self.start_status_bar_y + self.block_size * 8)
 
         fontObj2 = pygame.font.Font('assets/Roboto-Bold.ttf', self.font_size_middle*resize)
-        textSurfaceObj2 = fontObj2.render('Press a key to continue', True, GREEN)
+        textSurfaceObj2 = fontObj2.render('Press a key to continue', True, WHITE)
 
         textRectObj2 = textSurfaceObj2.get_rect()
         if self.mode == 'ai':
@@ -697,11 +697,11 @@ class Board:
     #게임 끝나면 점수 보여주는 곳
     def show_my_score(self):
         fontObj = pygame.font.Font('assets/Roboto-Bold.ttf', self.font_size_big*2*resize)
-        textSurfaceObj = fontObj.render('My Score : '+str(self.score), True, GREEN)
+        textSurfaceObj = fontObj.render('My Score : '+str(self.score), True, WHITE)
         textRectObj = textSurfaceObj.get_rect()
         textRectObj.center = (self.display_width/2, self.block_size*8)
         fontObj2 = pygame.font.Font('assets/Roboto-Bold.ttf', self.font_size_middle*resize)
-        textSurfaceObj2 = fontObj2.render('Press a key to continue', True, GREEN)
+        textSurfaceObj2 = fontObj2.render('Press a key to continue', True, WHITE)
         textRectObj2 = textSurfaceObj2.get_rect()
         textRectObj2.center = (self.display_width/2, self.block_size*12)
         self.screen.fill(BLACK)
