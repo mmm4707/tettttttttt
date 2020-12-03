@@ -320,23 +320,31 @@ class Tetris:
                                     self.board.block_size = 30
                                     font_resize = self.min_height/525
                                     pygame.display.set_mode((int(self.min_height*(self.board.width+self.board.status_size)/self.board.height), self.min_height), RESIZABLE)
-                            elif self.mode == 'two':
+                            else:
                                 if self.board.height*int(self.board.block_size*resize)>self.max_height:
                                     self.board.block_size = 50
                                     font_resize = 2
-                                    pygame.display.set_mode((int(self.max_height*(self.board.width+self.board.status_size)/self.board.height), self.max_height), RESIZABLE)
+                                    if self.mode == 'two':
+                                        pygame.display.set_mode((int(self.max_height*(self.board.width+self.board.status_size)/self.board.height), self.max_height), RESIZABLE)
+                                    else:
+                                        pygame.display.set_mode((int(self.max_height*(self.board.width*2+self.board.status_size*2)/self.board.height), self.max_height), RESIZABLE)
                                 elif self.board.height*int(self.board.block_size*resize)<self.min_height:
                                     self.board.block_size = 25
                                     font_resize = 1
-                                    pygame.display.set_mode((int(self.min_height*(self.board.width+self.board.status_size)/self.board.height), self.min_height), RESIZABLE)
+                                    if self.mode == 'two':
+                                        pygame.display.set_mode((int(self.min_height*(self.board.width+self.board.status_size)/self.board.height), self.min_height), RESIZABLE)
+                                    else:
+                                        pygame.display.set_mode((int(self.min_height*(self.board.width*2+self.board.status_size*2)/self.board.height), self.min_height), RESIZABLE)
 
-                            self.board.display_width = (self.board.width + self.board.status_size) * self.board.block_size
+                            if self.mode=='ai':
+                                self.board.display_width = (self.board.width + self.board.status_size) * self.board.block_size * 2
+                            else:
+                                self.board.display_width = (self.board.width + self.board.status_size) * self.board.block_size
                             self.board.status_width = self.board.block_size * self.board.status_size
                             self.board.font_size_big_in = int(self.board.font_size_big*font_resize)
                             self.board.font_size_middle_in = int(self.board.font_size_middle*font_resize)
                             self.board.font_size_small_in = int(self.board.font_size_small*font_resize)
                             self.board.display_height = self.board.height * self.board.block_size
-
 
                         elif resize> 1.001 or resize<1.0:
                             if self.mode=='basic':
@@ -345,8 +353,14 @@ class Tetris:
                                 font_resize = event.w/315
                             if self.mode=='two':
                                 font_resize = event.w/650
+                            if self.mode=='ai':
+                                font_resize = event.w/700
+
                             self.board.block_size = int(self.board.block_size*resize)
-                            self.board.display_width = (self.board.width + self.board.status_size) * self.board.block_size
+                            if self.mode=='ai':
+                                self.board.display_width = (self.board.width + self.board.status_size) * self.board.block_size * 2
+                            else:
+                                self.board.display_width = (self.board.width + self.board.status_size) * self.board.block_size
                             self.board.status_width = self.board.block_size * self.board.status_size
                             self.board.font_size_big_in = int(self.board.font_size_big*font_resize)
                             self.board.font_size_middle_in = int(self.board.font_size_middle*font_resize)
