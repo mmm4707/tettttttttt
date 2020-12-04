@@ -9,6 +9,14 @@ green = (98, 190, 68) #rgb(98, 190, 68) # S
 pink = (242, 64, 235) #rgb(242, 64, 235) # T
 red = (225, 13, 27) #rgb(225, 13, 27) # Z
 
+w_pink = (231,59,109)
+w_sky = (165,216,243)
+z_yellow = (252,215,2)
+z_green = (185,205,12)
+z_blue = (159,68,145)
+y_red = (241,141,56)
+y_violet = (96,57,140)
+
 #테트리스 블럭 clss
 class Piece:
     O = (((0,0,0,0,0), (0,0,0,0,0),(0,0,1,1,0),(0,0,1,1,0),(0,0,0,0,0)),) * 4
@@ -45,7 +53,8 @@ class Piece:
 
     PIECES = {'O': O, 'I': I, 'L': L, 'J': J, 'Z': Z, 'S':S, 'T':T}
 
-    T_COLOR = [yellow ,cyan, orange, blue, red, green, pink, (55, 55, 55)]
+    #T_COLOR = [yellow ,cyan, orange, blue, red, green, pink, (55, 55, 55)]
+    T_COLOR = [w_pink ,w_sky, z_blue, z_green, z_yellow, y_violet, y_red, (55, 55, 55)]
 
     ai_tetris_shapes = [
         [[1, 1, 1],
