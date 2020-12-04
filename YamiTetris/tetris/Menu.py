@@ -1,5 +1,5 @@
 import pygame
-from sound import Sound
+from variable import Var
 import pygame_menu
 from Tetris import *
 from Database import *
@@ -9,17 +9,17 @@ class Menu:
     def __init__(self):
         print('test')
         pygame.init()
-        self.w=600
-        self.h=600
+        self.w=Var.menu_display_w
+        self.h=Var.menu_display_h
         self.surface=pygame.display.set_mode((self.w,self.h),RESIZABLE)
         self.menu = pygame_menu.Menu(self.h,self.w, 'Yami Tetris', theme=pygame_menu.themes.THEME_BLUE)
         self.database = Database()
-        self.Mode = 0
-        self.id=0
+        self.Mode = Var.initial_mode
+        self.id=Var.initial_id
         self.mode='origin'
-        self.score=0
+        self.score=Var.initial_score
         self.tetris=Tetris()
-        self.page=0
+        self.page=Var.initial_page
 
     def back(self):
         self.surface=pygame.display.set_mode((self.w,self.h),RESIZABLE)
@@ -28,15 +28,15 @@ class Menu:
 
     def run(self):
         print('test2')
-        self.page=0
+        self.page=Var.initial_page
         self.menu.clear()
         self.menu.add_button('Select mode', self.show_game)
         self.menu.add_button('Show Rank', self.show_rank)
         self.menu.add_button('Quit', pygame_menu.events.EXIT)
 
     def reset(self):  ## 뒤로 갈때 보여줄 목록들
-        Sound.click.play()
-        self.page=0
+        Var.click.play()
+        self.page=Var.initial_page
 
         self.menu.clear()
 
@@ -51,7 +51,7 @@ class Menu:
 
     def show_game(self):  ## 게임 목록 들어가면 나오는 목록들
         self.page=1
-        Sound.click.play()
+        Var.click.play()
 
         self.menu.clear()
 
@@ -71,7 +71,7 @@ class Menu:
 
     def show_rank(self):  ## 랭크 들어가면 나오는 목록들기
         self.page=2
-        Sound.click.play()
+        Var.click.play()
 
         self.menu.clear()
 
@@ -103,13 +103,13 @@ class Menu:
         self.reset()
 
     def stop(self):
-        Sound.click.play()
+        Var.click.play()
         self.menu.disable()
 
 
     def Single_the_rank(self):
         self.page=3
-        Sound.click.play()
+        Var.click.play()
         self.menu.clear()
         self.menu.add_label("--Single Rank--", max_char=0, selectable=False, fontsize=20)
 
@@ -141,7 +141,7 @@ class Menu:
 
     def Twohands_the_rank(self):
         self.page=4
-        Sound.click.play()
+        Var.click.play()
         self.menu.clear()
         self.menu.add_label("--Two Rank--", max_char=0, selectable=False, fontsize=20)
 
@@ -172,7 +172,7 @@ class Menu:
 
     def Mini_the_rank(self):
         self.page=5
-        Sound.click.play()
+        Var.click.play()
         self.menu.clear()
         self.menu.add_label("--Mini Rank--", max_char=0, selectable=False, fontsize=20)
 
@@ -203,7 +203,7 @@ class Menu:
 
 
     def start_the_game(self):
-        Sound.click.play()
+        Var.click.play()
 
         self.Mode = 'basic'
         self.tetris.mode = 'basic'
@@ -213,7 +213,7 @@ class Menu:
         self.show_score(self.Mode,self.tetris.Score)
 
     def start_the_Mini(self):
-        Sound.click.play()
+        Var.click.play()
 
         self.Mode = 'mini'
         self.tetris.mode='mini'
@@ -224,7 +224,7 @@ class Menu:
 
 
     def start_the_Twohands(self):
-        Sound.click.play()
+        Var.click.play()
 
         self.Mode = 'two'
         self.tetris.mode='two'
@@ -236,7 +236,7 @@ class Menu:
 
 
     def start_the_Ai(self):
-        Sound.click.play()
+        Var.click.play()
 
         self.Mode = 'ai'
         self.tetris.mode='ai'

@@ -3,56 +3,7 @@ from pygame.locals import *
 from Board import *
 import random
 from ai import Ai
-from sound import Sound
-
-#            R    G    B
-BLACK = (0, 0, 0)
-RED = (225, 13, 27)
-GREEN = (98, 190, 68)
-BLUE = (64, 111, 249)
-ORANGE = (253, 189, 53)
-YELLOW = (246, 227, 90)
-PINK = (242, 64, 235)
-CYON = (70, 230, 210)
-GRAY = (26, 26, 26)
-WHITE = (255, 255, 255)
-colors = [BLACK, RED, GREEN, BLUE, ORANGE, YELLOW, PINK, CYON, GRAY]
-# 나중에 사용할 사이즈 조절용 변수임
-resize = 1
-
-
-ai_tetris_shapes = [
-    [[1, 1, 1],
-     [0, 1, 0]],
-
-    [[0, 2, 2],
-     [2, 2, 0]],
-
-    [[3, 3, 0],
-     [0, 3, 3]],
-
-    [[4, 0, 0],
-     [4, 4, 4]],
-
-    [[0, 0, 5],
-     [5, 5, 5]],
-
-    [[6, 6, 6, 6]],
-
-    [[7, 7],
-     [7, 7]]
-]
-
-weights = [3.39357083734159515, -1.8961941343266449, -5.107694873375318, -3.6314963941589093,
-           -2.9262681134021786,
-           -2.146136640641482, -7.204192964669836, -3.476853402227247, -6.813002842291903, 4.152001386170861,
-           -21.131715861293525, -10.181622180279133, -5.351108175564556, -2.6888972099986956,
-           -2.684925769670947,
-           -4.504495386829769, -7.4527302422826, -6.3489634714511505, -4.701455626343827, -10.502314845278828,
-           0.6969259450910086, -4.483319180395864, -2.471375907554622, -6.245643268054767, -1.899364785170105,
-           -5.3416512085013395, -4.072687054171711, -5.936652569831475, -2.3140398163110643, -4.842883337741306,
-           17.677262456993276, -4.42668539845469, -6.8954976464473585, 4.481308299774875]  # 21755 lignes
-
+from variable import Var
 
 class Tetris:
 
@@ -67,16 +18,15 @@ class Tetris:
         self.clock = pygame.time.Clock()
         self.music_on_off = True
         self.check_reset = True
-        self.Id=0
-        self.Score=0
-        self.delay = 150
-        self.interval = 100
+        self.Score = Var.initial_score
+        self.delay = Var.keyboard_delay
+        self.interval = Var.keyboard_interval
         self.game=False
 
         random.seed(6)
-        self.max_height = 900
-        self.min_height = 450
-        self.ai_speed = 180
+        self.max_height = Var.display_max_height
+        self.min_height = Var.display_min_height
+
 
     #각 키를 누를떄 실행되는 method
     def handle_key(self, event_key, mode):
@@ -95,18 +45,18 @@ class Tetris:
          
             if self.music_on_off:
                 if self.mode == 'ai':
-                    Sound.ai_bgm.play()
+                    Var.ai_bgm.play()
                 else:
-                    Sound.base_bgm.play()
+                    Var.base_bgm.play()
             else:
-                Sound.base_bgm.stop()
-                Sound.ai_bgm.stop()
+                Var.base_bgm.stop()
+                Var.ai_bgm.stop()
 
 
     def ai_new_stone(self):
         self.stone = self.next_stone[:]
-        self.next_stone = ai_tetris_shapes[
-            random.randint(0, len(ai_tetris_shapes) - 1)]  # 다음 블럭 랜덤으로 고르기 0~6 사이의 랜덤 숫자를 통해 고르기
+        self.next_stone = Var.ai_tetris_shapes[
+            random.randint(0, len(Var.ai_tetris_shapes) - 1)]  # 다음 블럭 랜덤으로 고르기 0~6 사이의 랜덤 숫자를 통해 고르기
         self.stone_x = int(self.board.width / 2 - len(self.stone[0]) / 2)  # self.width 기준 스톤의 위치 x
         self.stone_y = 0
         if self.board.ai_check_collision(self.ai_board, self.stone, (self.stone_x, self.stone_y)):
@@ -116,14 +66,13 @@ class Tetris:
     def ai_init_game(self):
         self.ai_board = [[0 for x in range(self.board.width)] for y in range(self.board.height)] # 새로운 게임 보드 생성
         self.ai_new_stone()  # 새로운 블럭 생성
-        self.ai_score = 0  # 시작 스코어
+        self.ai_score = Var.initial_score  # 시작 스코어
         self.ai_lines = 0  # 지운 라인의 개수
 
 
     def ai_add_cl_lines(self, n):
-        linescores = [0, 20, 35, 50, 65]
         self.ai_lines += n  # 지운 개수 추가하기
-        self.ai_score += linescores[n] * self.board.level * 2  # 점수  = 원래 점수 + 한번에지운 라인개수에 해당하는 점수 * 레벨
+        self.ai_score += Var.ai_linescores[n] * self.board.level * 2  # 점수  = 원래 점수 + 한번에지운 라인개수에 해당하는 점수 * 레벨
 
         # 블럭을 delta_x 만큼 움직이기
 
@@ -171,8 +120,8 @@ class Tetris:
 
     def ai_executes_moves(self, ai_moves):
         ai_key_actions = {
-            'LEFT': lambda: self.ai_move(-1),
-            'RIGHT': lambda: self.ai_move(+1),
+            'LEFT': lambda: self.ai_move(-Var.x_move_scale),
+            'RIGHT': lambda: self.ai_move(+Var.x_move_scale),
             'DOWN': lambda: self.ai_drop(True),
             'UP': self.rotate_stone,
             'SPACE': self.ai_start_game
@@ -185,9 +134,9 @@ class Tetris:
         if event_key == K_s:
             self.board.drop_piece(mode)
         elif event_key == K_a:
-            self.board.move_piece(dx=-1, dy=0)
+            self.board.move_piece(dx=-Var.x_move_scale, dy=0)
         elif event_key == K_d:
-            self.board.move_piece(dx=1, dy=0)
+            self.board.move_piece(dx=Var.x_move_scale, dy=0)
         elif event_key == K_w:
             self.board.rotate_piece()
         elif event_key == K_e:
@@ -195,9 +144,9 @@ class Tetris:
         if event_key == K_DOWN:
             self.board.drop_piece2()
         elif event_key == K_LEFT:
-            self.board.move_piece2(dx=-1, dy=0)
+            self.board.move_piece2(dx=-Var.x_move_scale, dy=0)
         elif event_key == K_RIGHT:
-            self.board.move_piece2(dx=1, dy=0)
+            self.board.move_piece2(dx=Var.x_move_scale, dy=0)
         elif event_key == K_UP:
             self.board.rotate_piece2()
         elif event_key == K_SPACE:
@@ -215,23 +164,21 @@ class Tetris:
         self.gameover =False # ai 관련
         self.paused= False # ai 관련
         if self.mode=='ai':
-            Sound.ai_bgm.play()
+            Var.ai_bgm.play()
         else:
-            Sound.base_bgm.play()
+            Var.base_bgm.play()
 
         if self.mode == 'ai':
-            self.next_stone = ai_tetris_shapes[
-                random.randint(0, len(ai_tetris_shapes) - 1)]  # 다음 블럭 랜덤으로 고르기 0~6 사이의 랜덤 숫자를 통해 고르기
+            self.next_stone = Var.ai_tetris_shapes[
+                random.randint(0, len(Var.ai_tetris_shapes) - 1)]  # 다음 블럭 랜덤으로 고르기 0~6 사이의 랜덤 숫자를 통해 고르기
             self.ai_init_game()
 
-        delay=150
-        interval=100
         pygame.key.set_repeat(self.delay, self.interval)
 
 
         while True:
             if self.mode =='ai':
-                Ai.choose(self.ai_board, self.stone, self.next_stone, self.stone_x, weights, self)
+                Ai.choose(self.ai_board, self.stone, self.next_stone, self.stone_x, Var.weights, self)
 
             if self.check_reset:
 
@@ -240,15 +187,15 @@ class Tetris:
 
             if self.mode =='ai':
                 if self.board.game_over() or self.board.score < self.ai_score:
-                    Sound.ai_bgm.stop()
+                    Var.ai_bgm.stop()
                     self.board.show_my_score()
                     break
 
 
             if self.board.game_over():
-                Sound.base_bgm.stop()
-                Sound.ai_bgm.stop()
-                Sound.game_over.play()
+                Var.base_bgm.stop()
+                Var.ai_bgm.stop()
+                Var.game_over.play()
                 self.Score=self.board.score
                 self.board.show_my_score()
                 break
@@ -263,8 +210,8 @@ class Tetris:
                     pygame.quit() #모든 호출 종
                     sys.exit() #게임을 종료한다ㅏ.
                 elif event.type == KEYUP and event.key == K_p: # 일시 정지 버튼 누르면    
-                    Sound.base_bgm.stop()
-                    Sound.ai_bgm.stop()  #일시 정지 노래 중둠    오류나서  일단 뺴
+                    Var.base_bgm.stop()
+                    Var.ai_bgm.stop()  #일시 정지 노래 중둠    오류나서  일단 뺴
                     self.board.pause()
 
 
@@ -352,9 +299,9 @@ class Tetris:
                             else:
                                 self.board.display_width = (self.board.width + self.board.status_size) * self.board.block_size
                             self.board.status_width = self.board.block_size * self.board.status_size
-                            self.board.font_size_big_in = int(self.board.font_size_big*font_resize)
-                            self.board.font_size_middle_in = int(self.board.font_size_middle*font_resize)
-                            self.board.font_size_small_in = int(self.board.font_size_small*font_resize)
+                            self.board.font_size_big_in = int(Var.font_size_big*font_resize)
+                            self.board.font_size_middle_in = int(Var.font_size_middle*font_resize)
+                            self.board.font_size_small_in = int(Var.font_size_small*font_resize)
 
                             self.board.display_height = self.board.height * self.board.block_size
 
@@ -364,4 +311,4 @@ class Tetris:
             # self.screen.fill(BLACK)
             self.board.draw(self, self.mode)
             pygame.display.update() #이게 나오면 구현 시
-            self.clock.tick(30) # 초당 프레임 관련
+            self.clock.tick(Var.fps) # 초당 프레임 관련
