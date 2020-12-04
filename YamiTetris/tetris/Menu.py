@@ -12,9 +12,9 @@ widget_image = pygame_menu.baseimage.BaseImage(
     drawing_mode=pygame_menu.baseimage.IMAGE_MODE_FILL)
 
 mytheme=pygame_menu.themes.THEME_ORANGE.copy()
-mytheme.widget_font_color=(246, 227, 90)
+mytheme.widget_font_color=(153,153,255)
 mytheme.background_color = menu_image
-mytheme.widget_background_color = widget_image
+#mytheme.widget_background_color = widget_image
 mytheme.title_bar_style=pygame_menu.widgets.MENUBAR_STYLE_NONE
 mytheme.widget_alignment=pygame_menu.locals.ALIGN_CENTER
 mytheme.widget_font =pygame_menu.font.FONT_NEVIS
@@ -36,7 +36,8 @@ class Menu:
         self.score=0
         self.tetris=Tetris()
         self.page=0
-        self.size=int((self.h)/20)
+        self.size=int((self.h)/15)
+        self.size2=int((self.h)/20)
         self.margin=int((self.h)/6)
         self.margin2=(0,int((self.h)/30))
         self.margin3=(0,int((self.h)/15))
@@ -160,13 +161,13 @@ class Menu:
         r3="#3 : "+original_3_name+"    "+ original_3_score
         r4="#4 : "+original_4_name+"    "+ original_4_score
         r5="#5 : "+original_5_name+"    "+ original_5_score
-        self.menu.add_button("       ID       Score", self.Mini_the_rank,font_size=self.size)
-        self.menu.add_button(r1, self.Mini_the_rank,font_size=self.size)
-        self.menu.add_button(r2, self.Mini_the_rank,font_size=self.size)
-        self.menu.add_button(r3, self.Mini_the_rank,font_size=self.size)
-        self.menu.add_button(r4, self.Mini_the_rank,font_size=self.size)
-        self.menu.add_button(r5, self.Mini_the_rank,font_size=self.size)
-        self.menu.add_button('back', self.reset,font_size=self.size)
+        self.menu.add_button("       ID       Score", self.Mini_the_rank,font_size=self.size2)
+        self.menu.add_button(r1, self.Mini_the_rank,font_size=self.size2)
+        self.menu.add_button(r2, self.Mini_the_rank,font_size=self.size2)
+        self.menu.add_button(r3, self.Mini_the_rank,font_size=self.size2)
+        self.menu.add_button(r4, self.Mini_the_rank,font_size=self.size2)
+        self.menu.add_button(r5, self.Mini_the_rank,font_size=self.size2)
+        self.menu.add_button('back', self.reset,font_size=self.size2)
 
 
     def Twohands_the_rank(self):
@@ -194,13 +195,13 @@ class Menu:
         r3="#3 : "+original_3_name+"    "+ original_3_score
         r4="#4 : "+original_4_name+"    "+ original_4_score
         r5="#5 : "+original_5_name+"    "+ original_5_score
-        self.menu.add_button("       ID       Score", self.show_the_Twohands,font_size=self.size)
-        self.menu.add_button(r1, self.show_the_Twohands,font_size=self.size)
-        self.menu.add_button(r2, self.show_the_Twohands,font_size=self.size)
-        self.menu.add_button(r3, self.show_the_Twohands,font_size=self.size)
-        self.menu.add_button(r4, self.show_the_Twohands,font_size=self.size)
-        self.menu.add_button(r5, self.show_the_Twohands,font_size=self.size)
-        self.menu.add_button('back', self.reset,font_size=self.size)
+        self.menu.add_button("       ID       Score", self.show_the_Twohands,font_size=self.size2)
+        self.menu.add_button(r1, self.show_the_Twohands,font_size=self.size2)
+        self.menu.add_button(r2, self.show_the_Twohands,font_size=self.size2)
+        self.menu.add_button(r3, self.show_the_Twohands,font_size=self.size2)
+        self.menu.add_button(r4, self.show_the_Twohands,font_size=self.size2)
+        self.menu.add_button(r5, self.show_the_Twohands,font_size=self.size2)
+        self.menu.add_button('back', self.reset,font_size=self.size2)
 
     def Mini_the_rank(self):
         self.page=5
@@ -227,13 +228,13 @@ class Menu:
         r3="#3 : "+original_3_name+"    "+ original_3_score
         r4="#4 : "+original_4_name+"    "+ original_4_score
         r5="#5 : "+original_5_name+"    "+ original_5_score
-        self.menu.add_button("       ID       Score", self.show_the_Twohands,font_size=self.size)
-        self.menu.add_button(r1, self.show_the_Twohands,font_size=self.size)
-        self.menu.add_button(r2, self.show_the_Twohands,font_size=self.size)
-        self.menu.add_button(r3, self.show_the_Twohands,font_size=self.size)
-        self.menu.add_button(r4, self.show_the_Twohands,font_size=self.size)
-        self.menu.add_button(r5, self.show_the_Twohands,font_size=self.size)
-        self.menu.add_button('back', self.reset,font_size=self.size)
+        self.menu.add_button("       ID       Score", self.show_the_Twohands,font_size=self.size2)
+        self.menu.add_button(r1, self.show_the_Twohands,font_size=self.size2)
+        self.menu.add_button(r2, self.show_the_Twohands,font_size=self.size2)
+        self.menu.add_button(r3, self.show_the_Twohands,font_size=self.size2)
+        self.menu.add_button(r4, self.show_the_Twohands,font_size=self.size2)
+        self.menu.add_button(r5, self.show_the_Twohands,font_size=self.size2)
+        self.menu.add_button('back', self.reset,font_size=self.size2)
 
 
     def start_the_game(self):
@@ -306,7 +307,9 @@ while True:
         elif event.type == VIDEORESIZE:
             mymenu.w=event.w
             mymenu.h=event.h
-            mymenu.size=int((mymenu.h)/20)
+            mymenu.size=int((mymenu.h)/15)
+            mymenu.size2=int((mymenu.h)/20)
+
             mymenu.margin=int((mymenu.h)/6)
             mymenu.margin2=(0,int((mymenu.h)/30))
             mymenu.margin3=(0,int((mymenu.h)/15))
