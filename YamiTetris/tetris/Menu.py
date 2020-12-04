@@ -4,6 +4,22 @@ import pygame_menu
 from Tetris import *
 from Database import *
 
+menu_image = pygame_menu.baseimage.BaseImage(
+    image_path='assets/images/메인메뉴2.PNG',
+    drawing_mode=pygame_menu.baseimage.IMAGE_MODE_FILL	)
+widget_image = pygame_menu.baseimage.BaseImage(
+    image_path='assets/images/메인위젯.PNG',
+    drawing_mode=pygame_menu.baseimage.IMAGE_MODE_FILL)
+
+mytheme=pygame_menu.themes.THEME_ORANGE.copy()
+mytheme.widget_font_color=(246, 227, 90)
+mytheme.background_color = menu_image
+mytheme.widget_background_color = widget_image
+mytheme.title_bar_style=pygame_menu.widgets.MENUBAR_STYLE_NONE
+mytheme.widget_alignment=pygame_menu.locals.ALIGN_CENTER
+mytheme.widget_font =pygame_menu.font.FONT_NEVIS
+mytheme.widget_margin=(0,40)
+
 class Menu:
 
     def __init__(self):
@@ -12,7 +28,7 @@ class Menu:
         self.w=600
         self.h=600
         self.surface=pygame.display.set_mode((self.w,self.h),RESIZABLE)
-        self.menu = pygame_menu.Menu(self.h,self.w, 'Yami Tetris', theme=pygame_menu.themes.THEME_BLUE)
+        self.menu = pygame_menu.Menu(self.h,self.w, '', theme=mytheme)
         self.database = Database()
         self.Mode = 0
         self.id=0
@@ -20,36 +36,38 @@ class Menu:
         self.score=0
         self.tetris=Tetris()
         self.page=0
-        self.fontsize=int((self.w+self.h)/40)
-
+        self.size=int((self.h)/20)
+        self.margin=int((self.h)/6)
+        self.margin2=(0,int((self.h)/30))
+        self.margin3=(0,int((self.h)/15))
+        self.margin4=(0,int((self.h)/60))
     def back(self):
         self.surface=pygame.display.set_mode((self.w,self.h),RESIZABLE)
-        self.menu = pygame_menu.Menu(self.h,self.w, 'Yami Tetris', theme=pygame_menu.themes.THEME_BLUE)
+        self.menu = pygame_menu.Menu(self.h,self.w, '', theme=mytheme)
         self.menu.draw(self.surface)
 
     def run(self):
         print('test2')
         self.page=0
         self.menu.clear()
-        self.menu.add_button('Select mode', self.show_game,font_size=self.fontsize)
-        self.menu.add_button('Show Rank', self.show_rank,font_size=self.fontsize)
-        self.menu.add_button('Quit', pygame_menu.events.EXIT,font_size=self.fontsize)
+        mytheme.widget_margin=self.margin3
+        self.menu.add_vertical_margin(self.h/6)
+        self.menu.add_button('   Select mode   ', self.show_game,font_size=self.size)
+        self.menu.add_button('    Show Rank    ', self.show_rank,font_size=self.size)
+        self.menu.add_button('        Quit         ', pygame_menu.events.EXIT,font_size=self.size)
 
     def reset(self):  ## 뒤로 갈때 보여줄 목록들
         self.surface = pygame.display.set_mode((self.w, self.h), RESIZABLE)
-        self.menu = pygame_menu.Menu(self.h, self.w, 'Yami Tetris', theme=pygame_menu.themes.THEME_BLUE)
+        self.menu = pygame_menu.Menu(self.h, self.w, '', theme=mytheme)
         Sound.click.play()
         self.page=0
+        mytheme.widget_margin=self.margin3
 
         self.menu.clear()
-
-        print('tset5')
-
-        self.menu.add_button('Select mode', self.show_game,font_size=self.fontsize)
-
-        self.menu.add_button('Show Rank', self.show_rank,font_size=self.fontsize)
-
-        self.menu.add_button('Quit', pygame_menu.events.EXIT,font_size=self.fontsize)
+        self.menu.add_vertical_margin(self.h/6)
+        self.menu.add_button('   Select mode   ', self.show_game,font_size=self.size)
+        self.menu.add_button('    Show Rank    ', self.show_rank,font_size=self.size)
+        self.menu.add_button('        Quit         ', pygame_menu.events.EXIT,font_size=self.size)
 
 
     def show_game(self):  ## 게임 목록 들어가면 나오는 목록들
@@ -57,48 +75,55 @@ class Menu:
         Sound.click.play()
 
         self.menu.clear()
+        mytheme.widget_margin=self.margin2
 
-        self.menu.add_label("--Show game--",max_char=0,selectable=False,font_size=self.fontsize)
+        self.menu.add_vertical_margin(self.margin)
 
-        self.menu.add_vertical_margin(self.fontsize)
 
-        self.menu.add_button('Single mode', self.start_the_game,font_size=self.fontsize)
+        self.menu.add_label("    --Start game--    ",max_char=0,selectable=False,font_size=self.size)
 
-        self.menu.add_button('MiNi mode', self.start_the_Mini,font_size=self.fontsize)
+        self.menu.add_vertical_margin(15)
 
-        self.menu.add_button('Twohands mode', self.start_the_Twohands,font_size=self.fontsize)
+        self.menu.add_button('      Single mode      ', self.start_the_game,font_size=self.size)
 
-        self.menu.add_button('Ai mode', self.start_the_Ai,font_size=self.fontsize)
+        self.menu.add_button('       MiNi mode       ', self.start_the_Mini,font_size=self.size)
 
-        self.menu.add_button('back', self.reset,font_size=self.fontsize)
+        self.menu.add_button('    Twohands mode   ', self.start_the_Twohands,font_size=self.size)
+
+        self.menu.add_button('         Ai mode         ', self.start_the_Ai,font_size=self.size)
+
+        self.menu.add_button('           back            ', self.reset,font_size=self.size)
 
     def show_rank(self):  ## 랭크 들어가면 나오는 목록들기
         self.page=2
         Sound.click.play()
+        mytheme.widget_margin=self.margin2
 
         self.menu.clear()
+        self.menu.add_vertical_margin(self.margin)
 
-        self.menu.add_label("--Show Rank--", max_char=0, selectable=False,font_size=self.fontsize)
+        self.menu.add_label("     --Show Rank--     ", max_char=0, selectable=False,font_size=self.size)
 
-        self.menu.add_vertical_margin(30)
+        self.menu.add_vertical_margin(15)
 
-        self.menu.add_button('Single mode', self.Single_the_rank,font_size=self.fontsize)
+        self.menu.add_button('      Single mode      ', self.Single_the_rank,font_size=self.size)
 
-        self.menu.add_button('Twohands mode', self.Twohands_the_rank,font_size=self.fontsize)
+        self.menu.add_button('    Twohands mode   ', self.Twohands_the_rank,font_size=self.size)
 
-        self.menu.add_button('MiNi mode', self.Mini_the_rank,font_size=self.fontsize)
+        self.menu.add_button('       MiNi mode       ', self.Mini_the_rank,font_size=self.size)
 
-        self.menu.add_button('back', self.reset,font_size=self.fontsize)
+        self.menu.add_button('           back            ', self.reset,font_size=self.size)
 
 
     def show_score(self ,game_mode,game_score):
         self.page=6
+        mytheme.widget_margin=self.margin3
         self.surface=pygame.display.set_mode((self.w,self.h),RESIZABLE)
         self.mode=game_mode
         self.score=game_score
-        self.menu.add_button(self.mode+' Mode', self.show_the_rank,font_size=self.fontsize)
-        self.menu.add_text_input('ID: ', maxchar=3,onreturn=self.save_id,font_size=self.fontsize)
-        self.menu.add_button("Exit",pygame_menu.events.EXIT,align=pygame_menu.locals.ALIGN_RIGHT,font_size=self.fontsize)
+        self.menu.add_button(self.mode+' Mode', self.show_the_rank,font_size=self.size)
+        self.menu.add_text_input('ID: ', maxchar=3,onreturn=self.save_id,font_size=self.size)
+        self.menu.add_button("Exit",pygame_menu.events.EXIT,font_size=self.size)
 
     def save_id(self ,value):
         self.id=value
@@ -114,9 +139,11 @@ class Menu:
         self.page=3
         Sound.click.play()
         self.menu.clear()
-        self.menu.add_label("--Single Rank--", max_char=0, selectable=False, fontsize=20)
+        mytheme.widget_margin=self.margin4
+        self.menu.add_vertical_margin(self.margin)
+        self.menu.add_label("--Single Rank--", max_char=0, selectable=False, size=20)
 
-        self.menu.add_vertical_margin(30)
+        self.menu.add_vertical_margin(10)
         original_data = self.database.load_data("basic")
         original_1_name = str(original_data[0]['ID'])
         original_1_score ='{0:>05s}'.format(str(original_data[0]['score']))
@@ -133,22 +160,24 @@ class Menu:
         r3="#3 : "+original_3_name+"    "+ original_3_score
         r4="#4 : "+original_4_name+"    "+ original_4_score
         r5="#5 : "+original_5_name+"    "+ original_5_score
-        self.menu.add_button("       ID       Score", self.Mini_the_rank)
-        self.menu.add_button(r1, self.Mini_the_rank,font_size=self.fontsize)
-        self.menu.add_button(r2, self.Mini_the_rank,font_size=self.fontsize)
-        self.menu.add_button(r3, self.Mini_the_rank,font_size=self.fontsize)
-        self.menu.add_button(r4, self.Mini_the_rank,font_size=self.fontsize)
-        self.menu.add_button(r5, self.Mini_the_rank,font_size=self.fontsize)
-        self.menu.add_button('back', self.reset,font_size=self.fontsize)
+        self.menu.add_button("       ID       Score", self.Mini_the_rank,font_size=self.size)
+        self.menu.add_button(r1, self.Mini_the_rank,font_size=self.size)
+        self.menu.add_button(r2, self.Mini_the_rank,font_size=self.size)
+        self.menu.add_button(r3, self.Mini_the_rank,font_size=self.size)
+        self.menu.add_button(r4, self.Mini_the_rank,font_size=self.size)
+        self.menu.add_button(r5, self.Mini_the_rank,font_size=self.size)
+        self.menu.add_button('back', self.reset,font_size=self.size)
 
 
     def Twohands_the_rank(self):
         self.page=4
         Sound.click.play()
         self.menu.clear()
-        self.menu.add_label("--Two Rank--", max_char=0, selectable=False, fontsize=20)
+        mytheme.widget_margin=self.margin4
+        self.menu.add_vertical_margin(self.margin)
+        self.menu.add_label("--Two Rank--", max_char=0, selectable=False, size=20)
 
-        self.menu.add_vertical_margin(30)
+        self.menu.add_vertical_margin(10)
         twohands_data = self.database.load_data("two")
         original_1_name = str(twohands_data[0]['ID'])
         original_1_score ='{0:>05s}'.format(str(twohands_data[0]['score']))
@@ -165,21 +194,23 @@ class Menu:
         r3="#3 : "+original_3_name+"    "+ original_3_score
         r4="#4 : "+original_4_name+"    "+ original_4_score
         r5="#5 : "+original_5_name+"    "+ original_5_score
-        self.menu.add_button("       ID       Score", self.show_the_Twohands)
-        self.menu.add_button(r1, self.show_the_Twohands,font_size=self.fontsize)
-        self.menu.add_button(r2, self.show_the_Twohands,font_size=self.fontsize)
-        self.menu.add_button(r3, self.show_the_Twohands,font_size=self.fontsize)
-        self.menu.add_button(r4, self.show_the_Twohands,font_size=self.fontsize)
-        self.menu.add_button(r5, self.show_the_Twohands,font_size=self.fontsize)
-        self.menu.add_button('back', self.reset,font_size=self.fontsize)
+        self.menu.add_button("       ID       Score", self.show_the_Twohands,font_size=self.size)
+        self.menu.add_button(r1, self.show_the_Twohands,font_size=self.size)
+        self.menu.add_button(r2, self.show_the_Twohands,font_size=self.size)
+        self.menu.add_button(r3, self.show_the_Twohands,font_size=self.size)
+        self.menu.add_button(r4, self.show_the_Twohands,font_size=self.size)
+        self.menu.add_button(r5, self.show_the_Twohands,font_size=self.size)
+        self.menu.add_button('back', self.reset,font_size=self.size)
 
     def Mini_the_rank(self):
         self.page=5
         Sound.click.play()
         self.menu.clear()
-        self.menu.add_label("--Mini Rank--", max_char=0, selectable=False, fontsize=20)
+        mytheme.widget_margin=self.margin4
+        self.menu.add_vertical_margin(self.margin)
+        self.menu.add_label("--Mini Rank--", max_char=0, selectable=False, size=20)
 
-        self.menu.add_vertical_margin(30)
+        self.menu.add_vertical_margin(10)
         mini_data = self.database.load_data("mini")
         original_1_name = str(mini_data[0]['ID'])
         original_1_score ='{0:>05s}'.format(str(mini_data[0]['score']))
@@ -196,13 +227,13 @@ class Menu:
         r3="#3 : "+original_3_name+"    "+ original_3_score
         r4="#4 : "+original_4_name+"    "+ original_4_score
         r5="#5 : "+original_5_name+"    "+ original_5_score
-        self.menu.add_button("       ID       Score", self.show_the_Twohands)
-        self.menu.add_button(r1, self.show_the_Twohands,font_size=self.fontsize)
-        self.menu.add_button(r2, self.show_the_Twohands,font_size=self.fontsize)
-        self.menu.add_button(r3, self.show_the_Twohands,font_size=self.fontsize)
-        self.menu.add_button(r4, self.show_the_Twohands,font_size=self.fontsize)
-        self.menu.add_button(r5, self.show_the_Twohands,font_size=self.fontsize)
-        self.menu.add_button('back', self.reset)
+        self.menu.add_button("       ID       Score", self.show_the_Twohands,font_size=self.size)
+        self.menu.add_button(r1, self.show_the_Twohands,font_size=self.size)
+        self.menu.add_button(r2, self.show_the_Twohands,font_size=self.size)
+        self.menu.add_button(r3, self.show_the_Twohands,font_size=self.size)
+        self.menu.add_button(r4, self.show_the_Twohands,font_size=self.size)
+        self.menu.add_button(r5, self.show_the_Twohands,font_size=self.size)
+        self.menu.add_button('back', self.reset,font_size=self.size)
 
 
     def start_the_game(self):
@@ -275,7 +306,11 @@ while True:
         elif event.type == VIDEORESIZE:
             mymenu.w=event.w
             mymenu.h=event.h
-            mymenu.fontsize=int((mymenu.w+mymenu.h)/40)
+            mymenu.size=int((mymenu.h)/20)
+            mymenu.margin=int((mymenu.h)/6)
+            mymenu.margin2=(0,int((mymenu.h)/30))
+            mymenu.margin3=(0,int((mymenu.h)/15))
+            mymenu.margin4=(0,int((mymenu.h)/60))
             print(mymenu.w)
             print(mymenu.h)
             mymenu.back()
