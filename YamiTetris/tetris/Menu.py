@@ -52,7 +52,7 @@ class Menu:
         self.page=0
         self.menu.clear()
         mytheme.widget_margin=self.margin3
-        self.menu.add_vertical_margin(self.h/6)
+        self.menu.add_vertical_margin(self.margin)
         self.menu.add_button('   Select mode   ', self.show_game,font_size=self.size)
         self.menu.add_button('    Show Rank    ', self.show_rank,font_size=self.size)
         self.menu.add_button('        Quit         ', pygame_menu.events.EXIT,font_size=self.size)
@@ -65,7 +65,7 @@ class Menu:
         mytheme.widget_margin=self.margin3
 
         self.menu.clear()
-        self.menu.add_vertical_margin(self.h/6)
+        self.menu.add_vertical_margin(self.margin)
         self.menu.add_button('   Select mode   ', self.show_game,font_size=self.size)
         self.menu.add_button('    Show Rank    ', self.show_rank,font_size=self.size)
         self.menu.add_button('        Quit         ', pygame_menu.events.EXIT,font_size=self.size)
@@ -119,6 +119,7 @@ class Menu:
     def show_score(self ,game_mode,game_score):
         self.page=6
         mytheme.widget_margin=self.margin3
+        self.menu.add_vertical_margin(self.margin)
         self.surface=pygame.display.set_mode((self.w,self.h),RESIZABLE)
         self.mode=game_mode
         self.score=game_score
