@@ -58,10 +58,10 @@ class Var:
                -5.3416512085013395, -4.072687054171711, -5.936652569831475, -2.3140398163110643, -4.842883337741306,
                17.677262456993276, -4.42668539845469, -6.8954976464473585, 4.481308299774875]  # 21755 lignes
 
-    keyboard_delay = 150
-    keyboard_interval = 100
+    keyboard_delay = 200
+    keyboard_interval = 150
 
-    display_max_height = 900
+    display_max_height = 792
     display_min_height = 450
 
 
@@ -79,6 +79,9 @@ class Var:
     WHITE = (255, 255, 255)
     MAIN_BLUE = (62, 149, 195)
     MAIN_WHITE = (228, 230, 246)
+    MAIN_VIOLET  = (153, 153, 255)
+    MAIN_VIOLET_W = (153, 153, 255, 50)
+    MAIN_YELLOW = (255, 217, 90)
     w_pink = (231, 59, 109)
     w_sky = (165, 216, 243)
     z_yellow = (252, 215, 2)
@@ -117,7 +120,7 @@ class Var:
 
     basic_block_size = 25
     basic_next_block_size_rate = 0.6
-    mini_block_size = int(basic_block_size*5/7)
+    mini_block_size = int(basic_block_size*7/5)
 
     font_size_small = 14
     font_size_middle = 16
@@ -134,22 +137,3 @@ class Var:
 
     menu_display_w = 600
     menu_display_h = 600
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
