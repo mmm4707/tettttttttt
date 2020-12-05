@@ -1,5 +1,5 @@
 import pygame
-from sound import Sound
+from variable import Var
 import pygame_menu
 from Tetris import *
 from Database import *
@@ -25,15 +25,15 @@ class Menu:
     def __init__(self):
         print('test')
         pygame.init()
-        self.w=600
-        self.h=600
+        self.w=Var.menu_display_w
+        self.h=Var.menu_display_h
         self.surface=pygame.display.set_mode((self.w,self.h),RESIZABLE)
         self.menu = pygame_menu.Menu(self.h,self.w, '', theme=mytheme)
         self.database = Database()
-        self.Mode = 0
-        self.id=0
+        self.Mode = Var.initial_mode
+        self.id=Var.initial_id
         self.mode='origin'
-        self.score=0
+        self.score=Var.initial_score
         self.tetris=Tetris()
         self.page=0
         self.size=int((self.h)/15)
@@ -42,6 +42,9 @@ class Menu:
         self.margin2=(0,int((self.h)/30))
         self.margin3=(0,int((self.h)/15))
         self.margin4=(0,int((self.h)/60))
+        self.page=Var.initial_page
+
+ 
     def back(self):
         self.surface=pygame.display.set_mode((self.w,self.h),RESIZABLE)
         self.menu = pygame_menu.Menu(self.h,self.w, '', theme=mytheme)
@@ -49,7 +52,7 @@ class Menu:
 
     def run(self):
         print('test2')
-        self.page=0
+        self.page=Var.initial_page
         self.menu.clear()
         mytheme.widget_margin=self.margin3
         self.menu.add_vertical_margin(self.margin)
@@ -63,6 +66,8 @@ class Menu:
         Sound.click.play()
         self.page=0
         mytheme.widget_margin=self.margin3
+        Var.click.play()
+        self.page=Var.initial_page
 
         self.menu.clear()
         self.menu.add_vertical_margin(self.margin)
@@ -73,7 +78,7 @@ class Menu:
 
     def show_game(self):  ## 게임 목록 들어가면 나오는 목록들
         self.page=1
-        Sound.click.play()
+        Var.click.play()
 
         self.menu.clear()
         mytheme.widget_margin=self.margin2
@@ -99,6 +104,7 @@ class Menu:
         self.page=2
         Sound.click.play()
         mytheme.widget_margin=self.margin2
+        Var.click.play()
 
         self.menu.clear()
         self.menu.add_vertical_margin(self.margin)
@@ -133,13 +139,13 @@ class Menu:
         self.reset()
 
     def stop(self):
-        Sound.click.play()
+        Var.click.play()
         self.menu.disable()
 
 
     def Single_the_rank(self):
         self.page=3
-        Sound.click.play()
+        Var.click.play()
         self.menu.clear()
         mytheme.widget_margin=self.margin4
         self.menu.add_vertical_margin(self.margin)
@@ -173,7 +179,7 @@ class Menu:
 
     def Twohands_the_rank(self):
         self.page=4
-        Sound.click.play()
+        Var.click.play()
         self.menu.clear()
         mytheme.widget_margin=self.margin4
         self.menu.add_vertical_margin(self.margin)
@@ -206,7 +212,7 @@ class Menu:
 
     def Mini_the_rank(self):
         self.page=5
-        Sound.click.play()
+        Var.click.play()
         self.menu.clear()
         mytheme.widget_margin=self.margin4
         self.menu.add_vertical_margin(self.margin)
@@ -239,7 +245,7 @@ class Menu:
 
 
     def start_the_game(self):
-        Sound.click.play()
+        Var.click.play()
 
         self.Mode = 'basic'
         self.tetris.mode = 'basic'
@@ -249,7 +255,7 @@ class Menu:
         self.show_score(self.Mode,self.tetris.Score)
 
     def start_the_Mini(self):
-        Sound.click.play()
+        Var.click.play()
 
         self.Mode = 'mini'
         self.tetris.mode='mini'
@@ -260,7 +266,7 @@ class Menu:
 
 
     def start_the_Twohands(self):
-        Sound.click.play()
+        Var.click.play()
 
         self.Mode = 'two'
         self.tetris.mode='two'
@@ -272,7 +278,7 @@ class Menu:
 
 
     def start_the_Ai(self):
-        Sound.click.play()
+        Var.click.play()
 
         self.Mode = 'ai'
         self.tetris.mode='ai'
