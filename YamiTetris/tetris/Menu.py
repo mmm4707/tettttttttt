@@ -44,7 +44,7 @@ class Menu:
         self.margin4=(0,int((self.h)/60))
         self.page=Var.initial_page
 
- 
+
     def back(self):
         self.surface=pygame.display.set_mode((self.w,self.h),RESIZABLE)
         self.menu = pygame_menu.Menu(self.h,self.w, '', theme=mytheme)
@@ -63,7 +63,7 @@ class Menu:
     def reset(self):  ## 뒤로 갈때 보여줄 목록들
         self.surface = pygame.display.set_mode((self.w, self.h), RESIZABLE)
         self.menu = pygame_menu.Menu(self.h, self.w, '', theme=mytheme)
-        Sound.click.play()
+        #Sound.click.play()
         self.page=0
         mytheme.widget_margin=self.margin3
         Var.click.play()
