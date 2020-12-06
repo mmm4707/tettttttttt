@@ -153,6 +153,32 @@ class Tetris:
             self.board.full_drop_piece2()
 
 
+    def vdresize2(self, resize, evheight):
+        if (evheight>Var.display_min_height):
+
+            if self.mode=='basic':
+                font_resize = evheight/450
+            if self.mode=='mini':
+                font_resize = evheight/525
+            if self.mode=='two':
+                font_resize = evheight/450
+            if self.mode=='ai':
+                font_resize = evheight/450
+
+            self.board.block_size = int(self.board.block_size*resize)
+            if self.mode=='ai':
+                self.board.display_width = (self.board.width + self.board.status_size) * self.board.block_size * 2
+            else:
+                self.board.display_width = (self.board.width + self.board.status_size) * self.board.block_size
+            self.board.status_width = self.board.block_size * self.board.status_size
+            self.board.font_size_big_in = int(Var.font_size_big*font_resize)
+            self.board.font_size_middle_in = int(Var.font_size_middle*font_resize)
+            self.board.font_size_small_in = int(Var.font_size_small*font_resize)
+
+            self.board.display_height = self.board.height * self.board.block_size
+
+            pygame.display.set_mode((self.board.display_width, self.board.display_height), RESIZABLE )
+
     def vdresize(self, resize, evwidth):
         if ( self.board.height*int(self.board.block_size*resize)<self.min_height):
             if self.mode == 'basic':
@@ -210,15 +236,12 @@ class Tetris:
     def run(self):
         pygame.init()
         (width, height) = pygame.display.get_surface().get_size()
+        pygame.display.set_mode((width, height),RESIZABLE).fill(Var.BLACK)
         print(width, height)
-        check = False
-        if width > 1200 :
-            print('dd')
-            check = True
         self.board = Board(self.mode)
-        if check == True:
-            resize = width/self.board.display_width
-            self.vdresize(resize, width)
+        self.board.screen.fill(Var.BLACK)
+        resize = height/self.board.display_height
+        self.vdresize2(resize, height)
         icon = pygame.image.load('assets/images/icon.PNG')  # png -> PNG로 수정
         pygame.display.set_icon(icon)
         pygame.display.set_caption('Tetris')
