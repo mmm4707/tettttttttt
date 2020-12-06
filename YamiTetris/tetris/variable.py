@@ -90,6 +90,7 @@ class Var:
     z_blue = (159, 68, 145)
     y_red = (241, 141, 56)
     y_violet = (96, 57, 140)
+    
 
     T_COLOR = [w_pink, w_sky, z_blue, z_green, z_yellow, y_violet, y_red, DARK_GRAY]
     colors = [BLACK, RED, GREEN, BLUE, ORANGE, YELLOW, PINK, CYON, GRAY]
@@ -102,7 +103,7 @@ class Var:
     initial_level = 1
     initial_goal = 2
     initial_combo = 0
-    initial_page = 0
+    initial_page = "page0"
     initial_mode = 0
     initial_id = 0
 
@@ -171,15 +172,15 @@ class Var:
     ## 메뉴 부분
     ## 메뉴 이미지 추가 부분
     menu_image = pygame_menu.baseimage.BaseImage(
-        image_path='assets/images/메인메뉴2.PNG',
+        image_path='assets/images/메인메뉴2.png',
         drawing_mode=pygame_menu.baseimage.IMAGE_MODE_FILL	)
     widget_image = pygame_menu.baseimage.BaseImage(
-        image_path='assets/images/메인위젯.PNG',
+        image_path='assets/images/메인위젯.png',
         drawing_mode=pygame_menu.baseimage.IMAGE_MODE_FILL)
 
 
     mytheme=pygame_menu.themes.THEME_ORANGE.copy()                  # 메뉴 기본 테마 설정
-    mytheme.widget_font_color=(153,153,255)                         # 메뉴 위젯 폰트 컬러
+    mytheme.widget_font_color=MAIN_VIOLET                         # 메뉴 위젯 폰트 컬러
     mytheme.background_color = menu_image                           # 메뉴 배경 설정
     #mytheme.widget_background_color = widget_image                 # 메뉴 위젯 배경 설정
     mytheme.title_bar_style=pygame_menu.widgets.MENUBAR_STYLE_NONE  # 메뉴 타이틀 바 모양 설정
