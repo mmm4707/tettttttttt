@@ -47,6 +47,7 @@ class Menu:
 
     def reset(self):  ## 뒤로 갈때 보여줄 목록들
         self.surface = pygame.display.set_mode((self.w, self.h), RESIZABLE)
+
         self.menu = pygame_menu.Menu(self.h, self.w, '', theme=self.mytheme)
         self.page='page0'
         self.mytheme.widget_margin=self.margin3
