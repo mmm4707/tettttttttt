@@ -102,7 +102,7 @@ class Menu:
 
     def show_rank(self):  ## 랭크 들어가면 나오는 목록들기
         self.page=2
-        Sound.click.play()
+        #Sound.click.play()
         mytheme.widget_margin=self.margin2
         Var.click.play()
 
