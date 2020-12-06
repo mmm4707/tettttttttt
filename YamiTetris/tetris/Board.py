@@ -13,29 +13,29 @@ class Board:
         self.mode = mode
 
         if (mode=='basic'):
-            self.width = 10  #맵의 좌에서 우로 사이즈
-            self.height = 18 #맵 위에서 아래로 사이즈
+            self.width = Var.basic_width  #맵의 좌에서 우로 사이즈
+            self.height = Var.basic_height #맵 위에서 아래로 사이즈
             self.block_size = Var.basic_block_size  #바꾸면 맵 블럭크기 변경
-            self.status_size = 6
-            self.display_width = (self.width + self.status_size) * self.block_size
+            self.status_size = Var.basic_status_size
+            self.display_width = Var.basic_display_width
         if(mode=='mini'):
-            self.width = 5  #맵의 좌에서 우로 사이즈
-            self.height = 15 #맵 위에서 아래로 사이즈
-            self.block_size = Var.mini_block_size  #바꾸면 맵 블럭크  기 변경
-            self.status_size = 5
-            self.display_width = (self.width + self.status_size) * self.block_size
+            self.width = Var.mini_width  #맵의 좌에서 우로 사이즈
+            self.height = Var.mini_height #맵 위에서 아래로 사이즈
+            self.block_size = Var.mini_block_size  #바꾸면 맵 블럭크기 변경
+            self.status_size = Var.mini_status_size
+            self.display_width = Var.mini_display_width
         if(mode=='two'):
-            self.width = 20  # 맵의 좌에서 우로 사이즈
-            self.height = 18  # 맵 위에서 아래로 사이즈
-            self.block_size = Var.basic_block_size   # 바꾸면 맵 블럭크기 변경
-            self.status_size = 8
-            self.display_width = (self.width + self.status_size) * self.block_size
+            self.width = Var.two_width  #맵의 좌에서 우로 사이즈
+            self.height = Var.two_height #맵 위에서 아래로 사이즈
+            self.block_size = Var.two_block_size  #바꾸면 맵 블럭크기 변경
+            self.status_size = Var.two_status_size
+            self.display_width = Var.two_display_width
         if(mode == "ai"):
-            self.width = 10  # 맵의 좌에서 우로 사이즈
-            self.height = 18  # 맵 위에서 아래로 사이즈
-            self.block_size = Var.basic_block_size   # 바꾸면 맵 블럭크기 변g경
-            self.status_size = 5
-            self.display_width = (self.width + self.status_size) * self.block_size*2
+            self.width = Var.ai_width  #맵의 좌에서 우로 사이즈
+            self.height = Var.ai_height #맵 위에서 아래로 사이즈
+            self.block_size = Var.ai_block_size  #바꾸면 맵 블럭크기 변경
+            self.status_size = Var.ai_status_size
+            self.display_width = Var.ai_display_width
 
 
 
@@ -77,16 +77,16 @@ class Board:
         self.goal = Var.initial_goal  #level up 도달 목표 a
 
         self.combo = Var.initial_combo # combo 수
-        self.timer0 = threading.Timer(10, self.combo_null)
-        self.timer1 = threading.Timer(10, self.combo_null)
-        self.timer2 = threading.Timer(10, self.combo_null)
-        self.timer3 = threading.Timer(10, self.combo_null)
-        self.timer4 = threading.Timer(10, self.combo_null)
-        self.timer5 = threading.Timer(10, self.combo_null)
-        self.timer6 = threading.Timer(10, self.combo_null)
-        self.timer7 = threading.Timer(10, self.combo_null)
-        self.timer8 = threading.Timer(10, self.combo_null)
-        self.timer9 = threading.Timer(10, self.combo_null)
+        self.timer0 = threading.Timer(Var.combo_reset_time, self.combo_null)
+        self.timer1 = threading.Timer(Var.combo_reset_time, self.combo_null)
+        self.timer2 = threading.Timer(Var.combo_reset_time, self.combo_null)
+        self.timer3 = threading.Timer(Var.combo_reset_time, self.combo_null)
+        self.timer4 = threading.Timer(Var.combo_reset_time, self.combo_null)
+        self.timer5 = threading.Timer(Var.combo_reset_time, self.combo_null)
+        self.timer6 = threading.Timer(Var.combo_reset_time, self.combo_null)
+        self.timer7 = threading.Timer(Var.combo_reset_time, self.combo_null)
+        self.timer8 = threading.Timer(Var.combo_reset_time, self.combo_null)
+        self.timer9 = threading.Timer(Var.combo_reset_time, self.combo_null)
         self.timer_list=[self.timer0,self.timer1,self.timer2,self.timer3,self.timer4,self.timer5,self.timer6,self.timer7,self.timer8,self.timer9]
         for _ in range(self.height):
             self.board.append([0]*self.width)

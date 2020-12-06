@@ -1,4 +1,5 @@
 import pygame
+import pygame_menu
 
 class Var:
     pygame.mixer.init()
@@ -137,3 +138,59 @@ class Var:
 
     menu_display_w = 600
     menu_display_h = 600
+
+    combo_reset_time=10  # 콤보 초기화 시간 
+
+    # 기본 사이즈 조정
+    basic_width = 10  #맵의 좌에서 우로 사이즈
+    basic_height = 18 #맵 위에서 아래로 사이즈
+    basic_block_size = basic_block_size  #바꾸면 맵 블럭크기 변경
+    basic_status_size = 6
+    basic_display_width = (basic_width + basic_status_size) * basic_block_size
+
+    mini_width = 5  #맵의 좌에서 우로 사이즈
+    mini_height = 15 #맵 위에서 아래로 사이즈
+    mini_block_size = mini_block_size  #바꾸면 맵 블럭크  기 변경
+    mini_status_size = 5
+    mini_display_width = (mini_width + mini_status_size) * mini_block_size
+
+    two_width = 20  # 맵의 좌에서 우로 사이즈
+    two_height = 18  # 맵 위에서 아래로 사이즈
+    two_block_size = basic_block_size   # 바꾸면 맵 블럭크기 변경
+    two_status_size = 8
+    two_display_width = (two_width + two_status_size) * two_block_size
+
+    ai_width = 10  # 맵의 좌에서 우로 사이즈
+    ai_height = 18  # 맵 위에서 아래로 사이즈
+    ai_block_size = basic_block_size   # 바꾸면 맵 블럭크기 변g경
+    ai_status_size = 5
+    ai_display_width = (ai_width + ai_status_size) * ai_block_size*2
+
+
+
+    ## 메뉴 부분
+    ## 메뉴 이미지 추가 부분
+    menu_image = pygame_menu.baseimage.BaseImage(
+        image_path='assets/images/메인메뉴2.PNG',
+        drawing_mode=pygame_menu.baseimage.IMAGE_MODE_FILL	)
+    widget_image = pygame_menu.baseimage.BaseImage(
+        image_path='assets/images/메인위젯.PNG',
+        drawing_mode=pygame_menu.baseimage.IMAGE_MODE_FILL)
+
+
+    mytheme=pygame_menu.themes.THEME_ORANGE.copy()                  # 메뉴 기본 테마 설정
+    mytheme.widget_font_color=(153,153,255)                         # 메뉴 위젯 폰트 컬러
+    mytheme.background_color = menu_image                           # 메뉴 배경 설정
+    #mytheme.widget_background_color = widget_image                 # 메뉴 위젯 배경 설정
+    mytheme.title_bar_style=pygame_menu.widgets.MENUBAR_STYLE_NONE  # 메뉴 타이틀 바 모양 설정
+    mytheme.widget_alignment=pygame_menu.locals.ALIGN_CENTER        # 메뉴 가운데 정렬 설정
+    mytheme.widget_font =pygame_menu.font.FONT_NEVIS                # 메뉴 폰트 설정
+    mytheme.widget_margin=(0,40)                                    # 메뉴 위젯 사이 간격 설정
+
+
+    size=int((menu_display_h)/15)                                      # 기본 폰트 사이즈 변경시
+    size2=int((menu_display_h)/20)                                     # 랭크창 폰트 사이즈 변경
+    margin=int((menu_display_h)/6)                                     # 위에서 부터 처음 위젯 까지 사이 간격 조정
+    margin2=(0,int((menu_display_h)/30))                               # 게임 선택 및 랭크 선택 위젯 사이 간격
+    margin3=(0,int((menu_display_h)/15))                               # 위젯 3개 있는 곳 사이 간격
+    margin4=(0,int((menu_display_h)/60))                               # 랭크 창 위젯 사이 간격

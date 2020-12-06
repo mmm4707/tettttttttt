@@ -4,22 +4,6 @@ import pygame_menu
 from Tetris import *
 from Database import *
 
-menu_image = pygame_menu.baseimage.BaseImage(
-    image_path='assets/images/메인메뉴2.PNG',
-    drawing_mode=pygame_menu.baseimage.IMAGE_MODE_FILL	)
-widget_image = pygame_menu.baseimage.BaseImage(
-    image_path='assets/images/메인위젯.PNG',
-    drawing_mode=pygame_menu.baseimage.IMAGE_MODE_FILL)
-
-mytheme=pygame_menu.themes.THEME_ORANGE.copy()
-mytheme.widget_font_color=(153,153,255)
-mytheme.background_color = menu_image
-#mytheme.widget_background_color = widget_image
-mytheme.title_bar_style=pygame_menu.widgets.MENUBAR_STYLE_NONE
-mytheme.widget_alignment=pygame_menu.locals.ALIGN_CENTER
-mytheme.widget_font =pygame_menu.font.FONT_NEVIS
-mytheme.widget_margin=(0,40)
-
 class Menu:
 
     def __init__(self):
@@ -28,33 +12,34 @@ class Menu:
         self.w=Var.menu_display_w
         self.h=Var.menu_display_h
         self.surface=pygame.display.set_mode((self.w,self.h),RESIZABLE)
-        self.menu = pygame_menu.Menu(self.h,self.w, '', theme=mytheme)
         self.database = Database()
         self.Mode = Var.initial_mode
         self.id=Var.initial_id
         self.mode='origin'
         self.score=Var.initial_score
         self.tetris=Tetris()
-        self.page=0
-        self.size=int((self.h)/15)
-        self.size2=int((self.h)/20)
-        self.margin=int((self.h)/6)
-        self.margin2=(0,int((self.h)/30))
-        self.margin3=(0,int((self.h)/15))
-        self.margin4=(0,int((self.h)/60))
+        self.page='page0'  # 페이지 순서
+        self.size=Var.size
+        self.size2=Var.size2
+        self.margin=Var.margin
+        self.margin2=Var.margin2
+        self.margin3=Var.margin3
+        self.margin4=Var.margin4
         self.page=Var.initial_page
+        self.mytheme=Var.mytheme
+        self.menu = pygame_menu.Menu(self.h,self.w, '', theme=self.mytheme)
 
 
     def back(self):
         self.surface=pygame.display.set_mode((self.w,self.h),RESIZABLE)
-        self.menu = pygame_menu.Menu(self.h,self.w, '', theme=mytheme)
+        self.menu = pygame_menu.Menu(self.h,self.w, '', theme=self.mytheme)
         self.menu.draw(self.surface)
 
     def run(self):
         print('test2')
         self.page=Var.initial_page
         self.menu.clear()
-        mytheme.widget_margin=self.margin3
+        self.mytheme.widget_margin=self.margin3
         self.menu.add_vertical_margin(self.margin)
         self.menu.add_button('   Select mode   ', self.show_game,font_size=self.size)
         self.menu.add_button('    Show Rank    ', self.show_rank,font_size=self.size)
@@ -62,10 +47,10 @@ class Menu:
 
     def reset(self):  ## 뒤로 갈때 보여줄 목록들
         self.surface = pygame.display.set_mode((self.w, self.h), RESIZABLE)
-        self.menu = pygame_menu.Menu(self.h, self.w, '', theme=mytheme)
-        #Sound.click.play()
-        self.page=0
-        mytheme.widget_margin=self.margin3
+
+        self.menu = pygame_menu.Menu(self.h, self.w, '', theme=self.mytheme)
+        self.page='page0'
+        self.mytheme.widget_margin=self.margin3
         Var.click.play()
         self.page=Var.initial_page
 
@@ -77,11 +62,11 @@ class Menu:
 
 
     def show_game(self):  ## 게임 목록 들어가면 나오는 목록들
-        self.page=1
+        self.page='page1'
         Var.click.play()
 
         self.menu.clear()
-        mytheme.widget_margin=self.margin2
+        self.mytheme.widget_margin=self.margin2
 
         self.menu.add_vertical_margin(self.margin)
 
@@ -101,9 +86,8 @@ class Menu:
         self.menu.add_button('           back            ', self.reset,font_size=self.size)
 
     def show_rank(self):  ## 랭크 들어가면 나오는 목록들기
-        self.page=2
-        #Sound.click.play()
-        mytheme.widget_margin=self.margin2
+        self.page='page2'
+        self.mytheme.widget_margin=self.margin2
         Var.click.play()
 
         self.menu.clear()
@@ -123,8 +107,8 @@ class Menu:
 
 
     def show_score(self ,game_mode,game_score):
-        self.page=6
-        mytheme.widget_margin=self.margin3
+        self.page='page6'
+        self.mytheme.widget_margin=self.margin3
         self.menu.add_vertical_margin(self.margin)
         self.surface=pygame.display.set_mode((self.w,self.h),RESIZABLE)
         self.mode=game_mode
@@ -144,10 +128,10 @@ class Menu:
 
 
     def Single_the_rank(self):
-        self.page=3
+        self.page='page3'
         Var.click.play()
         self.menu.clear()
-        mytheme.widget_margin=self.margin4
+        self.mytheme.widget_margin=self.margin4
         self.menu.add_vertical_margin(self.margin)
         self.menu.add_label("--Single Rank--", max_char=0, selectable=False, size=20)
 
@@ -178,10 +162,10 @@ class Menu:
 
 
     def Twohands_the_rank(self):
-        self.page=4
+        self.page='page4'
         Var.click.play()
         self.menu.clear()
-        mytheme.widget_margin=self.margin4
+        self.mytheme.widget_margin=self.margin4
         self.menu.add_vertical_margin(self.margin)
         self.menu.add_label("--Two Rank--", max_char=0, selectable=False, size=20)
 
@@ -211,10 +195,10 @@ class Menu:
         self.menu.add_button('back', self.reset,font_size=self.size2)
 
     def Mini_the_rank(self):
-        self.page=5
+        self.page='page5'
         Var.click.play()
         self.menu.clear()
-        mytheme.widget_margin=self.margin4
+        self.mytheme.widget_margin=self.margin4
         self.menu.add_vertical_margin(self.margin)
         self.menu.add_label("--Mini Rank--", max_char=0, selectable=False, size=20)
 
@@ -246,7 +230,6 @@ class Menu:
 
     def start_the_game(self):
         Var.click.play()
-
         self.Mode = 'basic'
         self.tetris.mode = 'basic'
         if __name__ == "__main__":
@@ -312,31 +295,32 @@ while True:
         if event.type == pygame.QUIT:
             exit()
         elif event.type == VIDEORESIZE:
-            mymenu.w=event.w
-            mymenu.h=event.h
-            mymenu.size=int((mymenu.h)/15)
-            mymenu.size2=int((mymenu.h)/20)
-
-            mymenu.margin=int((mymenu.h)/6)
-            mymenu.margin2=(0,int((mymenu.h)/30))
-            mymenu.margin3=(0,int((mymenu.h)/15))
-            mymenu.margin4=(0,int((mymenu.h)/60))
-            print(mymenu.w)
-            print(mymenu.h)
+            Var.menu_display_w=event.w
+            Var.menu_display_h=event.h
+            mymenu.w=Var.menu_display_w
+            mymenu.h=Var.menu_display_h
+            mymenu.size=Var.size
+            mymenu.size2=Var.size2
+            mymenu.margin=Var.margin
+            mymenu.margin2=Var.margin2
+            mymenu.margin3=Var.margin3
+            mymenu.margin4=Var.margin4
+            print(Var.menu_display_w)
+            print(Var.menu_display_h)
             mymenu.back()
-            if mymenu.page==0:
+            if mymenu.page=='page0':
                 mymenu.run()
-            elif mymenu.page==1:
+            elif mymenu.page=='page1':
                 mymenu.show_game()
-            elif mymenu.page==2:
+            elif mymenu.page=='page2':
                 mymenu.show_rank()
-            elif mymenu.page==3:
+            elif mymenu.page=='page3':
                 mymenu.Single_the_rank()
-            elif mymenu.page==4:
+            elif mymenu.page=='page4':
                 mymenu.Twohands_the_rank()
-            elif mymenu.page==5:
+            elif mymenu.page=='page5':
                 mymenu.Mini_the_rank()
-            elif mymenu.page==6:
+            elif mymenu.page=='page6':
                 mymenu.show_score(mymenu.mode,mymenu.score)
 
     if mymenu.menu.is_enabled():
