@@ -216,19 +216,19 @@ class Board:
 
         #왼쪽벽과 충돌하는 경우
         elif collide == Board.COLLIDE_ERROR['left_wall']:
-            if self.can_move_piece(dx=Var.x_move_scale, dy=0):
-                self.move_piece(dx=Var.x_move_scale, dy=0)
-            elif self.can_move_piece(dx=Var.x_move_scale*2, dy=0):
-                self.move_piece(dx=Var.x_move_scale*2, dy=0)
+            if self.can_move_piece(dx=Var.x_move_scale, dy=Var.y_move_scale_zero):
+                self.move_piece(dx=Var.x_move_scale, dy=Var.y_move_scale_zero)
+            elif self.can_move_piece(dx=Var.x_move_scale*2, dy=Var.y_move_scale_zero):
+                self.move_piece(dx=Var.x_move_scale*2, dy=Var.y_move_scale_zero)
             else:
                 self.piece.rotate(not clockwise)
 
         #오른쪽 벽과 충돌하는 경우
         elif collide == Board.COLLIDE_ERROR['right_wall']:
-            if self.can_move_piece(dx=-Var.x_move_scale, dy=0):
-                self.move_piece(dx=-Var.x_move_scale, dy=0)
-            elif self.can_move_piece(dx=-Var.x_move_scale*2, dy=0):
-                self.move_piece(dx=-Var.x_move_scale*2, dy=0)
+            if self.can_move_piece(dx=-Var.x_move_scale, dy=Var.y_move_scale_zero):
+                self.move_piece(dx=-Var.x_move_scale, dy=Var.y_move_scale_zero)
+            elif self.can_move_piece(dx=-Var.x_move_scale*2, dy=Var.y_move_scale_zero):
+                self.move_piece(dx=-Var.x_move_scale*2, dy=Var.y_move_scale_zero)
             else:
                 self.piece.rotate(not clockwise)
         else:
@@ -244,19 +244,19 @@ class Board:
 
         # 왼쪽벽과 충돌하는 경우
         elif collide == Board.COLLIDE_ERROR['left_wall']:
-            if self.can_move_piece2(dx=Var.x_move_scale, dy=0):
-                self.move_piece2(dx=Var.x_move_scale, dy=0)
-            elif self.can_move_piece2(dx=Var.x_move_scale*2, dy=0):
-                self.move_piece2(dx=Var.x_move_scale*2, dy=0)
+            if self.can_move_piece2(dx=Var.x_move_scale, dy=Var.y_move_scale_zero):
+                self.move_piece2(dx=Var.x_move_scale, dy=Var.y_move_scale_zero)
+            elif self.can_move_piece2(dx=Var.x_move_scale*2, dy=Var.y_move_scale_zero):
+                self.move_piece2(dx=Var.x_move_scale*2, dy=Var.y_move_scale_zero)
             else:
                 self.piece2.rotate(not clockwise)
 
             # 오른쪽 벽과 충돌하는 경우
         elif collide == Board.COLLIDE_ERROR['right_wall']:
-            if self.can_move_piece2(dx=-Var.x_move_scale, dy=0):
-                self.move_piece2(dx=-Var.x_move_scale, dy=0)
-            elif self.can_move_piece2(dx=-Var.x_move_scale*2, dy=0):
-                self.move_piece2(dx=-Var.x_move_scale*2, dy=0)
+            if self.can_move_piece2(dx=-Var.x_move_scale, dy=Var.y_move_scale_zero):
+                self.move_piece2(dx=-Var.x_move_scale, dy=Var.y_move_scale_zero)
+            elif self.can_move_piece2(dx=-Var.x_move_scale*2, dy=Var.y_move_scale_zero):
+                self.move_piece2(dx=-Var.x_move_scale*2, dy=Var.y_move_scale_zero)
             else:
                 self.piece2.rotate(not clockwise)
 
@@ -280,14 +280,14 @@ class Board:
 #블럭 내리기
     def drop_piece(self, mode):
         if self.can_drop_piece():
-            self.move_piece(dx=0, dy=Var.y_move_scale)
+            self.move_piece(dx=Var.x_move_scale_zero, dy=Var.y_move_scale)
         else:
             self.absorb_piece(self.mode)
             self.delete_lines()
 
     def drop_piece2(self):
         if self.can_drop_piece2():
-            self.move_piece2(dx=0, dy=Var.y_move_scale)
+            self.move_piece2(dx=Var.x_move_scale_zero, dy=Var.y_move_scale)
         else:
             self.absorb_piece2()
             self.delete_lines()
@@ -324,14 +324,14 @@ class Board:
             self.board[y] = list(self.board[y-1])
 
     def combo_null(self):
-        self.combo=0
+        self.combo=Var.combo_max
 
     def combo_null_start(self):
-        for i in range(9):
+        for i in range(Var.combo_max):
             if self.combo==i:
                 self.timer_list[i]=threading.Timer(10, self.combo_null)
                 self.timer_list[i].start()
-                for j in range(9):
+                for j in range(Var.combo_max):
                     if i != j :
                         self.timer_list[j].cancel()
     # 라인 삭제하기
