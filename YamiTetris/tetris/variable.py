@@ -98,12 +98,15 @@ class Var:
 
     x_move_scale = 1
     y_move_scale = 1
+    x_move_scale_zero = 0
+    y_move_scale_zero = 0
 
     initial_score = 0
     initial_level = 1
     initial_goal = 2
     initial_combo = 0
-    initial_page = "page0"
+
+    initial_page = 'page0'
     initial_mode = 0
     initial_id = 0
 
@@ -117,7 +120,7 @@ class Var:
     AI_per_speed = int(user_per_speed / 2)
 
 
-
+    combo_max=0
 
 
     basic_block_size = 25
@@ -140,7 +143,7 @@ class Var:
     menu_display_w = 600
     menu_display_h = 600
 
-    combo_reset_time=10  # 콤보 초기화 시간 
+    combo_reset_time=10  # 콤보 초기화 시간
 
     # 기본 사이즈 조정
     basic_width = 10  #맵의 좌에서 우로 사이즈
@@ -187,11 +190,17 @@ class Var:
     mytheme.widget_alignment=pygame_menu.locals.ALIGN_CENTER        # 메뉴 가운데 정렬 설정
     mytheme.widget_font =pygame_menu.font.FONT_NEVIS                # 메뉴 폰트 설정
     mytheme.widget_margin=(0,40)                                    # 메뉴 위젯 사이 간격 설정
-
-
     size=int((menu_display_h)/15)                                      # 기본 폰트 사이즈 변경시
     size2=int((menu_display_h)/20)                                     # 랭크창 폰트 사이즈 변경
     margin=int((menu_display_h)/6)                                     # 위에서 부터 처음 위젯 까지 사이 간격 조정
     margin2=(0,int((menu_display_h)/30))                               # 게임 선택 및 랭크 선택 위젯 사이 간격
     margin3=(0,int((menu_display_h)/15))                               # 위젯 3개 있는 곳 사이 간격
-    margin4=(0,int((menu_display_h)/60))                               # 랭크 창 위젯 사이 간격
+    margin4=(0,int((menu_display_h)/60))
+
+    font_rate1=15
+    font_rate2=20
+    margin_rate1=6
+    margin_rate2=30
+    margin_rate3=15
+    margin_rate4=60
+                    # 랭크 창 위젯 사이 간격

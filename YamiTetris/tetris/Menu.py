@@ -298,14 +298,15 @@ while True:
             Var.menu_display_h=event.h
             mymenu.w=Var.menu_display_w
             mymenu.h=Var.menu_display_h
-            mymenu.size=Var.size
-            mymenu.size2=Var.size2
-            mymenu.margin=Var.margin
-            mymenu.margin2=Var.margin2
-            mymenu.margin3=Var.margin3
-            mymenu.margin4=Var.margin4
+            mymenu.size=int((Var.menu_display_h)/Var.font_rate1)
+            mymenu.size2=int((Var.menu_display_h)/Var.font_rate2)
+            mymenu.margin=int((Var.menu_display_h)/Var.margin_rate1)
+            mymenu.margin2=(0,int((Var.menu_display_h)/Var.margin_rate2))
+            mymenu.margin3=(0,int((Var.menu_display_h)/Var.margin_rate3))
+            mymenu.margin4=(0,int((Var.menu_display_h)/Var.margin_rate4))
             print(Var.menu_display_w)
             print(Var.menu_display_h)
+            print(mymenu.size2)
             mymenu.back()
             if mymenu.page=='page0':
                 mymenu.run()
