@@ -7,7 +7,7 @@ from variable import Var
 
 class Board:
     #충돌에러
-    COLLIDE_ERROR = {'no_error' : 0, 'right_wall':1, 'left_wall':2,'bottom':3, 'overlap':4}
+    COLLIDE_ERROR = Var.error_type
 
     def __init__(self,  mode):
         self.mode = mode
@@ -54,7 +54,7 @@ class Board:
 
         # 상태 줄 정보
         #(self.width*self.block_size) = self.width * self.block_size
-        self.start_status_bar_y = 0
+        self.start_status_bar_y = Var.start_status_bar_y
         if mode=='two':
             self.status_width = self.block_size * self.status_size
         else:
@@ -62,7 +62,7 @@ class Board:
         #(self.height*self.block_size) = self.height * self.block_size
 
         #(self.width * self.block_size + self.display_width / 2) = self.width * self.block_size + self.display_width / 2
-        self.ai_start_status_bar_y = 0
+        self.ai_start_status_bar_y = Var.start_status_bar_y
 
         self.font_size_small_in = Var.font_size_small
         self.font_size_middle_in = Var.font_size_middle
@@ -74,7 +74,7 @@ class Board:
         self.board = []
         self.score = Var.initial_score #시작 점수
         self.level = Var.initial_level #시작 level
-        self.goal = Var.initial_goal  #level up 도달 목표 a
+        self.goal = Var.level_goal_per  #level up 도달 목표 a
 
         self.combo = Var.initial_combo # combo 수
         self.timer0 = threading.Timer(Var.combo_reset_time, self.combo_null)
@@ -89,7 +89,7 @@ class Board:
         self.timer9 = threading.Timer(Var.combo_reset_time, self.combo_null)
         self.timer_list=[self.timer0,self.timer1,self.timer2,self.timer3,self.timer4,self.timer5,self.timer6,self.timer7,self.timer8,self.timer9]
         for _ in range(self.height):
-            self.board.append([0]*self.width)
+            self.board.append([Var.board_empty_state]*self.width)
 
     def generate_piece(self, mode):
         self.piece = Piece()
@@ -143,7 +143,7 @@ class Board:
 #충돌 관련
     def block_collide_with_board(self, x, y):
         #왼쪽 끝점 기준 (0,0)
-        if x < 0:               # 왼쪽 벽
+        if x < Var.board_start_x:               # 왼쪽 벽
             return Board.COLLIDE_ERROR['left_wall']
         elif x >= self.width:   #가로 길이 넘어가면
             return Board.COLLIDE_ERROR['right_wall']
@@ -155,7 +155,7 @@ class Board:
 
     def block_collide_with_Two_Baord2(self, x, y):
         #왼쪽 끝점 기준 (0,0)
-        if x < 0:               # 왼쪽 벽
+        if x < Var.board_start_x:               # 왼쪽 벽
             return Board.COLLIDE_ERROR['left_wall']
         elif x >= self.width:   #가로 길이 넘어가면
             return Board.COLLIDE_ERROR['right_wall']
@@ -201,10 +201,10 @@ class Board:
 
 #아래로 한칸 내려가는 것
     def can_drop_piece(self):
-        return self.can_move_piece(dx=0, dy=Var.y_move_scale)
+        return self.can_move_piece(dx=Var.x_move_scale_zero, dy=Var.y_move_scale)
 
     def can_drop_piece2(self):
-        return self.can_move_piece2(dx=0, dy=Var.y_move_scale)
+        return self.can_move_piece2(dx=Var.x_move_scale_zero, dy=Var.y_move_scale)
 
 #블럭 회전 시도
     def try_rotate_piece(self, clockwise=True):
@@ -218,8 +218,8 @@ class Board:
         elif collide == Board.COLLIDE_ERROR['left_wall']:
             if self.can_move_piece(dx=Var.x_move_scale, dy=Var.y_move_scale_zero):
                 self.move_piece(dx=Var.x_move_scale, dy=Var.y_move_scale_zero)
-            elif self.can_move_piece(dx=Var.x_move_scale*2, dy=Var.y_move_scale_zero):
-                self.move_piece(dx=Var.x_move_scale*2, dy=Var.y_move_scale_zero)
+            elif self.can_move_piece(dx=Var.x_move_scale*Var.collide_move_rate, dy=Var.y_move_scale_zero):
+                self.move_piece(dx=Var.x_move_scale*Var.collide_move_rate, dy=Var.y_move_scale_zero)
             else:
                 self.piece.rotate(not clockwise)
 
@@ -227,8 +227,8 @@ class Board:
         elif collide == Board.COLLIDE_ERROR['right_wall']:
             if self.can_move_piece(dx=-Var.x_move_scale, dy=Var.y_move_scale_zero):
                 self.move_piece(dx=-Var.x_move_scale, dy=Var.y_move_scale_zero)
-            elif self.can_move_piece(dx=-Var.x_move_scale*2, dy=Var.y_move_scale_zero):
-                self.move_piece(dx=-Var.x_move_scale*2, dy=Var.y_move_scale_zero)
+            elif self.can_move_piece(dx=-Var.x_move_scale*Var.collide_move_rate, dy=Var.y_move_scale_zero):
+                self.move_piece(dx=-Var.x_move_scale*Var.collide_move_rate, dy=Var.y_move_scale_zero)
             else:
                 self.piece.rotate(not clockwise)
         else:
@@ -246,8 +246,8 @@ class Board:
         elif collide == Board.COLLIDE_ERROR['left_wall']:
             if self.can_move_piece2(dx=Var.x_move_scale, dy=Var.y_move_scale_zero):
                 self.move_piece2(dx=Var.x_move_scale, dy=Var.y_move_scale_zero)
-            elif self.can_move_piece2(dx=Var.x_move_scale*2, dy=Var.y_move_scale_zero):
-                self.move_piece2(dx=Var.x_move_scale*2, dy=Var.y_move_scale_zero)
+            elif self.can_move_piece2(dx=Var.x_move_scale*Var.collide_move_rate, dy=Var.y_move_scale_zero):
+                self.move_piece2(dx=Var.x_move_scale*Var.collide_move_rate, dy=Var.y_move_scale_zero)
             else:
                 self.piece2.rotate(not clockwise)
 
@@ -255,8 +255,8 @@ class Board:
         elif collide == Board.COLLIDE_ERROR['right_wall']:
             if self.can_move_piece2(dx=-Var.x_move_scale, dy=Var.y_move_scale_zero):
                 self.move_piece2(dx=-Var.x_move_scale, dy=Var.y_move_scale_zero)
-            elif self.can_move_piece2(dx=-Var.x_move_scale*2, dy=Var.y_move_scale_zero):
-                self.move_piece2(dx=-Var.x_move_scale*2, dy=Var.y_move_scale_zero)
+            elif self.can_move_piece2(dx=-Var.x_move_scale*Var.collide_move_rate, dy=Var.y_move_scale_zero):
+                self.move_piece2(dx=-Var.x_move_scale*Var.collide_move_rate, dy=Var.y_move_scale_zero)
             else:
                 self.piece2.rotate(not clockwise)
 
@@ -347,19 +347,19 @@ class Board:
             self.delete_line(y)
             self.combo_null_start()
             #라인 삭제시 콤보 점수 1 증가
-            self.combo+=1
+            self.combo+= Var.count_combo
 
             #콤보 *level * 10 만큼 점수 올려주기
             self.score += self.level*self.combo*Var.combo_score_rate
             #level * 10 만큼 점수 올려주기
             self.score += Var.level_score_rate * self.level
             #level up까지 목표 골수 1만큼 내려주기
-            self.goal -= 1
+            self.goal -= Var.count_goal
 
-            if self.goal == 0:  # 만약 골이 0이된다면
+            if self.goal == Var.goal_zero_state:  # 만약 골이 0이된다면
                 if self.level < Var.max_level:  #레벨이 10보다 작다면
-                    self.level += 1  #레햣 벨 올려주고
-                    self.goal = Var.initial_goal * self.level  #레벨 * 5 만큼 골 수 변경
+                    self.level += Var.count_level  #레햣 벨 올려주고
+                    self.goal = Var.level_goal_per * self.level  #레벨 * 5 만큼 골 수 변경
 
                     Var.level_up.play()
                 else:  #레벨 10부터느 골수는 없음 ( - ) 로 표시
@@ -370,44 +370,44 @@ class Board:
     def level_speed(self):
         if self.level < Var.max_level:
             pygame.time.set_timer(pygame.USEREVENT, (Var.user_start_speed -  Var.user_per_speed * self.level))
-            pygame.time.set_timer(pygame.USEREVENT + 1, (Var.AI_start_speed -  Var.AI_per_speed * self.level))
+            pygame.time.set_timer(Var.ai_event, (Var.AI_start_speed -  Var.AI_per_speed * self.level))
         else:
             pygame.time.set_timer(pygame.USEREVENT, (Var.user_start_speed -  Var.user_per_speed * self.level))
-            pygame.time.set_timer(pygame.USEREVENT + 1, (Var.AI_start_speed -  Var.AI_per_speed * self.level))
+            pygame.time.set_timer(Var.ai_event1, (Var.AI_start_speed -  Var.AI_per_speed * self.level))
 
     def game_over(self):
 
         return sum(self.board[0]) > 0 or sum(self.board[1]) > 0
 
    # 현재 내려오고 있는 블럭 그려주기
-    def draw_blocks(self, array2d, color=Var.WHITE, dx=0, dy=0):
+    def draw_blocks(self, array2d, color=Var.WHITE, dx=Var.x_move_scale_zero, dy=Var.y_move_scale_zero):
         for y, row in enumerate(array2d):
             y += dy
-            if y >= 0 and y < self.height:
+            if y >= Var.board_start_y and y < self.height:
                 for x, block in enumerate(row):
                     if block:
                         x += dx
                         x_pix, y_pix = self.pos_to_pixel(x, y)
-                        tmp = 1
-                        while self.can_move_piece(0, tmp):
-                            tmp += 1
+                        tmp = Var.y_move_scale
+                        while self.can_move_piece(Var.x_move_scale_zero, tmp):
+                            tmp += Var.y_move_scale
                         x_s, y_s = self.pos_to_pixel(x, y+tmp-1)
                         pygame.draw.rect(self.screen, Var.T_COLOR[block-1],
                                         (x_pix, y_pix, self.block_size, self.block_size))
                         pygame.draw.rect(self.screen, Var.BLACK,
                                         (x_pix, y_pix, self.block_size, self.block_size), 1)
 
-    def draw_blocks2(self, array2d, color=Var.WHITE, dx=0, dy=0):
+    def draw_blocks2(self, array2d, color=Var.WHITE, dx=Var.x_move_scale_zero, dy=Var.y_move_scale_zero):
         for y, row in enumerate(array2d):
             y += dy
-            if y >= 0 and y < self.height:
+            if y >= Var.board_start_y and y < self.height:
                 for x, block in enumerate(row):
                     if block:
                         x += dx
                         x_pix, y_pix = self.pos_to_pixel(x, y)
-                        tmp = 1
-                        while self.can_move_piece2(0, tmp):
-                            tmp += 1
+                        tmp = Var.y_move_scale
+                        while self.can_move_piece2(Var.x_move_scale_zero, tmp):
+                            tmp += Var.y_move_scale
                         x_s, y_s = self.pos_to_pixel(x, y+tmp-1)
                         pygame.draw.rect(self.screen, Var.T_COLOR[block-1],
                                         (x_pix, y_pix, self.block_size, self.block_size))
@@ -418,15 +418,15 @@ class Board:
     def draw_shadow(self, array2d, dx, dy):  # 그림자 오류 디버깅     #########
         for y, row in enumerate(array2d):
             y += dy
-            if y >= 0 and y < self.height:
+            if y >= Var.board_start_y and y < self.height:
                 for x, block in enumerate(row):
                     x += dx
                     if block:
-                        tmp = 1
-                        while self.can_move_piece(0, tmp):
-                            tmp += 1
+                        tmp = Var.y_move_scale
+                        while self.can_move_piece(Var.x_move_scale_zero, tmp):
+                            tmp += Var.y_move_scale
                         x_s, y_s = self.pos_to_pixel(x, y + tmp - 1)
-                        pygame.draw.rect(self.screen, Var.T_COLOR[7],
+                        pygame.draw.rect(self.screen, Var.DARK_GRAY,
                                          (x_s, y_s, self.block_size, self.block_size))
                         pygame.draw.rect(self.screen, Var.BLACK,
                                          (x_s, y_s, self.block_size, self.block_size), 1)
@@ -434,15 +434,15 @@ class Board:
     def draw_shadow2(self, array2d, dx, dy):  # 그림자 오류 디버깅     #########
         for y, row in enumerate(array2d):
             y += dy
-            if y >= 0 and y < self.height:
+            if y >= Var.board_start_y and y < self.height:
                 for x, block in enumerate(row):
                     x += dx
                     if block:
-                        tmp = 1
-                        while self.can_move_piece2(0, tmp):
-                            tmp += 1
+                        tmp = Var.y_move_scale
+                        while self.can_move_piece2(Var.x_move_scale_zero, tmp):
+                            tmp += Var.y_move_scale
                         x_s, y_s = self.pos_to_pixel(x, y + tmp - 1)
-                        pygame.draw.rect(self.screen, Var.T_COLOR[7],
+                        pygame.draw.rect(self.screen, Var.DARK_GRAY,
                                          (x_s, y_s, self.block_size, self.block_size))
                         pygame.draw.rect(self.screen, Var.BLACK,
                                          (x_s, y_s, self.block_size, self.block_size), 1)
