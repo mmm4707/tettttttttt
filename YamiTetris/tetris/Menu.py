@@ -3,7 +3,7 @@ from variable import Var
 import pygame_menu
 from Tetris import *
 from Database import *
-
+import time
 class Menu:
 
     def __init__(self):
@@ -30,10 +30,6 @@ class Menu:
         self.menu = pygame_menu.Menu(self.h,self.w, '', theme=self.mytheme)
 
 
-    def back(self):
-        self.surface=pygame.display.set_mode((self.w,self.h),RESIZABLE)
-        self.menu = pygame_menu.Menu(self.h,self.w, '', theme=self.mytheme)
-        self.menu.draw(self.surface)
 
     def run(self):
         print('test2')
@@ -291,24 +287,29 @@ mymenu.run()
 
 while True:
     events = pygame.event.get()
+
     for event in events:
         if event.type == pygame.QUIT:
             exit()
         elif event.type == VIDEORESIZE:
-            Var.menu_display_w=event.w
-            Var.menu_display_h=event.h
-            mymenu.w=Var.menu_display_w
-            mymenu.h=Var.menu_display_h
-            mymenu.size=int((Var.menu_display_h)/Var.font_rate1)
-            mymenu.size2=int((Var.menu_display_h)/Var.font_rate2)
-            mymenu.margin=int((Var.menu_display_h)/Var.margin_rate1)
-            mymenu.margin2=(0,int((Var.menu_display_h)/Var.margin_rate2))
-            mymenu.margin3=(0,int((Var.menu_display_h)/Var.margin_rate3))
-            mymenu.margin4=(0,int((Var.menu_display_h)/Var.margin_rate4))
-            print(Var.menu_display_w)
-            print(Var.menu_display_h)
-            print(mymenu.size2)
-            mymenu.back()
+            mymenu.w=event.w
+            mymenu.h=event.h
+            if event.w < 400:
+                mymenu.w = 400
+            if event.h < 400:
+                mymenu.h = 400
+            mymenu.surface = pygame.display.set_mode((mymenu.w, mymenu.h), RESIZABLE)
+            mymenu.menu = pygame_menu.Menu(mymenu.h, mymenu.w, '', theme=Var.mytheme)
+            mymenu.menu.draw(mymenu.surface)
+            mymenu.size=int((mymenu.h)/Var.font_rate1)
+            mymenu.size2=int((mymenu.h)/Var.font_rate2)
+            mymenu.margin=int((mymenu.h)/Var.margin_rate1)
+            mymenu.margin2=(0,int((mymenu.h)/Var.margin_rate2))
+            mymenu.margin3=(0,int((mymenu.h)/Var.margin_rate3))
+            mymenu.margin4=(0,int((mymenu.h)/Var.margin_rate4))
+            time.sleep(0.3)
+            print(mymenu.w)
+            print(mymenu.h)
             if mymenu.page=='page0':
                 mymenu.run()
             elif mymenu.page=='page1':
