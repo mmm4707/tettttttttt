@@ -678,7 +678,7 @@ class Board:
     #게임 끝나면 점수 보여주는 곳
     def show_my_score(self):
         pygame.display.set_mode((Var.menu_display_w,Var.menu_display_h))
-        fontObj = pygame.font.Font('assets/Roboto-Bold.ttf', myscore_font)
+        fontObj = pygame.font.Font('assets/Roboto-Bold.ttf', Var.myscore_font)
         textSurfaceObj = fontObj.render('My Score : '+str(self.score), True, Var.MAIN_YELLOW)
         textRectObj = textSurfaceObj.get_rect()
         self.screen.fill(Var.MAIN_VIOLET_W)
