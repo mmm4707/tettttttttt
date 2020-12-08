@@ -366,7 +366,7 @@ class Board:
                     self.goal = '-'
             self.level_speed()  #추가 - level증가에 따른 속도 증가
 
-        # 추가 - 레벨별 스피드 조절
+        #레벨별 스피드 조절
     def level_speed(self):
         if self.level < Var.max_level:
             pygame.time.set_timer(pygame.USEREVENT, (Var.user_start_speed -  Var.user_per_speed * self.level))
@@ -679,7 +679,7 @@ class Board:
 
     #게임 끝나면 점수 보여주는 곳
     def show_my_score(self):
-
+        pygame.display.set_mode((600,600))
         fontObj = pygame.font.Font('assets/Roboto-Bold.ttf', int(self.font_size_big_in*2))
 
         textSurfaceObj = fontObj.render('My Score : '+str(self.score), True, Var.MAIN_YELLOW)
