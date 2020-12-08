@@ -122,11 +122,11 @@ class Var:
     y_violet = (96, 57, 140)
     
 
-    T_COLOR = [w_pink, w_sky, z_blue, z_green, z_yellow, y_violet, y_red]
+    T_COLOR = [w_pink, w_sky, z_blue, z_green, MAIN_VIOLET, y_violet, y_red]
     colors = [BLACK, RED, GREEN, BLUE, ORANGE, YELLOW, PINK, CYON, GRAY]
 
-    keyboard_delay = 200
-    keyboard_interval = 150
+    #keyboard_delay = 200
+    #keyboard_interval = 150
 
     infoObject = () #디스플레이 사이즈 받는 용 
 
@@ -139,8 +139,14 @@ class Var:
     x_move_scale_zero = 0  # 블럭의 x축 이동 x
     y_move_scale_zero = 0 # 블럭의 y축 이동 x
     
-    board_start_x = 0       # 보드의 시작점 x좌표 
+    board_start_x = 0      # 보드의 시작점 x좌표
     board_start_y = 0      # 보드의 시작점 y좌표 
+    board_die_line=1      # 보드에서 다으면 죽는 라인 즉 맨 윗줄
+    board_line_start = 1  # 보드 지울때 첫 줄
+    delete_line=1         # 보드 지울때 한칸씩 지우기
+
+    board_die_num=0    # 맨 위에서 보드가 몇개 이상이면 죽을 것인지
+    line_size=1      # 그림자나 블록 라인 사이즈
 
     fps = 30  # 게임의 fps
     initial_score = 0   # 시작 점수 
@@ -158,7 +164,9 @@ class Var:
     rotate_start = 0      #회전 인덱스 시작값 
     rotate_cycle = 4      #회전 사이클
     next_block_shape = 1  #다음 회전한 모양 블럭 기준
-    block_start_index = 0 #블럭 인덱스 시작점 
+    block_start_index = 0 #블럭 인덱스 시작점
+
+
 
     #현재 블럭의 x축 기준 길이 
     def piece_length(piece):
@@ -213,8 +221,8 @@ class Var:
     level_score_rate = 10  # 레벨에 따른 점수 가중치 
     max_level = 10         #최대 레벨 
 
-    menu_display_w = 600
-    menu_display_h = 600
+    menu_display_w = 600  # 메뉴 시작시 처음 가로 크기
+    menu_display_h = 600  # 메뉴 시작시 처음 세로 크기
 
     combo_reset_time=10  # 콤보 초기화 시간
 
@@ -263,18 +271,24 @@ class Var:
     mytheme.title_bar_style=pygame_menu.widgets.MENUBAR_STYLE_NONE  # 메뉴 타이틀 바 모양 설정
     mytheme.widget_alignment=pygame_menu.locals.ALIGN_CENTER        # 메뉴 가운데 정렬 설정
     mytheme.widget_font =pygame_menu.font.FONT_NEVIS                # 메뉴 폰트 설정
-    mytheme.widget_margin=(0,40)                                    # 메뉴 위젯 사이 간격 설정
-    size=int((menu_display_h)/15)                                      # 기본 폰트 사이즈 변경시
-    size2=int((menu_display_h)/20)                                     # 랭크창 폰트 사이즈 변경
-    margin=int((menu_display_h)/6)                                     # 위에서 부터 처음 위젯 까지 사이 간격 조정
-    margin2=(0,int((menu_display_h)/30))                               # 게임 선택 및 랭크 선택 위젯 사이 간격
-    margin3=(0,int((menu_display_h)/15))                               # 위젯 3개 있는 곳 사이 간격
-    margin4=(0,int((menu_display_h)/60))
+    mytheme.widget_margin=(0,40)
+    font_rate1 = 15
+    font_rate2 = 20
+    margin_rate1 = 6
+    margin_rate2 = 30
+    margin_rate3 = 15
+    margin_rate4 = 45
+    # 메뉴 위젯 사이 간격 설정
+    size=int((menu_display_h)/font_rate1)                                      # 기본 폰트 사이즈 변경시
+    size2=int((menu_display_h)/font_rate2)                                     # 랭크창 폰트 사이즈 변경
+    margin=int((menu_display_h)/margin_rate1)                                     # 위에서 부터 처음 위젯 까지 사이 간격 조정
+    margin2=(0,int((menu_display_h)/margin_rate2))                               # 게임 선택 및 랭크 선택 위젯 사이 간격
+    margin3=(0,int((menu_display_h)/margin_rate3))                               # 위젯 3개 있는 곳 사이 간격
+    margin4=(0,int((menu_display_h)/margin_rate4))
+    margin_rank =10
 
-    font_rate1=15
-    font_rate2=20
-    margin_rate1=6
-    margin_rate2=30
-    margin_rate3=15
-    margin_rate4=60
-                    # 랭크 창 위젯 사이 간격
+
+
+    rank_max=4  # 랭크 보여주는 창 최대 갯수 -1
+    min_display_w =400
+    min_display_h =400

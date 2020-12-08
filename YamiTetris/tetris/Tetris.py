@@ -19,8 +19,8 @@ class Tetris:
         self.music_on_off = True
         self.check_reset = True
         self.Score = Var.initial_score
-        self.delay = Var.keyboard_delay
-        self.interval = Var.keyboard_interval
+        #self.delay = Var.keyboard_delay
+        #self.interval = Var.keyboard_interval
         self.game=False
 
         random.seed(Var.ai_random_seed)
@@ -179,22 +179,15 @@ class Tetris:
             pygame.display.set_mode((self.board.display_width, self.board.display_height), RESIZABLE )
 
     def vdresize(self, resize, evwidth):
-        print(Var.infoObject.current_h)
-        max_height = Var.infoObject.current_h - 25
+
         if (self.board.height*int(self.board.block_size*resize)<self.min_height) :
-            print(Var.infoObject.current_h)
+
             if self.mode == 'basic':
                 if (self.board.height*int(self.board.block_size*resize)<self.min_height):
                     self.board.block_size = 25
                     font_resize = 1
                     pygame.display.set_mode((int(self.min_height*(self.board.width+self.board.status_size)/self.board.height),self.min_height), RESIZABLE)
-                else:
-                    resize = (Var.infoObject.current_h-25)/self.board.height
-                    self.board.block_size = int(self.board.block_size*resize)
-                    self.board.display_width = (self.board.width + self.board.status_size) * self.board.block_size
 
-                    font_resize = Var.infoObject.current_h/450
-                    pygame.display.set_mode((self.board.display_width,int(self.board.display_width/16*18)), RESIZABLE)
             elif self.mode == 'mini':
                 if (self.board.height*int(self.board.block_size*resize)<self.min_height):
                     self.board.block_size = 30
@@ -298,7 +291,7 @@ class Tetris:
                 random.randint(Var.ai_block_choice_start, Var.ai_block_choice_end)]  # 다음 블럭 랜덤으로 고르기 0~6 사이의 랜덤 숫자를 통해 고르기
             self.ai_init_game()
 
-        pygame.key.set_repeat(self.delay, self.interval)
+        #pygame.key.set_repeat(self.delay, self.interval) 오류 많아서 삭제 
 
 
 

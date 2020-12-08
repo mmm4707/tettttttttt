@@ -320,8 +320,8 @@ class Board:
 
 
     def delete_line(self, y):
-        for y in reversed(range(1, y+1)):
-            self.board[y] = list(self.board[y-1])
+        for y in reversed(range(Var.board_line_start , y+Var.board_line_start)):
+            self.board[y] = list(self.board[y-Var.delete_line])
 
     def combo_null(self):
         self.combo=Var.combo_max
@@ -334,6 +334,7 @@ class Board:
                 for j in range(Var.combo_max):
                     if i != j :
                         self.timer_list[j].cancel()
+            
     # 라인 삭제하기
     def delete_lines(self):
         remove = [y for y, row in enumerate(self.board) if all(row)]
@@ -348,6 +349,7 @@ class Board:
             self.combo_null_start()
             #라인 삭제시 콤보 점수 1 증가
             self.combo+= Var.count_combo
+                
 
             #콤보 *level * 10 만큼 점수 올려주기
             self.score += self.level*self.combo*Var.combo_score_rate
@@ -376,8 +378,7 @@ class Board:
             pygame.time.set_timer(Var.ai_event1, (Var.AI_start_speed -  Var.AI_per_speed * self.level))
 
     def game_over(self):
-
-        return sum(self.board[0]) > 0 or sum(self.board[1]) > 0
+        return sum(self.board[Var.board_start_y]) > Var.board_die_num or sum(self.board[Var.board_die_line]) > Var.board_die_num # 여기서
 
    # 현재 내려오고 있는 블럭 그려주기
     def draw_blocks(self, array2d, color=Var.WHITE, dx=Var.x_move_scale_zero, dy=Var.y_move_scale_zero):
@@ -391,11 +392,11 @@ class Board:
                         tmp = Var.y_move_scale
                         while self.can_move_piece(Var.x_move_scale_zero, tmp):
                             tmp += Var.y_move_scale
-                        x_s, y_s = self.pos_to_pixel(x, y+tmp-1)
+                        x_s, y_s = self.pos_to_pixel(x, y+tmp-Var.board_line_start)
                         pygame.draw.rect(self.screen, Var.T_COLOR[block-1],
                                         (x_pix, y_pix, self.block_size, self.block_size))
                         pygame.draw.rect(self.screen, Var.BLACK,
-                                        (x_pix, y_pix, self.block_size, self.block_size), 1)
+                                        (x_pix, y_pix, self.block_size, self.block_size), Var.line_size)
 
     def draw_blocks2(self, array2d, color=Var.WHITE, dx=Var.x_move_scale_zero, dy=Var.y_move_scale_zero):
         for y, row in enumerate(array2d):
@@ -408,11 +409,11 @@ class Board:
                         tmp = Var.y_move_scale
                         while self.can_move_piece2(Var.x_move_scale_zero, tmp):
                             tmp += Var.y_move_scale
-                        x_s, y_s = self.pos_to_pixel(x, y+tmp-1)
+                        x_s, y_s = self.pos_to_pixel(x, y+tmp-Var.board_line_start)
                         pygame.draw.rect(self.screen, Var.T_COLOR[block-1],
                                         (x_pix, y_pix, self.block_size, self.block_size))
                         pygame.draw.rect(self.screen, Var.BLACK,
-                                        (x_pix, y_pix, self.block_size, self.block_size), 1)
+                                        (x_pix, y_pix, self.block_size, self.block_size), Var.line_size)
 
 
     def draw_shadow(self, array2d, dx, dy):  # 그림자 오류 디버깅     #########
@@ -425,11 +426,11 @@ class Board:
                         tmp = Var.y_move_scale
                         while self.can_move_piece(Var.x_move_scale_zero, tmp):
                             tmp += Var.y_move_scale
-                        x_s, y_s = self.pos_to_pixel(x, y + tmp - 1)
+                        x_s, y_s = self.pos_to_pixel(x, y + tmp - Var.board_line_start)
                         pygame.draw.rect(self.screen, Var.DARK_GRAY,
                                          (x_s, y_s, self.block_size, self.block_size))
                         pygame.draw.rect(self.screen, Var.BLACK,
-                                         (x_s, y_s, self.block_size, self.block_size), 1)
+                                         (x_s, y_s, self.block_size, self.block_size), Var.line_size)
 
     def draw_shadow2(self, array2d, dx, dy):  # 그림자 오류 디버깅     #########
         for y, row in enumerate(array2d):
@@ -441,11 +442,11 @@ class Board:
                         tmp = Var.y_move_scale
                         while self.can_move_piece2(Var.x_move_scale_zero, tmp):
                             tmp += Var.y_move_scale
-                        x_s, y_s = self.pos_to_pixel(x, y + tmp - 1)
+                        x_s, y_s = self.pos_to_pixel(x, y + tmp - Var.board_line_start)
                         pygame.draw.rect(self.screen, Var.DARK_GRAY,
                                          (x_s, y_s, self.block_size, self.block_size))
                         pygame.draw.rect(self.screen, Var.BLACK,
-                                         (x_s, y_s, self.block_size, self.block_size), 1)
+                                         (x_s, y_s, self.block_size, self.block_size), Var.line_size)
 
 
     #다음 블럭 모양 만들어 주기 ?
