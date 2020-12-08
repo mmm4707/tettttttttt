@@ -179,11 +179,16 @@ class Tetris:
             pygame.display.set_mode((self.board.display_width, self.board.display_height), RESIZABLE )
 
     def vdresize(self, resize, evwidth):
-        if ( self.board.height*int(self.board.block_size*resize)<self.min_height):
+        if (self.board.height*int(self.board.block_size*resize)<self.min_height) or (self.board.height*int(self.board.block_size*resize)>Var.infoObject.current_h-25):
             if self.mode == 'basic':
-                self.board.block_size = 25
-                font_resize = 1
-                pygame.display.set_mode((int(self.min_height*(self.board.width+self.board.status_size)/self.board.height),self.min_height), RESIZABLE)
+                if (self.board.height*int(self.board.block_size*resize)<self.min_height):
+                    self.board.block_size = 25
+                    font_resize = 1
+                    pygame.display.set_mode((int(self.min_height*(self.board.width+self.board.status_size)/self.board.height),self.min_height), RESIZABLE)
+                else:
+                    resize = (Var.infoObject.current_h-25)/
+
+                    self.board.block_size = 
             elif self.mode == 'mini':
                     self.board.block_size = 30
                     font_resize = self.min_height/525

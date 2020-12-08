@@ -128,6 +128,8 @@ class Var:
     keyboard_delay = 200
     keyboard_interval = 150
 
+    infoObject = () #디스플레이 사이즈 받는 용 
+
     display_max_height = 792
     display_min_height = 450
 

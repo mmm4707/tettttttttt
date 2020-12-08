@@ -9,6 +9,9 @@ class Menu:
     def __init__(self):
         print('test')
         pygame.init()
+        Var.infoObject = pygame.display.Info()
+        print(Var.infoObject.current_w, Var.infoObject.current_h)
+
         self.w=Var.menu_display_w
         self.h=Var.menu_display_h
         self.surface=pygame.display.set_mode((self.w,self.h),RESIZABLE)
