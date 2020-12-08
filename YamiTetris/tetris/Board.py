@@ -324,12 +324,12 @@ class Board:
             self.board[y] = list(self.board[y-Var.delete_line])
 
     def combo_null(self):
-        self.combo=Var.combo_max
+        self.combo=Var.combo_reset
 
     def combo_null_start(self):
         for i in range(Var.combo_max):
             if self.combo==i:
-                self.timer_list[i]=threading.Timer(10, self.combo_null)
+                self.timer_list[i]=threading.Timer(Var.combo_reset_time, self.combo_null)
                 self.timer_list[i].start()
                 for j in range(Var.combo_max):
                     if i != j :
