@@ -651,7 +651,6 @@ class Board:
                     running = False
 #게임 오버 배경
     def GameOver(self):
-
         fontObj = pygame.font.Font('assets/Roboto-Bold.ttf', Var.font_size_big*2*resize)
         textSurfaceObj = fontObj.render('Game over', True, Var.WHITE)
 
@@ -678,27 +677,12 @@ class Board:
 
     #게임 끝나면 점수 보여주는 곳
     def show_my_score(self):
-
-        fontObj = pygame.font.Font('assets/Roboto-Bold.ttf', int(self.font_size_big_in*2))
-
+        pygame.display.set_mode((Var.menu_display_w,Var.menu_display_h))
+        fontObj = pygame.font.Font('assets/Roboto-Bold.ttf', myscore_font)
         textSurfaceObj = fontObj.render('My Score : '+str(self.score), True, Var.MAIN_YELLOW)
         textRectObj = textSurfaceObj.get_rect()
-        if self.mode == 'ai':
-            textRectObj.center = (self.display_width/2, self.display_height*0.4)
-        else:
-            textRectObj.center = (self.display_width/2, self.display_height*0.4)
-        fontObj2 = pygame.font.Font('assets/Roboto-Bold.ttf', int(self.font_size_middle_in))
-        textSurfaceObj2 = fontObj2.render('Press a key to continue', True, Var.MAIN_YELLOW)
-        textRectObj2 = textSurfaceObj2.get_rect()
-        if self.mode == 'ai':
-            textRectObj2.center = (self.display_width/2, self.display_height*0.7)
-        else:
-            textRectObj2.center = (self.display_width/2, self.display_height*0.7)
         self.screen.fill(Var.MAIN_VIOLET_W)
-
-        self.screen.blit(textSurfaceObj, textRectObj)
-        self.screen.blit(textSurfaceObj2, textRectObj2)
-        pygame.display.update()
+        self.screen.blit(textSurfaceObj,Var.myscore_display)
         running = True
         while running:
             for event in pygame.event.get():
@@ -707,48 +691,8 @@ class Board:
                     sys.exit()
                 elif event.type == KEYDOWN:
                     running = False
-                elif event.type == VIDEORESIZE:
-                    done_resize = event.w/self.display_width
-                    if event.h != self.display_height:
-                        pygame.display.set_mode((self.display_width, self.display_height), RESIZABLE)
-                    if done_resize > 1.01 or done_resize < 1:
-                        font_resize = event.w/((self.width*2+self.status_size*2)*self.block_size)
-                        if self.mode=='basic':
-                            font_resize = event.w/350
-                        if self.mode=='mini':
-                            font_resize = event.w/315
-                        if self.mode=='two':
-                            font_resize = event.w/650
-                        if self.mode=='ai':
-                            font_resize = event.w/700
-                        self.font_size_big_in = int(Var.font_size_big*font_resize)
-                        self.font_size_middle_in = int(Var.font_size_middle*font_resize)
-                        self.block_size = int(self.block_size*done_resize)
-                        if self.mode == 'ai':
-                            self.display_width = (self.width + self.status_size) * self.block_size * 2
-                        else:
-                            self.display_width = (self.width + self.status_size) * self.block_size
-                        self.display_height = self.height * self.block_size
-                        pygame.display.set_mode((self.display_width, self.display_height), RESIZABLE)
-                    fontObj = pygame.font.Font('assets/Roboto-Bold.ttf', int(self.font_size_big_in*2))
-                    textSurfaceObj = fontObj.render('My Score : '+str(self.score), True, Var.MAIN_YELLOW)
-                    textRectObj = textSurfaceObj.get_rect()
-                    if self.mode == 'ai':
-                        textRectObj.center = (self.display_width/2, self.display_height*0.4)
-                    else:
-                        textRectObj.center = (self.display_width/2, self.display_height*0.4)
-                    fontObj2 = pygame.font.Font('assets/Roboto-Bold.ttf', int(self.font_size_middle_in))
-                    textSurfaceObj2 = fontObj2.render('Press a key to continue', True, Var.MAIN_YELLOW)
-                    textRectObj2 = textSurfaceObj2.get_rect()
-                    if self.mode == 'ai':
-                        textRectObj2.center = (self.display_width/2, self.display_height*0.7)
-                    else:
-                        textRectObj2.center = (self.display_width/2, self.display_height*0.7)
-                    self.screen.fill(Var.MAIN_VIOLET)
-                    self.screen.blit(textSurfaceObj, textRectObj)
-                    self.screen.blit(textSurfaceObj2, textRectObj2)
-                    pygame.display.update()
-                    running = True
+            pygame.display.update()
+
 
 
     def save_score(self, game_mode, ID):
