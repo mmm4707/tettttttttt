@@ -45,43 +45,43 @@
    
 4. 게임 실행
 
-  	  1.메뉴
+  	  a.메뉴
   
   <img src="https://user-images.githubusercontent.com/70746658/101520898-6e32d680-39c8-11eb-8ecb-25a9c4d5ab6e.png"  width="400" height="400">
   <img src="https://user-images.githubusercontent.com/70746658/101518585-75a4b080-39c5-11eb-8898-95ccdd3f057e.png"  width="400" height="400">
   <img src="https://user-images.githubusercontent.com/70746658/101518593-78070a80-39c5-11eb-8ee3-3cfa8adecab1.png"  width="400" height="400">
   
   
- 	  2.키 조작 help
+ 	  b.키 조작 help
   
   <img src="https://user-images.githubusercontent.com/70746658/101520904-712dc700-39c8-11eb-9077-b177bd618369.png"  width="400" height="400">
   
-	  3.일반 게임
+	  c.일반 게임
   
   <img src="https://user-images.githubusercontent.com/70746658/101518483-50b03d80-39c5-11eb-9d60-9a196822fabc.png"  width="300" height="400">
   
-	  4. Two Hands 모드
+	  d. Two Hands 모드
   
   <img src="https://user-images.githubusercontent.com/70746658/101518615-805f4580-39c5-11eb-818d-2332e4d1ef1b.png"  width="700" height="400">
 
-	  5. AI 모드
+	  e. AI 모드
   
   <img src="https://user-images.githubusercontent.com/70746658/101518622-835a3600-39c5-11eb-9e1c-75350c192d1e.png"  width="700" height="400">
   
- 	 6. MINI 모드
-  
-  <img src="https://user-images.githubusercontent.com/70746658/101518722-a4228b80-39c5-11eb-80fc-361252daae47"  width="280" height="400">  
-
-	  7. ID 입력
+ 	  f. MINI 모드
+   <img src="https://user-images.githubusercontent.com/70746658/101523674-3ded3700-39cc-11eb-9928-5e925e259cdd.png"  width="280" height="400">  
+ 
+	  g. ID 입력
   
   <img src="https://user-images.githubusercontent.com/70746658/101522098-1f863c00-39ca-11eb-929d-e1f983a3ec81.png"  width="400" height="400">  
   
-	  6. RANK 확인
+	  h. RANK 확인
   
   <img src="https://user-images.githubusercontent.com/70746658/101518501-586fe200-39c5-11eb-9aa2-4eb0ed0c77c7.png"  width="400" height="400">  
   
-  
-
+  	- 게임 종료 후, ID를 입력하면 aws에 만들어둔 데이터 베이스에 자동 저장
+  <img src="https://user-images.githubusercontent.com/70746658/101523466-fbc3f580-39cb-11eb-82d3-21fcdcd5d0f7.png"  width="300" height="150">  
+ 
 
 5. Reference
 
