@@ -334,6 +334,7 @@ class Board:
                 for j in range(Var.combo_max):
                     if i != j :
                         self.timer_list[j].cancel()
+            
     # 라인 삭제하기
     def delete_lines(self):
         remove = [y for y, row in enumerate(self.board) if all(row)]
@@ -348,6 +349,7 @@ class Board:
             self.combo_null_start()
             #라인 삭제시 콤보 점수 1 증가
             self.combo+= Var.count_combo
+                
 
             #콤보 *level * 10 만큼 점수 올려주기
             self.score += self.level*self.combo*Var.combo_score_rate
@@ -366,7 +368,7 @@ class Board:
                     self.goal = '-'
             self.level_speed()  #추가 - level증가에 따른 속도 증가
 
-        # 추가 - 레벨별 스피드 조절
+        #레벨별 스피드 조절
     def level_speed(self):
         if self.level < Var.max_level:
             pygame.time.set_timer(pygame.USEREVENT, (Var.user_start_speed -  Var.user_per_speed * self.level))

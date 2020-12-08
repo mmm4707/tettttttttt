@@ -122,11 +122,11 @@ class Var:
     y_violet = (96, 57, 140)
     
 
-    T_COLOR = [w_pink, w_sky, z_blue, z_green, z_yellow, y_violet, y_red]
+    T_COLOR = [w_pink, w_sky, z_blue, z_green, MAIN_VIOLET, y_violet, y_red]
     colors = [BLACK, RED, GREEN, BLUE, ORANGE, YELLOW, PINK, CYON, GRAY]
 
-    keyboard_delay = 200
-    keyboard_interval = 150
+    #keyboard_delay = 200
+    #keyboard_interval = 150
 
     infoObject = () #디스플레이 사이즈 받는 용 
 

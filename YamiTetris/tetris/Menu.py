@@ -151,7 +151,7 @@ class Menu:
         for i in range(Var.rank_max) :
             original_name=str(original_data[i]['ID'])
             original_score = '{0:>05s}'.format(str(original_data[i]['score']))
-            r="#1 : "+original_name+"    "+ original_score
+            r= "#{} : ".format(i+1) + original_name+"    "+ original_score
             self.menu.add_button(r, self.pass_,font_size=self.size2)
         self.menu.add_button('back', self.reset,font_size=self.size2)
 
@@ -169,7 +169,7 @@ class Menu:
         for i in range(Var.rank_max):
             original_name = str(twohadns_data[i]['ID'])
             original_score = '{0:>05s}'.format(str(twohadns_data[i]['score']))
-            r = "#1 : " + original_name + "    " + original_score
+            r = "#{} : ".format(i+1) + original_name + "    " + original_score
             self.menu.add_button(r, self.pass_, font_size=self.size2)
         self.menu.add_button('back', self.reset,font_size=self.size2)
 
@@ -186,7 +186,7 @@ class Menu:
         for i in range(Var.rank_max):
             original_name = str(mini_data[i]['ID'])
             original_score = '{0:>05s}'.format(str(mini_data[i]['score']))
-            r = "#1 : " + original_name + "    " + original_score
+            r = "#{} : ".format(i+1) + original_name + "    " + original_score
             self.menu.add_button(r, self.pass_, font_size=self.size2)
         self.menu.add_button('back', self.reset,font_size=self.size2)
 

@@ -19,8 +19,8 @@ class Tetris:
         self.music_on_off = True
         self.check_reset = True
         self.Score = Var.initial_score
-        self.delay = Var.keyboard_delay
-        self.interval = Var.keyboard_interval
+        #self.delay = Var.keyboard_delay
+        #self.interval = Var.keyboard_interval
         self.game=False
 
         random.seed(Var.ai_random_seed)
@@ -179,7 +179,9 @@ class Tetris:
             pygame.display.set_mode((self.board.display_width, self.board.display_height), RESIZABLE )
 
     def vdresize(self, resize, evwidth):
+
         if (self.board.height*int(self.board.block_size*resize)<self.min_height) :
+
             if self.mode == 'basic':
                 if (self.board.height*int(self.board.block_size*resize)<self.min_height):
                     self.board.block_size = 25
@@ -187,9 +189,17 @@ class Tetris:
                     pygame.display.set_mode((int(self.min_height*(self.board.width+self.board.status_size)/self.board.height),self.min_height), RESIZABLE)
 
             elif self.mode == 'mini':
+                if (self.board.height*int(self.board.block_size*resize)<self.min_height):
                     self.board.block_size = 30
                     font_resize = self.min_height/525
                     pygame.display.set_mode((int(self.min_height*(self.board.width+self.board.status_size)/self.board.height), self.min_height), RESIZABLE)
+                else:
+                    resize = (Var.infoObject.current_h-25)/self.board.height
+                    self.board.block_size = int(self.board.block_size*resize)
+                    self.board.display_width = (self.board.width + self.board.status_size) * self.board.block_size
+
+                    font_resize = Var.infoObject.current_h/525
+                    pygame.display.set_mode((self.board.display_width,int(self.board.display_width/10*15)), RESIZABLE)
             else:
                 self.board.block_size = 25
                 font_resize = 1
@@ -208,7 +218,29 @@ class Tetris:
             self.board.font_size_small_in = int(Var.font_size_small*font_resize)
             self.board.display_height = self.board.height * self.board.block_size
 
+        elif (self.board.height*int(self.board.block_size*resize)>(max_height)):
+            print(max_height)
+            resize = max_height / self.board.display_height
+            print(resize)
+            self.board.block_size = int(self.board.block_size * resize)
+            if self.mode == 'ai':
+                self.board.display_width = (self.board.width + self.board.status_size) * self.board.block_size * 2
+            else:
+                self.board.display_width = (self.board.width + self.board.status_size) * self.board.block_size
+            self.board.status_width = self.board.block_size * self.board.status_size
+            font_resize = max_height / 450
+
+            self.board.font_size_big_in = int(Var.font_size_big * font_resize)
+            self.board.font_size_middle_in = int(Var.font_size_middle * font_resize)
+            self.board.font_size_small_in = int(Var.font_size_small * font_resize)
+            self.board.display_height = self.board.height * self.board.block_size
+            info = pygame.display.Info()
+            print(info.current_w, info.current_h)
+
+            pygame.display.set_mode((self.board.display_width, self.board.display_height), RESIZABLE)
+
         elif resize> 1.001 or resize<1.0:
+            print('bas')
             if self.mode=='basic':
                 font_resize = evwidth/350
             if self.mode=='mini':
@@ -230,7 +262,7 @@ class Tetris:
 
             self.board.display_height = self.board.height * self.board.block_size
 
-            pygame.display.set_mode((self.board.display_width, self.board.display_height), RESIZABLE )
+            pygame.display.set_mode((self.board.display_width, self.board.display_height), RESIZABLE)
 
 
                 #실행하기
@@ -259,7 +291,7 @@ class Tetris:
                 random.randint(Var.ai_block_choice_start, Var.ai_block_choice_end)]  # 다음 블럭 랜덤으로 고르기 0~6 사이의 랜덤 숫자를 통해 고르기
             self.ai_init_game()
 
-        pygame.key.set_repeat(self.delay, self.interval)
+        #pygame.key.set_repeat(self.delay, self.interval) 오류 많아서 삭제 
 
 
 
@@ -292,6 +324,7 @@ class Tetris:
 
             for event in pygame.event.get():
 
+
                  #게임진행중 - event는 키보드 누를떄 특정 동작 수할떄 발생
 
                 if event.type == QUIT: #종류 이벤트가 발생한 경우
@@ -321,6 +354,9 @@ class Tetris:
 
                 #화면 크기 조절해 보기
                 elif event.type == VIDEORESIZE:
+                    info = pygame.display.Info()
+                    print(info.current_w, info.current_h, "kkk")
+
 
                     resize = event.w/self.board.display_width
 
@@ -328,9 +364,13 @@ class Tetris:
                         pygame.display.set_mode((self.board.display_width, self.board.display_height), RESIZABLE)
 
                     if resize!=1:
-                        self.vdresize(resize, event.w)
 
+                        self.vdresize(resize, event.w)
+                        if info.current_w == (1855):
+                            pygame.display.set_mode((info.current_w, info.current_h), RESIZABLE).fill(Var.BLACK)
                     print(self.board.display_width, self.board.display_height)
+                    info = pygame.display.Info()
+                    print(info.current_w, info.current_h, "dd")
 
                     #pygame.display.set_mode((300, 500),pygame.RESIZABLE)
             # self.screen.fill(BLACK)
