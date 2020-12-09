@@ -148,6 +148,8 @@ class Var:
 
     board_die_num=0    # 맨 위에서 보드가 몇개 이상이면 죽을 것인지
     line_size=1      # 그림자나 블록 라인 사이즈
+    ai_matrix_line_size = 0 #ai  매트릭스를 만들때 라인 사이즈 
+    ai_line_size = 2 # ai에서 board를 나누는 선의 두꼐 
 
     fps = 30  # 게임의 fps
     initial_score = 0   # 시작 점수
@@ -172,7 +174,9 @@ class Var:
     #현재 블럭의 x축 기준 길이
     def piece_length(piece):
         return piece[0]
-
+    def ai_rotate_start_index(shpae):
+        return len(shape)-1
+    
     initial_page = 'page0'
     initial_mode = 0 # 모드 초기값
     initial_id = 0   # id 초기값
@@ -196,7 +200,10 @@ class Var:
     ai_line_reset = 0  # 한번에 지운 라인 개수 초기
     ai_lineclear_per = 1 #한줄 지울때마다 올라가는 한번에 지운 개수
     ai_linescores = [0, 10, 15, 20, 25] #한번에 제거하는 줄의 개수에 따른 점수
-
+    ai_prev_index = -1
+    
+    ai_rotate_end_prev = -1
+    ai_rotate_search_next_index = -1
     user_start_speed = 600  #유저의 시작 스피드(몇초에 한번 이벤트가 진행되는가)
     AI_start_speed = int(user_start_speed / 2)   #ai의 시작 스피드
     user_per_speed = 40   #레벨에 따른 유저의 속도 증가
@@ -205,17 +212,41 @@ class Var:
     combo_max=9
     combo_reset=0
 
+    basic_block_size = 25   #미니 모드 제외 나머지의 블록 사이즈
+    basic_next_block_size_rate = 0.6  #화면에 표시되는 다음 블럭의 사이즈 비율
+    mini_block_size = int(basic_block_size*7/5)  #미니 모드의 블럭 사이즈
 
     basic_block_size = 25   #미니 모드 제외 나머지의 블록 사이즈
     basic_next_block_size_rate = 0.6  #화면에 표시되는 다음 블럭의 사이즈 비율
     mini_block_size = int(basic_block_size*7/5)  #미니 모드의 블럭 사이즈
-    min_mini_block_size = int(basic_block_size*6/5)
-    two_board_two = 2
+    min_mini_block_size = int(basic_block_size*6/5) #미니 모드의 최소 블럭사이즈
+
+    two_board_two = 2 #보드 크기가 두 배인 모드에 곱하는 용
+    center_divide = 2 # center 위치를 지정하기 위해 나누는 용
+    board_text_divide = 7 #board text 위치 조정을 위함
+    rect2_margin = 0.5 # 두번째 board칸 네모를 위한 margin
+    rect2_margin_double = rect2_margin*2 #margin 두 배
+    next_block_margin = 0.2 #next 블럭 보여줄 위치에 margin 추가
+    next_block_margin_y = 1.5 #next 블럭 y좌표를 위한 비율
+    next_block_size = 0.5 #next 블럭 사이즈 조절을 위한 비율
+    next_block2_margin = 0.45 # 두번째 next 블럭 위치 조절 비율
+
+    next_loc = 0.05
+    score_loc = 0.3
+    score_val_loc = 0.35
+    level_loc = 0.45
+    level_val_loc = 0.5
+    goal_loc = 0.6
+    goal_val_loc = 0.65
+    combo_loc = 0.75
+    combo_val_loc = 0.8
+    time_loc = 0.92
 
     font_size_small = 14    #폰트 사이즈 작은거
     font_size_middle = 16   #중간
     font_size_big = 18      #큰거
     font_resize = 1
+    font_size_double = 2 #fontsize 두 배
 
     block_start_basic_x = 3  #몇번 쨰 칸에서 블럭이 시작 하는가
     block_start_two_x = 12
@@ -262,6 +293,8 @@ class Var:
     resize_cut_up = 1.001
     resize_cut_down = 1.0
     start_status_bar_y = 0 #상태표시 바 시작 y 좌표
+    resize_basic = 1 # 리사이징 관련 고정 변수 
+
 
 
     ## 메뉴 부분
@@ -297,7 +330,7 @@ class Var:
     margin_rate1 = 6
     margin_rate2 = 30
     margin_rate3 = 15
-    margin_rate4 =600
+    margin_rate4 =60
     margin_rate5 = 10
     margin_rate6 = 1.25
 
@@ -315,6 +348,7 @@ class Var:
     margin3=(0,int((menu_display_h)/margin_rate3))                               # 위젯 3개 있는 곳 사이 간격
     margin4=(0,int((menu_display_h)/margin_rate4))
     margin_rank =10
+
 
     rank_max=5  # 랭크 보여주는 창 최대 갯수 -1
     min_display_w =400

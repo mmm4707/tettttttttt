@@ -102,12 +102,10 @@ class Ai:
     def maxPitDepth(self, heights):
         return max(heights)-min(heights)
 
-    def rotate_clockwise(shape): #회전 시킨 모양 만들어 주기
-        return [[shape[y][x]
-                 for y in range(len(shape))]
-                for x in range(len(Var.piece_length(shape)) - 1, -1, -1)]
+    def ai_rotate_clockwise(self, shape):
+        return [[shape[y][x] for y in range(len(shape))] for x in range(len(shape[0]) - 1, -1, -1)]
 
-########################3
+    ########################3
     @staticmethod
     def best(field, workingPieces, workingPieceIndex, weights, level):
         bestRotation = None
