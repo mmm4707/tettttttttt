@@ -324,12 +324,12 @@ class Board:
             self.board[y] = list(self.board[y-Var.delete_line])
 
     def combo_null(self):
-        self.combo=Var.combo_max
+        self.combo=Var.combo_reset
 
     def combo_null_start(self):
         for i in range(Var.combo_max):
             if self.combo==i:
-                self.timer_list[i]=threading.Timer(10, self.combo_null)
+                self.timer_list[i]=threading.Timer(Var.combo_reset_time, self.combo_null)
                 self.timer_list[i].start()
                 for j in range(Var.combo_max):
                     if i != j :
@@ -653,7 +653,6 @@ class Board:
                     running = False
 #게임 오버 배경
     def GameOver(self):
-
         fontObj = pygame.font.Font('assets/Roboto-Bold.ttf', Var.font_size_big*2*resize)
         textSurfaceObj = fontObj.render('Game over', True, Var.WHITE)
 
@@ -680,12 +679,13 @@ class Board:
 
     #게임 끝나면 점수 보여주는 곳
     def show_my_score(self):
-        pygame.display.set_mode((Var.menu_display_w, Var.menu_display_h))
+
+        pygame.display.set_mode((Var.menu_display_w,Var.menu_display_h))
         fontObj = pygame.font.Font('assets/Roboto-Bold.ttf', Var.myscore_font)
-        textSurfaceObj = fontObj.render('My Score : ' + str(self.score), True, Var.MAIN_YELLOW)
+        textSurfaceObj = fontObj.render('My Score : '+str(self.score), True, Var.MAIN_YELLOW)
         textRectObj = textSurfaceObj.get_rect()
         self.screen.fill(Var.MAIN_VIOLET_W)
-        self.screen.blit(textSurfaceObj, Var.myscore_display)
+        self.screen.blit(textSurfaceObj,Var.myscore_display)
         running = True
         while running:
             for event in pygame.event.get():
@@ -695,5 +695,6 @@ class Board:
                 elif event.type == KEYDOWN:
                     running = False
             pygame.display.update()
+1
     def save_score(self, game_mode, ID):
         self.database.add_data(game_mode, ID, self.score)

@@ -27,9 +27,12 @@ class Menu:
         self.margin2=Var.margin2
         self.margin3=Var.margin3
         self.margin4=Var.margin4
+        self.margin_help=Var.margin_help
+
         self.margin_rank=Var.margin_rank
         self.page=Var.initial_page
         self.mytheme=Var.mytheme
+        self.mytheme2=Var.mytheme_help
         self.menu = pygame_menu.Menu(self.h,self.w, '', theme=self.mytheme)
 
 
@@ -42,7 +45,9 @@ class Menu:
         self.menu.add_vertical_margin(self.margin)
         self.menu.add_button('   Select mode   ', self.show_game,font_size=self.size)
         self.menu.add_button('    Show Rank    ', self.show_rank,font_size=self.size)
+        self.menu.add_button('  Help  ', self.help,font_size=self.size)
         self.menu.add_button('        Quit         ', pygame_menu.events.EXIT,font_size=self.size)
+
 
     def reset(self):  ## 뒤로 갈때 보여줄 목록들
         self.surface = pygame.display.set_mode((self.w, self.h), RESIZABLE)
@@ -51,12 +56,20 @@ class Menu:
         self.mytheme.widget_margin=self.margin3
         Var.click.play()
         self.page=Var.initial_page
-
         self.menu.clear()
         self.menu.add_vertical_margin(self.margin)
         self.menu.add_button('   Select mode   ', self.show_game,font_size=self.size)
         self.menu.add_button('    Show Rank    ', self.show_rank,font_size=self.size)
+        self.menu.add_button('  Help  ', self.help,font_size=self.size)
         self.menu.add_button('        Quit         ', pygame_menu.events.EXIT,font_size=self.size)
+
+    def help(self):
+        self.page='page7'
+        self.surface = pygame.display.set_mode((self.w, self.h), RESIZABLE)
+        self.menu = pygame_menu.Menu(self.h, self.w, '', theme=self.mytheme2)
+        self.menu.add_vertical_margin(self.margin_help)
+        self.menu.add_button(' back ', self.reset,font_size=self.size2)
+
 
 
     def show_game(self):  ## 게임 목록 들어가면 나오는 목록들
@@ -249,6 +262,8 @@ while True:
             mymenu.margin2=(0,int((mymenu.h)/Var.margin_rate2))
             mymenu.margin3=(0,int((mymenu.h)/Var.margin_rate3))
             mymenu.margin4=(0,int((mymenu.h)/Var.margin_rate4))
+            mymenu.margin4=(0,int((mymenu.h)/Var.margin_rate5))
+            mymenu.margin_help = int((mymenu.h)/Var.margin_rate6)
             time.sleep(0.3)
             print(mymenu.w)
             print(mymenu.h)
@@ -266,6 +281,8 @@ while True:
                 mymenu.Mini_the_rank()
             elif mymenu.page=='page6':
                 mymenu.show_score(mymenu.mode,mymenu.score)
+            elif mymenu.page=='page7':
+                mymenu.help()
 
     if mymenu.menu.is_enabled():
         mymenu.menu.update(events)

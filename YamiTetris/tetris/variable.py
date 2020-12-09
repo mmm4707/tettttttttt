@@ -1,7 +1,7 @@
 import pygame
 import pygame_menu
 import random
-
+import os
 class Var:
     pygame.mixer.init()
 
@@ -202,8 +202,9 @@ class Var:
     user_per_speed = 40   #레벨에 따른 유저의 속도 증가
     AI_per_speed = int(user_per_speed / 2)  #레벨에 따른 ai의 속도 증가
 
+    combo_max=9
+    combo_reset=0
 
-    combo_max=0
 
     basic_block_size = 25   #미니 모드 제외 나머지의 블록 사이즈
     basic_next_block_size_rate = 0.6  #화면에 표시되는 다음 블럭의 사이즈 비율
@@ -227,8 +228,9 @@ class Var:
 
     menu_display_w = 600  # 메뉴 시작시 처음 가로 크기
     menu_display_h = 600  # 메뉴 시작시 처음 세로 크기
-    myscore_display = (160, 270)
-    myscore_font = 50
+
+    myscore_display=(160,270)
+    myscore_font=50
     combo_reset_time=10  # 콤보 초기화 시간
 
     # 기본 사이즈 조정
@@ -270,6 +272,16 @@ class Var:
     widget_image = pygame_menu.baseimage.BaseImage(
         image_path='assets/images/메인위젯.png',
         drawing_mode=pygame_menu.baseimage.IMAGE_MODE_FILL)
+    widget_image2 = pygame_menu.baseimage.BaseImage(
+        image_path='assets/images/위젯3.png',
+        drawing_mode=pygame_menu.baseimage.IMAGE_MODE_FILL)
+    PATH=os.path.join('assets/images/메인메뉴2.png')
+
+
+    mytheme_help=pygame_menu.themes.THEME_ORANGE.copy()                  # 메뉴 기본 테마 설정
+    mytheme_help.background_color = widget_image2                           # 메뉴 배경 설정
+    mytheme_help.title_bar_style=pygame_menu.widgets.MENUBAR_STYLE_NONE  # 메뉴 타이틀 바 모양 설정
+
 
 
     mytheme=pygame_menu.themes.THEME_ORANGE.copy()                  # 메뉴 기본 테마 설정
@@ -285,12 +297,21 @@ class Var:
     margin_rate1 = 6
     margin_rate2 = 30
     margin_rate3 = 15
-    margin_rate4 = 45
+    margin_rate4 =600
+    margin_rate5 = 10
+    margin_rate6 = 1.25
+
     # 메뉴 위젯 사이 간격 설정
     size=int((menu_display_h)/font_rate1)                                      # 기본 폰트 사이즈 변경시
     size2=int((menu_display_h)/font_rate2)                                     # 랭크창 폰트 사이즈 변경
-    margin=int((menu_display_h)/margin_rate1)                                     # 위에서 부터 처음 위젯 까지 사이 간격 조정
-    margin2=(0,int((menu_display_h)/marginte2))                               # 게임 선택 및 랭크 선택 위젯 사이 간격
+
+    margin=int((menu_display_h)/margin_rate1)
+    margin_help=int((menu_display_h)/margin_rate6)                                     # 위에서 부터 처음 위젯 까지 사이 간격 조정
+    # 위에서 부터 처음 위젯 까지 사이 간격 조정
+    margin_page0 = int((menu_display_h) / margin_rate5)                               # 위에서 부터 처음 위젯 까지 사이 간격 조정
+    margin_page0_1 = int((menu_display_h) / margin_rate4)                                # 위에서 부터 처음 위젯 까지 사이 간격 조정
+    margin0=(-200,0)
+    margin2=(0,int((menu_display_h)/margin_rate2))                               # 게임 선택 및 랭크 선택 위젯 사이 간격
     margin3=(0,int((menu_display_h)/margin_rate3))                               # 위젯 3개 있는 곳 사이 간격
     margin4=(0,int((menu_display_h)/margin_rate4))
     margin_rank =10
