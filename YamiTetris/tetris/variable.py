@@ -295,6 +295,6 @@ class Var:
     margin4=(0,int((menu_display_h)/margin_rate4))
     margin_rank =10
 
-    rank_max=4  # 랭크 보여주는 창 최대 갯수 -1
+    rank_max=5  # 랭크 보여주는 창 최대 갯수 -1
     min_display_w =400
     min_display_h =400
