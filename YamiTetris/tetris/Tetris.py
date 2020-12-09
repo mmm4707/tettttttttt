@@ -10,17 +10,10 @@ class Tetris:
     #생성자
     def __init__(self):
         self.mode = 'basic'
-        #self.width = 10  # 가로 칸수
-        #self.height = 18  # 세로 칸 수
-        #self.block_size = 25*resize  # 블럭 하나당 크기
-        #self.display_width = (self.board.width + 4) * self.block_size
-        #self.display_height = self.height * self.block_size
         self.clock = pygame.time.Clock()
         self.music_on_off = True
         self.check_reset = True
         self.Score = Var.initial_score
-        #self.delay = Var.keyboard_delay
-        #self.interval = Var.keyboard_interval
         self.game=False
 
         random.seed(Var.ai_random_seed)
@@ -43,7 +36,6 @@ class Tetris:
             self.board.full_drop_piece(mode)
         elif event_key == K_m: # 소리 설정
             self.music_on_off = not self.music_on_off
-
             if self.music_on_off:
                 if self.mode == 'ai':
                     Var.ai_bgm.play()
@@ -73,8 +65,6 @@ class Tetris:
     def ai_add_cl_lines(self, n):
         self.ai_lines += n  # 지운 개수 추가하기
         self.ai_score += Var.ai_linescores[n] * self.board.level * Var.ai_score_weight  # 점수  = 원래 점수 + 한번에지운 라인개수에 해당하는 점수 * 레벨
-
-        # 블럭을 delta_x 만큼 움직이기
 
     def ai_move(self, delta_x):
         if not self.gameover and not self.paused:  # 게임 종료, 정지 상태가 아니라면
@@ -165,23 +155,18 @@ class Tetris:
             self.board.font_size_big_in = int(Var.font_size_big*font_resize)
             self.board.font_size_middle_in = int(Var.font_size_middle*font_resize)
             self.board.font_size_small_in = int(Var.font_size_small*font_resize)
-
             self.board.display_height = self.board.height * self.board.block_size
-
             pygame.display.set_mode((self.board.display_width, self.board.display_height), RESIZABLE )
 
     def vdresize(self, resize, evwidth):
         self.max_height = Var.infoObject.current_h - Var.bar_size
         font_resize = Var.font_resize
         if (self.board.height*int(self.board.block_size*resize)<self.min_height) :
-
-
             if self.mode == 'basic':
                 if (self.board.height*int(self.board.block_size*resize)<self.min_height):
                     self.board.block_size = Var.basic_block_size
                     font_resize = Var.font_resize
                     pygame.display.set_mode((int(self.min_height*(self.board.width+self.board.status_size)/self.board.height),self.min_height), RESIZABLE)
-
             elif self.mode == 'mini':
                 if (self.board.height*int(self.board.block_size*resize)<self.min_height):
                     self.board.block_size = Var.min_mini_block_size
@@ -194,7 +179,6 @@ class Tetris:
                     pygame.display.set_mode((int(self.min_height*(self.board.width+self.board.status_size)/self.board.height), self.min_height), RESIZABLE)
                 else:
                     pygame.display.set_mode((int(self.min_height*(self.board.width*Var.two_board_two+self.board.status_size*Var.two_board_two)/self.board.height), self.min_height), RESIZABLE)
-
             if self.mode=='ai':
                 self.board.display_width = (self.board.width + self.board.status_size) * self.board.block_size * Var.two_board_two
             else:
@@ -225,7 +209,6 @@ class Tetris:
             self.board.display_height = self.board.height * self.board.block_size
             info = pygame.display.Info()
             print(info.current_w, info.current_h)
-
             pygame.display.set_mode((self.board.display_width, self.board.display_height), RESIZABLE)
 
         elif resize > Var.resize_cut_up or resize < Var.resize_cut_down:
@@ -238,7 +221,6 @@ class Tetris:
                 font_resize = evwidth/(Var.basic_block_size*(self.board.width+self.board.status_size))
             if self.mode=='ai':
                 font_resize = evwidth/(Var.basic_block_size*(self.board.width*2+self.board.status_size*Var.two_board_two))
-
             self.board.block_size = int(self.board.block_size*resize)
             if self.mode=='ai':
                 self.board.display_width = (self.board.width + self.board.status_size) * self.board.block_size * Var.two_board_two
@@ -249,9 +231,7 @@ class Tetris:
             self.board.font_size_big_in = int(Var.font_size_big*font_resize)
             self.board.font_size_middle_in = int(Var.font_size_middle*font_resize)
             self.board.font_size_small_in = int(Var.font_size_small*font_resize)
-
             self.board.display_height = self.board.height * self.board.block_size
-
             pygame.display.set_mode((self.board.display_width, self.board.display_height), RESIZABLE)
 
 
@@ -275,33 +255,21 @@ class Tetris:
             Var.ai_bgm.play()
         else:
             Var.base_bgm.play()
-
         if self.mode == 'ai':
             self.next_stone = Var.ai_tetris_shapes[
                 random.randint(Var.ai_block_choice_start, Var.ai_block_choice_end)]  # 다음 블럭 랜덤으로 고르기 0~6 사이의 랜덤 숫자를 통해 고르기
-            self.ai_init_game()
-
-        #pygame.key.set_repeat(self.delay, self.interval) 오류 많아서 삭제
-
-
-
-
         while True:
             if self.mode =='ai':
                 Ai.choose(self.ai_board, self.stone, self.next_stone, self.stone_x, Var.weights, self)
-
             if self.check_reset:
-
                 self.check_reset = False
-                #pygame.mixer.music.play(-1, 0.0)  ## 수정 필요 오류 나서 일단 빼둠
 
             if self.mode =='ai':
                 if self.board.game_over() or self.board.score < self.ai_score:
                     Var.ai_bgm.stop()
                     self.board.show_my_score()
                     break
-
-
+                    
             if self.board.game_over():
                 Var.base_bgm.stop()
                 Var.ai_bgm.stop()
@@ -310,13 +278,8 @@ class Tetris:
                 self.board.show_my_score()
                 break
 
-
-
             for event in pygame.event.get():
-
-
                  #게임진행중 - event는 키보드 누를떄 특정 동작 수할떄 발생
-
                 if event.type == QUIT: #종류 이벤트가 발생한 경우
                     pygame.quit() #모든 호출 종
                     sys.exit() #게임을 종료한다ㅏ.
@@ -324,8 +287,6 @@ class Tetris:
                     Var.base_bgm.stop()
                     Var.ai_bgm.stop()  #일시 정지 노래 중둠    오류나서  일단 뺴
                     self.board.pause()
-
-
                 elif event.type == KEYDOWN: #키보드를 누르면
                     if self.mode=='two':
                         self.handle_key2(event.key, self.mode)  # handle 메소드 실행
@@ -339,22 +300,14 @@ class Tetris:
                 elif event.type == Var.ai_event:
                     if self.mode == 'ai' :
                         self.ai_drop(False)
-
-
-
                 #화면 크기 조절해 보기
                 elif event.type == VIDEORESIZE:
                     info = pygame.display.Info()
                     print(info.current_w, info.current_h, "kkk")
-
-
                     resize = event.w/self.board.display_width
-
                     if event.h != self.board.display_height:
                         pygame.display.set_mode((self.board.display_width, self.board.display_height), RESIZABLE)
-
                     if resize!=1:
-
                         self.vdresize(resize, event.w)
                         if info.current_w == (Var.current_w):
                             pygame.display.set_mode((info.current_w, info.current_h), RESIZABLE).fill(Var.BLACK)

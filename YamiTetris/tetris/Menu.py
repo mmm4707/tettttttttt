@@ -11,7 +11,6 @@ class Menu:
         pygame.init()
         Var.infoObject = pygame.display.Info()
         print(Var.infoObject.current_w, Var.infoObject.current_h)
-
         self.w=Var.menu_display_w
         self.h=Var.menu_display_h
         self.surface=pygame.display.set_mode((self.w,self.h),RESIZABLE)
@@ -28,7 +27,6 @@ class Menu:
         self.margin3=Var.margin3
         self.margin4=Var.margin4
         self.margin_help=Var.margin_help
-
         self.margin_rank=Var.margin_rank
         self.page=Var.initial_page
         self.mytheme=Var.mytheme
@@ -75,45 +73,28 @@ class Menu:
     def show_game(self):  ## 게임 목록 들어가면 나오는 목록들
         self.page='page1'
         Var.click.play()
-
         self.menu.clear()
         self.mytheme.widget_margin=self.margin2
-
         self.menu.add_vertical_margin(self.margin)
-
-
         self.menu.add_label("    --Start game--    ",max_char=0,selectable=False,font_size=self.size)
-
         self.menu.add_vertical_margin(15)
-
         self.menu.add_button('      Single mode      ', self.start_the_game,font_size=self.size)
-
         self.menu.add_button('       MiNi mode       ', self.start_the_Mini,font_size=self.size)
-
         self.menu.add_button('    Twohands mode   ', self.start_the_Twohands,font_size=self.size)
-
         self.menu.add_button('         Ai mode         ', self.start_the_Ai,font_size=self.size)
-
         self.menu.add_button('           back            ', self.reset,font_size=self.size)
 
     def show_rank(self):  ## 랭크 들어가면 나오는 목록들기
         self.page='page2'
         self.mytheme.widget_margin=self.margin2
         Var.click.play()
-
         self.menu.clear()
         self.menu.add_vertical_margin(self.margin)
-
         self.menu.add_label("     --Show Rank--     ", max_char=0, selectable=False,font_size=self.size)
-
         self.menu.add_vertical_margin(15)
-
         self.menu.add_button('      Single mode      ', self.Single_the_rank,font_size=self.size)
-
         self.menu.add_button('    Twohands mode   ', self.Twohands_the_rank,font_size=self.size)
-
         self.menu.add_button('       MiNi mode       ', self.Mini_the_rank,font_size=self.size)
-
         self.menu.add_button('           back            ', self.reset,font_size=self.size)
 
 
@@ -136,7 +117,6 @@ class Menu:
     def stop(self):
         Var.click.play()
         self.menu.disable()
-
 
     def Single_the_rank(self):
         self.page='page3'
@@ -201,7 +181,6 @@ class Menu:
 
     def start_the_Mini(self):
         Var.click.play()
-
         self.Mode = 'mini'
         self.tetris.mode='mini'
         if __name__ == "__main__":
@@ -209,10 +188,8 @@ class Menu:
         self.menu.clear()
         self.show_score(self.Mode,self.tetris.Score)
 
-
     def start_the_Twohands(self):
         Var.click.play()
-
         self.Mode = 'two'
         self.tetris.mode='two'
         if __name__ == "__main__":
@@ -224,25 +201,20 @@ class Menu:
 
     def start_the_Ai(self):
         Var.click.play()
-
         self.Mode = 'ai'
         self.tetris.mode='ai'
         if __name__ == '__main__':
             self.tetris.run()
         self.reset()
 
-
     def pass_(self):
         pass
-
-
-
+    
 mymenu=Menu()
 mymenu.run()
 
 while True:
     events = pygame.event.get()
-
     for event in events:
         if event.type == pygame.QUIT:
             exit()

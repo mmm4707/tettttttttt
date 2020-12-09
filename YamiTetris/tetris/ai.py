@@ -58,13 +58,7 @@ class Ai:
         for i in range(Var.board_start_x, width):
             result.append(self.heightForColumn(i))
         return result
-
-
-
-    ################################################
-    #                   HEURISTICS                 #
-    ################################################
-
+    
     def heuristics(self):
         heights = self.heights()
         maxColumn = self.maxHeightColumns(heights)
