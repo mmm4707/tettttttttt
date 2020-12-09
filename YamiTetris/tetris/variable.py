@@ -290,7 +290,7 @@ class Var:
     size=int((menu_display_h)/font_rate1)                                      # 기본 폰트 사이즈 변경시
     size2=int((menu_display_h)/font_rate2)                                     # 랭크창 폰트 사이즈 변경
     margin=int((menu_display_h)/margin_rate1)                                     # 위에서 부터 처음 위젯 까지 사이 간격 조정
-    margin2=(0,int((menu_display_h)/margin_rate2))                               # 게임 선택 및 랭크 선택 위젯 사이 간격
+    margin2=(0,int((menu_display_h)/marginte2))                               # 게임 선택 및 랭크 선택 위젯 사이 간격
     margin3=(0,int((menu_display_h)/margin_rate3))                               # 위젯 3개 있는 곳 사이 간격
     margin4=(0,int((menu_display_h)/margin_rate4))
     margin_rank =10
