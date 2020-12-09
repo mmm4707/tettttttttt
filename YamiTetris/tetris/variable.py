@@ -289,6 +289,7 @@ class Var:
     ai_status_size = 5  #상태 바 사이즈 (블럭의 개수 기준으로 )
     ai_display_width = (ai_width + ai_status_size) * ai_block_size*2
 
+
     current_w = 1855
     resize_cut_up = 1.001
     resize_cut_down = 1.0
