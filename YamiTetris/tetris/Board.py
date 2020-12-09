@@ -679,7 +679,6 @@ class Board:
 
     #게임 끝나면 점수 보여주는 곳
     def show_my_score(self):
-
         pygame.display.set_mode((Var.menu_display_w,Var.menu_display_h))
         fontObj = pygame.font.Font('assets/Roboto-Bold.ttf', Var.myscore_font)
         textSurfaceObj = fontObj.render('My Score : '+str(self.score), True, Var.MAIN_YELLOW)
@@ -695,6 +694,12 @@ class Board:
                 elif event.type == KEYDOWN:
                     running = False
             pygame.display.update()
-1
+
+
     def save_score(self, game_mode, ID):
         self.database.add_data(game_mode, ID, self.score)
+
+
+1
+
+    
