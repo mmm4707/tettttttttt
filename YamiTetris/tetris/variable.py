@@ -169,40 +169,46 @@ class Var:
     next_block_shape = 1  #다음 회전한 모양 블럭 기준
     block_start_index = 0 #블럭 인덱스 시작점
 
-
-
-    #현재 블럭의 x축 기준 길이
+    # 현재 블럭의 x축 기준 길이
     def piece_length(piece):
         return piece[0]
-    def ai_rotate_start_index(shpae):
-        return len(shape)-1
-    
-    initial_mode = 0 # 모드 초기값
-    initial_id = 0   # id 초기값
+
+    initial_page = 'page0'
+    initial_mode = 0  # 모드 초기값
+    initial_id = 0  # id 초기값
 
     ai_event = pygame.USEREVENT + 1
-    ai_random_seed = 6 #ai랜덤 시드값
-    ai_stone_start_x_rate = 1/2  #x축 기준 새로운 블럭 시작 위치 비율
+    ai_diplay_width_rate = 2
+    ai_random_seed = 6  # ai랜덤 시드값
+    ai_stone_start_x_rate = 1 / 2  # x축 기준 새로운 블럭 시작 위치 비율
     ai_stone_start_y = 0  # 블록의 y좌표 시작점
-    ai_blockdown_score_per = 0  #블록을 내릴때 마다 추가되는 점수
-    ai_no_blockdown_score_per = 0  #블럭을 내리지 못하는 경우의 추가 점수
-    ai_block_choice_start = 0    #ai블럭을 선택하기 위한 시작 인덱스
-    ai_block_choice_end = len(ai_tetris_shapes)-1  #ai블럭을 선택하기 위한 끝  인덱스
-    ai_initial_completLine = 0 #ai 지운 라인수 초기값
-    ai_count_completLine = 1  #지운 라인수 증가율
-    ai_initial_numberOfHoles = 0 #구멍의 개수 초기값
-    ai_count_numberOfHoles = 1 #구멍 개수 증가율
-    ai_initial_bestscore = -10000 #베스트 스코어 초기값
-    ai_best_fix_level = 2 #ai best용 고정 레벨값
-    ai_choice_fix_level = 1 #ai choice용 고정 레벨값
-    ai_working_piece_index = 0 #현재 내려오는 블럭의 인덱스값
+    ai_blockdown_score_per = 0  # 블록을 내릴때 마다 추가되는 점수
+    ai_no_blockdown_score_per = 0  # 블럭을 내리지 못하는 경우의 추가 점수
+    ai_block_choice_start = 0  # ai블럭을 선택하기 위한 시작 인덱스
+    ai_block_choice_end = len(ai_tetris_shapes) - 1  # ai블럭을 선택하기 위한 끝  인덱스
+    ai_initial_completLine = 0  # ai 지운 라인수 초기값
+    ai_count_completLine = 1  # 지운 라인수 증가율
+    ai_initial_numberOfHoles = 0  # 구멍의 개수 초기값
+    ai_count_numberOfHoles = 1  # 구멍 개수 증가율
+    ai_initial_bestscore = -10000  # 베스트 스코어 초기값
+    ai_best_fix_level = 2  # ai best용 고정 레벨값
+    ai_choice_fix_level = 1  # ai choice용 고정 레벨값
+    ai_working_piece_index = 0  # 현재 내려오는 블럭의 인덱스값
     ai_line_reset = 0  # 한번에 지운 라인 개수 초기
-    ai_lineclear_per = 1 #한줄 지울때마다 올라가는 한번에 지운 개수
-    ai_linescores = [0, 10, 15, 20, 25] #한번에 제거하는 줄의 개수에 따른 점수
-    ai_prev_index = -1
-    
-    ai_rotate_end_prev = -1
-    ai_rotate_search_next_index = -1
+    ai_lineclear_per = 1  # 한줄 지울때마다 올라가는 한번에 지운 개수
+    ai_linescores = [0, 10, 15, 20, 25]  # 한번에 제거하는 줄의 개수에 따른 점수
+    ai_draw_space = 1  # 그림, 선이 잘 보이도록 여유 공간 빼주기
+    for_index_var = 1  # 인덱스값을 맞추기 위한 변수
+    search_rotate_next_index = -1  # 다음 인덴스를 찾아가기 (뒤에서 부터)
+    last_rotate_index_prev = -1  # 마지막 인덴스의 다음 인덱스(여기 전까지 진행)
+    field_up_line = 0  # 필드의 맨 윗줄
+    ai_display_middle_rate = 0.5
+    ai_text_loc_x = 0.15  # ai상태 창에서 글씨가 시간하는 부분의 비율 (상태창길이)
+    ai_score_text_loc = 9  # 디스플에의 높이 기준, 몇번째 블럭에 해당되는 곳의 옆에 있는가 
+    ai_score_loc = 10
+    ai_said1_loc = 1
+    ai_said2_loc = 2
+ 
     user_start_speed = 600  #유저의 시작 스피드(몇초에 한번 이벤트가 진행되는가)
     AI_start_speed = int(user_start_speed / 2)   #ai의 시작 스피드
     user_per_speed = 40   #레벨에 따른 유저의 속도 증가
