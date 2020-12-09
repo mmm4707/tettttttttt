@@ -212,13 +212,34 @@ class Var:
     basic_block_size = 25   #미니 모드 제외 나머지의 블록 사이즈
     basic_next_block_size_rate = 0.6  #화면에 표시되는 다음 블럭의 사이즈 비율
     mini_block_size = int(basic_block_size*7/5)  #미니 모드의 블럭 사이즈
-    min_mini_block_size = int(basic_block_size*6/5)
-    two_board_two = 2
+    min_mini_block_size = int(basic_block_size*6/5) #미니 모드의 최소 블럭사이즈
+
+    two_board_two = 2 #보드 크기가 두 배인 모드에 곱하는 용
+    center_divide = 2 # center 위치를 지정하기 위해 나누는 용
+    board_text_divide = 7 #board text 위치 조정을 위함
+    rect2_margin = 0.5 # 두번째 board칸 네모를 위한 margin
+    rect2_margin_double = rect2_margin*2 #margin 두 배
+    next_block_margin = 0.2 #next 블럭 보여줄 위치에 margin 추가
+    next_block_margin_y = 1.5 #next 블럭 y좌표를 위한 비율
+    next_block_size = 0.5 #next 블럭 사이즈 조절을 위한 비율
+    next_block2_margin = 0.45 # 두번째 next 블럭 위치 조절 비율
+
+    next_loc = 0.05
+    score_loc = 0.3
+    score_val_loc = 0.35
+    level_loc = 0.45
+    level_val_loc = 0.5
+    goal_loc = 0.6
+    goal_val_loc = 0.65
+    combo_loc = 0.75
+    combo_val_loc = 0.8
+    time_loc = 0.92
 
     font_size_small = 14    #폰트 사이즈 작은거
     font_size_middle = 16   #중간
     font_size_big = 18      #큰거
     font_resize = 1
+    font_size_double = 2 #fontsize 두 배
 
     block_start_basic_x = 3  #몇번 쨰 칸에서 블럭이 시작 하는가
     block_start_two_x = 12
