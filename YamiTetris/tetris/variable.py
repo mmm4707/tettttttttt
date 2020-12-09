@@ -132,6 +132,7 @@ class Var:
 
     display_max_height = 792
     display_min_height = 450
+    bar_size = 25
 
     x_move_scale = 1  # 블럭의 x축 이동 수
     y_move_scale = 1  # 블럭의 y축 이동 수
@@ -201,7 +202,6 @@ class Var:
     user_per_speed = 40   #레벨에 따른 유저의 속도 증가
     AI_per_speed = int(user_per_speed / 2)  #레벨에 따른 ai의 속도 증가
 
-
     combo_max=9
     combo_reset=0
 
@@ -209,9 +209,16 @@ class Var:
     basic_next_block_size_rate = 0.6  #화면에 표시되는 다음 블럭의 사이즈 비율
     mini_block_size = int(basic_block_size*7/5)  #미니 모드의 블럭 사이즈
 
+    basic_block_size = 25   #미니 모드 제외 나머지의 블록 사이즈
+    basic_next_block_size_rate = 0.6  #화면에 표시되는 다음 블럭의 사이즈 비율
+    mini_block_size = int(basic_block_size*7/5)  #미니 모드의 블럭 사이즈
+    min_mini_block_size = int(basic_block_size*6/5)
+    two_board_two = 2
+
     font_size_small = 14    #폰트 사이즈 작은거
     font_size_middle = 16   #중간
     font_size_big = 18      #큰거
+    font_resize = 1
 
     block_start_basic_x = 3  #몇번 쨰 칸에서 블럭이 시작 하는가
     block_start_two_x = 12
@@ -224,6 +231,7 @@ class Var:
 
     menu_display_w = 600  # 메뉴 시작시 처음 가로 크기
     menu_display_h = 600  # 메뉴 시작시 처음 세로 크기
+
     myscore_display=(160,270)
     myscore_font=50
     combo_reset_time=10  # 콤보 초기화 시간
@@ -253,6 +261,10 @@ class Var:
     ai_status_size = 5  #상태 바 사이즈 (블럭의 개수 기준으로 )
     ai_display_width = (ai_width + ai_status_size) * ai_block_size*2
 
+
+    current_w = 1855
+    resize_cut_up = 1.001
+    resize_cut_down = 1.0
     start_status_bar_y = 0 #상태표시 바 시작 y 좌표
 
 
@@ -296,6 +308,7 @@ class Var:
     # 메뉴 위젯 사이 간격 설정
     size=int((menu_display_h)/font_rate1)                                      # 기본 폰트 사이즈 변경시
     size2=int((menu_display_h)/font_rate2)                                     # 랭크창 폰트 사이즈 변경
+
     margin=int((menu_display_h)/margin_rate1)
     margin_help=int((menu_display_h)/margin_rate6)                                     # 위에서 부터 처음 위젯 까지 사이 간격 조정
     # 위에서 부터 처음 위젯 까지 사이 간격 조정
@@ -306,7 +319,6 @@ class Var:
     margin3=(0,int((menu_display_h)/margin_rate3))                               # 위젯 3개 있는 곳 사이 간격
     margin4=(0,int((menu_display_h)/margin_rate4))
     margin_rank =10
-
 
 
     rank_max=5  # 랭크 보여주는 창 최대 갯수 -1

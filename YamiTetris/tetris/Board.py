@@ -696,6 +696,10 @@ class Board:
             pygame.display.update()
 
 
-
     def save_score(self, game_mode, ID):
         self.database.add_data(game_mode, ID, self.score)
+
+
+1
+
+    

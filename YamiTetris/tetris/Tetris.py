@@ -26,6 +26,7 @@ class Tetris:
         random.seed(Var.ai_random_seed)
         self.max_height = Var.display_max_height
         self.min_height = Var.display_min_height
+        font_resize = Var.font_resize
 
 
     #각 키를 누를떄 실행되는 method
@@ -154,19 +155,10 @@ class Tetris:
 
     def vdresize2(self, resize, evheight):
         if (evheight>Var.display_min_height):
-
-            if self.mode=='basic':
-                font_resize = evheight/450
-            if self.mode=='mini':
-                font_resize = evheight/525
-            if self.mode=='two':
-                font_resize = evheight/450
-            if self.mode=='ai':
-                font_resize = evheight/450
-
+            font_resize = evheight/Var.display_min_height
             self.board.block_size = int(self.board.block_size*resize)
             if self.mode=='ai':
-                self.board.display_width = (self.board.width + self.board.status_size) * self.board.block_size * 2
+                self.board.display_width = (self.board.width + self.board.status_size) * self.board.block_size * Var.two_board_two
             else:
                 self.board.display_width = (self.board.width + self.board.status_size) * self.board.block_size
             self.board.status_width = self.board.block_size * self.board.status_size
@@ -179,57 +171,54 @@ class Tetris:
             pygame.display.set_mode((self.board.display_width, self.board.display_height), RESIZABLE )
 
     def vdresize(self, resize, evwidth):
-
+        self.max_height = Var.infoObject.current_h - Var.bar_size
+        font_resize = Var.font_resize
         if (self.board.height*int(self.board.block_size*resize)<self.min_height) :
+
 
             if self.mode == 'basic':
                 if (self.board.height*int(self.board.block_size*resize)<self.min_height):
-                    self.board.block_size = 25
-                    font_resize = 1
+                    self.board.block_size = Var.basic_block_size
+                    font_resize = Var.font_resize
                     pygame.display.set_mode((int(self.min_height*(self.board.width+self.board.status_size)/self.board.height),self.min_height), RESIZABLE)
 
             elif self.mode == 'mini':
                 if (self.board.height*int(self.board.block_size*resize)<self.min_height):
-                    self.board.block_size = 30
-                    font_resize = self.min_height/525
+                    self.board.block_size = Var.min_mini_block_size
+                    font_resize = self.min_height/(Var.mini_block_size*self.board.height)
                     pygame.display.set_mode((int(self.min_height*(self.board.width+self.board.status_size)/self.board.height), self.min_height), RESIZABLE)
-                else:
-                    resize = (Var.infoObject.current_h-25)/self.board.height
-                    self.board.block_size = int(self.board.block_size*resize)
-                    self.board.display_width = (self.board.width + self.board.status_size) * self.board.block_size
-
-                    font_resize = Var.infoObject.current_h/525
-                    pygame.display.set_mode((self.board.display_width,int(self.board.display_width/10*15)), RESIZABLE)
             else:
-                self.board.block_size = 25
-                font_resize = 1
+                self.board.block_size = Var.basic_block_size
+                font_resize = Var.font_resize
                 if self.mode == 'two':
                     pygame.display.set_mode((int(self.min_height*(self.board.width+self.board.status_size)/self.board.height), self.min_height), RESIZABLE)
                 else:
-                    pygame.display.set_mode((int(self.min_height*(self.board.width*2+self.board.status_size*2)/self.board.height), self.min_height), RESIZABLE)
+                    pygame.display.set_mode((int(self.min_height*(self.board.width*Var.two_board_two+self.board.status_size*Var.two_board_two)/self.board.height), self.min_height), RESIZABLE)
 
             if self.mode=='ai':
-                self.board.display_width = (self.board.width + self.board.status_size) * self.board.block_size * 2
+                self.board.display_width = (self.board.width + self.board.status_size) * self.board.block_size * Var.two_board_two
             else:
                 self.board.display_width = (self.board.width + self.board.status_size) * self.board.block_size
+            print(font_resize, "1")
             self.board.status_width = self.board.block_size * self.board.status_size
             self.board.font_size_big_in = int(Var.font_size_big*font_resize)
             self.board.font_size_middle_in = int(Var.font_size_middle*font_resize)
             self.board.font_size_small_in = int(Var.font_size_small*font_resize)
             self.board.display_height = self.board.height * self.board.block_size
 
-        elif (self.board.height*int(self.board.block_size*resize)>(max_height)):
-            print(max_height)
-            resize = max_height / self.board.display_height
+
+        elif (self.board.height*int(self.board.block_size*resize)>(self.max_height)):
+            print(self.max_height)
+            resize = self.max_height / self.board.display_height
             print(resize)
             self.board.block_size = int(self.board.block_size * resize)
             if self.mode == 'ai':
-                self.board.display_width = (self.board.width + self.board.status_size) * self.board.block_size * 2
+                self.board.display_width = (self.board.width + self.board.status_size) * self.board.block_size * Var.two_board_two
             else:
                 self.board.display_width = (self.board.width + self.board.status_size) * self.board.block_size
             self.board.status_width = self.board.block_size * self.board.status_size
-            font_resize = max_height / 450
-
+            font_resize = self.max_height / Var.display_min_height
+            print(font_resize, '2')
             self.board.font_size_big_in = int(Var.font_size_big * font_resize)
             self.board.font_size_middle_in = int(Var.font_size_middle * font_resize)
             self.board.font_size_small_in = int(Var.font_size_small * font_resize)
@@ -239,22 +228,23 @@ class Tetris:
 
             pygame.display.set_mode((self.board.display_width, self.board.display_height), RESIZABLE)
 
-        elif resize> 1.001 or resize<1.0:
+        elif resize > Var.resize_cut_up or resize < Var.resize_cut_down:
             print('bas')
             if self.mode=='basic':
-                font_resize = evwidth/350
+                font_resize = evwidth/(Var.basic_block_size*(self.board.width+self.board.status_size))
             if self.mode=='mini':
-                font_resize = evwidth/315
+                font_resize = evwidth/(Var.mini_block_size*(self.board.width+self.board.status_size))
             if self.mode=='two':
-                font_resize = evwidth/650
+                font_resize = evwidth/(Var.basic_block_size*(self.board.width+self.board.status_size))
             if self.mode=='ai':
-                font_resize = evwidth/700
+                font_resize = evwidth/(Var.basic_block_size*(self.board.width*2+self.board.status_size*Var.two_board_two))
 
             self.board.block_size = int(self.board.block_size*resize)
             if self.mode=='ai':
-                self.board.display_width = (self.board.width + self.board.status_size) * self.board.block_size * 2
+                self.board.display_width = (self.board.width + self.board.status_size) * self.board.block_size * Var.two_board_two
             else:
                 self.board.display_width = (self.board.width + self.board.status_size) * self.board.block_size
+            print(font_resize, '3')
             self.board.status_width = self.board.block_size * self.board.status_size
             self.board.font_size_big_in = int(Var.font_size_big*font_resize)
             self.board.font_size_middle_in = int(Var.font_size_middle*font_resize)
@@ -291,7 +281,7 @@ class Tetris:
                 random.randint(Var.ai_block_choice_start, Var.ai_block_choice_end)]  # 다음 블럭 랜덤으로 고르기 0~6 사이의 랜덤 숫자를 통해 고르기
             self.ai_init_game()
 
-        #pygame.key.set_repeat(self.delay, self.interval) 오류 많아서 삭제 
+        #pygame.key.set_repeat(self.delay, self.interval) 오류 많아서 삭제
 
 
 
@@ -346,7 +336,7 @@ class Tetris:
                     if self.mode=='two':
                         self.board.drop_piece2()
 
-                elif event.type == pygame.USEREVENT + 1:
+                elif event.type == Var.ai_event:
                     if self.mode == 'ai' :
                         self.ai_drop(False)
 
@@ -366,7 +356,7 @@ class Tetris:
                     if resize!=1:
 
                         self.vdresize(resize, event.w)
-                        if info.current_w == (1855):
+                        if info.current_w == (Var.current_w):
                             pygame.display.set_mode((info.current_w, info.current_h), RESIZABLE).fill(Var.BLACK)
                     print(self.board.display_width, self.board.display_height)
                     info = pygame.display.Info()
