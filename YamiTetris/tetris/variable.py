@@ -177,7 +177,6 @@ class Var:
     def ai_rotate_start_index(shpae):
         return len(shape)-1
     
-    initial_page = 'page0'
     initial_mode = 0 # 모드 초기값
     initial_id = 0   # id 초기값
 
@@ -296,8 +295,8 @@ class Var:
     start_status_bar_y = 0 #상태표시 바 시작 y 좌표
     resize_basic = 1 # 리사이징 관련 고정 변수 
 
-
-
+######################메뉴 관련 #########################
+##########################################################################################
     ## 메뉴 부분
     ## 메뉴 이미지 추가 부분
     menu_image = pygame_menu.baseimage.BaseImage(
@@ -312,11 +311,7 @@ class Var:
     PATH=os.path.join('assets/images/메인메뉴2.png')
 
 
-    mytheme_help=pygame_menu.themes.THEME_ORANGE.copy()                  # 메뉴 기본 테마 설정
-    mytheme_help.background_color = widget_image2                           # 메뉴 배경 설정
-    mytheme_help.title_bar_style=pygame_menu.widgets.MENUBAR_STYLE_NONE  # 메뉴 타이틀 바 모양 설정
-
-
+    #메뉴 기본 테마 만들기
 
     mytheme=pygame_menu.themes.THEME_ORANGE.copy()                  # 메뉴 기본 테마 설정
     mytheme.widget_font_color=MAIN_VIOLET                         # 메뉴 위젯 폰트 컬러
@@ -326,31 +321,45 @@ class Var:
     mytheme.widget_alignment=pygame_menu.locals.ALIGN_CENTER        # 메뉴 가운데 정렬 설정
     mytheme.widget_font =pygame_menu.font.FONT_NEVIS                # 메뉴 폰트 설정
     mytheme.widget_margin=(0,40)
-    font_rate1 = 15
-    font_rate2 = 20
-    margin_rate1 = 6
-    margin_rate2 = 30
-    margin_rate3 = 15
-    margin_rate4 =60
-    margin_rate5 = 10
-    margin_rate6 = 1.25
 
-    # 메뉴 위젯 사이 간격 설정
-    size=int((menu_display_h)/font_rate1)                                      # 기본 폰트 사이즈 변경시
-    size2=int((menu_display_h)/font_rate2)                                     # 랭크창 폰트 사이즈 변경
-
-    margin=int((menu_display_h)/margin_rate1)
-    margin_help=int((menu_display_h)/margin_rate6)                                     # 위에서 부터 처음 위젯 까지 사이 간격 조정
-    # 위에서 부터 처음 위젯 까지 사이 간격 조정
-    margin_page0 = int((menu_display_h) / margin_rate5)                               # 위에서 부터 처음 위젯 까지 사이 간격 조정
-    margin_page0_1 = int((menu_display_h) / margin_rate4)                                # 위에서 부터 처음 위젯 까지 사이 간격 조정
-    margin0=(-200,0)
-    margin2=(0,int((menu_display_h)/margin_rate2))                               # 게임 선택 및 랭크 선택 위젯 사이 간격
-    margin3=(0,int((menu_display_h)/margin_rate3))                               # 위젯 3개 있는 곳 사이 간격
-    margin4=(0,int((menu_display_h)/margin_rate4))
-    margin_rank =10
+    #HELP 메뉴 만들
+    mytheme_help = pygame_menu.themes.THEME_ORANGE.copy()  # 메뉴 기본 테마 설정
+    mytheme_help.background_color = widget_image2  # 메뉴 배경 설정
+    mytheme_help.title_bar_style = pygame_menu.widgets.MENUBAR_STYLE_NONE  # 메뉴 타이틀 바 모양 설정
 
 
-    rank_max=5  # 랭크 보여주는 창 최대 갯수 -1
-    min_display_w =400
-    min_display_h =400
+
+    rank_id_max=3           #랭크 ID 최대 이름 수
+    rank_max=5              # 랭크 보여주는 창 최대 갯수 -1
+    min_display_w =400      # 메뉴 최소 사이즈 가로
+    min_display_h =400      # 메뉴 최소 사이즈 세로
+    widget_center = 0
+    sleep_time = 0.3
+    initial_page = 'page0'  # 메뉴 시작 페이지
+
+    # 리사이징 시 변하는 비율
+    font_rate_main = 15
+    font_rate_sub = 20
+    widget_rate_main = 15
+    widget_rate_showpage = 30
+    widget_rate_rank = 60
+    rate_main=6
+    rate_show=40
+    rate_rank=30
+    rate_help=1.25
+
+    #폰트 사이즈
+    font_main = int((menu_display_h) / font_rate_main)   # 메뉴 기본 폰트 사이즈
+    font_sub = int((menu_display_h) / font_rate_sub)     # 메뉴 서브 폰트 사이즈
+
+    # 위젯 사이 간격
+    widget_margin_main = (0,int((menu_display_h)/widget_rate_main))         #  메인 화면
+    widget_margin_showpage=(0,int((menu_display_h)/widget_rate_showpage))   #게임 선택 랭킹 선택
+    widget_margin_rank=(0,int((menu_display_h)/widget_rate_rank))           # 랭크 보기 화면
+
+    #마진 시작 가로 세로  좌표
+    margin_main = int((menu_display_h)/rate_main)   # 메인 화면
+    margin_show = int((menu_display_h)/rate_show)   #SHOW 화면
+    margin_rank =int((menu_display_h)/rate_rank)    #RANK 화면
+    margin_help=int((menu_display_h)/rate_help)     #HELP 화면
+
