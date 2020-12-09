@@ -205,6 +205,9 @@ class Var:
     combo_max=9
     combo_reset=0
 
+    basic_block_size = 25   #미니 모드 제외 나머지의 블록 사이즈
+    basic_next_block_size_rate = 0.6  #화면에 표시되는 다음 블럭의 사이즈 비율
+    mini_block_size = int(basic_block_size*7/5)  #미니 모드의 블럭 사이즈
 
     basic_block_size = 25   #미니 모드 제외 나머지의 블록 사이즈
     basic_next_block_size_rate = 0.6  #화면에 표시되는 다음 블럭의 사이즈 비율
@@ -258,6 +261,7 @@ class Var:
     ai_status_size = 5  #상태 바 사이즈 (블럭의 개수 기준으로 )
     ai_display_width = (ai_width + ai_status_size) * ai_block_size*2
 
+
     current_w = 1855
     resize_cut_up = 1.001
     resize_cut_down = 1.0
@@ -297,7 +301,7 @@ class Var:
     margin_rate1 = 6
     margin_rate2 = 30
     margin_rate3 = 15
-    margin_rate4 =600
+    margin_rate4 =60
     margin_rate5 = 10
     margin_rate6 = 1.25
 
@@ -315,6 +319,7 @@ class Var:
     margin3=(0,int((menu_display_h)/margin_rate3))                               # 위젯 3개 있는 곳 사이 간격
     margin4=(0,int((menu_display_h)/margin_rate4))
     margin_rank =10
+
 
     rank_max=5  # 랭크 보여주는 창 최대 갯수 -1
     min_display_w =400

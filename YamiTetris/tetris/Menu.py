@@ -262,7 +262,6 @@ while True:
             mymenu.margin2=(0,int((mymenu.h)/Var.margin_rate2))
             mymenu.margin3=(0,int((mymenu.h)/Var.margin_rate3))
             mymenu.margin4=(0,int((mymenu.h)/Var.margin_rate4))
-            mymenu.margin4=(0,int((mymenu.h)/Var.margin_rate5))
             mymenu.margin_help = int((mymenu.h)/Var.margin_rate6)
             time.sleep(0.3)
             print(mymenu.w)
@@ -280,10 +279,9 @@ while True:
             elif mymenu.page=='page5':
                 mymenu.Mini_the_rank()
             elif mymenu.page=='page6':
-                mymenu.show_score(mymenu.mode,mymenu.score)
+                mymenu.show_score(mymenu.Mode,mymenu.tetris.Score)
             elif mymenu.page=='page7':
                 mymenu.help()
-
     if mymenu.menu.is_enabled():
         mymenu.menu.update(events)
         mymenu.menu.draw(mymenu.surface)
