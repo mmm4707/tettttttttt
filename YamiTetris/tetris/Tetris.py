@@ -218,8 +218,7 @@ class Tetris:
             self.board.font_size_small_in = int(Var.font_size_small*font_resize)
             self.board.display_height = self.board.height * self.board.block_size
 
-        elif (self.board.height*int(self.board.block_size*resize)>(max_height)):
-            print(max_height)
+        elif (self.board.height*int(self.board.block_size*resize)>(Var.display_max_height)):
             resize = max_height / self.board.display_height
             print(resize)
             self.board.block_size = int(self.board.block_size * resize)

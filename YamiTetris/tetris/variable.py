@@ -223,7 +223,8 @@ class Var:
 
     menu_display_w = 600  # 메뉴 시작시 처음 가로 크기
     menu_display_h = 600  # 메뉴 시작시 처음 세로 크기
-
+    myscore_display = (160, 270)
+    myscore_font = 50
     combo_reset_time=10  # 콤보 초기화 시간
 
     # 기본 사이즈 조정
