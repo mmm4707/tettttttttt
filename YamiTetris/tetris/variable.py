@@ -91,8 +91,8 @@ class Var:
                -5.3416512085013395, -4.072687054171711, -5.936652569831475, -2.3140398163110643, -4.842883337741306,
                17.677262456993276, -4.42668539845469, -6.8954976464473585, 4.481308299774875]  # 21755 lignes
 
-    error_type = {'no_error': 0, 'right_wall': 1, 'left_wall': 2, 'bottom': 3, 'overlap': 4} # 충돌 에러 판단용 
-    shapes_rotation = {4: 4, 8: 2, 12: 2, 16: 4, 20: 4, 24: 2, 28: 1} #ai 블럭 회전 판단용 
+    error_type = {'no_error': 0, 'right_wall': 1, 'left_wall': 2, 'bottom': 3, 'overlap': 4} # 충돌 에러 판단용
+    shapes_rotation = {4: 4, 8: 2, 12: 2, 16: 4, 20: 4, 24: 2, 28: 1} #ai 블럭 회전 판단용
 
 
 
@@ -120,7 +120,7 @@ class Var:
     z_blue = (159, 68, 145)
     y_red = (241, 141, 56)
     y_violet = (96, 57, 140)
-    
+
 
     T_COLOR = [w_pink, w_sky, z_blue, z_green, MAIN_VIOLET, y_violet, y_red]
     colors = [BLACK, RED, GREEN, BLUE, ORANGE, YELLOW, PINK, CYON, GRAY]
@@ -128,19 +128,20 @@ class Var:
     #keyboard_delay = 200
     #keyboard_interval = 150
 
-    infoObject = () #디스플레이 사이즈 받는 용 
+    infoObject = () #디스플레이 사이즈 받는 용
 
     display_max_height = 792
     display_min_height = 450
+    bar_size = 25
 
     x_move_scale = 1  # 블럭의 x축 이동 수
     y_move_scale = 1  # 블럭의 y축 이동 수
-    collide_move_rate =2 #벽과 충돌하는 경우 움직이는 배수 
+    collide_move_rate =2 #벽과 충돌하는 경우 움직이는 배수
     x_move_scale_zero = 0  # 블럭의 x축 이동 x
     y_move_scale_zero = 0 # 블럭의 y축 이동 x
-    
+
     board_start_x = 0      # 보드의 시작점 x좌표
-    board_start_y = 0      # 보드의 시작점 y좌표 
+    board_start_y = 0      # 보드의 시작점 y좌표
     board_die_line=1      # 보드에서 다으면 죽는 라인 즉 맨 윗줄
     board_line_start = 1  # 보드 지울때 첫 줄
     delete_line=1         # 보드 지울때 한칸씩 지우기
@@ -149,81 +150,85 @@ class Var:
     line_size=1      # 그림자나 블록 라인 사이즈
 
     fps = 30  # 게임의 fps
-    initial_score = 0   # 시작 점수 
-    initial_level = 1   # 시작 레벨 
-    count_level = 1     #레벨 증가률 
-    goal_zero_state = 0  # 골수가 0이 된 상태 
-    level_goal_per = 3   #레벨당 목표 goal수 
-    initial_combo = 0    # 시작 콤보 및 초기화 
-    count_combo = 1   #콤보 증가량 
-    count_goal = 1    #골수 증갈야 
-    initial_block_state= 0  #처음 블럭의 회전 상태 
+    initial_score = 0   # 시작 점수
+    initial_level = 1   # 시작 레벨
+    count_level = 1     #레벨 증가률
+    goal_zero_state = 0  # 골수가 0이 된 상태
+    level_goal_per = 3   #레벨당 목표 goal수
+    initial_combo = 0    # 시작 콤보 및 초기화
+    count_combo = 1   #콤보 증가량
+    count_goal = 1    #골수 증갈야
+    initial_block_state= 0  #처음 블럭의 회전 상태
     ai_score_weight = 2     #ai점수 가중치
     board_empty_state = 0 #보드 처음 상태
 
-    rotate_start = 0      #회전 인덱스 시작값 
+    rotate_start = 0      #회전 인덱스 시작값
     rotate_cycle = 4      #회전 사이클
     next_block_shape = 1  #다음 회전한 모양 블럭 기준
     block_start_index = 0 #블럭 인덱스 시작점
 
 
 
-    #현재 블럭의 x축 기준 길이 
+    #현재 블럭의 x축 기준 길이
     def piece_length(piece):
         return piece[0]
-    
+
     initial_page = 'page0'
-    initial_mode = 0 # 모드 초기값 
-    initial_id = 0   # id 초기값 
+    initial_mode = 0 # 모드 초기값
+    initial_id = 0   # id 초기값
 
     ai_event = pygame.USEREVENT + 1
     ai_random_seed = 6 #ai랜덤 시드값
-    ai_stone_start_x_rate = 1/2  #x축 기준 새로운 블럭 시작 위치 비율 
+    ai_stone_start_x_rate = 1/2  #x축 기준 새로운 블럭 시작 위치 비율
     ai_stone_start_y = 0  # 블록의 y좌표 시작점
     ai_blockdown_score_per = 0  #블록을 내릴때 마다 추가되는 점수
     ai_no_blockdown_score_per = 0  #블럭을 내리지 못하는 경우의 추가 점수
-    ai_block_choice_start = 0    #ai블럭을 선택하기 위한 시작 인덱스 
+    ai_block_choice_start = 0    #ai블럭을 선택하기 위한 시작 인덱스
     ai_block_choice_end = len(ai_tetris_shapes)-1  #ai블럭을 선택하기 위한 끝  인덱스
     ai_initial_completLine = 0 #ai 지운 라인수 초기값
-    ai_count_completLine = 1  #지운 라인수 증가율 
+    ai_count_completLine = 1  #지운 라인수 증가율
     ai_initial_numberOfHoles = 0 #구멍의 개수 초기값
     ai_count_numberOfHoles = 1 #구멍 개수 증가율
     ai_initial_bestscore = -10000 #베스트 스코어 초기값
     ai_best_fix_level = 2 #ai best용 고정 레벨값
     ai_choice_fix_level = 1 #ai choice용 고정 레벨값
-    ai_working_piece_index = 0 #현재 내려오는 블럭의 인덱스값 
+    ai_working_piece_index = 0 #현재 내려오는 블럭의 인덱스값
     ai_line_reset = 0  # 한번에 지운 라인 개수 초기
-    ai_lineclear_per = 1 #한줄 지울때마다 올라가는 한번에 지운 개수 
+    ai_lineclear_per = 1 #한줄 지울때마다 올라가는 한번에 지운 개수
     ai_linescores = [0, 10, 15, 20, 25] #한번에 제거하는 줄의 개수에 따른 점수
 
     user_start_speed = 600  #유저의 시작 스피드(몇초에 한번 이벤트가 진행되는가)
     AI_start_speed = int(user_start_speed / 2)   #ai의 시작 스피드
-    user_per_speed = 40   #레벨에 따른 유저의 속도 증가 
-    AI_per_speed = int(user_per_speed / 2)  #레벨에 따른 ai의 속도 증가 
+    user_per_speed = 40   #레벨에 따른 유저의 속도 증가
+    AI_per_speed = int(user_per_speed / 2)  #레벨에 따른 ai의 속도 증가
 
 
-    combo_max=0  
+    combo_max=0
 
-    basic_block_size = 25   #미니 모드 제외 나머지의 블록 사이즈 
-    basic_next_block_size_rate = 0.6  #화면에 표시되는 다음 블럭의 사이즈 비율 
-    mini_block_size = int(basic_block_size*7/5)  #미니 모드의 블럭 사이즈 
+    basic_block_size = 25   #미니 모드 제외 나머지의 블록 사이즈
+    basic_next_block_size_rate = 0.6  #화면에 표시되는 다음 블럭의 사이즈 비율
+    mini_block_size = int(basic_block_size*7/5)  #미니 모드의 블럭 사이즈
+    min_mini_block_size = int(basic_block_size*6/5)
+    two_board_two = 2
 
     font_size_small = 14    #폰트 사이즈 작은거
-    font_size_middle = 16   #중간 
-    font_size_big = 18      #큰거 
+    font_size_middle = 16   #중간
+    font_size_big = 18      #큰거
+    font_resize = 1
 
-    block_start_basic_x = 3  #몇번 쨰 칸에서 블럭이 시작 하는가 
+    block_start_basic_x = 3  #몇번 쨰 칸에서 블럭이 시작 하는가
     block_start_two_x = 12
     block_start_mini_x = 0
     block_start_y = -2
 
-    combo_score_rate = 10  #콤보에 따른 점수 가중치 
-    level_score_rate = 10  # 레벨에 따른 점수 가중치 
-    max_level = 10         #최대 레벨 
+    combo_score_rate = 10  #콤보에 따른 점수 가중치
+    level_score_rate = 10  # 레벨에 따른 점수 가중치
+    max_level = 10         #최대 레벨
 
     menu_display_w = 600  # 메뉴 시작시 처음 가로 크기
     menu_display_h = 600  # 메뉴 시작시 처음 세로 크기
-
+    myscore_display = (160, 270)
+    myscore_font = 50
     combo_reset_time=10  # 콤보 초기화 시간
 
     # 기본 사이즈 조정
@@ -251,7 +256,10 @@ class Var:
     ai_status_size = 5  #상태 바 사이즈 (블럭의 개수 기준으로 )
     ai_display_width = (ai_width + ai_status_size) * ai_block_size*2
 
-    start_status_bar_y = 0 #상태표시 바 시작 y 좌표 
+    current_w = 1855
+    resize_cut_up = 1.001
+    resize_cut_down = 1.0
+    start_status_bar_y = 0 #상태표시 바 시작 y 좌표
 
 
     ## 메뉴 부분
@@ -287,8 +295,6 @@ class Var:
     margin4=(0,int((menu_display_h)/margin_rate4))
     margin_rank =10
 
-
-
-    rank_max=4  # 랭크 보여주는 창 최대 갯수 -1
+    rank_max=5  # 랭크 보여주는 창 최대 갯수 -1
     min_display_w =400
     min_display_h =400
