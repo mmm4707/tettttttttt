@@ -128,7 +128,7 @@ class Tetris:
         for ai_action in ai_moves:
             ai_key_actions[ai_action]()
 
-    def handle_key2(self, event_key, mode):
+    def handle_key2(self, event_key, mode): # 투핸즈 모드 게임 조작 키 설정
         if event_key == K_s:
             self.board.drop_piece(mode)
         elif event_key == K_a:

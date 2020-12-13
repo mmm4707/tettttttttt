@@ -148,8 +148,8 @@ class Var:
 
     board_die_num=0    # 맨 위에서 보드가 몇개 이상이면 죽을 것인지
     line_size=1      # 그림자나 블록 라인 사이즈
-    ai_matrix_line_size = 0 #ai  매트릭스를 만들때 라인 사이즈 
-    ai_line_size = 2 # ai에서 board를 나누는 선의 두꼐 
+    ai_matrix_line_size = 0 #ai  매트릭스를 만들때 라인 사이즈
+    ai_line_size = 2 # ai에서 board를 나누는 선의 두꼐
 
     fps = 30  # 게임의 fps
     initial_score = 0   # 시작 점수
@@ -204,11 +204,11 @@ class Var:
     field_up_line = 0  # 필드의 맨 윗줄
     ai_display_middle_rate = 0.5
     ai_text_loc_x = 0.15  # ai상태 창에서 글씨가 시간하는 부분의 비율 (상태창길이)
-    ai_score_text_loc = 9  # 디스플에의 높이 기준, 몇번째 블럭에 해당되는 곳의 옆에 있는가 
+    ai_score_text_loc = 9  # 디스플에의 높이 기준, 몇번째 블럭에 해당되는 곳의 옆에 있는가
     ai_score_loc = 10
     ai_said1_loc = 1
     ai_said2_loc = 2
- 
+
     user_start_speed = 600  #유저의 시작 스피드(몇초에 한번 이벤트가 진행되는가)
     AI_start_speed = int(user_start_speed / 2)   #ai의 시작 스피드
     user_per_speed = 40   #레벨에 따른 유저의 속도 증가
@@ -299,7 +299,7 @@ class Var:
     resize_cut_up = 1.001
     resize_cut_down = 1.0
     start_status_bar_y = 0 #상태표시 바 시작 y 좌표
-    resize_basic = 1 # 리사이징 관련 고정 변수 
+    resize_basic = 1 # 리사이징 관련 고정 변수
 
 ######################메뉴 관련 #########################
 ##########################################################################################
@@ -343,16 +343,20 @@ class Var:
     sleep_time = 0.3
     initial_page = 'page0'  # 메뉴 시작 페이지
 
-    # 리사이징 시 변하는 비율
-    font_rate_main = 15
-    font_rate_sub = 20
-    widget_rate_main = 15
-    widget_rate_showpage = 30
-    widget_rate_rank = 60
-    rate_main=6
-    rate_show=40
-    rate_rank=30
-    rate_help=1.25
+    # 리사이징 시 변하는 비율 화면과 비례하는 비율
+    font_rate_main = 15          #메인 폰트 리사이징 비율
+    font_rate_sub = 20           #서브 폰트들 리사이징 비율
+    widget_rate_main = 15        #메인 화면 리젯들 사이 간격 비율
+    widget_rate_showpage = 30   #showpage 위젯 간격 비율
+    widget_rate_rank = 60       #rank페이지 위젯 간격 비율
+    rate_main=6                 #메인 위젯 시작 하는 위치 비율
+    rate_show=40                #show 위젯 시작 하는 위치 비율
+    rate_rank=30                #rank 위젝 시작 위치 비율
+    rate_help=1.25              #help 창 위젯 시작 위치 비율
+
+    help_h=756
+    help_w=756
+    help_screen=(756,756)
 
     #폰트 사이즈
     font_main = int((menu_display_h) / font_rate_main)   # 메뉴 기본 폰트 사이즈
@@ -367,5 +371,4 @@ class Var:
     margin_main = int((menu_display_h)/rate_main)   # 메인 화면
     margin_show = int((menu_display_h)/rate_show)   #SHOW 화면
     margin_rank =int((menu_display_h)/rate_rank)    #RANK 화면
-    margin_help=int((menu_display_h)/rate_help)     #HELP 화면
-
+    margin_help=600    #HELP 화면

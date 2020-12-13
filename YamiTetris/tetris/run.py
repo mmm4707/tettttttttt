@@ -3,7 +3,7 @@ from Tetris import *
 
 mymenu=Menu()
 mymenu.run()
-
+# 실행 파일
 while True:
     events = pygame.event.get()
     for event in events:
@@ -12,11 +12,11 @@ while True:
         elif event.type == VIDEORESIZE:
             mymenu.w=event.w
             mymenu.h=event.h
-            if event.w < Var.min_display_w:
+            if event.w < Var.min_display_w:   #최소 사이즈 정하기
                 mymenu.w = Var.min_display_w
             if event.h < Var.min_display_h:
                 mymenu.h = Var.min_display_h
-            mymenu.surface = pygame.display.set_mode((mymenu.w, mymenu.h), RESIZABLE)
+            mymenu.surface = pygame.display.set_mode((mymenu.w, mymenu.h), RESIZABLE) #리사이징 된걸로 새로 창 설정
             mymenu.menu = pygame_menu.Menu(mymenu.h, mymenu.w, '', theme=Var.mytheme)
             mymenu.menu.draw(mymenu.surface)
             mymenu.font_main=int((mymenu.h)/Var.font_rate_main)
@@ -31,8 +31,8 @@ while True:
             mymenu.widget_margin_showpage = (Var.widget_center, int((mymenu.h) / Var.widget_rate_showpage))
             mymenu.widget_margin_rank = (Var.widget_center, int((mymenu.h) / Var.widget_rate_rank))
 
-            time.sleep(Var.sleep_time)
-            if mymenu.page=='page0':
+            time.sleep(Var.sleep_time) # 페이지 변환 너무 빨라 렉걸리는 거 방지하기 위해 없어도 큰 상관 없음
+            if mymenu.page=='page0': #리사이징 후 원래 페이지로 돌아가기
                 mymenu.run()
             elif mymenu.page=='page1':
                 mymenu.show_game()
