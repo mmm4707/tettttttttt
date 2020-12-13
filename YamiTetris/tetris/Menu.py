@@ -21,14 +21,11 @@ class Menu:
         self.mytheme=Var.mytheme
         self.mytheme2=Var.mytheme_help
         self.menu = pygame_menu.Menu(self.h,self.w, '', theme=self.mytheme)
-
         self.font_main=Var.font_main   # 메인 폰트 사이즈
         self.font_sub=Var.font_sub     # 서브 폰트 사이즈
-
         self.widget_margin_main=Var.widget_margin_main         #메인 위젯 사이 간격
         self.widget_margin_showpage=Var.widget_margin_showpage #show 페이지 위젯 사이 간격
         self.widget_margin_rank=Var.widget_margin_rank         #rank 페이지 위젯 사이 간격
-
         self.margin_main=Var.margin_main                       #메인 페이지 x,y 위젯 시작 위치
         self.margin_show=Var.margin_show                       #show 페이지 x,y 위젯 시작 위치
         self.margin_help=Var.margin_help                       #help 페이지 back 위치
