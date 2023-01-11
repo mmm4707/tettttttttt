@@ -15,7 +15,7 @@
   
   OS : Linux(16.04.1)3333
   
-	추가 모듈 : pygame == 2.0.0 , pygame_menu == 3.3.0, pymysql == 0.10.1 dfdfedas
+	추가 모듈 : pygame == 2.0.0 , pygame_menu == 3.3.0, pymysql == 0.10.1
 
 3. 게임 실행 방식
    1. 현재 repository의 소스 코드를 모두 다운 또는 clone을 통해 local에 저장한다.
