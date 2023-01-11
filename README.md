@@ -16,8 +16,8 @@
   OS : Linux(16.04.1)
   
 	추가 모듈 : pygame == 2.0.0 , pygame_menu == 3.3.0, pymysql == 0.10.1 
-  
-
+  ssssss
+ddd
 3. 게임 실행 방식
    1. 현재 repository의 소스 코드를 모두 다운 또는 clone을 통해 local에 저장한다.
    2. 추가 모듈에 표기한 모듈들을 다운 받고 run.py에서 실행한다.
